@@ -3,6 +3,10 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  userName: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   email: {
     type: Sequelize.STRING,
     unique: true,
@@ -26,6 +30,11 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  profile_pic: {
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://cdn2.iconfinder.com/data/icons/party-36/100/Party-01-512.png'
   }
 })
 
