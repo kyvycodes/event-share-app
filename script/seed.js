@@ -1,7 +1,8 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Task} = require('../server/db/models')
+const {User, Task, Event, userEventRel} = require('../server/db/models')
+const {events, eventUsers} = require('../dummyData')
 
 async function seed() {
   await db.sync({force: true})
@@ -12,21 +13,31 @@ async function seed() {
     User.create({email: 'murphy@email.com', password: '123'})
   ])
 
+  await Promise.all(events.map(event => Event.create(event)))
+
+  await Promise.all(eventUsers.map(rel => userEventRel.create(rel)))
+
   const tasks = await Promise.all([
     Task.create({
       title: 'Bring beers',
       description: 'We need at least 20 beers',
-      category: 'to bring'
+      category: 'to bring',
+      userId: 2,
+      eventId: 1
     }),
     Task.create({
       title: 'Bring hot dogs',
       description: '10 packs of hot dogs',
-      category: 'to bring'
+      category: 'to bring',
+      userId: 1,
+      eventId: 1
     }),
     Task.create({
       title: 'Clean up',
       description: 'Clean up after the party is over',
-      category: 'to do'
+      category: 'to do',
+      userId: 1,
+      eventId: 2
     })
   ])
 
