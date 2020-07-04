@@ -22,6 +22,7 @@ const removeUser = () => ({type: REMOVE_USER})
  * THUNK CREATORS
  */
 export const me = () => async dispatch => {
+  console.log('OUTPUT: me')
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))

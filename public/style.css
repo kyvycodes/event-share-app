@@ -19,3 +19,17 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+/* ADD TASK FORM */
+
+.MuiInputLabel-formControl {
+  top: 3px;
+  left: 14px !important;
+  position: absolute;
+  transform: translate(0, 24px) scale(1);
+}
+
+.btn-theme {
+  margin: auto !important;
+  display: block !important;
+}
