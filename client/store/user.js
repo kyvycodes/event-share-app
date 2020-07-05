@@ -29,6 +29,14 @@ export const me = () => async dispatch => {
     console.error(err)
   }
 }
+export const getMe = () => async dispatch => {
+  try {
+    const res = await axios.get('/api/users/me')
+    dispatch(getUser(res.data || defaultUser))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const auth = (
   email,

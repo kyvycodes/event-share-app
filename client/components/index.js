@@ -6,5 +6,5 @@
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
-export {addEventForm} from './addEvent'
-export {EventDetails} from './EventDetails'
+export {default as EventForm} from './AddEventForm'
+export {default as EventDetails} from './EventDetails'
