@@ -5,16 +5,20 @@ const GET_TASK = 'GET_TASK'
 const ADD_TASK = 'ADD_TASK'
 const EDIT_TASK = 'EDIT_TASK'
 const DELETE_TASK = 'DELETE_TASK'
+const GET_ERRORS = 'GET_ERRORS'
+const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 const initialState = {
   singleTask: {},
-  multipleTasks: []
+  multipleTasks: [],
+  errorsTask: {}
 }
 
 const fetchSingleTask = task => ({type: GET_TASK, task})
 const fetchAllTaskEvent = tasks => ({type: GET_EVENT_TASKS, tasks})
 const addTask = task => ({type: ADD_TASK, task})
 const editedTask = task => ({type: EDIT_TASK, task})
+const gotErrorTask = errorsTask => ({type: GET_ERRORS, errorsTask})
 const deleteTask = task => ({type: DELETE_TASK, task})
 
 export const getSingleTask = id => async dispatch => {
@@ -46,12 +50,11 @@ export const updateTask = (taskObj, id) => async dispatch => {
 }
 
 export const setTask = taskObj => async dispatch => {
-  console.log(' 2  OUTPUT: taskObj', taskObj)
   try {
     const res = await axios.post(`/api/tasks/`, taskObj)
     dispatch(addTask(res.data))
   } catch (err) {
-    console.error(err)
+    dispatch(gotErrorTask(err.response.data))
   }
 }
 
@@ -65,6 +68,21 @@ export default function(state = initialState, action) {
       return {...state, task: action.task}
     case EDIT_TASK:
       return {...state, task: action.task}
+    case GET_ERRORS:
+      const errObj = {}
+      let errors = action.errorsTask.split(',')
+      errors.map(err => {
+        err = err.substring(18)
+        if (err.includes('Title')) {
+          errObj.title = err
+        }
+        if (err.includes('Category')) {
+          errObj.category = err
+        }
+      })
+      return {...state, errorsTask: errObj}
+    case CLEAR_ERRORS:
+      return {}
     default:
       return state
   }

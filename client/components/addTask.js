@@ -7,7 +7,11 @@ import {
   FormControl,
   Container,
   FormGroup,
-  Button
+  Button,
+  Select,
+  InputLabel,
+  MenuItem,
+  FormHelperText
 } from '@material-ui/core'
 
 export class AddTask extends React.Component {
@@ -16,19 +20,17 @@ export class AddTask extends React.Component {
     this.state = {
       title: '',
       description: '',
-      category: ''
+      category: '',
+      errorsTask: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-    console.log('give props ', this.props)
-
-    // const user = this.props.user
-    // this.setState({
-    //   userId: user.id
-    // })
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errorsTask) {
+      this.setState({errorsTask: nextProps.errorsTask})
+    }
   }
 
   handleChange(event) {
@@ -39,40 +41,42 @@ export class AddTask extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    const user = this.props.user
 
     let newTask = {
       title: this.state.title,
       description: this.state.description,
-      // category: this.state.category,
-      category: 'to do',
-      userId: 1,
-      dueDate: 'July 29 2020'
+      category: this.state.category,
+      dueDate: 'July 29 2020',
+      userId: user.id,
+      eventId: 1
     }
-
-    // const user = this.props;
-
     this.props.setTask(newTask)
   }
 
   render() {
-    console.log('this.props.', this.props)
+    const {errorsTask} = this.state
+
     return (
       <Container maxWidth="sm">
-        <h3 align="center">Create a Task</h3>
         <form
           onSubmit={this.handleSubmit}
           className="addTask-form"
           noValidate
           autoComplete="off"
         >
+          <h3 align="center">Create a Task</h3>
           <FormGroup>
             <FormControl>
               <TextField
+                type="tittle"
                 onChange={this.handleChange}
                 value={this.state.title}
                 name="title"
-                label="Title"
+                label="Title Name *"
                 variant="outlined"
+                error={!!errorsTask.title}
+                helperText={errorsTask.title}
               />
             </FormControl>
             <FormControl>
@@ -85,23 +89,32 @@ export class AddTask extends React.Component {
               />
             </FormControl>
 
-            <FormControl>
-              <TextField
-                onChange={this.handleChange}
-                id="standard-basic"
+            <FormControl fullWidth={true} variant="outlined" margin="normal">
+              <InputLabel id="demo-simple-select-filled-label">
+                Category
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-filled-label"
+                id="demo-simple-select-filled"
                 label="Category"
-              />
+                name="category"
+                value={this.state.category}
+                onChange={this.handleChange}
+                error={!!errorsTask.category}
+              >
+                <MenuItem value="to do">To Do</MenuItem>
+                <MenuItem value="to bring">To Bring</MenuItem>
+              </Select>
+              <FormHelperText error>{errorsTask.category}</FormHelperText>
             </FormControl>
           </FormGroup>
-
           <Button
             className="btn-theme"
             type="submit"
-            size="large"
             variant="contained"
             color="secondary"
           >
-            Create Now
+            Add to tasks
           </Button>
         </form>
       </Container>
@@ -112,7 +125,8 @@ export class AddTask extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    email: state.user.email
+    email: state.user.email,
+    errorsTask: state.task.errorsTask
   }
 }
 
