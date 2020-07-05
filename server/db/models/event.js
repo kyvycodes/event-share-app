@@ -17,7 +17,7 @@ const Event = db.define('events', {
     type: Sequelize.DATE,
     allowNull: false
   },
-  streetAddress: {
+  address: {
     type: Sequelize.STRING,
     allowNull: false
   },

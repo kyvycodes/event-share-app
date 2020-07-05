@@ -2,7 +2,15 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
-import {Login, Signup, UserHome, AddTask, TaskList} from './components'
+import {
+  Login,
+  Signup,
+  UserHome,
+  EventForm,
+  EventDetails,
+  AddTask,
+  TaskList
+} from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
 import LoginPage from './components/LoginPage'
@@ -21,7 +29,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
-        <Route exact path="/LandingPage" component={LandingPage} />
+        <Route exact path="/" component={LandingPage} />
         <Route exact path="/LoginPage" component={LoginPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
@@ -30,6 +38,10 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+
+            <Route path="/events/add" component={EventForm} />
+            <Route path="/events/:id" component={EventDetails} />
+
             <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} />
           </Switch>
