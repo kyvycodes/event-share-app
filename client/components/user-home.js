@@ -6,17 +6,19 @@ import {getMe} from '../store/user'
 /**
  * COMPONENT
  */
+
 export const UserHome = props => {
   useEffect(() => {
     props.getUser()
   }, [])
+
   const {firstName, lastName, email, profile_pic} = props.user
   const events = props.user.events || []
   const tasks = props.user.tasks || []
   return (
     <div>
       <div className="profile">
-        <img src={profile_pic} />
+        <img className="profilePic" src={profile_pic} />
         <h4>
           {firstName} {lastName}
         </h4>
