@@ -27,7 +27,13 @@ export const UserHome = props => {
       </div>
       <div>
         <h4>Your Events</h4>
-        <ul>{events.map(event => <li key={event.id}>{event.title}</li>)}</ul>
+        <ul>
+          {events.map(event => (
+            <Link to={`/events/${event.id}`} key={event.id}>
+              <li>{event.title}</li>
+            </Link>
+          ))}
+        </ul>
         <h4>Your Tasks</h4>
         <ul>{tasks.map(task => <li key={task.id}>{task.title}</li>)}</ul>
       </div>
