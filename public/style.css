@@ -7,7 +7,8 @@ a {
 }
 
 label {
-  display: block;
+  display: inline-block;
+  margin: 1em;
 }
 
 nav a {
@@ -19,7 +20,6 @@ form div {
   margin: 1em;
   display: inline-block;
 }
-
 img {
   max-width: 100px;
   height: auto;
@@ -42,4 +42,63 @@ input {
 
 .form {
   justify-content: center;
+}
+
+section {
+  background-color: aquamarine;
+  margin: auto;
+  height: 300px;
+  text-align: center;
+}
+/* p {
+
+} */
+
+#hero {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#hero .container {
+  height: 90vh;
+}
+
+.container-center {
+  margin-top: 5px;
+}
+
+.big {
+  font-size: 60px;
+}
+
+.discover-place-holder {
+  background-color: cadetblue;
+}
+
+.logo-place-holder {
+  text-align: left;
+  border: 1px solide black;
+  height: 70px;
+  width: 70px;
+  background-color: rgb(52, 216, 20);
+  margin-left: 20px;
+}
+
+.loginpage-form {
+  text-align: center;
+  border: 15px double black;
+  height: 500px;
+  width: 320px;
+  background-color: lightpink;
+  margin-left: 450px;
+  margin-right: 250px;
+}
+
+.logo-place-holder-login-form {
+  border: 1px solide black;
+  height: 70px;
+  width: 70px;
+  background-color: rgb(52, 216, 20);
+  margin-left: 130px;
 }
