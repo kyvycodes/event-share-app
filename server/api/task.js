@@ -13,6 +13,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/:eventId', async (req, res, next) => {
+  try {
+    const listTask = await Task.findAll({
+      where: {eventId: req.params.eventId},
+      order: [['updatedAt', 'DESC']]
+    })
+    res.json(listTask)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const newTask = await Task.create(req.body)

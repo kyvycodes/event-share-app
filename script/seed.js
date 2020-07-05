@@ -29,25 +29,47 @@ async function seed() {
 
   const tasks = await Promise.all([
     Task.create({
-      title: 'Bring beers',
+      title: 'Beers',
       description: 'We need at least 20 beers',
       category: 'to bring',
-      userId: 2,
+      userId: 1,
       eventId: 1
     }),
     Task.create({
-      title: 'Bring hot dogs',
+      title: 'Hot dogs',
       description: '10 packs of hot dogs',
       category: 'to bring',
       userId: 1,
       eventId: 1
     }),
     Task.create({
+      title: 'Chips & Salsa ',
+      description: 'Bring  2 packs of chips & salsa',
+      category: 'to bring',
+      userId: 1,
+      eventId: 1
+    }),
+
+    Task.create({
       title: 'Clean up',
       description: 'Clean up after the party is over',
       category: 'to do',
       userId: 1,
-      eventId: 2
+      eventId: 1
+    }),
+    Task.create({
+      title: 'Decorate',
+      description: 'Help us to decorate our place before the the party starts',
+      category: 'to do',
+      userId: 1,
+      eventId: 1
+    }),
+    Task.create({
+      title: 'Food Prep',
+      description: 'Help us to prep food before the the party starts',
+      category: 'to do',
+      userId: 1,
+      eventId: 1
     })
   ])
 
