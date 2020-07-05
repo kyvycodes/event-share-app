@@ -5,4 +5,6 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
+export {default as AddTask} from './addTask'
+export {default as TaskList} from './taskList'
 export {Login, Signup} from './auth-form'
