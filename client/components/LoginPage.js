@@ -13,7 +13,7 @@ class Login extends Component {
         <div className="logo-place-holder-login-form">logo</div>
         {/* <Login /> */}
         <div>
-          <form onSubmit={handleSubmit} name={name}>
+          <form onSubmit={handleSubmit} name="login">
             <div>
               <label htmlFor="email">
                 <small>Email</small>
@@ -68,7 +68,7 @@ const mapDispatch = dispatch => {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, formName))
+      dispatch(auth(email, password, null, null, formName))
     }
   }
 }

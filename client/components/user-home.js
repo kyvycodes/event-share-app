@@ -24,20 +24,30 @@ export const UserHome = props => {
         </h4>
         <p>{email}</p>
         <Link to="/events/add">
-          <button type="submit">Add Event</button>
+          <button type="submit">Create Event</button>
         </Link>
       </div>
       <div>
         <h4>Your Events</h4>
         <ul>
-          {events.map(event => (
-            <Link to={`/events/${event.id}`} key={event.id}>
-              <li>{event.title}</li>
-            </Link>
-          ))}
+          {events.length > 0 ? (
+            events.map(event => (
+              <Link to={`/events/${event.id}`} key={event.id}>
+                <li>{event.title}</li>
+              </Link>
+            ))
+          ) : (
+            <p>You Have No Current Events</p>
+          )}
         </ul>
         <h4>Your Tasks</h4>
-        <ul>{tasks.map(task => <li key={task.id}>{task.title}</li>)}</ul>
+        <ul>
+          {tasks.length > 0 ? (
+            tasks.map(task => <li key={task.id}>{task.title}</li>)
+          ) : (
+            <p>You Have No Current Tasks</p>
+          )}
+        </ul>
       </div>
     </div>
   )
