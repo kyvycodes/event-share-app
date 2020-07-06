@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 
-class LoginPage extends Component {
+class Login extends Component {
   render() {
     const {name, displayName, handleSubmit, error} = this.props
     return (
@@ -65,9 +65,9 @@ const mapDispatch = dispatch => {
     }
   }
 }
-export default connect(mapLogin, mapDispatch)(LoginPage)
+export default connect(mapLogin, mapDispatch)(Login)
 
-LoginPage.propTypes = {
+Login.propTypes = {
   name: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
