@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import Link from '@material-ui/core/Link'
+import Grid from '@material-ui/core/Grid'
 
 class Login extends Component {
   render() {
@@ -38,7 +40,12 @@ class Login extends Component {
           <h1>Need an account</h1>
           <br />
           <div>
-            <button type="submit">Sign Up</button>
+            {/* <button type="submit">Sign Up</button> */}
+            <Grid item>
+              <Link href="/signup" variant="body2">
+                Don't have an account? Sign up!
+              </Link>
+            </Grid>
           </div>
         </div>
       </div>
