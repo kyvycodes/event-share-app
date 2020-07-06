@@ -1,6 +1,17 @@
 const router = require('express').Router()
 const {Event} = require('../db/models')
+const main = require('./nodemailer')
 module.exports = router
+
+router.get('/invite', async (req, res, next) => {
+  // var name = req.body.name
+  console.log('HI')
+  // var email = req.body.email
+  // var message = req.body.message
+  // var content = `name: ${name} \n email: ${email} \n message: ${content} `
+  await main().catch(console.error)
+  res.json('Message Sent')
+})
 
 router.get('/:id', async (req, res, next) => {
   console.log('REQ', req.params)

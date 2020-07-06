@@ -16,6 +16,8 @@ class EventDetails extends React.Component {
   }
   render() {
     const date = formatDate(this.props.currEvent.date || [])
+    const eventId = this.props.currEvent.id
+
     return (
       <div>
         <h3>{this.props.currEvent.title}</h3>
@@ -23,8 +25,10 @@ class EventDetails extends React.Component {
         <p>
           Day of the Event: {date.month}-{date.day}-20{date.year}
         </p>
-        <button type="submit">Invite Members</button>
-        <button type="submit">Create Tasks</button>
+        <Link to={`/events/${eventId}/invite`}>
+          <button type="submit">Invite Members</button>
+        </Link>
+        <button type="submit">Create A Task</button>
         <button type="submit">Create A Poll</button>
       </div>
     )
