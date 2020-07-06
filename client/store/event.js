@@ -15,6 +15,19 @@ const getEvent = event => ({
   event
 })
 
+export const sendEmail = email => {
+  const obj = {
+    email: email
+  }
+  return dispatch => {
+    try {
+      return axios.put(`/api/events/sent/invate`, obj)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 export const fetchEvent = id => {
   return async dispatch => {
     try {

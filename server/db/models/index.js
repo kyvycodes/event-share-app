@@ -2,6 +2,7 @@ const userEventRel = require('./userEventRel')
 const User = require('./user')
 const Task = require('./task')
 const Event = require('./event')
+const Notification = require('./notification')
 
 Task.belongsTo(User)
 User.hasMany(Task)
@@ -28,5 +29,6 @@ module.exports = {
   User,
   Task,
   Event,
-  userEventRel
+  userEventRel,
+  Notification
 }
