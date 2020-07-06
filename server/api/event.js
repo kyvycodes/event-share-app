@@ -2,13 +2,13 @@ const router = require('express').Router()
 const {Event} = require('../db/models')
 const sendgridTransport = require('nodemailer-sendgrid-transport')
 const nodemailer = require('nodemailer')
-const SEND_GRID = require('../api_keys')
+
 module.exports = router
 
 const transporter = nodemailer.createTransport(
   sendgridTransport({
     auth: {
-      api_key: SEND_GRID
+      api_key: '<SEND_GRID>'
     }
   })
 )

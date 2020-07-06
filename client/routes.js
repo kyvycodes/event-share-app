@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
-  Login,
+  // Login,
   Signup,
   UserHome,
   EventForm,
@@ -13,7 +13,7 @@ import {
 } from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
-import LoginPage from './components/LoginPage'
+import Login from './components/LoginPage'
 
 /**
  * COMPONENT
@@ -28,24 +28,24 @@ class Routes extends Component {
 
     return (
       <Switch>
-        {/* Routes placed here are available to all visitors */}
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/LoginPage" component={LoginPage} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-
-            <Route path="/events/add" component={EventForm} />
+            <Route exact path="/" component={UserHome} />
+            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/events/add" component={EventForm} />
             <Route path="/events/:id" component={EventDetails} />
 
             <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} />
           </Switch>
         )}
+        {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={LandingPage} />
+        {/* <Route exact path="/LoginPage" component={LoginPage} /> */}
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
       </Switch>
