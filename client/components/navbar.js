@@ -82,6 +82,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
         onKeyDown={() => setOpen(false)}
       >
         <List className={classes.sideDrawer} component="nav">
+
           {/* The navbar will show these links after you log in */}
           {isLoggedIn ? (
             <div>

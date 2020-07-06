@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
-  Login,
+  // Login,
   Signup,
   UserHome,
   EventForm,
@@ -13,7 +13,7 @@ import {
 } from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
-import LoginPage from './components/LoginPage'
+import Login from './components/LoginPage'
 
 /**
  * COMPONENT
@@ -30,7 +30,7 @@ class Routes extends Component {
       <Switch>
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/LoginPage" component={LoginPage} />
+        {/* <Route exact path="/LoginPage" component={LoginPage} /> */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
 

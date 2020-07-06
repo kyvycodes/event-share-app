@@ -23,14 +23,19 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
+    // backgroundColor: theme.palette.secondary.main
+    backgroundColor: '#FF8E53'
   },
   form: {
     width: '100%', // Fix IE 11 issue.
     marginTop: theme.spacing(3)
   },
   submit: {
+    backgroundColor: 'black',
     margin: theme.spacing(3, 0, 2)
+  },
+  main: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
   }
 }))
 
@@ -41,7 +46,7 @@ export default function SignUp(props) {
   const {name, handleSubmit, displayName, error} = props
   const classes = useStyles()
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xs" className={classes.main}>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
