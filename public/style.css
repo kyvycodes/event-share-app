@@ -44,7 +44,7 @@ button {
 
 .MuiInputLabel-formControl {
   top: 3px;
-  left: 14px !important;
+  /* left: 14px !important; */
   position: absolute;
   transform: translate(0, 24px) scale(1);
 }

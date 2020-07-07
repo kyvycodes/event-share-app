@@ -1,6 +1,12 @@
 // const express = require('express');
 // const router = express.Router();
 // const passport = require('passport');
+/*
+2. choose task will change to display name picture
+3. if task is take & u are the persondisplay a btn that says drop task. Should go back to green &  choose task
+1. approve or reject  suggested taks
+
+*/
 
 const router = require('express').Router()
 const {Task} = require('../db/models')
