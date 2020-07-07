@@ -12,3 +12,6 @@ export {default as EventTabs} from './EventTabs'
 export {default as Login} from './LoginPage'
 export {Signup} from './auth-form'
 export {default as EventForm} from './AddEventForm'
+export {default as EventDetails} from './EventDetails'
+export {default as InviteForm} from './InviteForm'
+

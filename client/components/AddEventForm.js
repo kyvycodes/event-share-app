@@ -72,6 +72,7 @@ export class EventForm extends React.Component {
             Start Time:
             <input type="time" name="startTime" />
           </label>
+          <br />
           <button type="submit" value="button">
             Create Event
           </button>

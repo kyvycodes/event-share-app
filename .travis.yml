@@ -13,15 +13,18 @@ notifications:
 install:
   - npm ci # faster, goes only from package-lock
 before_script:
-  - psql -c 'create database "boilermaker-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
+  - psql -c 'create database "eventshare-test";' -U postgres # remember to change this name if you change it elsewhere (e.g. package.json)
 script:
   - npm test # test the code
   - npm run build-client # make the bundle
-# before_deploy:
-#   - rm -rf node_modules # omit from the tarball, since we skip cleanup
-# deploy:
-#   skip_cleanup: true # prevents travis from deleting the build
-#   provider: heroku
-#   app: YOUR-HEROKU-APP-NAME-HERE # see README
-#   api_key:
-#     secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+before_deploy: # omit node_modules, since we set skip_cleanup below
+  - rm -rf node_modules
+deploy: # see README for details on these keys
+  # prevents travis from deleting the build
+  skip_cleanup: true
+  provider: heroku
+  # app should be your heroku app name; see README
+  app: event-share
+  # the secure key indicates an encrypted value; see README
+  api_key:
+    secure: wVV6s8YhGDWTZLM5SrVL8Yd3CwLY0kd46EbyPF4C7Is6UHxK9Ya0benqdCQ1nA+8nZUVUWnwUlcQ/O45lsJoBJkNbvkNEL8BGloTkcU1h6FFLm5Oh2QEGOv5hZtth/NJo5vFzwJvqr5XkDqLkzJ2fwv1puMoUao/7Iwp91hV42piDgEa6P+x/TOMRvQjwJV2WW+oMCp54FckaXgl2mNtdb1q7PkayJ/Y9XGoXUUaSacVTerP16PAhVeNQbv1797Vi9u/rhm2EbP75yDIQxogUXDzTaMCbb8L/OJUYRng/E42HZUBmY87bty1ot5PN1uSoEBSs0zJ+2fZSGmgp7fTjGwcmFeWDxJZOeER6PFsbPV+2Ls/2VnFcieGTuflLF4S86zcRM1piMRlbzdBNs+1LsAsOwx/Mhd3YJaCe80khwsNku9ODvOZRlW8V04NcV7Kb6PGw3bFVk37WR5u74XvEEPcen3t0JjJk7L2gIU+qfa664Uj78TPH8aBY+GIVA5mdoG2prRgQfb8qkS0ULykBBWKDagw9lVdi5v5frWGq4b4nccP5lKe5Brpbw1Fac1t4KSp686dZRw/xtcoGPHR0QZE112LnlBPRFGtu5H9ONFENur+xsJqkfZqg9W8g8sYwWP9e+UMUacdd2mGoBf1MNOZJDZgZEJAttENPdirL7I=
