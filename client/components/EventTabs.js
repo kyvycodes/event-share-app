@@ -1,87 +1,84 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {makeStyles} from '@material-ui/core/styles'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import AppBar from '@material-ui/core/AppBar'
-import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
-import Box from '@material-ui/core/Box'
-// import Guests from './';
+import TabContext from '@material-ui/lab/TabContext'
+import TabList from '@material-ui/lab/TabList'
+import {fetchEvent} from '../store/event'
 import TaskList from './taskList'
 import EventDetails from './EventDetails'
-// import Polls from './';
+import TabPanel from '@material-ui/lab/TabPanel'
 
-function TabPanel(props) {
-  const {children, value, index, ...other} = props
+class EventTabs extends React.Component {
+  state = {
+    value: '1'
+  }
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  )
+  handleChange(event, newValue) {
+    this.setState({value: newValue})
+  }
+
+  componentDidMount() {
+    this.props.getEvent(this.props.match.params.id)
+  }
+  render() {
+    const eventId = this.props.match.params.id
+    return (
+      <div className="">
+        <Typography
+          align="center"
+          component="h1"
+          variant="h5"
+          color="secondary"
+          className="eventTitle"
+        >
+          {this.props.currEvent.title}🎉
+        </Typography>
+
+        <TabContext value={this.state.value}>
+          <AppBar position="static" color="secondary">
+            <TabList
+              onChange={this.handleChange.bind(this)}
+              aria-label="simple tabs example"
+            >
+              <Tab label="Details" value="1" />
+              <Tab label="Guests" value="2" />
+              <Tab label="Tasks" value="3" />
+              <Tab label="Polls" value="4" />
+            </TabList>
+          </AppBar>
+          <TabPanel value="1">
+            <EventDetails eventId={eventId} />
+          </TabPanel>
+          <TabPanel value="2">
+            Guests goes here whenever it is ready import the component here
+          </TabPanel>
+          <TabPanel value="3">
+            <TaskList />
+          </TabPanel>
+          <TabPanel value="4">
+            Polls goes here whenever it is ready import the component and added
+            here
+          </TabPanel>
+        </TabContext>
+      </div>
+    )
+  }
 }
 
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
-}
-
-function a11yProps(index) {
+const mapState = state => {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`
+    user: state.user,
+    currEvent: state.events.currEvent
   }
 }
 
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: 'white'
+const mapDispatch = dispatch => {
+  return {
+    getEvent: id => dispatch(fetchEvent(id))
   }
-}))
-
-export default function EventTabs() {
-  const classes = useStyles()
-  const [value, setValue] = React.useState(0)
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
-
-  return (
-    <div className={classes.root}>
-      <AppBar position="static" color="inherit">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs">
-          <Tab label="Details" {...a11yProps(0)} />
-          <Tab label="Guests" {...a11yProps(1)} />
-          <Tab label="Tasks" {...a11yProps(2)} />
-          <Tab label="Polls" {...a11yProps(3)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        <EventDetails />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Guests goes here whenever it is ready import the component and added
-        here
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <TaskList />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Polls goes here whenever it is ready import the component and added here
-      </TabPanel>
-    </div>
-  )
 }
+
+export default connect(mapState, mapDispatch)(EventTabs)

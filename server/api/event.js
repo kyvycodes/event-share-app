@@ -27,7 +27,6 @@ router.put('/sent/invate', (req, res, next) => {
 })
 
 router.get('/:id', async (req, res, next) => {
-  console.log('OUTPUT: SEN', SEN)
   console.log('REQ', req.params)
   try {
     res.json(await Event.findByPk(req.params.id))

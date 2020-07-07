@@ -106,7 +106,6 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           )}
         </List>
       </Drawer>
-      <hr />
     </div>
   )
 }
