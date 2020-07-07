@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer')
 const sendgridTransport = require('nodemailer-sendgrid-transport')
-const key = require('../../apiKey')
+
+if (process.env.NODE_ENV !== 'production') require('../../apiKey')
 
 // async..await is not allowed in global scope, must use a wrapper
 async function main(emails, name) {
@@ -11,7 +12,7 @@ async function main(emails, name) {
   const transporter = nodemailer.createTransport(
     sendgridTransport({
       auth: {
-        api_key: key.apiKey
+        api_key: process.env.NODE_MAILER_KEY
       }
     })
   )
