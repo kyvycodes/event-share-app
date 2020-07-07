@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import swal from 'sweetalert'
-import {createInvitee, fetchInvitees} from '../store/event'
+import {createInvitees} from '../store/event'
+import {Link} from 'react-router-dom'
 
 export class InviteForm extends React.Component {
   constructor(props) {
@@ -22,6 +23,8 @@ export class InviteForm extends React.Component {
       email: e.target.email.value,
       eventId: this.props.match.params.id
     }
+    e.target.name.value = ''
+    e.target.email.value = ''
     this.setState({invitees: [...this.state.invitees, invitee]})
   }
 
@@ -31,8 +34,14 @@ export class InviteForm extends React.Component {
     this.setState({invitees: editedInvitees})
   }
 
+  sendEmails(invitees, user) {
+    if (invitees.length === 0) {
+      swal('please add at least one recipient')
+    }
+    this.props.createInvitees({invitees, user})
+  }
+
   render() {
-    console.log('STATE', this.state)
     return (
       <div>
         <h3>Invite People To Your Event</h3>
@@ -40,7 +49,14 @@ export class InviteForm extends React.Component {
           Send an email invite to everyone you want to join your event. Simply
           put their name, email and hit send
         </p>
+        {/* {this.props.invitesSent.length > 0 ?
+          <div>
+            <p>Your email invitations have been sent</p>
+            <button type="button">Go back to event</button>
+            <button type="button">Send additional invitations</button>
+          </div>
 
+        : */}
         <div className="form">
           <form onSubmit={this.handleSubmit}>
             <label>
@@ -66,21 +82,30 @@ export class InviteForm extends React.Component {
               )
             })}
           </ul>
-          <button type="button" onClick={() => console.log('HI')}>
+          <button
+            type="button"
+            onClick={() =>
+              this.sendEmails(this.state.invitees, this.props.user.firstName)
+            }
+          >
             Send Invites
           </button>
         </div>
+        {/* } */}
       </div>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  invitees: state.events.invitees
-})
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    invitesSent: state.events.invitees
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
-  createInvitee: invitee => dispatch(createInvitee(invitee))
+  createInvitees: invitees => dispatch(createInvitees(invitees))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InviteForm)

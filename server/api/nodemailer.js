@@ -1,9 +1,9 @@
 const nodemailer = require('nodemailer')
 const sendgridTransport = require('nodemailer-sendgrid-transport')
-const cred = require('./config')
+const key = require('../../apiKey')
 
 // async..await is not allowed in global scope, must use a wrapper
-async function main(emails) {
+async function main(emails, name) {
   // Generate test SMTP service account from ethereal.email
   // Only needed if you don't have a real mail account for testing
 
@@ -11,21 +11,25 @@ async function main(emails) {
   const transporter = nodemailer.createTransport(
     sendgridTransport({
       auth: {
-        api_key:
-          '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'
+        api_key: key.apiKey
       }
     })
   )
 
   // send mail with defined transport object
   await transporter.sendMail({
-    to: emails, // list of receivers
+    to: 'recipient-eventshare2020@gmail.com',
+    bcc: emails, // list of receivers
     from: 'eventshare2020@gmail.com', // sender address
-    subject: 'Hello ✔', // Subject line
-    html: '<b>Hello world?</b>' // html body
+    subject: `${name} has invited you to join an event!`, // Subject line
+    html: `<div>
+    <b>You have been invited to join ${name}'s event, please click on the link below to join </b>
+    <p> LINK WILL BE HERE </p>
+    </div>` // html body
   })
 
   console.log('Message sent')
+  return true
   // // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 }
 
