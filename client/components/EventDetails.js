@@ -15,12 +15,10 @@ class EventDetails extends React.Component {
   componentDidMount() {
     this.props.getEvent(this.props.match.params.id)
   }
-  sendEmail() {
-    console.log('OUTPUT: EventDetails -> sendEmail -> sendEmail')
-    this.props.sendEmail('Tavilesa12@gmail.com')
-  }
   render() {
     const date = formatDate(this.props.currEvent.date || [])
+    const eventId = this.props.currEvent.id
+
     return (
       <div>
         <h3>{this.props.currEvent.title}</h3>
@@ -29,13 +27,15 @@ class EventDetails extends React.Component {
         <p>
           Day of the Event: {date.month}-{date.day}-20{date.year}
         </p>
+        <Link to={`/events/${eventId}/invite`}>
+          <button>Invite Members</button>
+        </Link>
+        <button type="submit">Create A Task</button>
 
-        <button type="button" onClick={this.sendEmail.bind(this)}>
+        {/* <button type="button" onClick={this.sendEmail.bind(this)}>
           Send email now
-        </button>
+        </button> */}
 
-        <button type="submit">Invite Members</button>
-        <button type="submit">Create Tasks</button>
         <button type="submit">Create A Poll</button>
       </div>
     )

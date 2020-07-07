@@ -34,7 +34,8 @@ const LandingPage = () => {
                 Get Started
               </Button>
             </Link>
-            <Link to="/LoginPage">
+
+            <Link to="/Login">
               <Button variant="contained" color="secondary">
                 Login
               </Button>

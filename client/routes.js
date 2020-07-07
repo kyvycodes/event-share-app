@@ -9,7 +9,8 @@ import {
   EventForm,
   EventDetails,
   AddTask,
-  TaskList
+  TaskList,
+  InviteForm
 } from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
@@ -34,7 +35,8 @@ class Routes extends Component {
             <Route exact path="/" component={UserHome} />
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/events/add" component={EventForm} />
-            <Route path="/events/:id" component={EventDetails} />
+            <Route exact path="/events/:id/invite" component={InviteForm} />
+            <Route exact path="/events/:id" component={EventDetails} />
 
             <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} />
@@ -42,6 +44,8 @@ class Routes extends Component {
         )}
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={LandingPage} />
+        <Route exact path="/home" component={LandingPage} />
+
         {/* <Route exact path="/LoginPage" component={LoginPage} /> */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
