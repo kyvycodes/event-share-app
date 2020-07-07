@@ -11,6 +11,7 @@ export class InviteForm extends React.Component {
     this.state = {
       invitees: []
     }
+    //add function/route that will check if email is already in invitee db
   }
 
   handleSubmit(e) {
@@ -67,6 +68,8 @@ export class InviteForm extends React.Component {
               Email
               <input type="email" name="email" />
             </label>
+            <br />
+
             <button type="submit">Add To list</button>
           </form>
           <p>People you are inviting:</p>

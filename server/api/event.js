@@ -14,7 +14,7 @@ router.post('/invite', async (req, res, next) => {
         emails.push(member.email)
       })
     )
-    // await main(emails, req.body.user)
+    await main(emails, req.body.user)
     res.json(emails)
   } catch (err) {
     next(err)
