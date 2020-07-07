@@ -7,6 +7,7 @@ import {
   Signup,
   UserHome,
   EventForm,
+  EventDetails,
   EventTabs,
   AddTask,
   TaskList,
@@ -38,10 +39,8 @@ class Routes extends Component {
             <Route exact path="/events/add" component={EventForm} />
 
             <Route path="/events/:id" component={EventTabs} />
-
             <Route exact path="/events/:id/invite" component={InviteForm} />
             <Route exact path="/events/:id" component={EventDetails} />
-
 
             <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} />
