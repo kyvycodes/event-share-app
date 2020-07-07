@@ -32,9 +32,7 @@ class EventDetails extends React.Component {
         <p>
           Day of the Event: {date.month}-{date.day}-20{date.year}
         </p>
-        {/* <Link to={`/events/${eventId}/invite`}>
-          <button type="button">Invite</button>
-        </Link> */}
+       
         <Box pt={2}>
           <Link to={`/events/${eventId}/invite`}>
             <Button color="primary">Invite</Button>
