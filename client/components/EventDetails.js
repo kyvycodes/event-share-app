@@ -13,8 +13,13 @@ const formatDate = date => {
 }
 class EventDetails extends React.Component {
   componentDidMount() {
-    this.props.getEvent(this.props.match.params.id)
+    this.props.getEvent(this.props.eventId)
   }
+// conflict 
+//   sendEmail() {
+//     this.props.sendEmail('Tavilesa12@gmail.com')
+//   }
+
   render() {
     const date = formatDate(this.props.currEvent.date || [])
     const eventId = this.props.currEvent.id
@@ -22,7 +27,6 @@ class EventDetails extends React.Component {
     return (
       <div>
         <h3>{this.props.currEvent.title}</h3>
-        {/* <EventTabs /> */}
         <p>{this.props.currEvent.description}</p>
         <p>
           Day of the Event: {date.month}-{date.day}-20{date.year}

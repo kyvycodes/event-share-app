@@ -37,7 +37,7 @@ export class TaskList extends React.Component {
       userId: user.id,
       eventId: 1
     }
-    console.log('OUTPUT: TaskList -> handleChooseTask -> newTask', newTask)
+
     // this.props.addTaskToUser(newTask)
   }
 
@@ -45,8 +45,6 @@ export class TaskList extends React.Component {
     const {tasks} = this.props
     return (
       <Container maxWidth="sm">
-        <h3 align="center">Task list for Kay's Birthday Party</h3>
-
         <Box pt={2}>
           <Button color="primary">What to bring:</Button>
         </Box>
