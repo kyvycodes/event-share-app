@@ -1,29 +1,38 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import swal from 'sweetalert'
-
-const isEmpty = e => {
-  const event = {}
-  for (let i = 0; i < e.target.length; i++) {
-    if (!e.target.elements[i].value) {
-      return false
-    } else {
-      event[e.target.elements[i].getAttribute('name')] =
-        e.target.elements[i].value
-    }
-  }
-  return event
-}
+import {createInvitee, fetchInvitees} from '../store/event'
 
 export class InviteForm extends React.Component {
   constructor(props) {
     super(props)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.state = {
+      invitees: []
+    }
   }
 
-  handleSubmit(e) {}
+  handleSubmit(e) {
+    e.preventDefault()
+    if (e.target.name.value === '' || e.target.email.value === '') {
+      swal('Please fill out name and email')
+    }
+    const invitee = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+      eventId: this.props.match.params.id
+    }
+    this.setState({invitees: [...this.state.invitees, invitee]})
+  }
+
+  removeFromList(i) {
+    const editedInvitees = [...this.state.invitees]
+    editedInvitees.splice(i, 1)
+    this.setState({invitees: editedInvitees})
+  }
 
   render() {
+    console.log('STATE', this.state)
     return (
       <div>
         <h3>Invite People To Your Event</h3>
@@ -33,7 +42,7 @@ export class InviteForm extends React.Component {
         </p>
 
         <div className="form">
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <label>
               Name:
               <input type="text" name="name" />
@@ -42,21 +51,36 @@ export class InviteForm extends React.Component {
               Email
               <input type="email" name="email" />
             </label>
-            <button type="submit" value="button">
-              Add To list
-            </button>
-            <button type="submit" value="button">
-              Send Invites
-            </button>
+            <button type="submit">Add To list</button>
           </form>
+          <p>People you are inviting:</p>
+          <ul>
+            {this.state.invitees.map((member, i) => {
+              return (
+                <div key={i}>
+                  <li>{member.email}</li>
+                  <button type="button" onClick={() => this.removeFromList(i)}>
+                    Remove
+                  </button>
+                </div>
+              )
+            })}
+          </ul>
+          <button type="button" onClick={() => console.log('HI')}>
+            Send Invites
+          </button>
         </div>
       </div>
     )
   }
 }
 
-// const mapDispatchToProps = dispatch => ({
-//   createEvent: event => dispatch(createEvent(event))
-// })
+const mapStateToProps = state => ({
+  invitees: state.events.invitees
+})
 
-export default connect(null, null)(InviteForm)
+const mapDispatchToProps = dispatch => ({
+  createInvitee: invitee => dispatch(createInvitee(invitee))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(InviteForm)

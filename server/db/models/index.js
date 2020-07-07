@@ -3,6 +3,7 @@ const User = require('./user')
 const Task = require('./task')
 const Event = require('./event')
 const Invitee = require('./invitees')
+const Notification = require('./notification')
 
 Task.belongsTo(User)
 User.hasMany(Task)
@@ -33,5 +34,6 @@ module.exports = {
   Task,
   Event,
   Invitee,
-  userEventRel
+  userEventRel,
+  Notification
 }
