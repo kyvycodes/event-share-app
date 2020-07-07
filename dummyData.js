@@ -26,19 +26,19 @@ const eventUsers = [
     eventId: 1,
     userId: 1,
     isOrganizer: true,
-    attending: true
+    attending: 'yes'
   },
   {
     eventId: 1,
     userId: 2,
     isOrganizer: false,
-    attending: true
+    attending: 'yes'
   },
   {
     eventId: 2,
     userId: 1,
     isOrganizer: false,
-    attending: true
+    attending: 'pending'
   }
 ]
 

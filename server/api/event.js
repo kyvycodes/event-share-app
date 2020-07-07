@@ -33,7 +33,7 @@ router.post('/add', async (req, res, next) => {
   try {
     const newEvent = await Event.create(req.body)
     newEvent.addUser(req.user.id, {
-      through: {isOrganizer: true, attending: true}
+      through: {isOrganizer: true, attending: 'yes'}
     })
     res.json(newEvent)
   } catch (err) {
