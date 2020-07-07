@@ -14,6 +14,7 @@ import {
 import {me} from './store'
 import LandingPage from './components/LandingPage'
 import Login from './components/LoginPage'
+import TasksSuggested from './components/TasksSuggested'
 
 /**
  * COMPONENT
@@ -38,6 +39,7 @@ class Routes extends Component {
 
             <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} />
+            <Route path="/notifications" component={TasksSuggested} />
           </Switch>
         )}
         {/* Routes placed here are available to all visitors */}

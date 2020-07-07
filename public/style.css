@@ -67,6 +67,12 @@ button {
   margin-bottom: 0.8rem !important;
 }
 
+/* NOTIFICATIONS */
+
+.btn-accept {
+  background-color: chartreuse !important;
+}
+
 /*  LANDING PAGE  */
 
 .btn-theme {
