@@ -2,11 +2,6 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const userEvent = db.define('users_events', {
-  isAdmin: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  },
   isOrganizer: {
     type: Sequelize.BOOLEAN,
     allowNull: false,
