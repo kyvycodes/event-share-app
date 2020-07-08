@@ -25,7 +25,8 @@ class EventTabs extends React.Component {
     this.props.getEvent(this.props.match.params.id)
   }
   render() {
-    console.log('PROPS', this.props)
+    const eventId = this.props.match.params.id
+
     return (
       <div className="">
         <Typography
@@ -48,14 +49,14 @@ class EventTabs extends React.Component {
                 label="Details"
                 value="1"
                 component={RouterLink}
-                to={`/events/${this.props.match.params.id}/details`}
+                to={`/events/${eventId}/details`}
               />
               <Tab label="Guests" value="2" />
               <Tab
                 label="Tasks"
                 value="3"
                 component={RouterLink}
-                to={`/events/${this.props.match.params.id}/tasks`}
+                to={`/events/${eventId}/tasks`}
               />
               <Tab label="Polls" value="4" />
               <Tab
