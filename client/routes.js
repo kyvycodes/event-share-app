@@ -43,8 +43,8 @@ class Routes extends Component {
             <Route path="/events/:id" component={EventApp} />
 
             {/* <Route path="/add-task" component={AddTask} />
-            <Route path="/task-list" component={TaskList} />
-            <Route path="/notifications" component={TasksSuggested} /> */}
+            <Route path="/task-list" component={TaskList} /> */}
+            <Route path="/notifications" component={TasksSuggested} />
           </Switch>
         )}
         {/* Routes placed here are available to all visitors */}
