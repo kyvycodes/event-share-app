@@ -2,6 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {fetchEvent, sendEmail} from '../store/event'
+import {Button, Box} from '@material-ui/core'
+// import EventTabs from './EventTabs'
+
 
 const formatDate = date => {
   return {
@@ -26,12 +29,26 @@ class EventDetails extends React.Component {
         <p>
           Day of the Event: {date.month}-{date.day}-20{date.year}
         </p>
+
         <Link to={`/events/${eventId}/invite`}>
           <button type="button">Invite</button>
         </Link>
         <Link to={`/events/${eventId}/add-task`}>
           <button type="submit">Create A Task</button>
         </Link>
+
+       
+        <Box pt={2}>
+          <Link to={`/events/${eventId}/invite`}>
+            <Button color="primary">Invite</Button>
+          </Link>
+        </Box>
+
+        <button type="submit">Create A Task</button>
+
+        {/* <button type="button" onClick={this.sendEmail.bind(this)}>
+          Send email now
+        </button> */}
         <button type="submit">Create A Poll</button>
       </div>
     )

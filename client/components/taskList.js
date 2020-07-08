@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {getAllTasksForAnEvent} from '../store/task'
 import {
   Container,
@@ -26,6 +27,7 @@ export class TaskList extends React.Component {
 
   async componentDidMount() {
     // dont forget to get eventDd dynamically
+    // console.log("OUTPUT: TaskList -> render -> params", this.props.match.params.id)
     await this.props.getAllTasksForAnEvent(1)
   }
 
@@ -43,10 +45,16 @@ export class TaskList extends React.Component {
 
   render() {
     const {tasks} = this.props
+    // const eventId = this.props.params.match.id;
+    const id = 1
+
     return (
       <Container maxWidth="sm">
         <Box pt={2}>
           <Button color="primary">What to bring:</Button>
+          <Link to={`/tasks/${id}/add`}>
+            <Button color="primary">Create a task</Button>
+          </Link>
         </Box>
 
         <Divider />
