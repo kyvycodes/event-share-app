@@ -4,7 +4,6 @@ import {withRouter, Route, Switch, Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import EventDetails from './EventDetails'
 import InviteForm from './InviteForm'
-import Test from './test'
 import EventTabs from './EventTabs'
 import AddTask from './addTask'
 import taskList from './taskList'
@@ -14,7 +13,6 @@ import taskList from './taskList'
  */
 export class EventRoutes extends Component {
   render() {
-    console.log('INSIDE ROUTER', this.props)
     return (
       <div>
         <Switch>
@@ -33,12 +31,4 @@ export class EventRoutes extends Component {
   }
 }
 
-const mapState = (state, ownProps) => {
-  return {
-    eventId: 2
-  }
-}
-
-// // The `withRouter` wrapper makes sure that updates are not blocked
-// // when the url changes
-export default withRouter(connect(mapState)(EventRoutes))
+export default withRouter(EventRoutes)

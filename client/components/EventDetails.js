@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {fetchEvent, sendEmail} from '../store/event'
-// import EventTabs from './EventTabs'
 
 const formatDate = date => {
   return {
