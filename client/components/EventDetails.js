@@ -16,10 +16,6 @@ class EventDetails extends React.Component {
   componentDidMount() {
     this.props.getEvent(this.props.eventId)
   }
-  // conflict
-  //   sendEmail() {
-  //     this.props.sendEmail('Tavilesa12@gmail.com')
-  //   }
 
   render() {
     const date = formatDate(this.props.currEvent.date || [])
@@ -32,7 +28,7 @@ class EventDetails extends React.Component {
         <p>
           Day of the Event: {date.month}-{date.day}-20{date.year}
         </p>
-       
+
         <Box pt={2}>
           <Link to={`/events/${eventId}/invite`}>
             <Button color="primary">Invite</Button>

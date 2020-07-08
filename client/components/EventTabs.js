@@ -9,6 +9,7 @@ import TabList from '@material-ui/lab/TabList'
 import {fetchEvent} from '../store/event'
 import TaskList from './taskList'
 import EventDetails from './EventDetails'
+import GuestList from './GuestList'
 import InviteForm from './InviteForm'
 import TabPanel from '@material-ui/lab/TabPanel'
 
@@ -55,7 +56,7 @@ class EventTabs extends React.Component {
             <EventDetails eventId={eventId} />
           </TabPanel>
           <TabPanel value="2">
-            Guests goes here whenever it is ready import the component here
+            <GuestList eventId={eventId} />
           </TabPanel>
           <TabPanel value="3">
             <TaskList />

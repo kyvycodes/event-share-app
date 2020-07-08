@@ -40,7 +40,8 @@ class Routes extends Component {
 
             <Route exact path="/events/:id" component={EventTabs} />
             <Route exact path="/events/:id/invite" component={InviteForm} />
-            <Route exact path="/events/:id" component={EventDetails} />
+            {/* <Route exact path="/events/:id" component={EventDetails} /> */}
+            <Route exact path="/events/:id/guests" component={EventDetails} />
 
             <Route path="/tasks/:id/add" component={AddTask} />
             <Route path="/task-list" component={TaskList} />

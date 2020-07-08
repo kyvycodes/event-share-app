@@ -35,11 +35,11 @@ export class InviteForm extends React.Component {
     this.setState({invitees: editedInvitees})
   }
 
-  sendEmails(invitees, user) {
+  sendEmails(invitees) {
     if (invitees.length === 0) {
       swal('please add at least one recipient')
     }
-    this.props.createInvitees({invitees, user})
+    this.props.createInvitees(invitees)
   }
 
   render() {
@@ -87,9 +87,7 @@ export class InviteForm extends React.Component {
           </ul>
           <button
             type="button"
-            onClick={() =>
-              this.sendEmails(this.state.invitees, this.props.user.firstName)
-            }
+            onClick={() => this.sendEmails(this.state.invitees)}
           >
             Send Invites
           </button>
