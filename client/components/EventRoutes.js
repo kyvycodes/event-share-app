@@ -26,7 +26,6 @@ export class EventRoutes extends Component {
           <Route exact path="/events/:id/polls" component={InviteForm} />
 
           <Redirect from="/events/:id" to="/events/:id/details" exact />
-          {/* <Route exact path="events/:id/invite" component={InviteForm} /> */}
           {/* <Route component={EventDetails} /> */}
         </Switch>
       </div>
