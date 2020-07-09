@@ -30,9 +30,9 @@ export const getSingleTask = id => async dispatch => {
   }
 }
 
-export const getAllTasksForAnEvent = eventId => async dispatch => {
+export const getAllTasksForAnEvent = id => async dispatch => {
   try {
-    const res = await axios.get(`/api/tasks/${eventId}`)
+    const res = await axios.get(`/api/tasks/${id}`)
     dispatch(fetchAllTaskEvent(res.data))
   } catch (err) {
     console.error(err)
@@ -53,6 +53,15 @@ export const setTask = taskObj => async dispatch => {
   try {
     const res = await axios.post(`/api/tasks/`, taskObj)
     dispatch(addTask(res.data))
+  } catch (err) {
+    dispatch(gotErrorTask(err.response.data))
+  }
+}
+
+export const addTaskToUser = (taskObj, id) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/tasks/${id}`, taskObj)
+    dispatch(fetchAllTaskEvent(res.data))
   } catch (err) {
     dispatch(gotErrorTask(err.response.data))
   }

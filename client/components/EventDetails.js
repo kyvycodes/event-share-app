@@ -3,8 +3,6 @@ import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {fetchEvent, sendEmail} from '../store/event'
 import {Button, Box} from '@material-ui/core'
-// import EventTabs from './EventTabs'
-
 
 const formatDate = date => {
   return {
@@ -21,7 +19,6 @@ class EventDetails extends React.Component {
   render() {
     const date = formatDate(this.props.currEvent.date || [])
     const eventId = this.props.match.params.id
-    console.log('PROPSSSS', this.props)
     return (
       <div>
         <h3>{this.props.currEvent.title}</h3>
@@ -37,7 +34,6 @@ class EventDetails extends React.Component {
           <button type="submit">Create A Task</button>
         </Link>
 
-       
         <Box pt={2}>
           <Link to={`/events/${eventId}/invite`}>
             <Button color="primary">Invite</Button>
