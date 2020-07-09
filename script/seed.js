@@ -34,12 +34,12 @@ async function seed() {
   const polls = await Promise.all([
     Poll.create({
       title: 'what should desert be?',
-      items: [{optionId: 1}],
-      // title: "what should desert be?",
-      // items: [{ options["title"], 'candy bar', 'fruit tarts'}],
-      autoClose: 10,
-      showTotal: true,
-      creator: true,
+      // items: [{optionId: 1}],
+      // // title: "what should desert be?",
+      // // items: [{ options["title"], 'candy bar', 'fruit tarts'}],
+      // autoClose: 10,
+      // showTotal: true,
+      // creator: true,
       userId: 1
     })
   ])
@@ -48,21 +48,21 @@ async function seed() {
     Options.create({
       title: 'cake',
       count: 1,
-      total: 4,
+      // total: 4,
       pollId: 1,
       userId: 1
     }),
     Options.create({
       title: 'fruit tart',
       count: 1,
-      total: 2,
+      // total: 2,
       pollId: 1,
       userId: 2
     }),
     Options.create({
       title: 'pie',
       count: 1,
-      total: 5,
+      // total: 5,
       pollId: 1
     })
   ])

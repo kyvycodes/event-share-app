@@ -10,7 +10,8 @@ import {
   EventDetails,
   AddTask,
   TaskList,
-  customPoll
+  Vote,
+  PollForm
 } from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
@@ -36,7 +37,8 @@ class Routes extends Component {
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/events/add" component={EventForm} />
             <Route path="/events/:id" component={EventDetails} />
-            <Route path="/poll" component={customPoll} />
+            <Route path="/poll" component={PollForm} />
+            <Route path="/vote" component={Vote} />
             <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} />
           </Switch>

@@ -7,10 +7,10 @@ const Options = db.define('options', {
   },
   count: {
     type: Sequelize.INTEGER
-  },
-  total: {
-    type: Sequelize.INTEGER
   }
+  // total: {
+  //   type: Sequelize.INTEGER
+  // }
 })
 
 module.exports = Options
