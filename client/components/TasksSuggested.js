@@ -58,8 +58,10 @@ export class TasksSuggested extends React.Component {
             <Button
               size="small"
               variant="contained"
-              color="primary"
-              className="btn-accept"
+              color="secondary"
+              style={{
+                backgroundColor: '#32CD32'
+              }}
             >
               Approve
             </Button>

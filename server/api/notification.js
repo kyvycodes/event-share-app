@@ -1,7 +1,14 @@
 /*
-2. choose task will change to display name picture
-3. if task is take & u are the persondisplay a btn that says drop task. Should go back to green &  choose task
-1. approve or reject  suggested taks
+GOAL: approve or reject  suggested taks
+1. add a field called isApproved to task model
+2.when create a task
+      if(userIsAdmin) {
+        create Task and set  isApproved = true
+      }
+      else {
+        create Task and set  isApproved = false
+      }
+3. make sure to only server the   isApproved = true for taskList & for notifications serve up only tasks that  isApproved = false
 */
 
 const router = require('express').Router()

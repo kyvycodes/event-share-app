@@ -4,7 +4,7 @@ const db = require('../db')
 // association we need  userID
 const Notification = db.define('notifications', {
   authorId: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER
   },
   authorName: {
     type: Sequelize.STRING
