@@ -83,10 +83,10 @@ class EventTabs extends React.Component {
           {/* <TabPanel value="3">
             <TaskList /> */}
           {/* </TabPanel> */}
-          {/* <TabPanel value="4">
-              Polls goes here whenever it is ready import the component and added
-              here
-          </TabPanel> */}
+          <TabPanel value="4">
+            Polls goes here whenever it is ready import the component and added
+            here
+          </TabPanel>
           {/* <TabPanel value="5">
             <InviteForm eventId={eventId} />
           </TabPanel> */}
