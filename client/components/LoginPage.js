@@ -8,6 +8,7 @@ import Grid from '@material-ui/core/Grid'
 class Login extends Component {
   render() {
     const {name, displayName, handleSubmit, error} = this.props
+    console.log('PARAMS', this.props)
     return (
       <div className="loginpage-form">
         <div className="logo-place-holder-login-form">logo</div>
@@ -80,23 +81,3 @@ Login.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }
-//export default LoginPage
-
-// export default LoginPage
-
-// import React from 'react'
-// import {Login} from './auth-form'
-
-// const LoginPage = () => {
-//   //console.log('HERERERERE',props)
-//   return (
-
-//     <div>
-//       <h1>yo wasssup</h1>
-//       <Login />
-
-//     </div>
-//   )
-// }
-
-// export default LoginPage

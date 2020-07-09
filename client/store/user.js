@@ -58,8 +58,13 @@ export const auth = (
   }
 
   try {
+    let historyUrl = '/home'
+    if (history.location.pathname) {
+      historyUrl = history.location.pathname
+    }
+    history = history.location.pathname
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push(`${historyUrl}`)
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }

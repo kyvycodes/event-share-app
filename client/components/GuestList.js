@@ -8,11 +8,9 @@ import {getMe} from '../store/user'
  */
 
 export const GuestList = props => {
-  useEffect(() => {
-    // will call to get guests
-  }, [])
-
-  const guests = props.guests || []
+  useEffect(() => {}, [])
+  console.log('PROPS IN GUESTS', props)
+  const invitees = props.invitees || []
   return (
     <div>
       <div>
@@ -21,9 +19,10 @@ export const GuestList = props => {
         <button type="submit">Declined</button>
       </div>
       <div>
-        <h4>Your Guests</h4>
-        {guests.length > 0 ? (
-          guests.map(guest => (
+        <h4>Guests</h4>
+        <li />
+        {invitees.length > 0 ? (
+          invitees.map(guest => (
             <ul key={guest.id}>
               <li>
                 {guest.name} - {guest.email}
@@ -49,15 +48,14 @@ export const GuestList = props => {
 const mapState = state => {
   return {
     user: state.user,
-    currEvent: state.user.currEvent
-    // guests: state.user.guests
+    currEvent: state.events.currEvent,
+    invitees: state.events.currEvent.invitees,
+    guests: state.events.currEvent.guests
   }
 }
 
 const mapDispatch = dispatch => {
-  return {
-    // getUser: () => dispatch(getMe())
-  }
+  return {}
 }
 
 export default connect(mapState, mapDispatch)(GuestList)

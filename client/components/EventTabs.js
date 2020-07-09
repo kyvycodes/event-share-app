@@ -52,7 +52,12 @@ class EventTabs extends React.Component {
                 component={RouterLink}
                 to={`/events/${eventId}/details`}
               />
-              <Tab label="Guests" value="2" />
+              <Tab
+                label="Guests"
+                value="2"
+                component={RouterLink}
+                to={`/events/${eventId}/guests`}
+              />
               <Tab
                 label="Tasks"
                 value="3"
@@ -64,7 +69,7 @@ class EventTabs extends React.Component {
                 label="Invite"
                 value="5"
                 component={RouterLink}
-                to={`/events/${this.props.match.params.id}/invite`}
+                to={`/events/${eventId}/invite`}
               />
             </TabList>
           </AppBar>
@@ -72,16 +77,16 @@ class EventTabs extends React.Component {
             <EventDetails  component={Link}
             to="/events/:id/invite" />
           </TabPanel> */}
-          <TabPanel value="2">
+          {/* <TabPanel value="2">
             <GuestList eventId={eventId} />
-          </TabPanel>
+          </TabPanel> */}
           {/* <TabPanel value="3">
             <TaskList /> */}
           {/* </TabPanel> */}
-          <TabPanel value="4">
-            Polls goes here whenever it is ready import the component and added
-            here
-          </TabPanel>
+          {/* <TabPanel value="4">
+              Polls goes here whenever it is ready import the component and added
+              here
+          </TabPanel> */}
           {/* <TabPanel value="5">
             <InviteForm eventId={eventId} />
           </TabPanel> */}

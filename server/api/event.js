@@ -17,7 +17,7 @@ router.post('/invite', async (req, res, next) => {
         emails.push(invitee.email)
       })
     )
-    // await main(emails, req.user.firstName)
+    await main(emails, req.user.firstName, req.body.eventId)
     res.json(emails)
   } catch (err) {
     next(err)
@@ -27,18 +27,7 @@ router.post('/invite', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const event = await Event.findByPk(req.params.id, {
-      attributes: [
-        'id',
-        'title',
-        'description',
-        'date',
-        'address',
-        'city',
-        'zipcode',
-        'state',
-        'startTime'
-      ],
-      include: Task
+      include: Invitee
     })
     res.json(event)
   } catch (err) {
