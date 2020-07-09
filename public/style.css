@@ -143,3 +143,46 @@ section {
   background-color: rgb(52, 216, 20);
   margin-left: 130px;
 }
+
+/* Voting */
+
+.heading {
+  text-align: center;
+  color: #222;
+  margin: 30px;
+}
+
+.options {
+  height: 400px;
+  width: 400px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: #ff8e53;
+  border: 2px solid #222;
+  margin: 2px;
+}
+
+.voteCount {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.optionName button {
+  color: green;
+  background-color: #0000;
+  border: none;
+  font-size: 30px;
+  outline: none;
+  cursor: pointer;
+}
