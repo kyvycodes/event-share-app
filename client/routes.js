@@ -56,7 +56,8 @@ class Routes extends Component {
 
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route exact path="/events/:id" component={Signup} />
+        <Route exact path="/events/:id/guests" component={Login} />
+        <Route exact path="/events/:id/signup" component={Signup} />
 
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />

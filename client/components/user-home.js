@@ -15,7 +15,6 @@ export const UserHome = props => {
   const {firstName, lastName, email, profile_pic} = props.user
   const events = props.user.events || []
   const tasks = props.user.tasks || []
-  console.log('EV', events)
   return (
     <div>
       <div className="profile">
@@ -40,14 +39,7 @@ export const UserHome = props => {
                 {event.users_events.attending === 'pending' ? (
                   <div>
                     <p>Attending?</p>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        props.updateUserAttendance(event.id, 'yes')
-                      }
-                    >
-                      Yes
-                    </button>
+                    <button type="button">Yes</button>
                     <button>No</button>
                   </div>
                 ) : (

@@ -6,15 +6,29 @@ import Link from '@material-ui/core/Link'
 import Grid from '@material-ui/core/Grid'
 
 class Login extends Component {
+  componentDidMount() {
+    if (this.props.match.params.id && !window.localStorage.getItem('eventId')) {
+      window.localStorage.setItem(
+        'eventId',
+        JSON.stringify(this.props.match.params.id)
+      )
+    }
+  }
+
   render() {
-    const {name, displayName, handleSubmit, error} = this.props
-    console.log('PARAMS', this.props)
+    const {displayName, handleSubmit, error} = this.props
     return (
       <div className="loginpage-form">
         <div className="logo-place-holder-login-form">logo</div>
         {/* <Login /> */}
         <div>
-          <form onSubmit={handleSubmit} name="login">
+          <form
+            onSubmit={e => {
+              e.preventDefault()
+              handleSubmit(e, this.props.match.params.id)
+            }}
+            name="login"
+          >
             <div>
               <label htmlFor="email">
                 <small>Email</small>
@@ -64,12 +78,12 @@ const mapLogin = state => {
 
 const mapDispatch = dispatch => {
   return {
-    handleSubmit(evt) {
-      evt.preventDefault()
+    handleSubmit(evt, id) {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(auth(email, password, null, null, formName))
+      const eventId = id
+      dispatch(auth(email, password, null, null, formName, eventId))
     }
   }
 }

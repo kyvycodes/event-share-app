@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import swal from 'sweetalert'
-import {createInvitees} from '../store/event'
+import {createInvites} from '../store/event'
 import {Link} from 'react-router-dom'
 
 export class InviteForm extends React.Component {
@@ -39,7 +39,7 @@ export class InviteForm extends React.Component {
     if (invitees.length === 0) {
       swal('please add at least one recipient')
     }
-    this.props.createInvitees(invitees)
+    this.props.sendInvites(invitees, this.props.match.params.id)
   }
 
   render() {
@@ -50,14 +50,6 @@ export class InviteForm extends React.Component {
           Send an email invite to everyone you want to join your event. Simply
           put their name, email and hit send
         </p>
-        {/* {this.props.invitesSent.length > 0 ?
-          <div>
-            <p>Your email invitations have been sent</p>
-            <button type="button">Go back to event</button>
-            <button type="button">Send additional invitations</button>
-          </div>
-
-        : */}
         <div className="form">
           <form onSubmit={this.handleSubmit}>
             <label>
@@ -106,7 +98,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createInvitees: invitees => dispatch(createInvitees(invitees))
+  sendInvites: (invitees, eventId) => dispatch(createInvites(invitees, eventId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InviteForm)

@@ -43,7 +43,6 @@ const useStyles = makeStyles(theme => ({
  * COMPONENT
  */
 export default function SignUp(props) {
-  console.log('PARAMS', props)
   const {name, handleSubmit, displayName, error} = props
   const classes = useStyles()
   return (
@@ -61,7 +60,9 @@ export default function SignUp(props) {
           noValidate
           onSubmit={e => {
             e.preventDefault()
-            handleSubmit(e, props.match.params.id)
+            const eventId = JSON.parse(window.localStorage.getItem('eventId'))
+            console.log('EVENTDI', eventId)
+            handleSubmit(e, eventId)
           }}
           name={name}
         >
@@ -142,21 +143,6 @@ export default function SignUp(props) {
   )
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
-// const mapLogin = state => {
-//   return {
-//     name: 'login',
-//     displayName: 'Login',
-//     error: state.user.error
-//   }
-// }
-
 const mapSignup = state => {
   return {
     name: 'signup',
@@ -168,7 +154,6 @@ const mapSignup = state => {
 const mapDispatch = dispatch => {
   return {
     handleSubmit(evt, id) {
-      console.log('ID', id)
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
@@ -180,7 +165,6 @@ const mapDispatch = dispatch => {
   }
 }
 
-// export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatch)(SignUp)
 
 /**

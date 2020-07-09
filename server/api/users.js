@@ -17,9 +17,6 @@ router.get('/me', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and email fields - even though
-      // users' passwords are encrypted, it won't help if we just
-      // send everything to anyone who asks!
       attributes: ['id', 'email', 'event', 'task'],
       include: [Event, Task]
     })
@@ -37,7 +34,6 @@ router.put('/me/:eventId', async (req, res, next) => {
         eventId: req.params.eventId
       }
     })
-    console.log('REQ BODY', req.body)
     userEvent.attending = req.body.decision
     await userEvent.save()
     console.log('USER', userEvent)

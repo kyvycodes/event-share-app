@@ -3,7 +3,7 @@ const sendgridTransport = require('nodemailer-sendgrid-transport')
 
 if (process.env.NODE_ENV !== 'production') require('../../apiKey')
 
-async function main(emails, name, id) {
+async function main(email, name, userName, id) {
   const transporter = nodemailer.createTransport(
     sendgridTransport({
       auth: {
@@ -13,13 +13,18 @@ async function main(emails, name, id) {
   )
 
   await transporter.sendMail({
-    to: 'recipient-eventshare2020@gmail.com',
-    bcc: emails, // list of receivers
+    to: email,
     from: 'eventshare2020@gmail.com', // sender address
-    subject: `${name} has invited you to join an event!`, // Subject line
+    subject: `${userName} has invited you to an event!`, // Subject line
     html: `<div>
-    <b>You have been invited to join ${name}'s event, please click on the link below to join </b>
-    <p>http://localhost:8080/events/${id}</p>
+    <h4>Hi, ${name}</h4>
+    <b>You have been invited to ${userName}'s event! </b>
+    <p>Please click the link below, sign in and let ${userName} know if you can make it or not.</p>
+    <a href="http://localhost:8080/events/${id}/guests"> Take Me To The Event </a>
+
+    <p>If you don't have an account, please <a href="http://localhost:8080/events/${id}/signup"> sign up here first </a> and then follow the link</p>
+
+    <L
         </div>` // html body
   })
 
