@@ -39,19 +39,18 @@ export class AddTask extends React.Component {
     })
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault()
-    const user = this.props.user
+    const eventId = this.props.match.params.id
 
     let newTask = {
       title: this.state.title,
       description: this.state.description,
       category: this.state.category,
-      dueDate: 'July 29 2020',
-      userId: user.id,
-      eventId: 1
+      eventId: eventId
     }
-    this.props.setTask(newTask)
+    await this.props.setTask(newTask)
+    this.props.history.push(`/events/${eventId}/tasks`)
   }
 
   render() {
