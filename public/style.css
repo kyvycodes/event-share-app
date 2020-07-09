@@ -60,6 +60,10 @@ button {
   display: inline;
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 /* EVENTTABS */
 
 .eventTitle {
