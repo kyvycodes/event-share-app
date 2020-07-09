@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getMe} from '../store/user'
+import {getMe, updateUserEvents} from '../store/user'
 /**
  * COMPONENT
  */
@@ -15,6 +15,7 @@ export const UserHome = props => {
   const {firstName, lastName, email, profile_pic} = props.user
   const events = props.user.events || []
   const tasks = props.user.tasks || []
+  console.log('EV', events)
   return (
     <div>
       <div className="profile">
@@ -32,9 +33,27 @@ export const UserHome = props => {
         <ul>
           {events.length > 0 ? (
             events.map(event => (
-              <Link to={`/events/${event.id}`} key={event.id}>
-                <li>{event.title}</li>
-              </Link>
+              <div key={event.id}>
+                <Link to={`/events/${event.id}`}>
+                  <li>{event.title}</li>
+                </Link>
+                {event.users_events.attending === 'pending' ? (
+                  <div>
+                    <p>Attending?</p>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        props.updateUserAttendance(event.id, 'yes')
+                      }
+                    >
+                      Yes
+                    </button>
+                    <button>No</button>
+                  </div>
+                ) : (
+                  <p>Attending: {event.users_events.attending}</p>
+                )}
+              </div>
             ))
           ) : (
             <p>You Have No Current Events</p>
@@ -66,7 +85,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getUser: () => dispatch(getMe())
+    getUser: () => dispatch(getMe()),
+    updateUserAttendance: (eventId, decision) =>
+      dispatch(updateUserEvents(eventId, decision))
   }
 }
 

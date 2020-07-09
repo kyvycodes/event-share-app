@@ -4,8 +4,13 @@ import history from '../history'
 const GET_EVENTS = 'GET_EVENTS'
 const GET_ONE_EVENT = 'GET_EVENT'
 const ADD_EVENT = 'ADD_EVENT'
-const GET_INVITEES = 'GET_INVITEE'
 const ADD_INVITEES = 'ADD_INVITEES'
+const UPDATE_USER_EVENT = 'UPDATE_USER_EVENT'
+
+const updatedUserEvent = events => ({
+  type: UPDATE_USER_EVENT,
+  events
+})
 
 const getEvents = events => ({
   type: GET_EVENTS,
@@ -22,23 +27,17 @@ const addInvitees = invitees => ({
   invitees
 })
 
-// const getInvitees = invitees => ({
-//   type: GET_INVITEES,
-//   invitees
-// })
-
-// export const fetchInvitees = (id) => {
-//   return async dispatch => {
-//     try {
-//       const {data} = await axios.get(`/api/events/invite/${id}`)
-//       dispatch(getInvitees(data))
-
-//     }
-//     catch(err) {
-//       console.log(err)
-//     }
-//   }
-// }
+export const updateUserEvents = (eventId, dec) => async dispatch => {
+  try {
+    const decision = {
+      decision: dec
+    }
+    const {data} = await axios.put(`/api/users/me/${eventId}`, decision)
+    dispatch(updatedUserEvent(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const createInvitees = invitees => {
   return async dispatch => {

@@ -43,6 +43,7 @@ const useStyles = makeStyles(theme => ({
  * COMPONENT
  */
 export default function SignUp(props) {
+  console.log('PARAMS', props)
   const {name, handleSubmit, displayName, error} = props
   const classes = useStyles()
   return (
@@ -58,7 +59,10 @@ export default function SignUp(props) {
         <form
           className={classes.form}
           noValidate
-          onSubmit={handleSubmit}
+          onSubmit={e => {
+            e.preventDefault()
+            handleSubmit(e, props.match.params.id)
+          }}
           name={name}
         >
           <Grid container spacing={2}>
@@ -163,14 +167,15 @@ const mapSignup = state => {
 
 const mapDispatch = dispatch => {
   return {
-    handleSubmit(evt) {
-      evt.preventDefault()
+    handleSubmit(evt, id) {
+      console.log('ID', id)
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
       const firstName = evt.target.firstName.value
       const lastName = evt.target.lastName.value
-      dispatch(auth(email, password, firstName, lastName, formName))
+      const eventId = id
+      dispatch(auth(email, password, firstName, lastName, formName, eventId))
     }
   }
 }

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Event, Invitee, Task} = require('../db/models')
+const {Event, Invitee, Task, userEventRel} = require('../db/models')
 const main = require('./nodemailer')
 module.exports = router
 
@@ -27,7 +27,7 @@ router.post('/invite', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const event = await Event.findByPk(req.params.id, {
-      include: Invitee
+      include: [Invitee]
     })
     res.json(event)
   } catch (err) {

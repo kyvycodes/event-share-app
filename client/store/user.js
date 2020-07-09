@@ -6,7 +6,6 @@ import history from '../history'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-
 /**
  * INITIAL STATE
  */
@@ -17,10 +16,21 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-
 /**
  * THUNK CREATORS
  */
+
+export const updateUserEvents = (eventId, dec) => async dispatch => {
+  try {
+    const decision = {
+      decision: dec
+    }
+    const {data} = await axios.put(`/api/users/me/${eventId}`, decision)
+    dispatch(getUser(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
@@ -43,7 +53,8 @@ export const auth = (
   password,
   firstName,
   lastName,
-  method
+  method,
+  eventId
 ) => async dispatch => {
   let res
   try {
@@ -51,7 +62,8 @@ export const auth = (
       email,
       password,
       firstName,
-      lastName
+      lastName,
+      eventId
     })
   } catch (authError) {
     return dispatch(getUser({error: authError}))
@@ -59,10 +71,9 @@ export const auth = (
 
   try {
     let historyUrl = '/home'
-    if (history.location.pathname) {
+    if (history.location.pathname === `/events/${1}/guests`) {
       historyUrl = history.location.pathname
     }
-    history = history.location.pathname
     dispatch(getUser(res.data))
     history.push(`${historyUrl}`)
   } catch (dispatchOrHistoryErr) {
