@@ -8,14 +8,19 @@ import {
   UserHome,
   EventForm,
   EventDetails,
+  EventTabs,
+  EventApp,
   AddTask,
   TaskList,
-  Vote,
-  PollForm
+  PollForm,
+  InviteForm,
+  Vote
 } from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
 import Login from './components/LoginPage'
+import TasksSuggested from './components/TasksSuggested'
+import {EventRoutes} from './components/EventRoutes'
 
 /**
  * COMPONENT
@@ -36,16 +41,30 @@ class Routes extends Component {
             <Route exact path="/" component={UserHome} />
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/events/add" component={EventForm} />
-            <Route path="/events/:id" component={EventDetails} />
             <Route path="/poll" component={PollForm} />
+            {/* <Route path="/add-task" component={AddTask} /> */}
+            <Route path="/events/:id" component={EventApp} />
             <Route path="/vote" component={Vote} />
-            <Route path="/add-task" component={AddTask} />
+            {/* <Route path="/add-task" component={AddTask} />
+            <Route path="/task-list" component={TaskList} /> */}
+
+            <Route exact path="/events/:id" component={EventTabs} />
+            <Route exact path="/events/:id/invite" component={InviteForm} />
+            <Route exact path="/events/:id" component={EventDetails} />
+
+            <Route path="/tasks/:id/add" component={AddTask} />
             <Route path="/task-list" component={TaskList} />
+
+            <Route path="/notifications" component={TasksSuggested} />
           </Switch>
         )}
         {/* Routes placed here are available to all visitors */}
         <Route exact path="/" component={LandingPage} />
+
+        <Route exact path="/home" component={LandingPage} />
+
         {/* <Route exact path="/LoginPage" component={LoginPage} /> */}
+
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
 
@@ -56,9 +75,6 @@ class Routes extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
 const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.

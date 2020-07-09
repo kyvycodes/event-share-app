@@ -44,7 +44,6 @@ button {
 
 .MuiInputLabel-formControl {
   top: 3px;
-  left: 14px !important;
   position: absolute;
   transform: translate(0, 24px) scale(1);
 }
@@ -54,11 +53,31 @@ button {
 .task-list {
   width: '100%';
   max-width: '36ch';
-  /* background-color: rgb(248, 248, 250); */
 }
 
 .inline {
   display: inline;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.float-left {
+  float: right !important;
+}
+
+/* EVENTTABS */
+
+.eventTitle {
+  margin-top: 1.8rem !important;
+  margin-bottom: 0.8rem !important;
+}
+
+/* NOTIFICATIONS */
+
+.btn-accept {
+  background-color: chartreuse !important;
 }
 
 /*  LANDING PAGE  */
@@ -123,4 +142,47 @@ section {
   width: 70px;
   background-color: rgb(52, 216, 20);
   margin-left: 130px;
+}
+
+/* Voting */
+
+.heading {
+  text-align: center;
+  color: #222;
+  margin: 30px;
+}
+
+.options {
+  height: 400px;
+  width: 400px;
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px;
+  background-color: #ff8e53;
+  border: 2px solid #222;
+  margin: 2px;
+}
+
+.voteCount {
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.optionName button {
+  color: green;
+  background-color: #0000;
+  border: none;
+  font-size: 30px;
+  outline: none;
+  cursor: pointer;
 }

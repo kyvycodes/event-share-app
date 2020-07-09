@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {fetchEvent} from '../store/event'
+import {Link, withRouter} from 'react-router-dom'
+import {fetchEvent, sendEmail} from '../store/event'
+import {Button, Box} from '@material-ui/core'
 
 const formatDate = date => {
   return {
@@ -14,8 +15,10 @@ class EventDetails extends React.Component {
   componentDidMount() {
     this.props.getEvent(this.props.match.params.id)
   }
+
   render() {
     const date = formatDate(this.props.currEvent.date || [])
+    const eventId = this.props.match.params.id
     return (
       <div>
         <h3>{this.props.currEvent.title}</h3>
@@ -23,8 +26,25 @@ class EventDetails extends React.Component {
         <p>
           Day of the Event: {date.month}-{date.day}-20{date.year}
         </p>
-        <button type="submit">Invite Members</button>
-        <button type="submit">Create Tasks</button>
+
+        <Link to={`/events/${eventId}/invite`}>
+          <button type="button">Invite</button>
+        </Link>
+        <Link to={`/events/${eventId}/add-task`}>
+          <button type="submit">Create A Task</button>
+        </Link>
+
+        <Box pt={2}>
+          <Link to={`/events/${eventId}/invite`}>
+            <Button color="primary">Invite</Button>
+          </Link>
+        </Box>
+
+        <button type="submit">Create A Task</button>
+
+        {/* <button type="button" onClick={this.sendEmail.bind(this)}>
+          Send email now
+        </button> */}
         <button type="submit">Create A Poll</button>
       </div>
     )
@@ -40,8 +60,9 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getEvent: id => dispatch(fetchEvent(id))
+    getEvent: id => dispatch(fetchEvent(id)),
+    sendEmail: email => dispatch(sendEmail(email))
   }
 }
 
-export default connect(mapState, mapDispatch)(EventDetails)
+export default withRouter(connect(mapState, mapDispatch)(EventDetails))

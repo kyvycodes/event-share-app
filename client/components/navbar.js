@@ -5,7 +5,6 @@ import {connect} from 'react-redux'
 import {logout} from '../store'
 import {makeStyles} from '@material-ui/core/styles'
 import {
-  Container,
   AppBar,
   Drawer,
   Toolbar,
@@ -47,13 +46,20 @@ const Navbar = ({handleClick, isLoggedIn}) => {
   return (
     <div className={classes.root}>
       <AppBar className="" position="static">
-        <Container>
-          <Toolbar>
-            <Typography variant="h5" className={classes.logoText}>
-              <Button component={RouterLink} to="/home" color="inherit">
-                EVENTSHARE
-              </Button>
-            </Typography>
+        <Toolbar>
+          <Typography variant="h5" className={classes.logoText}>
+            <Button component={RouterLink} to="/home" color="inherit">
+              EVENTSHARE
+            </Button>
+          </Typography>
+
+          <IconButton
+            edge="start"
+            component={RouterLink}
+            to="/notifications"
+            color="inherit"
+            aria-label="menu"
+          >
             <Badge
               badgeContent={4}
               color="secondary"
@@ -61,17 +67,17 @@ const Navbar = ({handleClick, isLoggedIn}) => {
             >
               <NotificationsIcon />
             </Badge>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-              onClick={() => setOpen(true)}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Toolbar>
-        </Container>
+          </IconButton>
+
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => setOpen(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
       </AppBar>
 
       <Drawer
@@ -82,7 +88,6 @@ const Navbar = ({handleClick, isLoggedIn}) => {
         onKeyDown={() => setOpen(false)}
       >
         <List className={classes.sideDrawer} component="nav">
-
           {/* The navbar will show these links after you log in */}
           {isLoggedIn ? (
             <div>
@@ -107,7 +112,6 @@ const Navbar = ({handleClick, isLoggedIn}) => {
           )}
         </List>
       </Drawer>
-      <hr />
     </div>
   )
 }

@@ -29,10 +29,13 @@ const LandingPage = () => {
             </h2>
           </div>
           <div className={classes.root}>
-            <Button variant="contained" color="primary">
-              Get Started
-            </Button>
-            <Link to="/LoginPage">
+            <Link to="signup">
+              <Button variant="contained" color="primary">
+                Get Started
+              </Button>
+            </Link>
+
+            <Link to="/Login">
               <Button variant="contained" color="secondary">
                 Login
               </Button>

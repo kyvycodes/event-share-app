@@ -44,7 +44,7 @@ const Event = db.define('events', {
       isUrl: true
     }
   },
-  invitees: {
+  invited: {
     type: Sequelize.INTEGER
   },
   attending: {
