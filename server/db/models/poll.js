@@ -1,16 +1,14 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
+const {STRING} = require('sequelize')
 
 const Poll = db.define('poll', {
   title: {
     type: Sequelize.STRING,
     allowNull: false
   },
-  items: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  voters: {
-    type: Sequelize.ARRAY(Sequelize.INTEGER) // an array of voter id
+  item: {
+    type: Sequelize.ARRAY(STRING)
   },
   autoClose: {
     type: Sequelize.INTEGER
@@ -23,12 +21,13 @@ const Poll = db.define('poll', {
     type: Sequelize.BOOLEAN,
     defaultValue: 'false'
   },
-  // creator: {
-  //   type: Sequelize.BOOLEAN,
-  // },
+  creator: {
+    type: Sequelize.BOOLEAN
+  },
   showTotal: {
     type: Sequelize.BOOLEAN,
     defaultValue: 'false'
   }
 })
+
 module.exports = Poll

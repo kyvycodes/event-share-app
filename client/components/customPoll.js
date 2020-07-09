@@ -11,7 +11,7 @@ const customPoll = () => {
         // styles={customStyle}
         // text={customText}
         text="hi"
-        // data={data}
+        data={data}
         // console.log("data", data)
 
         onCreate={(data, diff) => {
