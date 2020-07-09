@@ -58,7 +58,7 @@ async function seed() {
     }),
     Task.create({
       title: 'Chips & Salsa ',
-      description: 'Bring  2 packs of chips & salsa',
+      description: '2 packages of chips&salsa',
       category: 'to bring',
       userId: 1,
       eventId: 1

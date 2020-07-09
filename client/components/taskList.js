@@ -13,9 +13,10 @@ import {
   Box,
   Avatar,
   Typography,
-  IconButton
+  IconButton,
+  Grid
 } from '@material-ui/core'
-import DeleteIcon from '@material-ui/icons/Delete'
+import RemoveCircleTwoToneIcon from '@material-ui/icons/RemoveCircleTwoTone'
 
 export class TaskList extends React.Component {
   constructor(props) {
@@ -30,24 +31,22 @@ export class TaskList extends React.Component {
     await this.props.getAllTasksForAnEvent(eventId)
   }
 
-  async handleChooseTask(taskId) {
+  async handleChooseTask(taskId, type) {
     const asigneedId = this.props.user.id
     const eventId = this.props.match.params.id
     let updateTask = {
       taskId: taskId,
       userId: asigneedId,
-      eventId: eventId
+      eventId: eventId,
+      type: type
     }
     await this.props.addTaskToUser(updateTask, taskId)
-  }
-
-  delete(taskId) {
-    console.log('TaskList -> delete -> delete', taskId)
   }
 
   render() {
     const {tasks} = this.props
     const eventId = this.props.match.params.id
+    const userId = this.props.user.id
     return (
       <Container maxWidth="sm">
         <Box pt={2} display="flex" className="space-between">
@@ -66,52 +65,77 @@ export class TaskList extends React.Component {
                 return (
                   <div key={task.id}>
                     <ListItem alignItems="flex-start">
-                      <ListItemText
-                        primary={task.title}
-                        secondary={
-                          <React.Fragment>
-                            <Typography
-                              component="span"
-                              variant="body2"
-                              className="inline"
-                              color="textPrimary"
-                            />
-                            {task.description}
-                          </React.Fragment>
-                        }
-                      />
-
-                      {task.user ? (
-                        <div>
-                          <Chip
-                            avatar={
-                              <Avatar
-                                alt={task.user.firstName}
-                                src={task.user.profile_pic}
-                              />
+                      <Grid container>
+                        <Grid item xs={7}>
+                          <ListItemText
+                            primary={task.title}
+                            secondary={
+                              <React.Fragment>
+                                <Typography
+                                  component="span"
+                                  variant="body2"
+                                  className="inline"
+                                  color="textPrimary"
+                                />
+                                {task.description}
+                              </React.Fragment>
                             }
-                            label={task.user.firstName}
-                            color="primary"
-                            style={{backgroundColor: '#ff2400', width: '80px'}}
                           />
-                          <IconButton
-                            color="secondary"
-                            aria-label="add an alarm"
-                            size="small"
-                            onClick={this.delete.bind(this, task.id)}
-                          >
-                            <DeleteIcon />
-                          </IconButton>
-                        </div>
-                      ) : (
-                        <Chip
-                          label="Accept"
-                          color="primary"
-                          style={{backgroundColor: '#32CD32', width: '80px'}}
-                          onClick={this.handleChooseTask.bind(this, task.id)}
-                        />
-                      )}
+                        </Grid>
+                        <Grid item xs={5}>
+                          {task.user ? (
+                            <div className="float-left">
+                              {userId === task.user.id ? (
+                                <IconButton
+                                  color="secondary"
+                                  aria-label="add an alarm"
+                                  size="small"
+                                  onClick={this.handleChooseTask.bind(
+                                    this,
+                                    task.id,
+                                    'removeUserTask'
+                                  )}
+                                >
+                                  <RemoveCircleTwoToneIcon />
+                                </IconButton>
+                              ) : (
+                                ''
+                              )}
+                              <Chip
+                                avatar={
+                                  <Avatar
+                                    alt={task.user.firstName}
+                                    src={task.user.profile_pic}
+                                  />
+                                }
+                                label={task.user.firstName}
+                                color="primary"
+                                style={{
+                                  backgroundColor: '#ff2400',
+                                  width: '80px'
+                                }}
+                              />
+                            </div>
+                          ) : (
+                            <Chip
+                              label="Accept"
+                              color="primary"
+                              style={{
+                                backgroundColor: '#32CD32',
+                                width: '80px'
+                              }}
+                              onClick={this.handleChooseTask.bind(
+                                this,
+                                task.id,
+                                'addUserTask'
+                              )}
+                              className="float-left"
+                            />
+                          )}
+                        </Grid>
+                      </Grid>
                     </ListItem>
+
                     <Divider />
                   </div>
                 )
@@ -135,27 +159,75 @@ export class TaskList extends React.Component {
                 return (
                   <div key={task.id}>
                     <ListItem alignItems="flex-start">
-                      <ListItemText
-                        primary={task.title}
-                        secondary={
-                          <React.Fragment>
-                            <Typography
-                              component="span"
-                              variant="body2"
-                              className="inline"
-                              color="textPrimary"
+                      <Grid container>
+                        <Grid item xs={7}>
+                          <ListItemText
+                            primary={task.title}
+                            secondary={
+                              <React.Fragment>
+                                <Typography
+                                  component="span"
+                                  variant="body2"
+                                  className="inline"
+                                  color="textPrimary"
+                                />
+                                {task.description}
+                              </React.Fragment>
+                            }
+                          />
+                        </Grid>
+                        <Grid item xs={5}>
+                          {task.user ? (
+                            <div className="float-left">
+                              {userId === task.user.id ? (
+                                <IconButton
+                                  color="secondary"
+                                  aria-label="add an alarm"
+                                  size="small"
+                                  onClick={this.handleChooseTask.bind(
+                                    this,
+                                    task.id,
+                                    'removeUserTask'
+                                  )}
+                                >
+                                  <RemoveCircleTwoToneIcon />
+                                </IconButton>
+                              ) : (
+                                ''
+                              )}
+                              <Chip
+                                avatar={
+                                  <Avatar
+                                    alt={task.user.firstName}
+                                    src={task.user.profile_pic}
+                                  />
+                                }
+                                label={task.user.firstName}
+                                color="primary"
+                                style={{
+                                  backgroundColor: '#ff2400',
+                                  width: '80px'
+                                }}
+                              />
+                            </div>
+                          ) : (
+                            <Chip
+                              label="Accept"
+                              color="primary"
+                              style={{
+                                backgroundColor: '#32CD32',
+                                width: '80px'
+                              }}
+                              onClick={this.handleChooseTask.bind(
+                                this,
+                                task.id,
+                                'addUserTask'
+                              )}
+                              className="float-left"
                             />
-                            {task.description}
-                          </React.Fragment>
-                        }
-                      />
-
-                      <Chip
-                        label="Accept"
-                        color="primary"
-                        style={{backgroundColor: '#32CD32', width: '80px'}}
-                        onClick={this.handleChooseTask.bind(this, task.id)}
-                      />
+                          )}
+                        </Grid>
+                      </Grid>
                     </ListItem>
                     <Divider />
                   </div>
