@@ -7,11 +7,12 @@ const customPoll = () => {
     <div>
       <h1>hi from poll</h1>
 
+      {/* if this is a component can I dispatch inside of it  */}
       <ReactVote
         // styles={customStyle}
         // text={customText}
         text="hi"
-        data={data}
+        // data={data}
         // console.log("data", data)
 
         onCreate={(data, diff) => {
@@ -33,6 +34,7 @@ const customPoll = () => {
           console.log('onReset data', data)
           console.log('onReset diff', diff)
         }}
+        // if
         isAdmin={true}
         clientId={1}
       />

@@ -7,7 +7,8 @@ const {
   Event,
   userEventRel,
   Poll,
-  Options
+  Options,
+  pollOptions
 } = require('../server/db/models')
 const {events, eventUsers} = require('../dummyData')
 

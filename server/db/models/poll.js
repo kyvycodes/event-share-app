@@ -7,9 +7,9 @@ const Poll = db.define('poll', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  item: {
-    type: Sequelize.ARRAY(STRING)
-  },
+  // item: {
+  //   type: Sequelize.ARRAY(STRING)
+  // },
   autoClose: {
     type: Sequelize.INTEGER
   },
