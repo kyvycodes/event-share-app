@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setTask} from '../store/task'
-
 import {
   TextField,
   FormControl,
@@ -42,7 +41,6 @@ export class AddTask extends React.Component {
   async handleSubmit(event) {
     event.preventDefault()
     const eventId = this.props.match.params.id
-
     let newTask = {
       title: this.state.title,
       description: this.state.description,
@@ -55,7 +53,6 @@ export class AddTask extends React.Component {
 
   render() {
     const {errorsTask} = this.state
-
     return (
       <Container maxWidth="sm">
         <form

@@ -47,11 +47,19 @@ router.post('/', async (req, res, next) => {
 })
 
 router.put('/:id', async (req, res, next) => {
+  console.log('put', Object.keys(Task.prototype))
+  console.log('put', Object.keys(User.prototype))
+
   try {
     const task = await Task.findByPk(req.params.id)
     const userAssigned = await User.findByPk(req.body.userId)
+    const type = req.body.type
     if (task && userAssigned) {
-      await task.setUser(userAssigned)
+      if (type === 'addUserTask') {
+        await task.setUser(userAssigned)
+      } else {
+        await userAssigned.removeTask(req.params.id)
+      }
 
       const listTask = await Task.findAll({
         where: {eventId: req.body.eventId},

@@ -44,7 +44,6 @@ button {
 
 .MuiInputLabel-formControl {
   top: 3px;
-  /* left: 14px !important; */
   position: absolute;
   transform: translate(0, 24px) scale(1);
 }
@@ -62,6 +61,10 @@ button {
 
 .space-between {
   justify-content: space-between;
+}
+
+.float-left {
+  float: right !important;
 }
 
 /* EVENTTABS */
