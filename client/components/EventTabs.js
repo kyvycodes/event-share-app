@@ -44,7 +44,7 @@ class EventTabs extends React.Component {
           <AppBar position="static" color="secondary">
             <TabList
               onChange={this.handleChange.bind(this)}
-              aria-label="simple tabs example"
+              // aria-label="simple tabs example"
             >
               <Tab
                 label="Details"
@@ -70,7 +70,7 @@ class EventTabs extends React.Component {
                 value="5"
                 component={RouterLink}
                 to={`/events/${eventId}/invite`}
-              /> */}
+              />
             </TabList>
           </AppBar>
           {/* <TabPanel value="1">

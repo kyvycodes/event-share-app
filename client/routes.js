@@ -17,11 +17,11 @@ import {
   Vote,
   Login,
   Notifications
-} from './components
+} from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
 // import Login from './components/LoginPage'
-import TasksSuggested from './components/TasksSuggested'
+// import TasksSuggested from './components/TasksSuggested'
 import {EventRoutes} from './components/EventRoutes'
 
 /**
