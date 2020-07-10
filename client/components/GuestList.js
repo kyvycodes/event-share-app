@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchEvent, updateUserAttendance} from '../store/event'
 import DoneIcon from '@material-ui/icons/Done'
-import AddCircleTwoToneIcon from '@material-ui/icons/AddCircleTwoTone'
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
 import {
   Container,
   Button,
@@ -20,8 +20,7 @@ import {
   Grid
 } from '@material-ui/core'
 
-import RemoveCircleTwoToneIcon from '@material-ui/icons/RemoveCircleTwoTone'
-
+import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp'
 /**
  * COMPONENT
  */
@@ -36,110 +35,153 @@ export const GuestList = props => {
   return (
     <div>
       <div>
-        <h4>Invited To Event</h4>
-      </div>
-      <div>
-        <h4>Members</h4>
-        {users.length !== 0 ? (
-          users.map(user => {
-            if (user.id === props.user.id) {
-              return (
-                <div key={user.id}>
-                  <p>{user.firstName}</p>
-                  <p>Attending?</p>
-                  {user.users_events.attending === 'pending' ? (
-                    <div>
-                      <Chip
-                        label="Yes"
-                        color="primary"
-                        style={{
-                          backgroundColor: '#32CD32',
-                          width: '50px'
-                        }}
-                        onClick={() =>
-                          props.updateUserAttendance(eventId, 'yes')
-                        }
-                      />
+        <Container maxWidth="sm">
+          <Box pt={2} display="flex" className="space-between">
+            <Button color="primary">Invited To Event</Button>
+            <Button color="primary">RSVP'd</Button>
+          </Box>
+          <Divider />
+          <List className="task-list">
+            {users.length !== 0 ? (
+              users.map(user => {
+                if (user.id === props.user.id) {
+                  return (
+                    <div key={user.id}>
+                      <ListItem alignItems="flex-start">
+                        <ListItemText>
+                          {' '}
+                          {user.firstName} {user.lastName}
+                        </ListItemText>
 
-                      <Chip
-                        label="No"
-                        color="primary"
-                        style={{
-                          backgroundColor: '#ff2400',
-                          width: '50px'
-                        }}
-                        onClick={() =>
-                          props.updateUserAttendance(eventId, 'no')
-                        }
-                      />
+                        {user.users_events.attending === 'pending' ? (
+                          <div>
+                            <Button
+                              label="YES"
+                              size="small"
+                              variant="text"
+                              style={{
+                                backgroundColor: '#32CD32'
+                              }}
+                              onClick={() =>
+                                props.updateUserAttendance(eventId, 'yes')
+                              }
+                            >
+                              YES
+                            </Button>
+
+                            <Button
+                              label="NO"
+                              color="primary"
+                              size="small"
+                              variant="text"
+                              style={{
+                                backgroundColor: '#ff2400'
+                              }}
+                              onClick={() =>
+                                props.updateUserAttendance(eventId, 'no')
+                              }
+                            >
+                              NO
+                            </Button>
+                          </div>
+                        ) : (
+                          <div>
+                            {user.users_events.attending === 'yes' ? (
+                              <div>
+                                <IconButton
+                                  color="secondary"
+                                  size="small"
+                                  onClick={() =>
+                                    props.updateUserAttendance(eventId, 'no')
+                                  }
+                                >
+                                  <HighlightOffSharpIcon />
+                                </IconButton>
+                                <Chip
+                                  label="Attending"
+                                  color="primary"
+                                  size="small"
+                                  style={{
+                                    backgroundColor: '#32CD32'
+                                  }}
+                                />
+                              </div>
+                            ) : (
+                              <div>
+                                <IconButton
+                                  color="secondary"
+                                  size="small"
+                                  onClick={() =>
+                                    props.updateUserAttendance(eventId, 'yes')
+                                  }
+                                >
+                                  <CheckCircleOutlineIcon
+                                    style={{
+                                      color: '#32CD32'
+                                    }}
+                                  />
+                                </IconButton>
+                                <Chip
+                                  label="Declined"
+                                  color="primary"
+                                  size="small"
+                                  style={{
+                                    backgroundColor: '#ff2400'
+                                  }}
+                                />
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </ListItem>
+                      <Divider />
                     </div>
-                  ) : (
-                    <div>
-                      {user.users_events.attending === 'yes' ? (
-                        <div>
-                          <Chip
-                            label="Yes"
-                            color="primary"
-                            style={{
-                              backgroundColor: '#32CD32',
-                              width: '50px'
-                            }}
-                          />
-                          <IconButton
-                            color="secondary"
-                            size="small"
-                            onClick={() =>
-                              props.updateUserAttendance(eventId, 'no')
-                            }
-                          >
-                            <RemoveCircleTwoToneIcon />
-                          </IconButton>
+                  )
+                } else {
+                  return (
+                    <div key={user.id}>
+                      <ListItem alignItems="flex-start">
+                        <ListItemText>
+                          {' '}
+                          {user.firstName} {user.lastName}
+                        </ListItemText>
+                        <div className="float-left">
+                          {user.users_events.attending === 'yes' ? (
+                            <ListItemText>Attending</ListItemText>
+                          ) : (
+                            <ListItemText>Declined</ListItemText>
+                          )}
                         </div>
-                      ) : (
-                        <div>
-                          <Chip
-                            label="No"
-                            color="primary"
-                            style={{
-                              backgroundColor: '#ff2400',
-                              width: '50px'
-                            }}
-                          />
-                          <IconButton
-                            color="secondary"
-                            size="small"
-                            onClick={() =>
-                              props.updateUserAttendance(eventId, 'yes')
-                            }
-                          >
-                            <AddCircleTwoToneIcon />
-                          </IconButton>
-                        </div>
-                      )}
+                      </ListItem>
+                      <Divider />
                     </div>
-                  )}
-                </div>
-              )
-            } else {
-              return (
-                <div key={user.id}>
-                  <p>
-                    {user.firstName} {user.lastName}
-                  </p>
-                  <p>Attending? {user.users_events.attending}</p>
-                </div>
-              )
-            }
-          })
-        ) : (
-          <p>No members have been invited</p>
-        )}
-        <h4>Others</h4>
-        {nonUsers.length !== 0 ? (
-          nonUsers.map(nonUser => <p key={nonUser.id}>{nonUser.name}</p>)
-        ) : (
-          <p>No pending invitations</p>
-        )}
+                  )
+                }
+              })
+            ) : (
+              <p>No members have been invited</p>
+            )}
+            <br />
+            <br />
+
+            <Box pt={2} display="flex" className="space-between">
+              <Button color="primary">Others Who Are Pending</Button>
+            </Box>
+            <Divider />
+
+            {nonUsers.length !== 0 ? (
+              nonUsers.map(nonUser => (
+                <ListItem alignItems="flex-start" key={nonUser.id}>
+                  <ListItemText>{nonUser.name}</ListItemText>
+                  <Divider />
+                </ListItem>
+              ))
+            ) : (
+              <p>No pending invitations</p>
+            )}
+          </List>
+          <Divider />
+        </Container>
       </div>
     </div>
   )

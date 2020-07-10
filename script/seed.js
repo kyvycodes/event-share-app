@@ -11,7 +11,7 @@ const {
   Options,
   pollOptions
 } = require('../server/db/models')
-const {events, eventUsers} = require('../dummyData')
+const {events, eventUsers, usersDummyData} = require('../dummyData')
 
 async function seed() {
   await db.sync({force: true})
@@ -32,7 +32,7 @@ async function seed() {
     }),
     User.create({
       firstName: 'Fila',
-      lastName: 'Fb',
+      lastName: 'Braz',
       email: 'fila@email.com',
       password: '123',
       profile_pic: 'https://avatars0.githubusercontent.com/u/38737958?s=40&v=4'
@@ -81,6 +81,8 @@ async function seed() {
       pollId: 1
     })
   ])
+
+  await Promise.all(usersDummyData.map(user => User.create(user)))
 
   await Promise.all(events.map(event => Event.create(event)))
 
