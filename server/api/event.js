@@ -72,6 +72,29 @@ router.post('/invite', async (req, res, next) => {
     next(err)
   }
 })
+router.put('/:eventId/checkforEmail', async (req, res, next) => {
+  try {
+    console.log('REQ', req.body)
+    const nonMembersCheck = Invitee.findOne({
+      where: {
+        email: req.body.email
+      }
+    })
+
+    const membersCheck = User.findOne({
+      where: {
+        email: req.body.email
+      }
+    })
+    if (nonMembersCheck || membersCheck) {
+      res.json('This email has already been invited, please add others')
+    } else {
+      res.end()
+    }
+  } catch (err) {
+    next(err)
+  }
+})
 
 router.put('/:eventId/updateUser', async (req, res, next) => {
   try {

@@ -5,6 +5,12 @@ const GET_EVENTS = 'GET_EVENTS'
 const GET_ONE_EVENT = 'GET_EVENT'
 const ADD_EVENT = 'ADD_EVENT'
 const ADD_INVITES = 'ADD_INVITES'
+const EMAIL_ERROR = 'EMAIL_ERROR'
+
+const gotEmailError = error => ({
+  type: EMAIL_ERROR,
+  error
+})
 
 const getEvents = events => ({
   type: GET_EVENTS,
@@ -20,6 +26,19 @@ const addInvites = invitees => ({
   type: ADD_INVITES,
   invitees
 })
+
+export const fetchOneEmail = (email, eventId) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/events/${eventId}/checkforEmail`, {
+        email: email
+      })
+      dispatch(gotEmailError(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
 
 export const updateUserAttendance = (eventId, dec) => async dispatch => {
   try {
@@ -74,7 +93,8 @@ export const createEvent = event => {
 const initialState = {
   events: [],
   currEvent: {},
-  invitees: []
+  invitees: [],
+  error: ''
 }
 
 export default function(state = initialState, action) {
@@ -87,6 +107,9 @@ export default function(state = initialState, action) {
     }
     case ADD_INVITES: {
       return {...state, invitees: action.invitees}
+    }
+    case EMAIL_ERROR: {
+      return {...state, error: action.error}
     }
     default:
       return state

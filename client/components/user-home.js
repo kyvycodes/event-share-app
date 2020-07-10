@@ -7,6 +7,20 @@ import {getAllNotifications} from '../store/notifications'
 /**
  * COMPONENT
  */
+import {
+  Container,
+  Button,
+  Chip,
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
+  Box,
+  Avatar,
+  Typography,
+  IconButton,
+  Grid
+} from '@material-ui/core'
 
 export const UserHome = props => {
   useEffect(() => {
@@ -30,28 +44,46 @@ export const UserHome = props => {
         </Link>
       </div>
       <div>
-        <h4>Your Events</h4>
-        <ul>
-          {events.length > 0 ? (
-            events.map(event => (
-              <div key={event.id}>
-                <Link to={`/events/${event.id}`}>
-                  <li>{event.title}</li>
-                </Link>
-              </div>
-            ))
-          ) : (
-            <p>You Have No Current Events</p>
-          )}
-        </ul>
-        <h4>Your Tasks</h4>
-        <ul>
-          {tasks.length > 0 ? (
-            tasks.map(task => <li key={task.id}>{task.title}</li>)
-          ) : (
-            <p>You Have No Current Tasks</p>
-          )}
-        </ul>
+        <Container maxWidth="sm">
+          <Box pt={2} className="space-between">
+            <Button color="primary">Events</Button>
+          </Box>
+          <Divider />
+          <List className="task-list">
+            {events.length > 0 ? (
+              events.map(event => (
+                <div key={event.id}>
+                  <Link to={`/events/${event.id}`}>
+                    <ListItem>
+                      <ListItemText>{event.title}</ListItemText>
+                    </ListItem>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <p>You Have No Current Events</p>
+            )}
+          </List>
+        </Container>
+        <Container>
+          <Box pt={2} className="space-between">
+            <Button color="primary">Tasks</Button>
+          </Box>
+          <Divider />
+          <List className="task-list">
+            {tasks.length > 0 ? (
+              tasks.map(task => (
+                <div key={task.id}>
+                  <ListItem>
+                    <ListItemText>{task.title}</ListItemText>
+                  </ListItem>
+                </div>
+              ))
+            ) : (
+              <p>You Have No Current Tasks</p>
+            )}
+          </List>
+        </Container>
       </div>
     </div>
   )
