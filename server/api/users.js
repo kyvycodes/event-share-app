@@ -25,26 +25,3 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
-
-router.put('/me/:eventId', async (req, res, next) => {
-  try {
-    const userEvent = await userEventRel.findOne({
-      where: {
-        userId: req.user.id,
-        eventId: req.params.eventId
-      }
-    })
-    userEvent.attending = req.body.decision
-    await userEvent.save()
-    console.log('USER', userEvent)
-    res.json(
-      await userEventRel.findAll({
-        where: {
-          userId: req.user.id
-        }
-      })
-    )
-  } catch (err) {
-    next(err)
-  }
-})
