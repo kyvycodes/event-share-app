@@ -65,12 +65,12 @@ class EventTabs extends React.Component {
                 to={`/events/${eventId}/tasks`}
               />
               <Tab label="Polls" value="4" />
-              <Tab
+              {/* <Tab
                 label="Invite"
                 value="5"
                 component={RouterLink}
                 to={`/events/${eventId}/invite`}
-              />
+              /> */}
             </TabList>
           </AppBar>
           {/* <TabPanel value="1">
