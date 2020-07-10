@@ -45,13 +45,6 @@ class Routes extends Component {
             {/* <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} /> */}
 
-            <Route exact path="/events/:id" component={EventTabs} />
-            <Route exact path="/events/:id/invite" component={InviteForm} />
-            <Route exact path="/events/:id" component={EventDetails} />
-
-            <Route path="/tasks/:id/add" component={AddTask} />
-            <Route path="/task-list" component={TaskList} />
-
             <Route path="/notifications" component={TasksSuggested} />
           </Switch>
         )}
@@ -64,6 +57,8 @@ class Routes extends Component {
 
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
+        <Route exact path="/events/:id/guests" component={Login} />
+        <Route exact path="/events/:id/signup" component={Signup} />
 
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />

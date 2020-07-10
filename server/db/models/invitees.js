@@ -11,7 +11,6 @@ const Invitee = db.define('invitees', {
     type: Sequelize.STRING,
     allowNull: false,
     notEmpty: true,
-    unique: true,
     validate: {
       isEmail: true
     }

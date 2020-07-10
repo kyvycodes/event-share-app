@@ -58,7 +58,12 @@ export default function SignUp(props) {
         <form
           className={classes.form}
           noValidate
-          onSubmit={handleSubmit}
+          onSubmit={e => {
+            e.preventDefault()
+            const eventId = JSON.parse(window.localStorage.getItem('eventId'))
+            console.log('EVENTDI', eventId)
+            handleSubmit(e, eventId)
+          }}
           name={name}
         >
           <Grid container spacing={2}>
@@ -138,21 +143,6 @@ export default function SignUp(props) {
   )
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
-// const mapLogin = state => {
-//   return {
-//     name: 'login',
-//     displayName: 'Login',
-//     error: state.user.error
-//   }
-// }
-
 const mapSignup = state => {
   return {
     name: 'signup',
@@ -163,19 +153,18 @@ const mapSignup = state => {
 
 const mapDispatch = dispatch => {
   return {
-    handleSubmit(evt) {
-      evt.preventDefault()
+    handleSubmit(evt, id) {
       const formName = evt.target.name
       const email = evt.target.email.value
       const password = evt.target.password.value
       const firstName = evt.target.firstName.value
       const lastName = evt.target.lastName.value
-      dispatch(auth(email, password, firstName, lastName, formName))
+      const eventId = id
+      dispatch(auth(email, password, firstName, lastName, formName, eventId))
     }
   }
 }
 
-// export const Login = connect(mapLogin, mapDispatch)(AuthForm)
 export const Signup = connect(mapSignup, mapDispatch)(SignUp)
 
 /**
