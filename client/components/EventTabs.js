@@ -64,7 +64,7 @@ class EventTabs extends React.Component {
                 component={RouterLink}
                 to={`/events/${eventId}/tasks`}
               />
-              <Tab label="Polls" value="4" />
+              <Tab label="Polls" value="4" component={RouterLink} to="/vote" />
               <Tab
                 label="Invite"
                 value="5"
