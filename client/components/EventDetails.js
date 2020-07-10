@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {fetchEvent, sendEmail} from '../store/event'
 import {Button, Box} from '@material-ui/core'
 // import EventTabs from './EventTabs'
+import MapContainer from './MapContainer'
 
 const formatDate = date => {
   return {
@@ -32,7 +33,7 @@ class EventDetails extends React.Component {
         <p>
           Day of the Event: {date.month}-{date.day}-20{date.year}
         </p>
-       
+
         <Box pt={2}>
           <Link to={`/events/${eventId}/invite`}>
             <Button color="primary">Invite</Button>
@@ -46,6 +47,7 @@ class EventDetails extends React.Component {
         </button> */}
 
         <button type="submit">Create A Poll</button>
+        <MapContainer />
       </div>
     )
   }
