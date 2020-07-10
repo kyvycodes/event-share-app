@@ -18,7 +18,10 @@ import {
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import NotificationsIcon from '@material-ui/icons/Notifications'
-import {getAllNotifications} from '../store/notifications'
+import {
+  getAllNotifications,
+  resetAllNotifications
+} from '../store/notifications'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -136,6 +139,7 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+      dispatch(resetAllNotifications())
     },
     getAllNotifications: eventId => dispatch(getAllNotifications(eventId))
   }

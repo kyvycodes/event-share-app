@@ -34,7 +34,7 @@ export const UserHome = props => {
   return (
     <div>
       <div className="profile">
-        <img className="profilePic" src={profile_pic} />
+        <img className="img-profile " src={profile_pic} />
         <h4>
           {firstName} {lastName}
         </h4>

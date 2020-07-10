@@ -21,10 +21,11 @@ form div {
   display: inline-block;
 }
 
-img {
+.img-profile {
   max-width: 100px;
   height: auto;
   border-radius: 100%;
+  margin-top: 1.5rem;
 }
 
 button {
@@ -71,6 +72,17 @@ button {
 
 .float-left {
   float: right !important;
+}
+
+/* EVENT DETAILS */
+
+.labelInfo {
+  padding: 3px 5px;
+  font-size: 1rem;
+}
+
+.chip-color {
+  background-color: '#32CD32' !important;
 }
 
 /* EVENTTABS */

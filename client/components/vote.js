@@ -15,6 +15,7 @@ class Vote extends React.Component {
     }
   }
 
+  //options and title from api
   vote(i) {
     let favOptions = [...this.state.options]
     favOptions[i].votes++
