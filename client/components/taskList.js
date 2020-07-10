@@ -142,7 +142,7 @@ export class TaskList extends React.Component {
               }
             })
           ) : (
-            <h3>There are not tasks</h3>
+            <h3>There are no tasks</h3>
           )}
           <Divider />
         </List>

@@ -38,15 +38,6 @@ export const UserHome = props => {
                 <Link to={`/events/${event.id}`}>
                   <li>{event.title}</li>
                 </Link>
-                {event.users_events.attending === 'pending' ? (
-                  <div>
-                    <p>Attending?</p>
-                    <button type="button">Yes</button>
-                    <button>No</button>
-                  </div>
-                ) : (
-                  <p>Attending: {event.users_events.attending}</p>
-                )}
               </div>
             ))
           ) : (
