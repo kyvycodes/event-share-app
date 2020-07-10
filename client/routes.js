@@ -17,7 +17,7 @@ import {
   Vote,
   Login,
   Notifications
-} from './components
+} from './component'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
 // import Login from './components/LoginPage'

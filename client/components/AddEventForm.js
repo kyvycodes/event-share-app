@@ -2,17 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {createEvent} from '../store/event'
 import swal from 'sweetalert'
-import {
-  TextField,
-  FormControl,
-  Container,
-  FormGroup,
-  Button,
-  Select,
-  InputLabel,
-  MenuItem,
-  FormHelperText
-} from '@material-ui/core'
+import {Container} from '@material-ui/core'
 
 const isEmpty = e => {
   const event = {}
