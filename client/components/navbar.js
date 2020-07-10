@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Link as RouterLink} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import NotificationsIcon from '@material-ui/icons/Notifications'
+import {getAllNotifications} from '../store/notifications'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -40,9 +41,14 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Navbar = ({handleClick, isLoggedIn}) => {
+const Navbar = ({handleClick, isLoggedIn, notifications}) => {
   const [open, setOpen] = useState(false)
   const classes = useStyles()
+
+  useEffect(() => {
+    getAllNotifications(1)
+  }, [])
+
   return (
     <div className={classes.root}>
       <AppBar className="" position="static">
@@ -61,7 +67,7 @@ const Navbar = ({handleClick, isLoggedIn}) => {
             aria-label="menu"
           >
             <Badge
-              badgeContent={4}
+              badgeContent={notifications.suggestions.length}
               color="secondary"
               className={classes.notificationIcon}
             >
@@ -121,7 +127,8 @@ const Navbar = ({handleClick, isLoggedIn}) => {
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    notifications: state.notifications
   }
 }
 
@@ -129,7 +136,8 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
-    }
+    },
+    getAllNotifications: eventId => dispatch(getAllNotifications(eventId))
   }
 }
 

@@ -1,26 +1,49 @@
-import axios from '../axios-lists'
+import axios from 'axios'
 
-const GET_NOTIFICATION = 'GET_NOTIFICATION'
+const GET_SUGGESTIONS = 'GET_SUGGESTIONS'
+const DELETE_SUGGESTION = 'DELETE_SUGGESTION'
 
-export const getNotification = () => dispatch => {
-  axios
-    .get(`/api/notification`)
-    .then(res =>
-      dispatch({
-        type: GET_NOTIFICATION,
-        payload: res.data
-      })
-    )
-    .catch(err => console.log(err))
+const initialState = {
+  suggestions: [],
+  poll: []
 }
 
-export const checkNotification = () => dispatch => {
-  axios.put(`/api/notification/check`).catch(err => console.log(err))
+const fetchAllNotifications = suggestions => ({
+  type: GET_SUGGESTIONS,
+  suggestions
+})
+const fetchDeleteSuggestion = id => ({type: DELETE_SUGGESTION, id})
+
+export const getAllNotifications = id => async dispatch => {
+  try {
+    const res = await axios.get(`/api/notifications/${id}`)
+    dispatch(fetchAllNotifications(res.data))
+  } catch (err) {
+    console.error(err)
+  }
 }
 
-export const removeNotification = id => dispatch => {
-  axios
-    .delete(`/api/notification/${id}`)
-    .then(res => dispatch(getNotification()))
-    .catch(err => console.log(err))
+export const deletelNotification = id => async dispatch => {
+  try {
+    const res = await axios.delete(`/api/notifications/${id}`)
+    dispatch(fetchDeleteSuggestion(id))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export default function(state = initialState, action) {
+  switch (action.type) {
+    case GET_SUGGESTIONS:
+      return {...state, suggestions: [...action.suggestions]}
+    case DELETE_SUGGESTION:
+      return {
+        ...state,
+        suggestions: [
+          ...state.suggestions.filter(suggestion => suggestion.id !== action.id)
+        ]
+      }
+    default:
+      return state
+  }
 }

@@ -48,6 +48,12 @@ button {
   transform: translate(0, 24px) scale(1);
 }
 
+/* NOTIFICATIONS */
+
+.card-notifications {
+  margin-bottom: 1.5rem;
+}
+
 /*  TASK LIST  */
 
 .task-list {
@@ -77,7 +83,7 @@ button {
 /* NOTIFICATIONS */
 
 .btn-accept {
-  background-color: chartreuse !important;
+  background-color: '#32CD32' !important;
 }
 
 /*  LANDING PAGE  */
