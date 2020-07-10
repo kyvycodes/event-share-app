@@ -71,10 +71,11 @@ export const auth = (
 
   try {
     let historyUrl = '/home'
-    if (history.location.pathname === `/events/${1}/guests`) {
-      historyUrl = history.location.pathname
+    if (eventId) {
+      historyUrl = `/events/${eventId}/guests`
     }
     dispatch(getUser(res.data))
+    localStorage.clear()
     history.push(`${historyUrl}`)
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)

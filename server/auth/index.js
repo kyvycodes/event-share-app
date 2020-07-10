@@ -27,18 +27,17 @@ router.post('/login', async (req, res, next) => {
 router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(req.body)
-    if (req.body.eventId) {
-      const isInvited = await Invitee.findOne({
-        where: {
-          email: req.body.email,
-          eventId: req.body.eventId
-        }
-      })
-      if (isInvited) {
-        user.addEvent(req.body.eventId)
-        isInvited.destroy()
+    const isInvited = await Invitee.findOne({
+      where: {
+        email: req.body.email,
+        eventId: req.body.eventId
       }
+    })
+    if (isInvited) {
+      user.addEvent(req.body.eventId)
+      isInvited.destroy()
     }
+
     req.login(user, err => (err ? next(err) : res.json(user)))
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {

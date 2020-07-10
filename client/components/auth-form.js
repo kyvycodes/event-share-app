@@ -61,7 +61,6 @@ export default function SignUp(props) {
           onSubmit={e => {
             e.preventDefault()
             const eventId = JSON.parse(window.localStorage.getItem('eventId'))
-            console.log('EVENTDI', eventId)
             handleSubmit(e, eventId)
           }}
           name={name}
