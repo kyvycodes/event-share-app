@@ -29,6 +29,7 @@ const LandingPage = () => {
             </h2>
           </div>
           <div className={classes.root}>
+            <img src="/afterparty.jpg" />
             <Link to="signup">
               <Button variant="contained" color="primary">
                 Get Started

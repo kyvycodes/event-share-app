@@ -6,11 +6,10 @@ const {
   Task,
   Event,
   userEventRel,
-  Notification
+  Notification,
   Poll,
   Options,
   pollOptions
-
 } = require('../server/db/models')
 const {events, eventUsers} = require('../dummyData')
 
