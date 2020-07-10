@@ -1,4 +1,6 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
+import {Button} from '@material-ui/core'
 
 class Vote extends React.Component {
   constructor(props) {
@@ -27,6 +29,11 @@ class Vote extends React.Component {
   render() {
     return (
       <>
+        <Link to="/poll">
+          <Button color="primary" variant="contained" size="small">
+            Create a Poll
+          </Button>
+        </Link>
         <h1 className="heading">Vote!</h1>
         <div className="options">
           {this.state.options.map((opt, i) => (
