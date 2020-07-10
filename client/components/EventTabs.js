@@ -70,7 +70,7 @@ class EventTabs extends React.Component {
                 value="5"
                 component={RouterLink}
                 to={`/events/${eventId}/invite`}
-              />
+              /> */}
             </TabList>
           </AppBar>
           {/* <TabPanel value="1">

@@ -6,11 +6,12 @@ const {
   Task,
   Event,
   userEventRel,
+  Notification,
   Poll,
   Options,
   pollOptions
 } = require('../server/db/models')
-const {events, eventUsers} = require('../dummyData')
+const {events, eventUsers, usersDummyData} = require('../dummyData')
 
 async function seed() {
   await db.sync({force: true})
@@ -31,7 +32,7 @@ async function seed() {
     }),
     User.create({
       firstName: 'Fila',
-      lastName: 'Fb',
+      lastName: 'Braz',
       email: 'fila@email.com',
       password: '123',
       profile_pic: 'https://avatars0.githubusercontent.com/u/38737958?s=40&v=4'
@@ -81,30 +82,56 @@ async function seed() {
     })
   ])
 
+  await Promise.all(usersDummyData.map(user => User.create(user)))
+
   await Promise.all(events.map(event => Event.create(event)))
 
   await Promise.all(eventUsers.map(rel => userEventRel.create(rel)))
+
+  const notificationSuggestions = await Promise.all([
+    Notification.create({
+      authorId: 3,
+      authorName: 'Fila Fb',
+      title: 'Music',
+      description: 'Bring some music to play',
+      category: 'to bring',
+      eventId: 1
+    }),
+    Notification.create({
+      authorId: 4,
+      authorName: 'Luis Carbajal',
+      title: '3 Milk Cake',
+      description: 'Bring some 3 Milk Cake',
+      category: 'to bring',
+      eventId: 1
+    }),
+    Notification.create({
+      authorId: 4,
+      authorName: 'Luis Carbajal',
+      title: 'Margaritas',
+      description: 'Some margaritas sounds great',
+      category: 'to bring',
+      eventId: 1
+    })
+  ])
 
   const tasks = await Promise.all([
     Task.create({
       title: 'Beers',
       description: 'We need at least 20 beers',
       category: 'to bring',
-      userId: 1,
       eventId: 1
     }),
     Task.create({
       title: 'Hot dogs',
       description: '10 packs of hot dogs',
       category: 'to bring',
-      userId: 1,
       eventId: 1
     }),
     Task.create({
       title: 'Chips & Salsa ',
       description: '2 packages of chips&salsa',
       category: 'to bring',
-      userId: 1,
       eventId: 1
     }),
 
@@ -112,27 +139,25 @@ async function seed() {
       title: 'Clean up',
       description: 'Clean up after the party is over',
       category: 'to do',
-      userId: 1,
       eventId: 1
     }),
     Task.create({
       title: 'Decorate',
       description: 'Help us to decorate our place before the the party starts',
       category: 'to do',
-      userId: 1,
       eventId: 1
     }),
     Task.create({
       title: 'Food Prep',
       description: 'Help us to prep food before the the party starts',
       category: 'to do',
-      userId: 1,
       eventId: 1
     })
   ])
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${tasks.length} tasks`)
+  console.log(`seeded ${notificationSuggestions.length} suggestions`)
   console.log(`seeded ${polls.length} tasks`)
   console.log(`seeded ${options.length} tasks`)
   console.log(`seeded successfully`)

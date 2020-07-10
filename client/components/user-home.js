@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getMe, updateUserEvents} from '../store/user'
+import {getAllNotifications} from '../store/notifications'
 /**
  * COMPONENT
  */
@@ -10,6 +11,7 @@ import {getMe, updateUserEvents} from '../store/user'
 export const UserHome = props => {
   useEffect(() => {
     props.getUser()
+    props.getAllNotifications(1)
   }, [])
 
   const {firstName, lastName, email, profile_pic} = props.user
@@ -36,15 +38,6 @@ export const UserHome = props => {
                 <Link to={`/events/${event.id}`}>
                   <li>{event.title}</li>
                 </Link>
-                {event.users_events.attending === 'pending' ? (
-                  <div>
-                    <p>Attending?</p>
-                    <button type="button">Yes</button>
-                    <button>No</button>
-                  </div>
-                ) : (
-                  <p>Attending: {event.users_events.attending}</p>
-                )}
               </div>
             ))
           ) : (
@@ -71,7 +64,8 @@ const mapState = state => {
   return {
     user: state.user,
     events: state.user.events,
-    tasks: state.user.tasks
+    tasks: state.user.tasks,
+    notifications: state.notifications
   }
 }
 
@@ -79,7 +73,8 @@ const mapDispatch = dispatch => {
   return {
     getUser: () => dispatch(getMe()),
     updateUserAttendance: (eventId, decision) =>
-      dispatch(updateUserEvents(eventId, decision))
+      dispatch(updateUserEvents(eventId, decision)),
+    getAllNotifications: eventId => dispatch(getAllNotifications(eventId))
   }
 }
 

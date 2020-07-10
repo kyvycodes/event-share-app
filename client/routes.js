@@ -15,8 +15,9 @@ import {
   PollForm,
   InviteForm,
   Vote,
-  Login
-} from './components'
+  Login,
+  Notifications
+} from './components
 import {me} from './store'
 import LandingPage from './components/LandingPage'
 // import Login from './components/LoginPage'
@@ -49,7 +50,7 @@ class Routes extends Component {
             {/* <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} /> */}
 
-            <Route path="/notifications" component={TasksSuggested} />
+            <Route path="/notifications" component={Notifications} />
           </Switch>
         )}
         {/* Routes placed here are available to all visitors */}
