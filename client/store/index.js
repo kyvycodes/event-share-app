@@ -14,7 +14,7 @@ const reducer = combineReducers({
   user,
   events,
   task,
-  notifications
+  notifications,
   options,
   poll
 })
