@@ -5,11 +5,13 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 import events from './event'
 import task from './task'
+import notifications from './notifications'
 
 const reducer = combineReducers({
   user,
   events,
-  task
+  task,
+  notifications
 })
 
 const middleware = composeWithDevTools(

@@ -5,16 +5,20 @@ import history from '../history'
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
+const GET_USER_EVENT_HOST = 'GET_USER_EVENT_HOST'
 const REMOVE_USER = 'REMOVE_USER'
 /**
  * INITIAL STATE
  */
-const defaultUser = {}
+const defaultUser = {
+  userParties: []
+}
 
 /**
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
+const getUserParties = user => ({type: GET_USER_EVENT_HOST, user})
 const removeUser = () => ({type: REMOVE_USER})
 /**
  * THUNK CREATORS
@@ -43,6 +47,7 @@ export const getMe = () => async dispatch => {
   try {
     const res = await axios.get('/api/users/me')
     dispatch(getUser(res.data || defaultUser))
+    dispatch(getUserParties(res.data || defaultUser))
   } catch (err) {
     console.error(err)
   }
@@ -98,6 +103,14 @@ export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
+    case GET_USER_EVENT_HOST:
+      const userParties = []
+      action.user.events.map(event => {
+        if (event.users_events.isOrganizer) {
+          userParties.push(event.users_events.eventId)
+        }
+      })
+      return {...state, userParties: userParties}
     case REMOVE_USER:
       return defaultUser
     default:

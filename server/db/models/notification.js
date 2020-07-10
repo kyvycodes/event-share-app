@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-// association we need  userID
 const Notification = db.define('notifications', {
   authorId: {
     type: Sequelize.INTEGER
@@ -9,8 +8,22 @@ const Notification = db.define('notifications', {
   authorName: {
     type: Sequelize.STRING
   },
-  text: {
-    type: Sequelize.STRING
+  eventId: {
+    type: Sequelize.INTEGER
+  },
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    notEmpty: true,
+    validate: {
+      len: {
+        args: [3, 100],
+        msg: 'Title must be at least 3 characters & less than 100'
+      }
+    }
+  },
+  description: {
+    type: Sequelize.TEXT
   },
   date: {
     type: Sequelize.DATE,
@@ -19,6 +32,14 @@ const Notification = db.define('notifications', {
   read: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  category: {
+    type: Sequelize.ENUM('to bring', 'to do'),
+    allowNull: false,
+    validate: {
+      len: {args: [3, 100], msg: 'Type notification is required'}
+    }
   }
 })
+
 module.exports = Notification
