@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import swal from 'sweetalert'
-import {createInvites} from '../store/event'
+import {createInvites, fetchOneEmail} from '../store/event'
 import {Link} from 'react-router-dom'
 
 export class InviteForm extends React.Component {
@@ -26,7 +26,10 @@ export class InviteForm extends React.Component {
     }
     e.target.name.value = ''
     e.target.email.value = ''
-    this.setState({invitees: [...this.state.invitees, invitee]})
+    this.props.searchEmail(invitee.email, invitee.eventId)
+    if (this.props.emailCheck) {
+      this.setState({invitees: [...this.state.invitees, invitee]})
+    }
   }
 
   removeFromList(i) {
@@ -63,6 +66,7 @@ export class InviteForm extends React.Component {
             <br />
 
             <button type="submit">Add To list</button>
+            <p>{this.props.emailCheck}</p>
           </form>
           <p>People you are inviting:</p>
           <ul>
@@ -93,12 +97,15 @@ export class InviteForm extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    invitesSent: state.events.invitees
+    invitesSent: state.events.invitees,
+    emailCheck: state.events.error
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  sendInvites: (invitees, eventId) => dispatch(createInvites(invitees, eventId))
+  sendInvites: (invitees, eventId) =>
+    dispatch(createInvites(invitees, eventId)),
+  searchEmail: (email, eventId) => dispatch(fetchOneEmail(email, eventId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InviteForm)

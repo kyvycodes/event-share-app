@@ -12,7 +12,6 @@ import {
   Typography,
   Container
 } from '@material-ui/core'
-import {Button, Box} from '@material-ui/core'
 // import EventTabs from './EventTabs'
 import MapContainer from './MapContainer'
 
@@ -33,7 +32,6 @@ class EventDetails extends React.Component {
     const eventId = this.props.match.params.id
     return (
       <div>
-
         <Paper className="pad-1">
           <Grid container>
             <Grid container item xs={12} md={6}>
@@ -132,7 +130,6 @@ class EventDetails extends React.Component {
             </Grid>
           </Grid>
         </Paper>
-
       </div>
     )
   }

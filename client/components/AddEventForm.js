@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {createEvent} from '../store/event'
 import swal from 'sweetalert'
+import {Container} from '@material-ui/core'
 
 const isEmpty = e => {
   const event = {}
@@ -34,49 +35,52 @@ export class EventForm extends React.Component {
 
   render() {
     return (
-      <div className="form">
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Event Title:
-            <input type="text" name="title" />
-          </label>
-          <label>
-            Event description:
-            <input type="text" name="description" />
-          </label>
-          <label>
-            Event Date:
-            <input type="date" name="date" />
-          </label>
-          <label>
-            Address:
-            <input type="text" name="address" />
-          </label>
-          <label>
-            City:
-            <input type="text" name="city" />
-          </label>
-          <label htmlFor="state">State:</label>
+      <div align="center">
+        <Container maxWidth="sm">
+          <h3 align="center">Create an Event</h3>
+          <form onSubmit={this.handleSubmit} className="addTask-form">
+            <label>
+              Event Title:
+              <input type="text" name="title" />
+            </label>
+            <label>
+              Event description:
+              <input type="text" name="description" />
+            </label>
+            <label>
+              Event Date:
+              <input type="date" name="date" />
+            </label>
+            <label>
+              Address:
+              <input type="text" name="address" />
+            </label>
+            <label>
+              City:
+              <input type="text" name="city" />
+            </label>
+            <label htmlFor="state">State:</label>
 
-          <select name="state" id="state">
-            <option value="NY">NY</option>
-            <option value="NJ">NJ</option>
-            <option value="PA">PA</option>
-            <option value="FL">FL</option>
-          </select>
-          <label>
-            Zipcode:
-            <input id="zipcode" name="zipcode" type="text" pattern="[0-9]*" />
-          </label>
-          <label>
-            Start Time:
-            <input type="time" name="startTime" />
-          </label>
-          <br />
-          <button type="submit" value="button">
-            Create Event
-          </button>
-        </form>
+            <select name="state" id="state">
+              <option value="NY">NY</option>
+              <option value="NJ">NJ</option>
+              <option value="PA">PA</option>
+              <option value="FL">FL</option>
+            </select>
+            <label>
+              Zipcode:
+              <input id="zipcode" name="zipcode" type="text" pattern="[0-9]*" />
+            </label>
+            <label>
+              Start Time:
+              <input type="time" name="startTime" />
+            </label>
+            <br />
+            <button type="submit" value="button">
+              Create Event
+            </button>
+          </form>
+        </Container>
       </div>
     )
   }
