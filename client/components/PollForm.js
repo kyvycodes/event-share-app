@@ -7,12 +7,16 @@ import {
   FormGroup,
   Button
 } from '@material-ui/core'
+import options from '../store/options'
 
 export class PollForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: ''
+      title: '',
+      optionOne: '',
+      optionTwo: '',
+      optionThree: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -31,15 +35,14 @@ export class PollForm extends React.Component {
 
     let newPoll = {
       title: this.state.title,
-      optionId: options.id,
-      userId: user.id,
+      optionOne: this.state.optionOne,
+      optionTwo: this.state.optionTwo,
+      optionThree: this.state.optionThree,
       eventId: event.id
     }
     this.props.setOption(newPoll) //fix
   }
   render() {
-    const {errorsTask} = this.state
-
     return (
       <Container maxWidth="sm">
         <form onSubmit={this.handleSubmit}>
@@ -57,7 +60,7 @@ export class PollForm extends React.Component {
               <TextField
                 onChange={this.handleChange}
                 value={this.state.description}
-                name="options"
+                name="optionOne"
                 label="option 1"
                 variant="outlined"
               />
@@ -66,7 +69,7 @@ export class PollForm extends React.Component {
               <TextField
                 onChange={this.handleChange}
                 value={this.state.description}
-                name="options"
+                name="optionTwo"
                 label="option 2"
                 variant="outlined"
               />
@@ -75,7 +78,7 @@ export class PollForm extends React.Component {
               <TextField
                 onChange={this.handleChange}
                 value={this.state.description}
-                name="options"
+                name="optionThree"
                 label="option 3"
                 variant="outlined"
               />
