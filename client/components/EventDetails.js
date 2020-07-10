@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
-import {fetchEvent, sendEmail} from '../store/event'
+import {fetchEvent} from '../store/event'
 import {Button, Box} from '@material-ui/core'
 
 const formatDate = date => {
@@ -33,19 +33,6 @@ class EventDetails extends React.Component {
         <Link to={`/events/${eventId}/add-task`}>
           <button type="submit">Create A Task</button>
         </Link>
-
-        <Box pt={2}>
-          <Link to={`/events/${eventId}/invite`}>
-            <Button color="primary">Invite</Button>
-          </Link>
-        </Box>
-
-        <button type="submit">Create A Task</button>
-
-        {/* <button type="button" onClick={this.sendEmail.bind(this)}>
-          Send email now
-        </button> */}
-        <button type="submit">Create A Poll</button>
       </div>
     )
   }
@@ -60,8 +47,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getEvent: id => dispatch(fetchEvent(id)),
-    sendEmail: email => dispatch(sendEmail(email))
+    getEvent: id => dispatch(fetchEvent(id))
   }
 }
 

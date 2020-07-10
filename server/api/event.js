@@ -1,29 +1,15 @@
 const router = require('express').Router()
-const {Event, Invitee} = require('../db/models')
+const {Event, Invitee, Task, User, userEventRel} = require('../db/models')
 const main = require('./nodemailer')
-const nodemailer = require('nodemailer')
-const sendgridTransport = require('nodemailer-sendgrid-transport')
 module.exports = router
-
-router.post('/invite', async (req, res, next) => {
-  try {
-    const emails = []
-    await Promise.all(
-      req.body.invitees.map(member => {
-        Invitee.create(member)
-        emails.push(member.email)
-      })
-    )
-    await main(emails, req.body.user)
-    res.json(emails)
-  } catch (err) {
-    next(err)
-  }
-})
 
 router.get('/:id', async (req, res, next) => {
   try {
-    res.json(await Event.findByPk(req.params.id))
+    const event = await Event.findOne({
+      where: {id: req.params.id},
+      include: [Invitee, User, Task]
+    })
+    res.json(event)
   } catch (err) {
     next(err)
   }
@@ -31,11 +17,78 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/add', async (req, res, next) => {
   try {
-    const newEvent = await Event.create(req.body)
+    const event = {
+      title: req.body.title,
+      description: req.body.description,
+      date: req.body.date,
+      address: req.body.address,
+      city: req.body.city,
+      state: req.body.state,
+      zipcode: req.body.zipcode,
+      startTime: req.body.startTime
+    }
+    const newEvent = await Event.create(event)
     newEvent.addUser(req.user.id, {
       through: {isOrganizer: true, attending: 'yes'}
     })
     res.json(newEvent)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.post('/invite', async (req, res, next) => {
+  try {
+    const emails = []
+    await Promise.all(
+      req.body.map(async member => {
+        const isUser = await User.findOne({
+          where: {
+            email: member.email
+          }
+        })
+        if (!isUser) {
+          const invitee = {
+            name: member.name,
+            email: member.email,
+            eventId: member.eventId
+          }
+          Invitee.create(invitee)
+        } else {
+          isUser.addEvent(member.eventId)
+        }
+        await main(
+          member.email,
+          member.name,
+          req.user.firstName,
+          member.eventId
+        )
+
+        emails.push(member)
+      })
+    )
+    res.json(emails)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:eventId/updateUser', async (req, res, next) => {
+  try {
+    console.log('req', req.params.eventId)
+    const userEvent = await userEventRel.findOne({
+      where: {
+        userId: req.user.id,
+        eventId: req.params.eventId
+      }
+    })
+    userEvent.attending = req.body.decision
+    await userEvent.save()
+    const currEvent = await Event.findByPk(req.params.eventId, {
+      include: [User, Invitee]
+    })
+    console.log('USER', userEvent, 'EVENT', currEvent)
+    res.json(currEvent)
   } catch (err) {
     next(err)
   }

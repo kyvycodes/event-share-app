@@ -6,12 +6,19 @@ const Event = db.define('events', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
-      notEmpty: true
+      notEmpty: {arg: true, msg: 'Title must be filled'},
+      len: {
+        arg: [3, 100],
+        msg: 'Title must be at least 3 characters & less than 100'
+      }
     }
   },
   description: {
-    type: Sequelize.STRING,
-    allowNull: false
+    type: Sequelize.TEXT,
+    allowNull: false,
+    validate: {
+      notEmpty: {arg: true, msg: 'Description must be filled'}
+    }
   },
   date: {
     type: Sequelize.DATE,
@@ -32,7 +39,7 @@ const Event = db.define('events', {
   zipcode: {
     type: Sequelize.INTEGER,
     validate: {
-      len: [5]
+      len: {args: [5], msg: 'Zipcode must be five digits long'}
     }
   },
   startTime: {
@@ -43,15 +50,6 @@ const Event = db.define('events', {
     validate: {
       isUrl: true
     }
-  },
-  invited: {
-    type: Sequelize.INTEGER
-  },
-  attending: {
-    type: Sequelize.INTEGER
-  },
-  declined: {
-    type: Sequelize.INTEGER
   }
 })
 

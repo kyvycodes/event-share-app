@@ -10,6 +10,7 @@ import TabList from '@material-ui/lab/TabList'
 import {fetchEvent} from '../store/event'
 import TaskList from './taskList'
 import EventDetails from './EventDetails'
+import GuestList from './GuestList'
 import InviteForm from './InviteForm'
 import TabPanel from '@material-ui/lab/TabPanel'
 class EventTabs extends React.Component {
@@ -51,7 +52,12 @@ class EventTabs extends React.Component {
                 component={RouterLink}
                 to={`/events/${eventId}/details`}
               />
-              <Tab label="Guests" value="2" />
+              <Tab
+                label="Guests"
+                value="2"
+                component={RouterLink}
+                to={`/events/${eventId}/guests`}
+              />
               <Tab
                 label="Tasks"
                 value="3"
@@ -63,7 +69,7 @@ class EventTabs extends React.Component {
                 label="Invite"
                 value="5"
                 component={RouterLink}
-                to={`/events/${this.props.match.params.id}/invite`}
+                to={`/events/${eventId}/invite`}
               />
             </TabList>
           </AppBar>
@@ -71,9 +77,9 @@ class EventTabs extends React.Component {
             <EventDetails  component={Link}
             to="/events/:id/invite" />
           </TabPanel> */}
-          <TabPanel value="2">
-            Guests goes here whenever it is ready import the component here
-          </TabPanel>
+          {/* <TabPanel value="2">
+            <GuestList eventId={eventId} />
+          </TabPanel> */}
           {/* <TabPanel value="3">
             <TaskList /> */}
           {/* </TabPanel> */}

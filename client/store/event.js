@@ -4,8 +4,7 @@ import history from '../history'
 const GET_EVENTS = 'GET_EVENTS'
 const GET_ONE_EVENT = 'GET_EVENT'
 const ADD_EVENT = 'ADD_EVENT'
-const GET_INVITEES = 'GET_INVITEE'
-const ADD_INVITEES = 'ADD_INVITEES'
+const ADD_INVITES = 'ADD_INVITES'
 
 const getEvents = events => ({
   type: GET_EVENTS,
@@ -17,46 +16,32 @@ const getEvent = event => ({
   event
 })
 
-const addInvitees = invitees => ({
-  type: ADD_INVITEES,
+const addInvites = invitees => ({
+  type: ADD_INVITES,
   invitees
 })
 
-// const getInvitees = invitees => ({
-//   type: GET_INVITEES,
-//   invitees
-// })
+export const updateUserAttendance = (eventId, dec) => async dispatch => {
+  try {
+    const decision = {
+      decision: dec
+    }
+    const {data} = await axios.put(
+      `/api/events/${eventId}/updateUser`,
+      decision
+    )
+    dispatch(getEvent(data))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
-// export const fetchInvitees = (id) => {
-//   return async dispatch => {
-//     try {
-//       const {data} = await axios.get(`/api/events/invite/${id}`)
-//       dispatch(getInvitees(data))
-
-//     }
-//     catch(err) {
-//       console.log(err)
-//     }
-//   }
-// }
-
-export const createInvitees = invitees => {
+export const createInvites = (invitees, eventId) => {
   return async dispatch => {
     try {
       const {data} = await axios.post(`/api/events/invite`, invitees)
-      dispatch(addInvitees(data))
-    } catch (err) {
-      console.log(err)
-    }
-  }
-}
-export const sendEmail = email => {
-  const obj = {
-    email: email
-  }
-  return dispatch => {
-    try {
-      return axios.put(`/api/events/sent/invate`, obj)
+      dispatch(addInvites(data))
+      history.push(`/events/${eventId}/guests`)
     } catch (err) {
       console.log(err)
     }
@@ -73,6 +58,7 @@ export const fetchEvent = id => {
     }
   }
 }
+
 export const createEvent = event => {
   return async dispatch => {
     try {
@@ -99,10 +85,9 @@ export default function(state = initialState, action) {
     case ADD_EVENT: {
       return {...state, currEvent: action.event}
     }
-    case ADD_INVITEES: {
+    case ADD_INVITES: {
       return {...state, invitees: action.invitees}
     }
-
     default:
       return state
   }
