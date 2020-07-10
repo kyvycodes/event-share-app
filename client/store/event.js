@@ -5,12 +5,6 @@ const GET_EVENTS = 'GET_EVENTS'
 const GET_ONE_EVENT = 'GET_EVENT'
 const ADD_EVENT = 'ADD_EVENT'
 const ADD_INVITES = 'ADD_INVITES'
-const UPDATE_USER_EVENT = 'UPDATE_USER_EVENT'
-
-const updatedUserEvent = events => ({
-  type: UPDATE_USER_EVENT,
-  events
-})
 
 const getEvents = events => ({
   type: GET_EVENTS,
@@ -27,13 +21,16 @@ const addInvites = invitees => ({
   invitees
 })
 
-export const updateUserEvents = (eventId, dec) => async dispatch => {
+export const updateUserAttendance = (eventId, dec) => async dispatch => {
   try {
     const decision = {
       decision: dec
     }
-    const {data} = await axios.put(`/api/users/me/${eventId}`, decision)
-    dispatch(updatedUserEvent(data))
+    const {data} = await axios.put(
+      `/api/events/${eventId}/updateUser`,
+      decision
+    )
+    dispatch(getEvent(data))
   } catch (err) {
     console.error(err)
   }
@@ -50,18 +47,6 @@ export const createInvites = (invitees, eventId) => {
     }
   }
 }
-export const sendEmail = email => {
-  const obj = {
-    email: email
-  }
-  return dispatch => {
-    try {
-      return axios.put(`/api/events/sent/invate`, obj)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-}
 
 export const fetchEvent = id => {
   return async dispatch => {
@@ -73,6 +58,7 @@ export const fetchEvent = id => {
     }
   }
 }
+
 export const createEvent = event => {
   return async dispatch => {
     try {
@@ -102,7 +88,6 @@ export default function(state = initialState, action) {
     case ADD_INVITES: {
       return {...state, invitees: action.invitees}
     }
-
     default:
       return state
   }

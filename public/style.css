@@ -124,12 +124,13 @@ section {
 }
 
 .logo-place-holder {
-  text-align: left;
+  /* text-align: left;
   border: 1px solide black;
   height: 70px;
   width: 70px;
   background-color: rgb(52, 216, 20);
-  margin-left: 20px;
+  margin-left: 20px; */
+  background-image: url(eventShareLogo.png);
 }
 
 .loginpage-form {

@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
-import {fetchEvent, sendEmail} from '../store/event'
+import {fetchEvent} from '../store/event'
 import {Button, Box} from '@material-ui/core'
 
 const formatDate = date => {
@@ -47,8 +47,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getEvent: id => dispatch(fetchEvent(id)),
-    sendEmail: email => dispatch(sendEmail(email))
+    getEvent: id => dispatch(fetchEvent(id))
   }
 }
 
