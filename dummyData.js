@@ -30,7 +30,7 @@ const eventUsers = [
   },
   {
     eventId: 1,
-    userId: 2,
+    userId: 3,
     isOrganizer: false,
     attending: 'yes'
   },

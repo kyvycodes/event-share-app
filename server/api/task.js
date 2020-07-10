@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Task, Event} = require('../db/models')
+const {Task, Event, User} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -13,11 +13,12 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-router.get('/:eventId', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
     const listTask = await Task.findAll({
-      where: {eventId: req.params.eventId},
-      order: [['updatedAt', 'DESC']]
+      where: {eventId: req.params.id},
+      order: [['updatedAt', 'DESC']],
+      include: {model: User}
     })
     res.json(listTask)
   } catch (err) {
@@ -27,18 +28,45 @@ router.get('/:eventId', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    console.log('OUTPUT: try', Object.keys(Event.prototype))
-
     const taskObj = {
       title: req.body.title,
       description: req.body.description,
-      category: req.body.category,
-      userId: 3
+      category: req.body.category
     }
     const newTask = await Task.create(taskObj)
-    const event = await Event.findByPk(1)
-    event.addTask(newTask)
-    res.status(201).json(newTask)
+    const event = await Event.findByPk(req.body.eventId)
+    if (event) {
+      event.addTask(newTask)
+      res.status(201).json(newTask)
+    } else {
+      res.status(404)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/:id', async (req, res, next) => {
+  try {
+    const task = await Task.findByPk(req.params.id)
+    const userAssigned = await User.findByPk(req.body.userId)
+    const type = req.body.type
+    if (task && userAssigned) {
+      if (type === 'addUserTask') {
+        await task.setUser(userAssigned)
+      } else {
+        await userAssigned.removeTask(req.params.id)
+      }
+
+      const listTask = await Task.findAll({
+        where: {eventId: req.body.eventId},
+        order: [['updatedAt', 'DESC']],
+        include: {model: User}
+      })
+      res.json(listTask)
+    } else {
+      res.status(404)
+    }
   } catch (error) {
     next(error)
   }

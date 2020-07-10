@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {withRouter, Link as RouterLink} from 'react-router-dom'
+
 import AppBar from '@material-ui/core/AppBar'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
@@ -9,9 +10,9 @@ import TabList from '@material-ui/lab/TabList'
 import {fetchEvent} from '../store/event'
 import TaskList from './taskList'
 import EventDetails from './EventDetails'
+import GuestList from './GuestList'
 import InviteForm from './InviteForm'
 import TabPanel from '@material-ui/lab/TabPanel'
-
 class EventTabs extends React.Component {
   state = {
     value: '1'
@@ -26,6 +27,7 @@ class EventTabs extends React.Component {
   }
   render() {
     const eventId = this.props.match.params.id
+
     return (
       <div className="">
         <Typography
@@ -44,29 +46,50 @@ class EventTabs extends React.Component {
               onChange={this.handleChange.bind(this)}
               aria-label="simple tabs example"
             >
-              <Tab label="Details" value="1" />
-              <Tab label="Guests" value="2" />
-              <Tab label="Tasks" value="3" />
+              <Tab
+                label="Details"
+                value="1"
+                component={RouterLink}
+                to={`/events/${eventId}/details`}
+              />
+              <Tab
+                label="Guests"
+                value="2"
+                component={RouterLink}
+                to={`/events/${eventId}/guests`}
+              />
+              <Tab
+                label="Tasks"
+                value="3"
+                component={RouterLink}
+                to={`/events/${eventId}/tasks`}
+              />
               <Tab label="Polls" value="4" />
-              <Tab label="Invite" value="5" />
+              <Tab
+                label="Invite"
+                value="5"
+                component={RouterLink}
+                to={`/events/${eventId}/invite`}
+              />
             </TabList>
           </AppBar>
-          <TabPanel value="1">
-            <EventDetails eventId={eventId} />
-          </TabPanel>
-          <TabPanel value="2">
-            Guests goes here whenever it is ready import the component here
-          </TabPanel>
-          <TabPanel value="3">
-            <TaskList />
-          </TabPanel>
+          {/* <TabPanel value="1">
+            <EventDetails  component={Link}
+            to="/events/:id/invite" />
+          </TabPanel> */}
+          {/* <TabPanel value="2">
+            <GuestList eventId={eventId} />
+          </TabPanel> */}
+          {/* <TabPanel value="3">
+            <TaskList /> */}
+          {/* </TabPanel> */}
           <TabPanel value="4">
             Polls goes here whenever it is ready import the component and added
             here
           </TabPanel>
-          <TabPanel value="5">
+          {/* <TabPanel value="5">
             <InviteForm eventId={eventId} />
-          </TabPanel>
+          </TabPanel> */}
         </TabContext>
       </div>
     )
@@ -86,4 +109,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(EventTabs)
+export default withRouter(connect(mapState, mapDispatch)(EventTabs))

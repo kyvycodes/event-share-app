@@ -2,6 +2,9 @@ const userEventRel = require('./userEventRel')
 const User = require('./user')
 const Task = require('./task')
 const Event = require('./event')
+const Poll = require('./poll')
+const Options = require('./options')
+const pollOptions = require('./pollOptions')
 const Invitee = require('./invitees')
 const Notification = require('./notification')
 
@@ -14,8 +17,15 @@ User.belongsToMany(Event, {through: 'users_events'})
 Task.belongsTo(Event)
 Event.hasMany(Task)
 
+Poll.belongsTo(Event)
+Poll.belongsTo(User)
+
+Options.belongsTo(Poll)
+Poll.belongsToMany(Options, {through: 'poll_options'})
+
 Invitee.belongsTo(Event)
 Event.hasMany(Invitee)
+
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -33,7 +43,10 @@ module.exports = {
   User,
   Task,
   Event,
-  Invitee,
   userEventRel,
+  Poll,
+  Options,
+  pollOptions,
+  Invitee,
   Notification
 }

@@ -1,72 +1,49 @@
-// const express = require('express');
-// const router = express.Router();
-// const passport = require('passport');
-/*
-2. choose task will change to display name picture
-3. if task is take & u are the persondisplay a btn that says drop task. Should go back to green &  choose task
-1. approve or reject  suggested taks
-
-*/
-
 const router = require('express').Router()
-const {Task} = require('../db/models')
+const {Task, Notification} = require('../db/models')
 module.exports = router
 
-const Notification = require('../../models/Notification')
-
-// fetch all notification
-router.get('/', passport.authenticate('jwt', {session: false}), (req, res) => {
-  Notification.find({userID: req.user.id, read: false})
-    .countDocuments()
-    .then(count => {
-      Notification.find({userID: req.user.id})
-        .sort('-date')
-        .then(notification => {
-          res.json({
-            notification: notification,
-            unread: count
-          })
-        })
-        .catch(err =>
-          res
-            .status(404)
-            .json({error: 'Error in get api/notification/. ' + err})
-        )
+// get allNotificationsByEventId
+router.get('/:id', async (req, res, next) => {
+  try {
+    const allNotificationsById = await Notification.findAll({
+      where: {eventId: req.params.id}
     })
+    res.json(allNotificationsById)
+  } catch (err) {
+    next(err)
+  }
 })
 
-// set notification read to true
-router.put(
-  '/check',
-  passport.authenticate('jwt', {session: false}),
-  (req, res) => {
-    Notification.updateMany(
-      {userID: req.user.id, read: false},
-      {read: true}
-    ).catch(err =>
-      res
-        .status(404)
-        .json({error: 'Error in get api/notification/check. ' + err})
-    )
+router.post('/', async (req, res, next) => {
+  try {
+    const taskObj = {
+      title: req.body.title,
+      description: req.body.description,
+      category: req.body.category
+    }
+    const newTask = await Task.create(taskObj)
+    const event = await Event.findByPk(req.body.eventId)
+    if (event) {
+      event.addTask(newTask)
+      res.status(201).json(newTask)
+    } else {
+      res.status(404)
+    }
+  } catch (error) {
+    next(error)
   }
-)
+})
 
-// delete a notification
-router.delete(
-  '/:id',
-  passport.authenticate('jwt', {session: false}),
-  (req, res) => {
-    Notification.findById(req.params.id)
-      .then(notification => {
-        if (!notification) {
-          return res.status(404).json({error: 'This notification is not found'})
-        }
-        notification.remove().then(() => res.json({success: true}))
-      })
-      .catch(err =>
-        res.status(404).json({error: 'Error in get api/notification/. ' + err})
-      )
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const eventToDelete = await Notification.findByPk(req.params.id)
+    if (eventToDelete) {
+      const isDeleted = await eventToDelete.destroy()
+      res.json(isDeleted)
+    } else {
+      res.status(404)
+    }
+  } catch (err) {
+    next(err)
   }
-)
-
-module.exports = router
+})
