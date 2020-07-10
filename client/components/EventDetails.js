@@ -2,10 +2,19 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {fetchEvent} from '../store/event'
+import {
+  Paper,
+  Grid,
+  Box,
+  Chip,
+  Avatar,
+  Button,
+  Typography,
+  Container
+} from '@material-ui/core'
 import {Button, Box} from '@material-ui/core'
 // import EventTabs from './EventTabs'
 import MapContainer from './MapContainer'
-
 
 const formatDate = date => {
   return {
@@ -24,31 +33,105 @@ class EventDetails extends React.Component {
     const eventId = this.props.match.params.id
     return (
       <div>
-        <h3>{this.props.currEvent.title}</h3>
-        <p>{this.props.currEvent.description}</p>
-        <p>
-          Day of the Event: {date.month}-{date.day}-20{date.year}
-        </p>
-      
-        <Box pt={2}>
-          <Link to={`/events/${eventId}/invite`}>
-            <Button color="primary">Invite</Button>
-          </Link>
-        </Box>
 
-        <button type="submit">Create A Task</button>
+        <Paper className="pad-1">
+          <Grid container>
+            <Grid container item xs={12} md={6}>
+              <img
+                className="marginB-1"
+                style={{width: '100%', marginBottom: '1rem'}}
+                src="/partyglass.jpg"
+                alt="Party"
+              />
+            </Grid>
 
-        {/* <button type="button" onClick={this.sendEmail.bind(this)}>
-          Send email now
-        </button> */}
+            <Grid item xs={12} md={6}>
+              <Container>
+                <Chip
+                  color="primary"
+                  style={{backgroundColor: '#32CD32'}}
+                  label="Event title"
+                />
+                <Typography paragraph className="labelInfo">
+                  {this.props.currEvent.title}
+                </Typography>
 
-        <button type="submit">Create A Poll</button>
-        <MapContainer />
+                <Chip
+                  color="primary"
+                  style={{backgroundColor: '#32CD32'}}
+                  label="Event details"
+                />
+                <Typography paragraph className="labelInfo">
+                  {this.props.currEvent.description}
+                </Typography>
 
+                <Chip
+                  color="primary"
+                  style={{backgroundColor: '#32CD32'}}
+                  label=" Day of the event"
+                />
+                <Typography paragraph className="labelInfo">
+                  {date.month}-{date.day}-20{date.year}
+                </Typography>
 
-        <Link to={`/events/${eventId}/add-task`}>
-          <button type="submit">Create A Task</button>
-        </Link>
+                <Chip
+                  color="primary"
+                  style={{backgroundColor: '#32CD32'}}
+                  label="Event address"
+                />
+                <Typography paragraph className="labelInfo">
+                  {this.props.currEvent.address}, {this.props.currEvent.city}
+                </Typography>
+
+                <Chip
+                  color="primary"
+                  style={{backgroundColor: '#32CD32'}}
+                  label="Start time"
+                />
+                <Typography paragraph className="labelInfo">
+                  {this.props.currEvent.startTime}
+                </Typography>
+
+                <Chip
+                  color="primary"
+                  style={{backgroundColor: '#32CD32'}}
+                  label="End time"
+                />
+                <Typography paragraph className="labelInfo">
+                  To be determined
+                </Typography>
+
+                {/* <Typography className="labelInfo">Host By{}</Typography> */}
+
+                <Typography paragraph display="inline">
+                  <Link to={`/profile/${1}`}>
+                    {/* Host By {event.user.name} */}
+                  </Link>
+                </Typography>
+
+                <Box display="flex" mb={2} mr={1} justifyContent="center">
+                  <Box mr={1}>
+                    <Link to={`/events/${eventId}/invite`}>
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="secondary"
+                      >
+                        Invite
+                      </Button>
+                    </Link>
+                  </Box>
+
+                  <Link to={`/events/${eventId}/add-task`}>
+                    <Button size="small" variant="contained" color="secondary">
+                      Create A Task
+                    </Button>
+                  </Link>
+                </Box>
+              </Container>
+            </Grid>
+          </Grid>
+        </Paper>
 
       </div>
     )
