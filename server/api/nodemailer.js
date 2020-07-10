@@ -3,12 +3,7 @@ const sendgridTransport = require('nodemailer-sendgrid-transport')
 
 if (process.env.NODE_ENV !== 'production') require('../../apiKey')
 
-// async..await is not allowed in global scope, must use a wrapper
-async function main(emails, name) {
-  // Generate test SMTP service account from ethereal.email
-  // Only needed if you don't have a real mail account for testing
-
-  // create reusable transporter object using the default SMTP transport
+async function main(email, name, userName, id) {
   const transporter = nodemailer.createTransport(
     sendgridTransport({
       auth: {
@@ -17,21 +12,23 @@ async function main(emails, name) {
     })
   )
 
-  // send mail with defined transport object
   await transporter.sendMail({
-    to: 'recipient-eventshare2020@gmail.com',
-    bcc: emails, // list of receivers
+    to: email,
     from: 'eventshare2020@gmail.com', // sender address
-    subject: `${name} has invited you to join an event!`, // Subject line
+    subject: `${userName} has invited you to an event!`, // Subject line
     html: `<div>
-    <b>You have been invited to join ${name}'s event, please click on the link below to join </b>
-    <p> LINK WILL BE HERE </p>
-    </div>` // html body
+    <h4>Hi, ${name}</h4>
+    <b>You have been invited to ${userName}'s event! </b>
+    <p>Please click the link below, sign in and let ${userName} know if you can make it or not.</p>
+    <a href="http://localhost:8080/events/${id}/guests"> Take Me To The Event </a>
+
+    <p>If you don't have an account, please <a href="http://localhost:8080/events/${id}/signup"> sign up here first </a> and then follow the link</p>
+
+    <L
+        </div>` // html body
   })
 
   console.log('Message sent')
-  return true
-  // // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
 }
 
 module.exports = main

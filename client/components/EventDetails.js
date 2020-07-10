@@ -33,19 +33,6 @@ class EventDetails extends React.Component {
         <Link to={`/events/${eventId}/add-task`}>
           <button type="submit">Create A Task</button>
         </Link>
-
-        <Box pt={2}>
-          <Link to={`/events/${eventId}/invite`}>
-            <Button color="primary">Invite</Button>
-          </Link>
-        </Box>
-
-        <button type="submit">Create A Task</button>
-
-        {/* <button type="button" onClick={this.sendEmail.bind(this)}>
-          Send email now
-        </button> */}
-        <button type="submit">Create A Poll</button>
       </div>
     )
   }
