@@ -1,7 +1,15 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Task, Event, userEventRel} = require('../server/db/models')
+const {
+  User,
+  Task,
+  Event,
+  userEventRel,
+  Poll,
+  Options,
+  pollOptions
+} = require('../server/db/models')
 const {events, eventUsers} = require('../dummyData')
 
 async function seed() {
@@ -34,6 +42,42 @@ async function seed() {
       email: 'Luis@email.com',
       password: '123',
       profile_pic: 'https://avatars0.githubusercontent.com/u/10853211?s=120&v=4'
+    })
+  ])
+
+  const polls = await Promise.all([
+    Poll.create({
+      title: 'what should desert be?',
+      // items: [{optionId: 1}],
+      // // title: "what should desert be?",
+      // // items: [{ options["title"], 'candy bar', 'fruit tarts'}],
+      // autoClose: 10,
+      // showTotal: true,
+      // creator: true,
+      userId: 1
+    })
+  ])
+
+  const options = await Promise.all([
+    Options.create({
+      title: 'cake',
+      count: 1,
+      // total: 4,
+      pollId: 1,
+      userId: 1
+    }),
+    Options.create({
+      title: 'fruit tart',
+      count: 1,
+      // total: 2,
+      pollId: 1,
+      userId: 2
+    }),
+    Options.create({
+      title: 'pie',
+      count: 1,
+      // total: 5,
+      pollId: 1
     })
   ])
 
@@ -89,6 +133,8 @@ async function seed() {
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded ${tasks.length} tasks`)
+  console.log(`seeded ${polls.length} tasks`)
+  console.log(`seeded ${options.length} tasks`)
   console.log(`seeded successfully`)
 }
 
