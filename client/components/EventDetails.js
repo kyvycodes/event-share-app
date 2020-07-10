@@ -105,12 +105,25 @@ class EventDetails extends React.Component {
                   </Link>
                 </Typography>
 
-                <Link to={`/events/${eventId}/invite`}>
-                  <button type="button">Invite</button>
-                </Link>
-                <Link to={`/events/${eventId}/add-task`}>
-                  <button type="submit">Create A Task</button>
-                </Link>
+                <Box display="flex" mb={2} mr={1} justifyContent="center">
+                  <Box mr={1}>
+                    <Link to={`/events/${eventId}/invite`}>
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="secondary"
+                      >
+                        Invite
+                      </Button>
+                    </Link>
+                  </Box>
+
+                  <Link to={`/events/${eventId}/add-task`}>
+                    <Button size="small" variant="contained" color="secondary">
+                      Create A Task
+                    </Button>
+                  </Link>
+                </Box>
               </Container>
             </Grid>
           </Grid>
