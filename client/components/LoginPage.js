@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
@@ -46,6 +46,14 @@ const useStyles = makeStyles(theme => ({
  * COMPONENT
  */
 export default function AuthFormLogin(props) {
+  useEffect(() => {
+    if (props.match.params.id && !window.localStorage.getItem('eventId')) {
+      window.localStorage.setItem(
+        'eventId',
+        JSON.stringify(props.match.params.id)
+      )
+    }
+  }, [])
   const {name, handleSubmit, displayName, error} = props
   const classes = useStyles()
   return (
@@ -63,8 +71,7 @@ export default function AuthFormLogin(props) {
           noValidate
           onSubmit={e => {
             e.preventDefault()
-            const eventId = JSON.parse(window.localStorage.getItem('eventId'))
-            handleSubmit(e, eventId)
+            handleSubmit(e, props.match.params.id)
           }}
           name={name}
         >
