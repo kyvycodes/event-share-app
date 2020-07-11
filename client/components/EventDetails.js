@@ -28,6 +28,10 @@ class EventDetails extends React.Component {
   }
 
   render() {
+    const getDirections = `http://maps.google.com/?q=${
+      this.props.currEvent.address
+    }, ${this.props.currEvent.city}`
+
     const date = formatDate(this.props.currEvent.date || [])
     const eventId = this.props.match.params.id
     return (
@@ -100,6 +104,40 @@ class EventDetails extends React.Component {
                 </Typography>
 
                 {/* <Typography className="labelInfo">Host By{}</Typography> */}
+
+                <Grid container>
+                  <Grid item xs={6}>
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      className="inline"
+                      color="textPrimary"
+                    >
+                      Map
+                    </Typography>
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      className="inline"
+                      color="textPrimary"
+                    >
+                      <a
+                        href={getDirections}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        className="direcions"
+                      >
+                        Get Directions
+                      </a>
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={6} />
+                </Grid>
+
+                <MapContainer mb={2} />
 
                 <Typography paragraph display="inline">
                   <Link to={`/profile/${1}`}>

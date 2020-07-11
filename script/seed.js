@@ -22,13 +22,16 @@ async function seed() {
       firstName: 'cody',
       lastName: 'michaels',
       email: 'cody@email.com',
-      password: '123'
+      password: '123',
+      profile_pic:
+        'https://avatars0.githubusercontent.com/u/1868782?s=460&u=2c72e54e297dc00128739a1207ce9c572bc34d4e&v=4'
     }),
     User.create({
       firstName: 'murphy',
       lastName: 'jones',
       email: 'murphy@email.com',
-      password: '123'
+      password: '123',
+      profile_pic: 'https://avatars3.githubusercontent.com/u/45020?s=460&v=4'
     }),
     User.create({
       firstName: 'Fila',

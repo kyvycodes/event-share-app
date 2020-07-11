@@ -74,7 +74,7 @@ export default function(state = initialState, action) {
     case GET_EVENT_TASKS:
       return {...state, tasks: action.tasks}
     case ADD_TASK:
-      return {...state, task: action.task}
+      return {...state, task: action.task, errorsTask: {}}
     case EDIT_TASK:
       return {...state, task: action.task}
     case GET_ERRORS:
