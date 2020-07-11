@@ -33,6 +33,9 @@ const useStyles = makeStyles(theme => ({
   logoText: {
     flexGrow: 1
   },
+  logo: {
+    height: '50px'
+  },
   sideDrawer: {
     minWidth: '15rem'
   },
@@ -58,7 +61,7 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
         <Toolbar>
           <Typography variant="h5" className={classes.logoText}>
             <Button component={RouterLink} to="/home" color="inherit">
-              EVENTSHARE
+              <img className={classes.logo} src="/eventShareHeading.png" />
             </Button>
           </Typography>
 
