@@ -1,23 +1,25 @@
 import axios from 'axios'
 
-const ADD_OPTION = 'ADD_OPTION'
+export const ADD_OPTION = 'ADD_OPTION'
 
 const initialState = {
   option: {}
 }
 
-const addOption = option => ({type: ADD_OPTION, option})
+export const addOption = option => ({
+  type: ADD_OPTION,
+  option
+})
 
-export const setOption = optionObj => async dispatch => {
-  try {
-    const res = await axios.post(`/api/poll/`, optionObj)
-    dispatch(addOption(res.data))
-  } catch (err) {
-    dispatch(gotErrorTask(err.response.data))
-  }
+export const setOption = option => async dispatch => {
+  const {data} = await axios.post(`/api/poll/`, option)
+  console.log('res****', data)
+  dispatch(addOption(data))
 }
 
 export default function(state = initialState, action) {
+  console.log('actionnnnnn', action)
+  //action is undefined ???
   switch (action.type) {
     case ADD_OPTION:
       return {...state, option: action.option}

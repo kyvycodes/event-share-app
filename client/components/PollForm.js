@@ -7,16 +7,17 @@ import {
   FormGroup,
   Button
 } from '@material-ui/core'
-import options from '../store/options'
+// import setOption from '../store/options'
+import getPoll from '../store/poll'
 
 export class PollForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: '',
-      optionOne: '',
-      optionTwo: '',
-      optionThree: ''
+      title: ''
+      // optionOne: '',
+      // optionTwo: '',
+      // optionThree: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -31,18 +32,20 @@ export class PollForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const poll = this.props.poll
-
-    let newPoll = {
-      title: this.state.title,
-      optionOne: this.state.optionOne,
-      optionTwo: this.state.optionTwo,
-      optionThree: this.state.optionThree,
-      eventId: event.id
-    }
-    this.props.setOption(newPoll) //fix
+    //     console.log('props', this.props)
+    // this.props.addOption(this.state);
+    // this.setState({
+    //     title: ''
+    // })
+    this.props.fetchPoll(this.state)
+    this.setState({
+      title: ''
+    })
+    // eventId: event.id
   }
+
   render() {
+    console.log('propssss', this.props)
     return (
       <Container maxWidth="sm">
         <form onSubmit={this.handleSubmit}>
@@ -57,31 +60,31 @@ export class PollForm extends React.Component {
               />
             </FormControl>
             <FormControl>
-              <TextField
+              {/* <TextField
                 onChange={this.handleChange}
                 value={this.state.description}
                 name="optionOne"
                 label="option 1"
                 variant="outlined"
-              />
+              /> */}
             </FormControl>
             <FormControl>
-              <TextField
-                onChange={this.handleChange}
-                value={this.state.description}
-                name="optionTwo"
-                label="option 2"
-                variant="outlined"
-              />
+              {/* <TextField
+              //   onChange={this.handleChange}
+              //   value={this.state.description}
+              //   name="optionTwo"
+              //   label="option 2"
+              //   variant="outlined"
+              // /> */}
             </FormControl>
             <FormControl>
-              <TextField
+              {/* <TextField
                 onChange={this.handleChange}
                 value={this.state.description}
                 name="optionThree"
                 label="option 3"
                 variant="outlined"
-              />
+              /> */}
             </FormControl>
           </FormGroup>
           <Button type="submit">Create Poll</Button>
@@ -91,16 +94,24 @@ export class PollForm extends React.Component {
   }
 }
 
-const mapState = state => {
-  return {
-    user: state.user
-  }
-}
+// const mapState = state => {
+//   return {
+//     user: state.user
+//   }
+// }
+
+// const mapDispatch = dispatch => {
+//   return {
+//     addOption: (poll) => dispatch(setOption(poll))
+//   }
+// }
 
 const mapDispatch = dispatch => {
   return {
-    addOption: poll => dispatch(setOption(poll))
+    fetchPoll: poll => dispatch(getPoll(poll))
   }
 }
 
-export default connect(mapState, mapDispatch)(PollForm)
+export default connect(null, mapDispatch)(PollForm)
+
+// export default connect(mapState, mapDispatch)(PollForm)

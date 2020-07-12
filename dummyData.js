@@ -145,8 +145,17 @@ const eventUsers = [
   }
 ]
 
+const userAnswers = [
+  {
+    optionId: 1,
+    userId: 2,
+    isOrganizer: false
+  }
+]
+
 module.exports = {
   events,
   eventUsers,
-  usersDummyData
+  usersDummyData,
+  userAnswers
 }
