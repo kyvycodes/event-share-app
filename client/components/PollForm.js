@@ -10,36 +10,49 @@ import {
 // import setOption from '../store/options'
 import getPoll from '../store/poll'
 
+// there are a million ideas in here. Feel free to delete what you want. I have started from scratch multiple times
+
 export class PollForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: ''
+      title: '',
+      options: []
       // optionOne: '',
       // optionTwo: '',
       // optionThree: ''
     }
-
-    this.handleChange = this.handleChange.bind(this)
+    // this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+  // Options should be mapped thru
+
+  // handleChange(event) {
+  //   this.setState({
+  //     [event.target.name]: event.target.value
+  //   })
+  // }
 
   handleSubmit(event) {
     event.preventDefault()
+
+    //the first way I tried to handle the submit is below
     //     console.log('props', this.props)
     // this.props.addOption(this.state);
     // this.setState({
     //     title: ''
     // })
-    this.props.fetchPoll(this.state)
+    const option = {
+      title: event.target.title.value,
+      eventId: this.props.match.params.id
+    }
+
+    event.target.title.value = ''
+
+    this.props.setOptions(this.state)
     this.setState({
-      title: ''
+      options: [...this.state.options, option]
     })
     // eventId: event.id
   }
@@ -60,6 +73,7 @@ export class PollForm extends React.Component {
               />
             </FormControl>
             <FormControl>
+              {/* INSTEAD OF MAPPING OPTION BY OPTION IT SHOULD BE MAPPED FROM OPTIONS STORED IN THE DB */}
               {/* <TextField
                 onChange={this.handleChange}
                 value={this.state.description}
@@ -94,23 +108,23 @@ export class PollForm extends React.Component {
   }
 }
 
-// const mapState = state => {
-//   return {
-//     user: state.user
-//   }
-// }
-
-// const mapDispatch = dispatch => {
-//   return {
-//     addOption: (poll) => dispatch(setOption(poll))
-//   }
-// }
+const mapState = state => {
+  return {
+    user: state.user
+  }
+}
 
 const mapDispatch = dispatch => {
   return {
-    fetchPoll: poll => dispatch(getPoll(poll))
+    addOption: poll => dispatch(setOption(poll))
   }
 }
+
+// const mapDispatch = dispatch => {
+//   return {
+//     fetchPoll: poll => dispatch(getPoll(poll))
+//   }
+// }
 
 export default connect(null, mapDispatch)(PollForm)
 
