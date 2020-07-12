@@ -4,10 +4,16 @@ import history from '../history'
 const GET_ONE_EVENT = 'GET_EVENT'
 const ADD_EVENT = 'ADD_EVENT'
 const ADD_INVITES = 'ADD_INVITES'
+const GET_USER_EVENTS = 'GET_USER_EVENTS '
 
 const getEvent = event => ({
   type: GET_ONE_EVENT,
   event
+})
+
+const getUserEvents = events => ({
+  type: GET_USER_EVENTS,
+  events
 })
 
 const addInvites = invitees => ({
@@ -53,6 +59,17 @@ export const fetchEvent = id => {
   }
 }
 
+export const fetchUserEvents = upcomingOrPast => {
+  return async dispatch => {
+    try {
+      const {data} = await axios(`/api/users/me/${upcomingOrPast}`)
+      dispatch(getUserEvents(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 export const createEvent = event => {
   return async dispatch => {
     try {
@@ -73,6 +90,9 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case GET_USER_EVENTS: {
+      return {...state, events: action.events}
+    }
     case GET_ONE_EVENT: {
       return {...state, currEvent: action.event}
     }

@@ -13,6 +13,10 @@ User.hasMany(Task)
 
 Event.belongsToMany(User, {through: 'users_events'})
 User.belongsToMany(Event, {through: 'users_events'})
+userEventRel.belongsTo(Event)
+Event.hasMany(userEventRel)
+userEventRel.belongsTo(User)
+User.hasMany(userEventRel)
 
 Task.belongsTo(Event)
 Event.hasMany(Task)

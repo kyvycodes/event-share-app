@@ -205,3 +205,9 @@ section {
   outline: none;
   cursor: pointer;
 }
+
+/* USER PROFILE */
+.userTitles {
+  width: '100%';
+  max-width: '36ch';
+}
