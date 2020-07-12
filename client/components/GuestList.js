@@ -63,7 +63,7 @@ export const GuestList = props => {
                                 backgroundColor: '#32CD32'
                               }}
                               onClick={() =>
-                                props.updateUserAttendance(eventId, 'yes')
+                                props.updateUserAttendance(eventId, 'attending')
                               }
                             >
                               YES
@@ -78,7 +78,7 @@ export const GuestList = props => {
                                 backgroundColor: '#ff2400'
                               }}
                               onClick={() =>
-                                props.updateUserAttendance(eventId, 'no')
+                                props.updateUserAttendance(eventId, 'declined')
                               }
                             >
                               NO
@@ -86,13 +86,16 @@ export const GuestList = props => {
                           </div>
                         ) : (
                           <div>
-                            {user.users_events.attending === 'yes' ? (
+                            {user.users_events.attending === 'attending' ? (
                               <div>
                                 <IconButton
                                   color="secondary"
                                   size="small"
                                   onClick={() =>
-                                    props.updateUserAttendance(eventId, 'no')
+                                    props.updateUserAttendance(
+                                      eventId,
+                                      'declined'
+                                    )
                                   }
                                 >
                                   <HighlightOffSharpIcon />
@@ -112,7 +115,10 @@ export const GuestList = props => {
                                   color="secondary"
                                   size="small"
                                   onClick={() =>
-                                    props.updateUserAttendance(eventId, 'yes')
+                                    props.updateUserAttendance(
+                                      eventId,
+                                      'attending'
+                                    )
                                   }
                                 >
                                   <CheckCircleOutlineIcon
@@ -146,11 +152,9 @@ export const GuestList = props => {
                           {user.firstName} {user.lastName}
                         </ListItemText>
                         <div className="float-left">
-                          {user.users_events.attending === 'yes' ? (
-                            <ListItemText>Attending</ListItemText>
-                          ) : (
-                            <ListItemText>Declined</ListItemText>
-                          )}
+                          <ListItemText>
+                            {user.users_events.attending}
+                          </ListItemText>
                         </div>
                       </ListItem>
                       <Divider />

@@ -15,7 +15,7 @@ import {
 // import EventTabs from './EventTabs'
 import MapContainer from './MapContainer'
 
-const formatDate = date => {
+export const formatDate = date => {
   return {
     day: `${date[8]}${date[9]}`,
     month: `${date[5]}${date[6]}`,
