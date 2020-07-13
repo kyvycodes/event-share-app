@@ -1,9 +1,52 @@
+const Sequelize = require('sequelize')
+const Op = Sequelize.Op
 const router = require('express').Router()
 const {Event, Invitee, Task, User, userEventRel} = require('../db/models')
 const main = require('./nodemailer')
 module.exports = router
 
 router.get('/:id', async (req, res, next) => {
+  try {
+    const event = await Event.findOne({
+      where: {id: req.params.id},
+      include: [Invitee, User, Task]
+    })
+    res.json(event)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.delete('/:id/delete', async (req, res, next) => {
+  try {
+    console.log('REQ', req.params)
+    const event = await Event.findByPk(req.params.id)
+    event.destroy()
+    const events = await userEventRel.findAll({
+      attributes: ['isOrganizer', 'eventId', 'userId', 'attending'],
+      where: {
+        userId: req.user.id
+      },
+      include: [
+        {
+          model: Event,
+          where: {
+            date: {
+              [Op.gt]: new Date()
+            }
+          },
+          attributes: {exclude: ['createdAt', 'updatedAt']},
+          order: ['date', 'DESC']
+        }
+      ]
+    })
+    res.json(events)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.put('/:id/edit', async (req, res, next) => {
   try {
     const event = await Event.findOne({
       where: {id: req.params.id},
@@ -29,7 +72,7 @@ router.post('/add', async (req, res, next) => {
     }
     const newEvent = await Event.create(event)
     newEvent.addUser(req.user.id, {
-      through: {isOrganizer: true, attending: 'yes'}
+      through: {isOrganizer: true, attending: 'Attending'}
     })
     res.json(newEvent)
   } catch (err) {
@@ -87,7 +130,6 @@ router.put('/:eventId/updateUser', async (req, res, next) => {
     const currEvent = await Event.findByPk(req.params.eventId, {
       include: [User, Invitee]
     })
-    console.log('USER', userEvent, 'EVENT', currEvent)
     res.json(currEvent)
   } catch (err) {
     next(err)

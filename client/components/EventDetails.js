@@ -24,7 +24,8 @@ export const formatDate = date => {
 }
 class EventDetails extends React.Component {
   componentDidMount() {
-    this.props.getEvent(this.props.match.params.id)
+    // this.props.getEvent(this.props.match.params.id)
+    console.log('HELLO')
   }
 
   render() {

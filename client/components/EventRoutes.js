@@ -8,7 +8,7 @@ import EventTabs from './EventTabs'
 import AddTask from './addTask'
 import taskList from './taskList'
 import GuestList from './GuestList'
-
+import EditEvent from './AdditionalForms/EditEvent'
 /**
  * COMPONENT
  */
@@ -23,6 +23,7 @@ export class EventRoutes extends Component {
           <Route exact path="/events/:id/tasks" component={taskList} />
           <Route exact path="/events/:id/add-task" component={AddTask} />
           <Route exact path="/events/:id/polls" component={InviteForm} />
+          <Route exact path="/events/:id/edit" component={EditEvent} />
 
           <Redirect from="/events/:id" to="/events/:id/details" exact />
           {/* <Route component={EventDetails} /> */}
