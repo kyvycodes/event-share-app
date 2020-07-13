@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import swal from 'sweetalert'
-import {createInvites, fetchOneEmail} from '../store/event'
+import {createInvites} from '../store/event'
 import {Link} from 'react-router-dom'
 
 export class InviteForm extends React.Component {
@@ -11,7 +11,6 @@ export class InviteForm extends React.Component {
     this.state = {
       invitees: []
     }
-    //add function/route that will check if email is already in invitee db
   }
 
   handleSubmit(e) {
@@ -26,10 +25,7 @@ export class InviteForm extends React.Component {
     }
     e.target.name.value = ''
     e.target.email.value = ''
-    this.props.searchEmail(invitee.email, invitee.eventId)
-    if (this.props.emailCheck) {
-      this.setState({invitees: [...this.state.invitees, invitee]})
-    }
+    this.setState({invitees: [...this.state.invitees, invitee]})
   }
 
   removeFromList(i) {
@@ -41,6 +37,7 @@ export class InviteForm extends React.Component {
   sendEmails(invitees) {
     if (invitees.length === 0) {
       swal('please add at least one recipient')
+      return
     }
     this.props.sendInvites(invitees, this.props.match.params.id)
   }
@@ -66,7 +63,6 @@ export class InviteForm extends React.Component {
             <br />
 
             <button type="submit">Add To list</button>
-            <p>{this.props.emailCheck}</p>
           </form>
           <p>People you are inviting:</p>
           <ul>
@@ -97,15 +93,12 @@ export class InviteForm extends React.Component {
 const mapStateToProps = state => {
   return {
     user: state.user,
-    invitesSent: state.events.invitees,
-    emailCheck: state.events.error
+    invitesSent: state.events.invitees
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  sendInvites: (invitees, eventId) =>
-    dispatch(createInvites(invitees, eventId)),
-  searchEmail: (email, eventId) => dispatch(fetchOneEmail(email, eventId))
+  sendInvites: (invitees, eventId) => dispatch(createInvites(invitees, eventId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(InviteForm)

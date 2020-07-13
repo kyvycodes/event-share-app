@@ -2,14 +2,18 @@ import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getMe, updateUserEvents} from '../store/user'
+import {getMe} from '../store/user'
+import {fetchUserEvents} from '../store/event'
+
 import {getAllNotifications} from '../store/notifications'
+import {formatDate} from './EventDetails'
 /**
  * COMPONENT
  */
 import {
   Container,
   Button,
+  ButtonGroup,
   Chip,
   List,
   ListItem,
@@ -34,6 +38,7 @@ export const UserHome = props => {
     () => {
       async function fetchNotifications() {
         await props.getUser()
+        await props.getUserEvents('upcoming')
         if (props.user.userParties) {
           const partiesOrganizedByUser = await props.user.userParties
           const userPartiesObj = {
@@ -53,6 +58,7 @@ export const UserHome = props => {
   const {firstName, lastName, email, profile_pic} = props.user
   const events = props.user.events || []
   const tasks = props.user.tasks || []
+  console.log('PROPS', props)
   return (
     <div>
       <div className="profile">
@@ -62,42 +68,71 @@ export const UserHome = props => {
         </h4>
         <p>{email}</p>
         <Link to="/events/add">
-          <button type="submit">Create Event</button>
+          <Button variant="contained" color="primary" size="small">
+            Create Event
+          </Button>{' '}
         </Link>
+        <br />
+        <br />
+
+        <ButtonGroup color="primary" aria-label="outlined primary button group">
+          <Button onClick={() => props.getUserEvents('upcoming')}>
+            Upcoming
+          </Button>
+          <Button onClick={() => props.getUserEvents('past')}>
+            Past Events
+          </Button>
+        </ButtonGroup>
       </div>
       <div>
         <Container maxWidth="sm">
-          <Box pt={2} className="space-between">
-            <Button color="primary">Events</Button>
-          </Box>
+          <br />
           <Divider />
           <List className="task-list">
-            {events.length > 0 ? (
-              events.map(event => (
-                <div key={event.id}>
-                  <Link to={`/events/${event.id}`}>
-                    <ListItem>
-                      <ListItemText>{event.title}</ListItemText>
+            {props.events.length > 0 ? (
+              props.events.map(ev => {
+                const date = formatDate(ev.event.date)
+                return (
+                  <div key={ev.event.id}>
+                    <ListItem alignItems="flex-start">
+                      <ListItemText
+                        secondary={`${date.month}-${date.day}-20${date.year}`}
+                      >
+                        {ev.event.title}
+                      </ListItemText>
+                      <div className="float-left">
+                        <Button>
+                          <Link to={`events/${ev.event.id}`}>Details</Link>
+                        </Button>
+                      </div>
                     </ListItem>
-                  </Link>
-                </div>
-              ))
+                  </div>
+                )
+              })
             ) : (
               <p>You Have No Current Events</p>
             )}
           </List>
         </Container>
-        <Container>
-          <Box pt={2} className="space-between">
-            <Button color="primary">Tasks</Button>
+        <Container maxWidth="sm">
+          <Box pt={2} display="flex" className="space-between">
+            <Typography color="primary" size="small" style={{fontSize: '14px'}}>
+              TASKS{' '}
+            </Typography>
           </Box>
           <Divider />
           <List className="task-list">
             {tasks.length > 0 ? (
               tasks.map(task => (
                 <div key={task.id}>
-                  <ListItem>
-                    <ListItemText>{task.title}</ListItemText>
+                  <ListItem alignItems="flex-start">
+                    <ListItemText
+                      secondary={task.description}
+                      primary={task.title}
+                    />
+                    <div className="align-left">
+                      <Button>Details</Button>
+                    </div>
                   </ListItem>
                 </div>
               ))
@@ -117,7 +152,7 @@ export const UserHome = props => {
 const mapState = state => {
   return {
     user: state.user,
-    events: state.user.events,
+    events: state.events.events,
     tasks: state.user.tasks,
     notifications: state.notifications
   }
@@ -126,10 +161,8 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return {
     getUser: () => dispatch(getMe()),
-    updateUserAttendance: (eventId, decision) =>
-      dispatch(updateUserEvents(eventId, decision)),
-    getAllNotifications: userPartiesObj =>
-      dispatch(getAllNotifications(userPartiesObj))
+    getAllNotifications: eventId => dispatch(getAllNotifications(eventId)),
+    getUserEvents: pastOrUpcoming => dispatch(fetchUserEvents(pastOrUpcoming))
   }
 }
 

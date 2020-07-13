@@ -81,13 +81,13 @@ const eventUsers = [
     eventId: 1,
     userId: 1,
     isOrganizer: true,
-    attending: 'yes'
+    attending: 'attending'
   },
   {
     eventId: 1,
     userId: 3,
     isOrganizer: false,
-    attending: 'yes'
+    attending: 'attending'
   },
   {
     eventId: 2,
@@ -105,43 +105,43 @@ const eventUsers = [
     eventId: 1,
     userId: 5,
     isOrganizer: false,
-    attending: 'pending'
+    attending: 'declined'
   },
   {
     eventId: 1,
     userId: 6,
     isOrganizer: false,
-    attending: 'yes'
+    attending: 'attending'
   },
   {
     eventId: 1,
     userId: 7,
     isOrganizer: false,
-    attending: 'pending'
+    attending: 'declined'
   },
   {
     eventId: 1,
     userId: 8,
-    isOrganizer: true,
-    attending: 'yes'
+    isOrganizer: false,
+    attending: 'attending'
   },
   {
     eventId: 1,
     userId: 9,
-    isOrganizer: true,
-    attending: 'yes'
+    isOrganizer: false,
+    attending: 'attending'
   },
   {
     eventId: 1,
     userId: 10,
-    isOrganizer: true,
-    attending: 'yes'
+    isOrganizer: false,
+    attending: 'declined'
   },
   {
     eventId: 1,
     userId: 11,
-    isOrganizer: true,
-    attending: 'yes'
+    isOrganizer: false,
+    attending: 'declined'
   }
 ]
 
