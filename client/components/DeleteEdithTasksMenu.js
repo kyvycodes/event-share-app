@@ -34,10 +34,12 @@ export default function DeleteEdithTasksMenu(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => props.deleteTask(props.taskId)}>
+        <MenuItem onClick={() => props.deleteTask(props.taskId, props.eventId)}>
           Delete
         </MenuItem>
-        <Link to={`/events/${props.eventId}/EdithTaskForm/${props.taskId}`}>
+        <Link
+          to={`/events/${props.eventId}/tasks/EdithTaskForm/${props.taskId}`}
+        >
           <MenuItem onClick={handleClose}>Edith</MenuItem>
         </Link>
       </Menu>

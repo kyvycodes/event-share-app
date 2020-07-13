@@ -138,6 +138,7 @@ export class TaskList extends React.Component {
                             />
                           )}
                           <DeleteEdithTasksMenu
+                            eventId={this.props.match.params.id}
                             taskId={task.id}
                             deleteTask={this.props.deleteTask}
                           />
@@ -273,7 +274,7 @@ const mapDispatch = dispatch => {
     getAllTasksForAnEvent: eventId => dispatch(getAllTasksForAnEvent(eventId)),
     addTaskToUser: (updateTask, taskId) =>
       dispatch(addTaskToUser(updateTask, taskId)),
-    deleteTask: taskId => dispatch(deleteTaskThunk(taskId))
+    deleteTask: (taskId, eventId) => dispatch(deleteTaskThunk(taskId, eventId))
   }
 }
 

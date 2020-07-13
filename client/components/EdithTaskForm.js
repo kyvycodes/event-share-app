@@ -41,19 +41,22 @@ export class EdithTaskForm extends React.Component {
   async handleSubmit(event) {
     event.preventDefault()
     const taskId = this.props.match.params.taskId
+    //const eventId = this.props.match.params.eventId
+
     let edithTask = {
       title: this.state.title,
       description: this.state.description,
       category: this.state.category,
-      Id: taskId
+      eventId: this.props.match.params.id
     }
+    //console.log('EVENTID', edithTask.eventId)
     //console.log('PROPS', edithTask)
-    console.log('ID', taskId)
+    //console.log('ID', taskId)
     await this.props.editTask(taskId, edithTask)
     //console.log('****errorsTask', this.state.errorsTask.title)
-    if (!this.state.errorsTask.title) {
-      this.props.history.push(`/events/${eventId}/tasks`)
-    }
+    // if (!this.state.errorsTask.title) {
+    //   this.props.history.push(`/events/${eventId}/tasks`)
+    // }
   }
 
   render() {
@@ -127,7 +130,7 @@ export class EdithTaskForm extends React.Component {
 
 const mapState = state => {
   return {
-    task: state.singleTask
+    task: state.task
   }
 }
 

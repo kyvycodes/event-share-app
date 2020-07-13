@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 const GET_EVENT_TASKS = 'GET_EVENT_TASKS'
 const GET_TASK = 'GET_TASK'
@@ -9,8 +10,8 @@ const GET_ERRORS = 'GET_ERRORS'
 const CLEAR_ERRORS = 'CLEAR_ERRORS'
 
 const initialState = {
-  singleTask: {},
-  multipleTasks: [],
+  task: {},
+  tasks: [],
   errorsTask: {}
 }
 
@@ -67,27 +68,28 @@ export const addTaskToUser = (taskObj, id) => async dispatch => {
   }
 }
 
-export const deleteTaskThunk = taskID => async dispatch => {
+export const deleteTaskThunk = (taskID, eventId) => async dispatch => {
   try {
     await axios.delete(`/api/tasks/${taskID}`)
     dispatch(deleteTask(taskID))
-    history.push(`/taskList`)
+    //history.push(`/events/${eventId}/`)
+    //events/${eventId}/tasks
   } catch (error) {
-    console.error('Failed to DELETE')
+    console.error('Failed to DELETE', error)
   }
 }
 export const editTaskThunk = (taskId, task) => async dispatch => {
-  console.log('THUNK', taskId)
   try {
-    const res = await axios.put(`/api/tasks/${taskId}`, task)
-    dispatch(editTask(res.data))
-    history.push(`/tasks/${taskId}`)
+    const res = await axios.put(`/api/tasks/${taskId}/edith`, task)
+    dispatch(editedTask(res.data))
+    history.push(`/events/${task.eventId}/tasks`)
   } catch (error) {
     console.error(error)
   }
 }
 
 export default function(state = initialState, action) {
+  //console.log('ACTION', action.type)
   switch (action.type) {
     case GET_TASK:
       return {...state, task: action.task}
@@ -95,8 +97,8 @@ export default function(state = initialState, action) {
       return {...state, tasks: action.tasks}
     case ADD_TASK:
       return {...state, task: action.task, errorsTask: {}}
-    case EDIT_TASK:
-      return {...state, task: action.task}
+    // case EDIT_TASK:
+    //   return {...state, task: action.task}
     case GET_ERRORS:
       const errObj = {}
       let errors = action.errorsTask.split(',')
@@ -113,12 +115,17 @@ export default function(state = initialState, action) {
     case CLEAR_ERRORS:
       return {}
     case DELETE_TASK:
-      return [
+      // console.log('STATE News', {
+
+      //   ...state, tasks: state.tasks.filter((task) => task.id !== action.taskId)
+      // })
+      return {
         ...state,
-        initialState.multipleTasks.filter(id => id !== action.taskID)
-      ]
-    // case EDIT_TASK:
-    //   return {...state, singleTask: action.task}
+        tasks: state.tasks.filter(task => task.id !== action.taskId)
+      }
+    // multipleTasks: multipleTasks.filter(id => id !== action.taskID)
+    case EDIT_TASK:
+      return {...state, task: action.task}
 
     default:
       return state

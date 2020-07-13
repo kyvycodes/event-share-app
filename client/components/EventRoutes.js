@@ -26,7 +26,7 @@ export class EventRoutes extends Component {
           <Route exact path="/events/:id/polls" component={InviteForm} />
           <Route
             exact
-            path="/events/:id/EdithTaskForm/:taskId"
+            path="/events/:id/tasks/EdithTaskForm/:taskId"
             component={EdithTaskForm}
           />
 
