@@ -19,7 +19,7 @@ const fetchAllTaskEvent = tasks => ({type: GET_EVENT_TASKS, tasks})
 const addTask = task => ({type: ADD_TASK, task})
 const editedTask = task => ({type: EDIT_TASK, task})
 const gotErrorTask = errorsTask => ({type: GET_ERRORS, errorsTask})
-const deleteTask = task => ({type: DELETE_TASK, task})
+const deleteTask = taskId => ({type: DELETE_TASK, taskId})
 
 export const getSingleTask = id => async dispatch => {
   try {
@@ -67,6 +67,26 @@ export const addTaskToUser = (taskObj, id) => async dispatch => {
   }
 }
 
+export const deleteTaskThunk = taskID => async dispatch => {
+  try {
+    await axios.delete(`/api/tasks/${taskID}`)
+    dispatch(deleteTask(taskID))
+    history.push(`/taskList`)
+  } catch (error) {
+    console.error('Failed to DELETE')
+  }
+}
+export const editTaskThunk = (taskId, task) => async dispatch => {
+  console.log('THUNK', taskId)
+  try {
+    const res = await axios.put(`/api/tasks/${taskId}`, task)
+    dispatch(editTask(res.data))
+    history.push(`/tasks/${taskId}`)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_TASK:
@@ -92,6 +112,14 @@ export default function(state = initialState, action) {
       return {...state, errorsTask: errObj}
     case CLEAR_ERRORS:
       return {}
+    case DELETE_TASK:
+      return [
+        ...state,
+        initialState.multipleTasks.filter(id => id !== action.taskID)
+      ]
+    // case EDIT_TASK:
+    //   return {...state, singleTask: action.task}
+
     default:
       return state
   }

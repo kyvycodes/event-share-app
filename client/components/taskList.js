@@ -1,7 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {getAllTasksForAnEvent, addTaskToUser} from '../store/task'
+import {
+  getAllTasksForAnEvent,
+  addTaskToUser,
+  deleteTaskThunk
+} from '../store/task'
 import {
   Container,
   Button,
@@ -17,6 +21,7 @@ import {
   Grid
 } from '@material-ui/core'
 import RemoveCircleTwoToneIcon from '@material-ui/icons/RemoveCircleTwoTone'
+import DeleteEdithTasksMenu from './DeleteEdithTasksMenu'
 
 export class TaskList extends React.Component {
   constructor(props) {
@@ -132,6 +137,10 @@ export class TaskList extends React.Component {
                               className="float-left"
                             />
                           )}
+                          <DeleteEdithTasksMenu
+                            taskId={task.id}
+                            deleteTask={this.props.deleteTask}
+                          />
                         </Grid>
                       </Grid>
                     </ListItem>
@@ -226,6 +235,11 @@ export class TaskList extends React.Component {
                               className="float-left"
                             />
                           )}
+                          <DeleteEdithTasksMenu
+                            eventId={this.props.match.params.id}
+                            taskId={task.id}
+                            deleteTask={this.props.deleteTask}
+                          />
                         </Grid>
                       </Grid>
                     </ListItem>
@@ -258,7 +272,8 @@ const mapDispatch = dispatch => {
     setTask: task => dispatch(setTask(task)),
     getAllTasksForAnEvent: eventId => dispatch(getAllTasksForAnEvent(eventId)),
     addTaskToUser: (updateTask, taskId) =>
-      dispatch(addTaskToUser(updateTask, taskId))
+      dispatch(addTaskToUser(updateTask, taskId)),
+    deleteTask: taskId => dispatch(deleteTaskThunk(taskId))
   }
 }
 
