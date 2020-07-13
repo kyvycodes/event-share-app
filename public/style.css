@@ -40,7 +40,6 @@ button {
 .form {
   justify-content: center;
 }
-
 /* ADD TASK FORM */
 
 .MuiInputLabel-formControl {
@@ -48,13 +47,11 @@ button {
   position: absolute;
   transform: translate(0, 24px) scale(1);
 }
-
 /* NOTIFICATIONS */
 
 .card-notifications {
   margin-bottom: 1.5rem;
 }
-
 /*  TASK LIST  */
 
 .task-list {
@@ -73,7 +70,6 @@ button {
 .float-left {
   float: right !important;
 }
-
 /* EVENT DETAILS */
 
 .labelInfo {
@@ -84,20 +80,17 @@ button {
 .chip-color {
   background-color: '#32CD32' !important;
 }
-
 /* EVENTTABS */
 
 .eventTitle {
   margin-top: 1.8rem !important;
   margin-bottom: 0.8rem !important;
 }
-
 /* NOTIFICATIONS */
 
 .btn-accept {
   background-color: '#32CD32' !important;
 }
-
 /*  LANDING PAGE  */
 
 .btn-theme {
@@ -162,7 +155,6 @@ section {
   background-color: rgb(52, 216, 20);
   margin-left: 130px;
 }
-
 /* Voting */
 
 .heading {
@@ -205,9 +197,36 @@ section {
   outline: none;
   cursor: pointer;
 }
+/* LANDIGN PAGE */
 
-/* USER PROFILE */
-.userTitles {
-  width: '100%';
-  max-width: '36ch';
+.title {
+  margin-top: 1.2rem !important;
+  color: white;
+  margin-bottom: 2rem !important;
+}
+
+.ctaBtn {
+  margin-bottom: 5rem !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* MEDIA QUERIES */
+
+@media only screen and (min-width: 768px) {
+  .ctaBtn {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .title {
+    margin-top: 5rem !important;
+    margin-bottom: 1rem;
+    font-size: 2rem !important;
+    font-weight: 800;
+  }
+  /* USER PROFILE */
+  .userTitles {
+    width: '100%';
+    max-width: '36ch';
+  }
 }

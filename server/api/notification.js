@@ -3,12 +3,30 @@ const {Task, Notification} = require('../db/models')
 module.exports = router
 
 // get allNotificationsByEventId
-router.get('/:id', async (req, res, next) => {
+// router.get('/:id', async (req, res, next) => {
+//   try {
+//     const allNotificationsById = await Notification.findAll({
+//       where: {eventId: req.params.id}
+//     })
+//     res.json(allNotificationsById)
+//   } catch (err) {
+//     next(err)
+//   }
+// })
+
+// get allNotificationsByUser array
+router.put('/', async (req, res, next) => {
   try {
-    const allNotificationsById = await Notification.findAll({
-      where: {eventId: req.params.id}
-    })
-    res.json(allNotificationsById)
+    const partiesArray = req.body.userPartiesArray
+    let result = []
+    let currentResult
+    for (let i = 0; i < partiesArray.length; i++) {
+      currentResult = await Notification.findAll({
+        where: {eventId: partiesArray[i]}
+      })
+      result = [...result, ...currentResult]
+    }
+    res.json(result)
   } catch (err) {
     next(err)
   }

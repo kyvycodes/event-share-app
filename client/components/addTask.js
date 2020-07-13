@@ -48,7 +48,6 @@ export class AddTask extends React.Component {
       eventId: eventId
     }
     await this.props.setTask(newTask)
-    console.log('****errorsTask', this.state.errorsTask.title)
     if (!this.state.errorsTask.title) {
       this.props.history.push(`/events/${eventId}/tasks`)
     }

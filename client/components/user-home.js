@@ -25,13 +25,35 @@ import {
   IconButton,
   Grid
 } from '@material-ui/core'
+import {useState} from 'react'
 
 export const UserHome = props => {
-  useEffect(() => {
-    props.getUser()
-    props.getUserEvents('upcoming')
-    props.getAllNotifications(1)
-  }, [])
+  // effect functions can't be async, so declare the
+  // async function inside the effect, then call it
+  const [setValue, handleValue] = useState(true)
+  /*
+  useEffect every time a  value change inside the array the useEffect will excute again
+  */
+  useEffect(
+    () => {
+      async function fetchNotifications() {
+        await props.getUser()
+        await props.getUserEvents('upcoming')
+        if (props.user.userParties) {
+          const partiesOrganizedByUser = await props.user.userParties
+          const userPartiesObj = {
+            userPartiesArray: partiesOrganizedByUser
+          }
+          props.getAllNotifications(userPartiesObj)
+        }
+        if (!props.user.userParties) {
+          handleValue(false)
+        }
+      }
+      fetchNotifications()
+    },
+    [setValue]
+  )
 
   const {firstName, lastName, email, profile_pic} = props.user
   const events = props.user.events || []
