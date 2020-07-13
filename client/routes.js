@@ -23,6 +23,7 @@ import LandingPage from './components/LandingPage'
 // import Login from './components/LoginPage'
 // import TasksSuggested from './components/TasksSuggested'
 import {EventRoutes} from './components/EventRoutes'
+import EdithTaskForm from './components/EdithTaskForm'
 
 /**
  * COMPONENT
