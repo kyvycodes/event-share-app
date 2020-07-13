@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
-import {fetchEvent} from '../store/event'
+import {fetchEvent, deleteEvent} from '../store/event'
+import DropMenuList from './AdditionalForms/DropDownMenu'
 import {
   Paper,
   Grid,
@@ -58,7 +59,10 @@ class EventDetails extends React.Component {
                 <Typography paragraph className="labelInfo">
                   {this.props.currEvent.title}
                 </Typography>
-
+                <DropMenuList
+                  eventId={eventId}
+                  delete={this.props.deleteEvent}
+                />
                 <Chip
                   color="primary"
                   style={{backgroundColor: '#32CD32'}}
@@ -183,7 +187,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getEvent: id => dispatch(fetchEvent(id))
+    getEvent: id => dispatch(fetchEvent(id)),
+    deleteEvent: eventId => dispatch(deleteEvent(eventId))
   }
 }
 

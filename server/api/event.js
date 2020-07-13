@@ -55,7 +55,6 @@ router.put('/:id/edit', async (req, res, next) => {
       }
     }
     await event.save()
-    console.log('EVENTTT', event)
     res.json(event)
   } catch (err) {
     next(err)
