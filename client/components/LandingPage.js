@@ -11,11 +11,6 @@ import {
 } from '@material-ui/core'
 
 const useStyles = makeStyles(() => ({
-  title: {
-    marginTop: '1.2rem',
-    color: 'white',
-    marginBottom: '2rem'
-  },
   subTitle: {
     marginTop: '1.5rem'
   },
@@ -28,7 +23,7 @@ const useStyles = makeStyles(() => ({
     padding: '3rem 2rem'
   },
   ctaBtn: {
-    marginBottom: '.1rem'
+    marginBottom: '.5rem'
   }
 }))
 
@@ -38,7 +33,7 @@ const Home = () => {
     <>
       <Paper className={classes.heroBackground} elevation={3}>
         <Typography
-          className={classes.title}
+          className="title"
           variant="h5"
           component="h1"
           gutterBottom
@@ -47,9 +42,10 @@ const Home = () => {
           Everything your team needs to create an event in one platform.
         </Typography>
         <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
+          className="ctaBtn"
+          // display="flex"
+          // flexDirection="column"
+          // justifyContent="center"
           mt="7rem"
         >
           <Button

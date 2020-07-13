@@ -28,17 +28,39 @@ export class Notifications extends React.Component {
   async componentDidMount() {
     // get user's parties
     await this.props.getMe()
-    await this.props.user.userParties
-    this.props.getAllNotifications(1)
+    const partiesOrganizedByUser = await this.props.user.userParties
+    const userPartiesObj = {
+      userPartiesArray: partiesOrganizedByUser
+    }
+    if (partiesOrganizedByUser.length > 0) {
+      this.props.getAllNotifications(userPartiesObj)
+    }
+    /*
+     const userParties = user.userParties; // [1, 2]
+
+     give me only  the userParties that are in my ar
+
+
+
+     const {user} = this.props;
+if(user.id )
+    */
   }
 
-  async handleSubmit(category, description, title, suggestionId, event) {
+  async handleSubmit(
+    category,
+    description,
+    title,
+    suggestionId,
+    eventId,
+    event
+  ) {
     // const eventId = this.props.match.params.id
     let newTask = {
       title: title,
       description: description,
       category: category,
-      eventId: 1
+      eventId: eventId
     }
     await this.props.setTask(newTask)
     this.props.deletelNotification(suggestionId)
@@ -77,7 +99,8 @@ export class Notifications extends React.Component {
                       suggestion.category,
                       suggestion.description,
                       suggestion.title,
-                      suggestion.id
+                      suggestion.id,
+                      suggestion.eventId
                     )}
                     size="small"
                     variant="contained"
@@ -132,7 +155,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    getAllNotifications: eventId => dispatch(getAllNotifications(eventId)),
+    getAllNotifications: userPartiesObj =>
+      dispatch(getAllNotifications(userPartiesObj)),
     getMe: () => dispatch(getMe()),
     deletelNotification: id => dispatch(deletelNotification(id)),
     setTask: task => dispatch(setTask(task))

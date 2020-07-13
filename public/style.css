@@ -205,3 +205,33 @@ section {
   outline: none;
   cursor: pointer;
 }
+
+/* LANDIGN PAGE */
+
+.title {
+  margin-top: 1.2rem !important;
+  color: white;
+  margin-bottom: 2rem !important;
+}
+
+.ctaBtn {
+  margin-bottom: 5rem !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (min-width: 768px) {
+  .ctaBtn {
+    flex-direction: row;
+    justify-content: center;
+  }
+  .title {
+    margin-top: 5rem !important;
+    margin-bottom: 1rem;
+    font-size: 2rem !important;
+    font-weight: 800;
+  }
+}
