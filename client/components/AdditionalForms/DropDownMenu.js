@@ -12,7 +12,8 @@ import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    zIndex: 9999
   },
   paper: {
     marginRight: theme.spacing(2)
@@ -101,9 +102,9 @@ export default function MenuListComposition(props) {
                     style={{backgroundColor: 'solid'}}
                   >
                     <MenuItem onClick={handleClick}>Delete</MenuItem>
-                    <MenuItem>
-                      <Link to={`events/${props.eventId}/edit`}>Edit</Link>
-                    </MenuItem>
+                    <Link to={`events/${props.eventId}/edit`}>
+                      <MenuItem>Edit</MenuItem>
+                    </Link>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

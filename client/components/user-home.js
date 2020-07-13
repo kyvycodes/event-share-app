@@ -79,7 +79,9 @@ export class UserHome extends React.Component {
         <div>
           <Container maxWidth="sm">
             <br />
-            <p>My Events</p>
+            <Box>
+              <Typography color="primary">My Events</Typography>
+            </Box>
             <Divider />
             <List className="task-list">
               {this.props.myEvents.length > 0 ? (
@@ -111,9 +113,10 @@ export class UserHome extends React.Component {
                 <p>You Have No Events</p>
               )}
             </List>
-          </Container>
-          <Container>
-            <p>My Friend's Events</p>
+            <br />
+            <Box>
+              <Typography color="primary">My Friend's Events</Typography>
+            </Box>
             <Divider />
             <List className="task-list">
               {this.props.events.length > 0 ? (
@@ -128,9 +131,7 @@ export class UserHome extends React.Component {
                           {ev.event.title}
                         </ListItemText>
                         <div className="float-left">
-                          <Button>
-                            <Link to={`events/${ev.event.id}`}>Details</Link>
-                          </Button>
+                          <Link to={`events/${ev.event.id}`}>DETAILS</Link>
                         </div>
                       </ListItem>
                     </div>
