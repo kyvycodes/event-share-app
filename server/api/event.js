@@ -48,10 +48,14 @@ router.delete('/:id/delete', async (req, res, next) => {
 
 router.put('/:id/edit', async (req, res, next) => {
   try {
-    const event = await Event.findOne({
-      where: {id: req.params.id},
-      include: [Invitee, User, Task]
-    })
+    const event = await Event.findByPk(req.params.id)
+    for (let input in req.body) {
+      if (event[input]) {
+        event[input] = req.body[input]
+      }
+    }
+    await event.save()
+    console.log('EVENTTT', event)
     res.json(event)
   } catch (err) {
     next(err)

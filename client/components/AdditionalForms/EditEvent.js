@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchEvent} from '../../store/event'
+import {fetchEvent, updateEvent} from '../../store/event'
 import {
   TextField,
   FormControl,
@@ -14,15 +14,6 @@ import {
   Typography
 } from '@material-ui/core'
 
-const isEmpty = e => {
-  const event = {}
-  for (let i = 0; i < e.target.length; i++) {
-    event[e.target.elements[i].getAttribute('name')] =
-      e.target.elements[i].value
-  }
-  return event
-}
-
 export class EditEvent extends Component {
   componentDidMount() {
     // this.props.getEvent(this.props.match.params.id)
@@ -33,10 +24,13 @@ export class EditEvent extends Component {
     e.preventDefault()
     const event = {}
     for (let i = 0; i < e.target.length; i++) {
-      event[e.target.elements[i].getAttribute('name')] =
-        e.target.elements[i].value
+      if (e.target.elements[i].value) {
+        event[e.target.elements[i].getAttribute('name')] =
+          e.target.elements[i].value
+      }
     }
-    this.props.editEvent(event)
+    console.log('EVENT', event)
+    this.props.editEvent(event, this.props.match.params.id)
   }
 
   render() {
@@ -51,7 +45,7 @@ export class EditEvent extends Component {
         >
           <h3 align="center">Edit Event</h3>
           <FormGroup>
-            <Typography>Title: {event.title}</Typography>
+            <Typography>Title</Typography>
             <FormControl>
               <TextField
                 size="small"
@@ -59,7 +53,7 @@ export class EditEvent extends Component {
                 // onChange={this.handleChange}
                 // value={this.state.title}
                 name="title"
-                label="Title"
+                label={event.title}
                 variant="outlined"
 
                 // error={!!errorsTask.title}
@@ -67,57 +61,57 @@ export class EditEvent extends Component {
               />
             </FormControl>
             <FormControl>
-              <Typography>Description: {event.description}</Typography>
+              <Typography>Description</Typography>
 
               <TextField
                 size="small"
                 // onChange={this.handleChange}
                 // value={this.state.description}
                 name="description"
-                label="Description"
+                label={event.description}
                 variant="outlined"
               />
             </FormControl>
             <FormControl>
-              <Typography>Street Address: {event.address}</Typography>
+              <Typography>Street Address:</Typography>
 
               <TextField
                 size="small"
                 name="address"
-                label="Street Address"
+                label={event.address}
                 type="address"
                 variant="outlined"
               />
             </FormControl>
             <FormControl>
-              <Typography>City: {event.city}</Typography>
+              <Typography>City:</Typography>
 
               <TextField
                 size="small"
                 name="city"
-                label="City"
+                label={event.city}
                 type="city"
                 variant="outlined"
               />
             </FormControl>
             <FormControl>
-              <Typography>Zipcode: {event.zipcode}</Typography>
+              <Typography>Zipcode:</Typography>
 
               <TextField
                 size="small"
                 name="zipcode"
-                label="Zipcode"
+                label={event.zipcode}
                 type="number"
                 variant="outlined"
               />
             </FormControl>
             <FormControl>
-              <Typography>Date: {event.date}</Typography>
+              <Typography>Date:</Typography>
 
               <TextField
                 size="small"
                 name="date"
-                label="Date"
+                label={event.date}
                 type="date"
                 variant="outlined"
                 InputLabelProps={{
@@ -126,12 +120,12 @@ export class EditEvent extends Component {
               />
             </FormControl>
             <FormControl>
-              <Typography>Start Time: {event.startTime}</Typography>
+              <Typography>Start Time:</Typography>
 
               <TextField
                 size="small"
                 id="time"
-                label="Start Time"
+                label={event.startTime}
                 type="time"
                 variant="outlined"
                 InputLabelProps={{
@@ -162,7 +156,8 @@ const mapStateToProps = state => ({
   currEvent: state.events.currEvent
 })
 const mapDispatchToProps = dispatch => ({
-  getEvent: id => dispatch(fetchEvent(id))
+  getEvent: id => dispatch(fetchEvent(id)),
+  editEvent: (event, id) => dispatch(updateEvent(event, id))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditEvent)

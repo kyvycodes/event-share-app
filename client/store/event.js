@@ -79,6 +79,19 @@ export const deleteEvent = id => {
   }
 }
 
+export const updateEvent = (event, id) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/events/${id}/edit`, event)
+      dispatch(getEvent(data))
+      // alert("Your changes have been made")
+      history.push(`/events/${id}/details`)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 export const fetchUserEvents = upcomingOrPast => {
   return async dispatch => {
     try {
