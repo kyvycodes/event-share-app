@@ -24,6 +24,8 @@ Event.hasMany(Task)
 Poll.belongsTo(Event)
 Poll.belongsTo(User)
 
+Options.belongsTo(Poll)
+
 Options.belongsToMany(User, {through: 'answers'})
 User.belongsToMany(Options, {through: 'answers'})
 

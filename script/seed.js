@@ -57,7 +57,11 @@ async function seed() {
   const polls = await Promise.all([
     Poll.create({
       title: 'what should desert be?',
-      userId: 1
+      userId: 1,
+      optionId: 1
+    }),
+    Poll.create({
+      title: 'how hard is it to make a poll'
     })
   ])
 

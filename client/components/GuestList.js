@@ -20,14 +20,11 @@ import {
 } from '@material-ui/core'
 
 import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp'
-/**
- * COMPONENT
- */
 
 export const GuestList = props => {
-  useEffect(() => {
-    props.getEvent(props.match.params.id)
-  }, [])
+  // useEffect(() => {
+  //   props.getEvent(props.match.params.id)
+  // }, [])
   const users = props.users || []
   const nonUsers = props.nonUsers || []
   const eventId = props.match.params.id
@@ -174,10 +171,12 @@ export const GuestList = props => {
 
             {nonUsers.length !== 0 ? (
               nonUsers.map(nonUser => (
-                <ListItem alignItems="flex-start" key={nonUser.id}>
-                  <ListItemText>{nonUser.name}</ListItemText>
+                <div key={nonUser.id}>
+                  <ListItem alignItems="flex-start">
+                    <ListItemText>{nonUser.name}</ListItemText>
+                  </ListItem>
                   <Divider />
-                </ListItem>
+                </div>
               ))
             ) : (
               <p>No pending invitations</p>
