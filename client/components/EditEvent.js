@@ -13,7 +13,6 @@ import {
 
 export class EditEvent extends Component {
   componentDidMount() {
-    // this.props.getEvent(this.props.match.params.id)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 

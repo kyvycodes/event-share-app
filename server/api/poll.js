@@ -42,7 +42,6 @@ router.post('/', async (req, res, next) => {
       let option = await Options.create({title})
       option.setPoll(newPoll.id)
     }
-
     res.status(201).json(newPoll)
   } catch (error) {
     next(error)

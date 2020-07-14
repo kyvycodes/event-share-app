@@ -64,16 +64,23 @@ async function seed() {
       title: 'how hard is it to make a poll'
     })
   ])
-  // console.log(polls.__proto__)
 
   const options = await Promise.all([
     Options.create({
-      title: 'cake', // total: 4
+      title: 'cake',
+      pollId: 1,
+      userId: 1
+    }),
+    Options.create({
+      title: 'fruit tart',
+      pollId: 1,
+      userId: 2
+    }),
+    Options.create({
+      title: 'pie',
       pollId: 1
     })
   ])
-
-  // console.log(options.__proto__)
 
   await Promise.all(usersDummyData.map(user => User.create(user)))
 
