@@ -9,7 +9,7 @@ import AddTask from './addTask'
 import taskList from './taskList'
 import GuestList from './GuestList'
 import EditEvent from './EditEvent'
-import EdithTaskForm from './EdithTaskForm'
+import EditTaskForm from './EditTaskForm'
 
 /**
  * COMPONENT
@@ -28,8 +28,8 @@ export class EventRoutes extends Component {
           <Route exact path="/events/:id/edit" component={EditEvent} />
           <Route
             exact
-            path="/events/:id/tasks/EdithTaskForm/:taskId"
-            component={EdithTaskForm}
+            path="/events/:id/tasks/EditTaskForm/:taskId"
+            component={EditTaskForm}
           />
           <Redirect from="/events/:id" to="/events/:id/details" exact />
           {/* <Route component={EventDetails} /> */}

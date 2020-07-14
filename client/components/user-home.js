@@ -60,7 +60,7 @@ export const UserHome = props => {
   const events = props.user.events || []
   const tasks = props.user.tasks || []
   const eventId = props.eventId
-  console.log('PROPS', props)
+
   return (
     <div>
       <div className="profile">
