@@ -26,8 +26,8 @@ export class Notifications extends React.Component {
   }
 
   async componentDidMount() {
-    // get user's parties
     await this.props.getMe()
+    // gets user's parties
     const partiesOrganizedByUser = await this.props.user.userParties
     const userPartiesObj = {
       userPartiesArray: partiesOrganizedByUser
@@ -35,16 +35,6 @@ export class Notifications extends React.Component {
     if (partiesOrganizedByUser.length > 0) {
       this.props.getAllNotifications(userPartiesObj)
     }
-    /*
-     const userParties = user.userParties; // [1, 2]
-
-     give me only  the userParties that are in my ar
-
-
-
-     const {user} = this.props;
-if(user.id )
-    */
   }
 
   async handleSubmit(
@@ -55,7 +45,6 @@ if(user.id )
     eventId,
     event
   ) {
-    // const eventId = this.props.match.params.id
     let newTask = {
       title: title,
       description: description,
@@ -67,7 +56,7 @@ if(user.id )
   }
 
   render() {
-    const {suggestions, polls} = this.props.notifications
+    const {suggestions} = this.props.notifications
     return (
       <Container maxWidth="sm">
         <Box pt={2}>

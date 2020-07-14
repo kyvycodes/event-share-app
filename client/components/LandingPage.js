@@ -41,13 +41,7 @@ const Home = () => {
         >
           Everything your team needs to create an event in one platform.
         </Typography>
-        <Box
-          className="ctaBtn"
-          // display="flex"
-          // flexDirection="column"
-          // justifyContent="center"
-          mt="7rem"
-        >
+        <Box className="ctaBtn" mt="7rem">
           <Button
             className={classes.ctaBtn}
             color="secondary"
