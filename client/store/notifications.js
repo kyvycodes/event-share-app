@@ -6,7 +6,7 @@ const RESET_NOTIFICATIONS = 'RESET_NOTIFICATIONS'
 
 const initialState = {
   suggestions: [],
-  poll: []
+  polls: []
 }
 
 const fetchAllNotifications = suggestions => ({
@@ -28,7 +28,7 @@ export const getAllNotifications = userPartiesObj => async dispatch => {
 
 export const deletelNotification = id => async dispatch => {
   try {
-    const res = await axios.delete(`/api/notifications/${id}`)
+    await axios.delete(`/api/notifications/${id}`)
     dispatch(fetchDeleteSuggestion(id))
   } catch (err) {
     console.error(err)

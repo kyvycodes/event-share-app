@@ -87,7 +87,6 @@ export const editTaskThunk = (taskId, task) => async dispatch => {
 }
 
 export default function(state = initialState, action) {
-  //console.log('ACTION', action.type)
   switch (action.type) {
     case GET_TASK:
       return {...state, task: action.task}
@@ -95,8 +94,6 @@ export default function(state = initialState, action) {
       return {...state, tasks: action.tasks}
     case ADD_TASK:
       return {...state, task: action.task, errorsTask: {}}
-    // case EDIT_TASK:
-    //   return {...state, task: action.task}
     case GET_ERRORS:
       const errObj = {}
       let errors = action.errorsTask.split(',')
@@ -113,15 +110,10 @@ export default function(state = initialState, action) {
     case CLEAR_ERRORS:
       return {}
     case DELETE_TASK:
-      // console.log('STATE News', {
-
-      //   ...state, tasks: state.tasks.filter((task) => task.id !== action.taskId)
-      // })
       return {
         ...state,
         tasks: state.tasks.filter(task => task.id !== action.taskId)
       }
-    // multipleTasks: multipleTasks.filter(id => id !== action.taskID)
     case EDIT_TASK:
       return {...state, task: action.task}
 

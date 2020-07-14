@@ -2,18 +2,6 @@ const router = require('express').Router()
 const {Task, Notification} = require('../db/models')
 module.exports = router
 
-// get allNotificationsByEventId
-// router.get('/:id', async (req, res, next) => {
-//   try {
-//     const allNotificationsById = await Notification.findAll({
-//       where: {eventId: req.params.id}
-//     })
-//     res.json(allNotificationsById)
-//   } catch (err) {
-//     next(err)
-//   }
-// })
-
 // get allNotificationsByUser array
 router.put('/', async (req, res, next) => {
   try {
