@@ -14,7 +14,19 @@ const dummyData2 = {
   pollId: 9
 }
 
-router.get('/:eventId', async (req, res, next) => {
+router.get('/:pollId', async (req, res, next) => {
+  try {
+    console.log('ISNIDE', req.params)
+    const currPoll = await Poll.findByPk(req.params.pollId, {
+      include: Options
+    })
+    res.json(currPoll)
+  } catch (err) {
+    next(err)
+  }
+})
+
+router.get('/:eventId/polls', async (req, res, next) => {
   try {
     const polls = await Poll.findAll({
       where: {
@@ -27,11 +39,11 @@ router.get('/:eventId', async (req, res, next) => {
   }
 })
 
-router.post('/', async (req, res, next) => {
+router.post('/create', async (req, res, next) => {
   try {
     const poll = {
       title: req.body.title,
-      // userId: req.user.id,
+      userId: req.user.id,
       eventid: req.body.eventId
     }
 

@@ -1,131 +1,93 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-  TextField,
-  FormControl,
-  Container,
-  FormGroup,
-  Button
-} from '@material-ui/core'
-// import setOption from '../store/options'
-import getPoll from '../store/poll'
-
-// there are a million ideas in here. Feel free to delete what you want. I have started from scratch multiple times
+import {createPoll} from '../store/poll'
 
 export class PollForm extends React.Component {
   constructor(props) {
-    super(props)
+    super()
     this.state = {
+      options: [],
       title: '',
-      options: []
-      // optionOne: '',
-      // optionTwo: '',
-      // optionThree: ''
+      currentOption: ''
     }
-    // this.handleChange = this.handleChange.bind(this)
+
+    this.handleChange = this.handleChange.bind(this)
+    this.handleAddOption = this.handleAddOption.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  // Options should be mapped thru
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
 
-  // handleChange(event) {
-  //   this.setState({
-  //     [event.target.name]: event.target.value
-  //   })
-  // }
+  handleAddOption(event) {
+    event.preventDefault()
+    const option = this.state.currentOption
+
+    this.setState({
+      options: [...this.state.options, option],
+      currentOption: ''
+    })
+  }
 
   handleSubmit(event) {
     event.preventDefault()
-
-    //the first way I tried to handle the submit is below
-    //     console.log('props', this.props)
-    // this.props.addOption(this.state);
-    // this.setState({
-    //     title: ''
-    // })
-    const option = {
-      title: event.target.title.value,
+    const newPoll = {
+      title: this.state.title,
+      options: this.state.options,
       eventId: this.props.match.params.id
     }
-
-    event.target.title.value = ''
-
-    this.props.setOptions(this.state)
-    this.setState({
-      options: [...this.state.options, option]
-    })
-    // eventId: event.id
+    this.props.createPoll(newPoll)
   }
 
   render() {
-    console.log('propssss', this.props)
     return (
-      <Container maxWidth="sm">
-        <form onSubmit={this.handleSubmit}>
-          <h3 align="center">Create a Poll</h3>
-          <FormGroup>
-            <FormControl>
-              <TextField
-                type="title"
-                onChange={this.handleChange}
-                value={this.state.title}
-                name="title"
-              />
-            </FormControl>
-            <FormControl>
-              {/* INSTEAD OF MAPPING OPTION BY OPTION IT SHOULD BE MAPPED FROM OPTIONS STORED IN THE DB */}
-              {/* <TextField
-                onChange={this.handleChange}
-                value={this.state.description}
-                name="optionOne"
-                label="option 1"
-                variant="outlined"
-              /> */}
-            </FormControl>
-            <FormControl>
-              {/* <TextField
-              //   onChange={this.handleChange}
-              //   value={this.state.description}
-              //   name="optionTwo"
-              //   label="option 2"
-              //   variant="outlined"
-              // /> */}
-            </FormControl>
-            <FormControl>
-              {/* <TextField
-                onChange={this.handleChange}
-                value={this.state.description}
-                name="optionThree"
-                label="option 3"
-                variant="outlined"
-              /> */}
-            </FormControl>
-          </FormGroup>
-          <Button type="submit">Create Poll</Button>
-        </form>
-      </Container>
+      <div>
+        <h1>Create A Poll For Your Event</h1>
+
+        <label>
+          <p>Poll Question</p>
+          <input
+            type="text"
+            name="title"
+            placeholder="question"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+          <p>Write Your Options</p>
+
+          <input
+            type="text"
+            name="currentOption"
+            placeholder="option"
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+        </label>
+        <div>
+          <button type="button" onClick={this.handleAddOption}>
+            Add Option
+          </button>
+        </div>
+        <h4>Your Options</h4>
+        <div>
+          {this.state.options.map(option => {
+            return <p>{option}</p>
+          })}
+
+          <form onSubmit={this.handleSubmit}>
+            <button type="submit">Create Poll</button>
+          </form>
+        </div>
+      </div>
     )
   }
 }
 
-const mapState = state => {
-  return {
-    user: state.user
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  createPoll: event => dispatch(createPoll(event))
+})
 
-const mapDispatch = dispatch => {
-  return {
-    addOption: poll => dispatch(setOption(poll))
-  }
-}
-
-// const mapDispatch = dispatch => {
-//   return {
-//     fetchPoll: poll => dispatch(getPoll(poll))
-//   }
-// }
-
-export default connect(null, mapDispatch)(PollForm)
-
-// export default connect(mapState, mapDispatch)(PollForm)
+export default connect(null, mapDispatchToProps)(PollForm)
