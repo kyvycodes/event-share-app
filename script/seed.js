@@ -9,9 +9,14 @@ const {
   Notification,
   Poll,
   Options,
-  pollOptions
+  Answers
 } = require('../server/db/models')
-const {events, eventUsers, usersDummyData} = require('../dummyData')
+const {
+  events,
+  eventUsers,
+  usersDummyData,
+  userAnswers
+} = require('../dummyData')
 
 async function seed() {
   await db.sync({force: true})
@@ -52,12 +57,6 @@ async function seed() {
   const polls = await Promise.all([
     Poll.create({
       title: 'what should desert be?',
-      // items: [{optionId: 1}],
-      // // title: "what should desert be?",
-      // // items: [{ options["title"], 'candy bar', 'fruit tarts'}],
-      // autoClose: 10,
-      // showTotal: true,
-      // creator: true,
       userId: 1
     })
   ])
@@ -65,22 +64,16 @@ async function seed() {
   const options = await Promise.all([
     Options.create({
       title: 'cake',
-      count: 1,
-      // total: 4,
       pollId: 1,
       userId: 1
     }),
     Options.create({
       title: 'fruit tart',
-      count: 1,
-      // total: 2,
       pollId: 1,
       userId: 2
     }),
     Options.create({
       title: 'pie',
-      count: 1,
-      // total: 5,
       pollId: 1
     })
   ])
@@ -90,6 +83,8 @@ async function seed() {
   await Promise.all(events.map(event => Event.create(event)))
 
   await Promise.all(eventUsers.map(rel => userEventRel.create(rel)))
+
+  await Promise.all(userAnswers.map(answer => Answers.create(answer)))
 
   const notificationSuggestions = await Promise.all([
     Notification.create({

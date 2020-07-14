@@ -77,23 +77,6 @@ class EventTabs extends React.Component {
               />
             </TabList>
           </AppBar>
-          {/* <TabPanel value="1">
-            <EventDetails  component={Link}
-            to="/events/:id/invite" />
-          </TabPanel> */}
-          {/* <TabPanel value="2">
-            <GuestList eventId={eventId} />
-          </TabPanel> */}
-          {/* <TabPanel value="3">
-            <TaskList /> */}
-          {/* </TabPanel> */}
-          <TabPanel value="4">
-            Polls goes here whenever it is ready import the component and added
-            here
-          </TabPanel>
-          {/* <TabPanel value="5">
-            <InviteForm eventId={eventId} />
-          </TabPanel> */}
         </TabContext>
       </div>
     )

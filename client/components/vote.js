@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {Button} from '@material-ui/core'
 
+// this is a template for user vote component that is being refactored
 class Vote extends React.Component {
   constructor(props) {
     super(props)
@@ -15,7 +16,6 @@ class Vote extends React.Component {
     }
   }
 
-  //options and title from api
   vote(i) {
     let favOptions = [...this.state.options]
     favOptions[i].votes++

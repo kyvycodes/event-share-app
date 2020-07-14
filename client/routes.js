@@ -40,10 +40,9 @@ class Routes extends Component {
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/events/add" component={EventForm} />
             <Route path="/poll" component={PollForm} />
-            {/* <Route path="/add-task" component={AddTask} /> */}
             <Route path="/events/:id" component={EventApp} />
             <Route path="/vote" component={Vote} />
-
+            {/* someone please check add task and task list before deleting */}
             {/* <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} /> */}
 
@@ -54,9 +53,6 @@ class Routes extends Component {
         <Route exact path="/" component={LandingPage} />
 
         <Route exact path="/home" component={LandingPage} />
-
-        {/* <Route exact path="/LoginPage" component={LoginPage} /> */}
-
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/events/:id/guests" component={Login} />

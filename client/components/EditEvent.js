@@ -12,7 +12,6 @@ import {
 
 export class EditEvent extends Component {
   componentDidMount() {
-    // this.props.getEvent(this.props.match.params.id)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
@@ -45,12 +44,9 @@ export class EditEvent extends Component {
               <TextField
                 size="small"
                 type="title"
-                // onChange={this.handleChange}
-                // value={this.state.title}
                 name="title"
                 label={event.title}
                 variant="outlined"
-
                 // error={!!errorsTask.title}
                 // helperText={errorsTask.title}
               />
@@ -60,8 +56,6 @@ export class EditEvent extends Component {
 
               <TextField
                 size="small"
-                // onChange={this.handleChange}
-                // value={this.state.description}
                 name="description"
                 label={event.description}
                 variant="outlined"

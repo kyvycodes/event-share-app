@@ -31,7 +31,6 @@ export class EventRoutes extends Component {
             path="/events/:id/tasks/EdithTaskForm/:taskId"
             component={EdithTaskForm}
           />
-
           <Redirect from="/events/:id" to="/events/:id/details" exact />
           {/* <Route component={EventDetails} /> */}
         </Switch>

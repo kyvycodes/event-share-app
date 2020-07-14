@@ -14,6 +14,8 @@ import Typography from '@material-ui/core/Typography'
 import {makeStyles} from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
 
+//  '#22bfa0' color used for logo
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -23,20 +25,16 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(1),
-    // backgroundColor: theme.palette.secondary.main
     backgroundColor: '#FF8E53'
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(3)
   },
   submit: {
     backgroundColor: 'black',
     margin: theme.spacing(3, 0, 2)
   },
-  // main: {
-  //   backgroundColor: '#22bfa0', //color used for logo
-  // }
   main: {
     background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
   }

@@ -17,7 +17,6 @@ const fetchDeleteSuggestion = id => ({type: DELETE_SUGGESTION, id})
 export const resetAllNotifications = () => ({type: RESET_NOTIFICATIONS})
 
 export const getAllNotifications = userPartiesObj => async dispatch => {
-  console.log('userPartiesObj', userPartiesObj)
   try {
     const res = await axios.put(`/api/notifications/`, userPartiesObj)
     dispatch(fetchAllNotifications(res.data))
