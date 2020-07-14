@@ -13,7 +13,7 @@ import {
   FormHelperText
 } from '@material-ui/core'
 
-export class EdithTaskForm extends React.Component {
+export class EditTaskForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -43,7 +43,7 @@ export class EdithTaskForm extends React.Component {
     const taskId = this.props.match.params.taskId
     //const eventId = this.props.match.params.eventId
 
-    let edithTask = {
+    let editTask = {
       title: this.state.title,
       description: this.state.description,
       category: this.state.category,
@@ -52,7 +52,7 @@ export class EdithTaskForm extends React.Component {
     //console.log('EVENTID', edithTask.eventId)
     //console.log('PROPS', edithTask)
     //console.log('ID', taskId)
-    await this.props.editTask(taskId, edithTask)
+    await this.props.editTask(taskId, editTask)
     //console.log('****errorsTask', this.state.errorsTask.title)
     // if (!this.state.errorsTask.title) {
     //   this.props.history.push(`/events/${eventId}/tasks`)
@@ -78,7 +78,7 @@ export class EdithTaskForm extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.title}
                 name="title"
-                label="Edith Name *"
+                label="Edit Name *"
                 variant="outlined"
                 error={!!errorsTask.title}
                 helperText={errorsTask.title}
@@ -89,7 +89,7 @@ export class EdithTaskForm extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.description}
                 name="description"
-                label="Edith Description"
+                label="Edit Description"
                 variant="outlined"
               />
             </FormControl>
@@ -101,7 +101,7 @@ export class EdithTaskForm extends React.Component {
               <Select
                 labelId="demo-simple-select-filled-label"
                 id="demo-simple-select-filled"
-                label="Edith Category"
+                label="Edit Category"
                 name="category"
                 value={this.state.category}
                 onChange={this.handleChange}
@@ -140,4 +140,4 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(EdithTaskForm)
+export default connect(mapState, mapDispatch)(EditTaskForm)

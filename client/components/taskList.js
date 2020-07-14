@@ -21,7 +21,7 @@ import {
   Grid
 } from '@material-ui/core'
 import RemoveCircleTwoToneIcon from '@material-ui/icons/RemoveCircleTwoTone'
-import DeleteEdithTasksMenu from './DeleteEdithTasksMenu'
+import DeleteEditTasksMenu from './DeleteEditTasksMenu'
 
 export class TaskList extends React.Component {
   constructor(props) {
@@ -137,7 +137,7 @@ export class TaskList extends React.Component {
                               className="float-left"
                             />
                           )}
-                          <DeleteEdithTasksMenu
+                          <DeleteEditTasksMenu
                             eventId={this.props.match.params.id}
                             taskId={task.id}
                             deleteTask={this.props.deleteTask}
@@ -236,7 +236,7 @@ export class TaskList extends React.Component {
                               className="float-left"
                             />
                           )}
-                          <DeleteEdithTasksMenu
+                          <DeleteEditTasksMenu
                             eventId={this.props.match.params.id}
                             taskId={task.id}
                             deleteTask={this.props.deleteTask}

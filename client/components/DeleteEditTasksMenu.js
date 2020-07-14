@@ -3,10 +3,10 @@ import Button from '@material-ui/core/Button'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
-import EdithTaskForm from './EdithTaskForm'
+import EditTaskForm from './EditTaskForm'
 import {Link} from 'react-router-dom'
 
-export default function DeleteEdithTasksMenu(props) {
+export default function DeleteEditTasksMenu(props) {
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const handleClick = event => {
@@ -37,7 +37,7 @@ export default function DeleteEdithTasksMenu(props) {
           Delete
         </MenuItem>
         <Link
-          to={`/events/${props.eventId}/tasks/EdithTaskForm/${props.taskId}`}
+          to={`/events/${props.eventId}/tasks/EditTaskForm/${props.taskId}`}
         >
           <MenuItem onClick={handleClose}>Edit</MenuItem>
         </Link>
