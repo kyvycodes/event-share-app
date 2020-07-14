@@ -27,12 +27,14 @@ class EventDetails extends React.Component {
   }
 
   render() {
-    const getDirections = `http://maps.google.com/?q=${
-      this.props.currEvent.address
-    }, ${this.props.currEvent.city}`
+    const currEvent = this.props.currEvent || []
 
-    const date = formatDate(this.props.currEvent.date || [])
+    const date = formatDate(currEvent.date || [])
     const eventId = this.props.match.params.id
+
+    const getDirections = `http://maps.google.com/?q=${currEvent.address}, ${
+      currEvent.city
+    }`
 
     return (
       <div>
@@ -64,7 +66,7 @@ class EventDetails extends React.Component {
                   label="Event title"
                 />
                 <Typography paragraph className="labelInfo">
-                  {this.props.currEvent.title}
+                  {currEvent.title}
                 </Typography>
                 <Chip
                   color="primary"
@@ -72,7 +74,7 @@ class EventDetails extends React.Component {
                   label="Event details"
                 />
                 <Typography paragraph className="labelInfo">
-                  {this.props.currEvent.description}
+                  {currEvent.description}
                 </Typography>
 
                 <Typography paragraph className="labelInfo">
@@ -93,7 +95,7 @@ class EventDetails extends React.Component {
                   label="Event address"
                 />
                 <Typography paragraph className="labelInfo">
-                  {this.props.currEvent.address}, {this.props.currEvent.city}
+                  {currEvent.address}, {currEvent.city}
                 </Typography>
 
                 <Chip
@@ -102,7 +104,7 @@ class EventDetails extends React.Component {
                   label="Start time"
                 />
                 <Typography paragraph className="labelInfo">
-                  {this.props.currEvent.startTime}
+                  {currEvent.startTime}
                 </Typography>
 
                 <Chip

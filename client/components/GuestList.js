@@ -26,8 +26,8 @@ export const GuestList = props => {
     props.getEvent(props.match.params.id)
   }, [])
   const currEvent = props.currEvent || []
-  const users = props.currEvent.users || []
-  const nonUsers = currEvent.nonUsers || []
+  const users = currEvent.users || []
+  const nonUsers = currEvent.invitees || []
   const eventId = props.match.params.id
   return (
     <div>
