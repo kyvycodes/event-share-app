@@ -25,7 +25,7 @@ class EventTabs extends React.Component {
   }
   render() {
     const eventId = this.props.match.params.id
-
+    const currEvent = this.props.currEvent || []
     return (
       <div className="">
         <Typography
@@ -35,11 +35,11 @@ class EventTabs extends React.Component {
           color="secondary"
           className="eventTitle"
         >
-          {this.props.currEvent.title}🎉
+          {currEvent.title}🎉
         </Typography>
         <Box align="center" className="dropDownMenu">
           <DropMenuList
-            eventId={this.props.currEvent.id}
+            eventId={currEvent.id}
             eventLink="/edit"
             delete={this.props.deleteEvent}
           />
@@ -68,7 +68,12 @@ class EventTabs extends React.Component {
                 component={RouterLink}
                 to={`/events/${eventId}/tasks`}
               />
-              <Tab label="Polls" value="4" component={RouterLink} to="/vote" />
+              <Tab
+                label="Polls"
+                value="4"
+                component={RouterLink}
+                to={`/events/${eventId}/polls/1`}
+              />
               <Tab
                 label="Invite"
                 value="5"

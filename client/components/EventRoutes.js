@@ -10,7 +10,8 @@ import taskList from './taskList'
 import GuestList from './GuestList'
 import EditEvent from './EditEvent'
 import EdithTaskForm from './EdithTaskForm'
-
+import PollForm from './PollForm'
+import Vote from './vote'
 /**
  * COMPONENT
  */
@@ -24,7 +25,11 @@ export class EventRoutes extends Component {
           <Route exact path="/events/:id/guests" component={GuestList} />
           <Route exact path="/events/:id/tasks" component={taskList} />
           <Route exact path="/events/:id/add-task" component={AddTask} />
-          <Route exact path="/events/:id/polls" component={InviteForm} />
+          <Route exact path="/events/:id/polls/create" component={PollForm} />
+          <Route exact path="/events/:id/polls/:pollId" component={Vote} />
+
+          <Route exact path="/events/:id/polls/vote" component={Vote} />
+
           <Route exact path="/events/:id/edit" component={EditEvent} />
           <Route
             exact
