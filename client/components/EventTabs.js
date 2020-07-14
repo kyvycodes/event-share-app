@@ -1,18 +1,16 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Link as RouterLink} from 'react-router-dom'
-
+import {fetchEvent, deleteEvent} from '../store/event'
+import DropMenuList from './AdditionalForms/DropDownMenu'
 import AppBar from '@material-ui/core/AppBar'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
 import TabContext from '@material-ui/lab/TabContext'
 import TabList from '@material-ui/lab/TabList'
-import {fetchEvent} from '../store/event'
-import TaskList from './taskList'
-import EventDetails from './EventDetails'
-import GuestList from './GuestList'
-import InviteForm from './InviteForm'
 import TabPanel from '@material-ui/lab/TabPanel'
+import {Box} from '@material-ui/core/'
+
 class EventTabs extends React.Component {
   state = {
     value: '1'
@@ -39,12 +37,18 @@ class EventTabs extends React.Component {
         >
           {this.props.currEvent.title}🎉
         </Typography>
-
+        <Box align="center" className="dropDownMenu">
+          <DropMenuList
+            eventId={this.props.currEvent.id}
+            eventLink="/edit"
+            delete={this.props.deleteEvent}
+          />
+        </Box>
         <TabContext value={this.state.value}>
-          <AppBar position="static" color="secondary">
+          <AppBar position="static" color="secondary" style={{zIndex: 3000}}>
             <TabList
               onChange={this.handleChange.bind(this)}
-              // aria-label="simple tabs example"
+              aria-label="simple tabs example"
             >
               <Tab
                 label="Details"
@@ -99,13 +103,15 @@ class EventTabs extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    currEvent: state.events.currEvent
+    currEvent: state.events.currEvent,
+    isOrganizer: state.events.organizer
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getEvent: id => dispatch(fetchEvent(id))
+    getEvent: id => dispatch(fetchEvent(id)),
+    deleteEvent: eventId => dispatch(deleteEvent(eventId))
   }
 }
 

@@ -9,9 +9,9 @@ const userEvent = db.define('users_events', {
   },
   attending: {
     type: Sequelize.STRING,
-    defaultValue: 'pending',
+    defaultValue: 'Pending',
     validate: {
-      isIn: [['attending', 'declined', 'pending']]
+      isIn: [['Attending', 'Declined', 'Pending']]
     }
   }
 })

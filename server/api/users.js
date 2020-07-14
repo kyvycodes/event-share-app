@@ -19,7 +19,7 @@ router.get('/me', async (req, res, next) => {
 
 router.get('/me/upcoming', async (req, res, next) => {
   try {
-    const event = await userEventRel.findAll({
+    const events = await userEventRel.findAll({
       attributes: ['isOrganizer', 'eventId', 'userId', 'attending'],
       where: {
         userId: req.user.id
@@ -33,11 +33,11 @@ router.get('/me/upcoming', async (req, res, next) => {
             }
           },
           attributes: {exclude: ['createdAt', 'updatedAt']},
-          order: ['date', 'ASC']
+          order: ['date', 'DESC']
         }
       ]
     })
-    res.json(event)
+    res.json(events)
   } catch (err) {
     next(err)
   }
@@ -45,7 +45,7 @@ router.get('/me/upcoming', async (req, res, next) => {
 
 router.get('/me/past', async (req, res, next) => {
   try {
-    const event = await userEventRel.findAll({
+    const events = await userEventRel.findAll({
       attributes: ['isOrganizer', 'eventId', 'userId', 'attending'],
       where: {
         userId: req.user.id
@@ -63,7 +63,7 @@ router.get('/me/past', async (req, res, next) => {
         }
       ]
     })
-    res.json(event)
+    res.json(events)
   } catch (err) {
     next(err)
   }

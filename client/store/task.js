@@ -72,8 +72,6 @@ export const deleteTaskThunk = (taskID, eventId) => async dispatch => {
   try {
     await axios.delete(`/api/tasks/${taskID}`)
     dispatch(deleteTask(taskID))
-    //history.push(`/events/${eventId}/`)
-    //events/${eventId}/tasks
   } catch (error) {
     console.error('Failed to DELETE', error)
   }

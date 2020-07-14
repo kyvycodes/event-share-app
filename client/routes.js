@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {
-  // Login,
   Signup,
   UserHome,
   EventForm,
@@ -20,10 +19,6 @@ import {
 } from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
-// import Login from './components/LoginPage'
-// import TasksSuggested from './components/TasksSuggested'
-import {EventRoutes} from './components/EventRoutes'
-import EdithTaskForm from './components/EdithTaskForm'
 
 /**
  * COMPONENT
@@ -48,6 +43,7 @@ class Routes extends Component {
             {/* <Route path="/add-task" component={AddTask} /> */}
             <Route path="/events/:id" component={EventApp} />
             <Route path="/vote" component={Vote} />
+
             {/* <Route path="/add-task" component={AddTask} />
             <Route path="/task-list" component={TaskList} /> */}
 

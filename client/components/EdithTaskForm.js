@@ -70,7 +70,7 @@ export class EdithTaskForm extends React.Component {
           noValidate
           autoComplete="off"
         >
-          <h3 align="center">Edith Task</h3>
+          <h3 align="center">Edit Task</h3>
           <FormGroup>
             <FormControl>
               <TextField

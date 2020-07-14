@@ -115,7 +115,7 @@ export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
       return action.user
-    case GET_USER_EVENT_HOST:
+    case GET_USER_EVENT_HOST: {
       const userParties = []
       action.user.events.map(event => {
         if (event.users_events.isOrganizer) {
@@ -123,6 +123,7 @@ export default function(state = defaultUser, action) {
         }
       })
       return {...state, userParties: userParties}
+    }
     case REMOVE_USER:
       return defaultUser
     default:

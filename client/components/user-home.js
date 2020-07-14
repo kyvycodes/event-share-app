@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {getMe} from '../store/user'
-import {fetchUserEvents} from '../store/event'
+import {fetchUserEvents, deleteEvent} from '../store/event'
+import DropMenuList from './AdditionalForms/DropDownMenu'
 
 import {getAllNotifications} from '../store/notifications'
 import {formatDate} from './EventDetails'
@@ -21,11 +22,11 @@ import {
   ListItemText,
   Box,
   Avatar,
-  Typography,
-  IconButton,
-  Grid
+  Typography
 } from '@material-ui/core'
 import {useState} from 'react'
+
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 
 export const UserHome = props => {
   // effect functions can't be async, so declare the
@@ -58,6 +59,7 @@ export const UserHome = props => {
   const {firstName, lastName, email, profile_pic} = props.user
   const events = props.user.events || []
   const tasks = props.user.tasks || []
+  const eventId = props.eventId
   console.log('PROPS', props)
   return (
     <div>
@@ -87,6 +89,45 @@ export const UserHome = props => {
       <div>
         <Container maxWidth="sm">
           <br />
+          <Box>
+            <Typography color="primary">My Events</Typography>
+          </Box>
+          <Divider />
+          <List className="task-list">
+            {props.myEvents.length > 0 ? (
+              props.myEvents.map(ev => {
+                const date = formatDate(ev.event.date)
+                return (
+                  <div key={ev.event.id}>
+                    <ListItem alignItems="flex-start">
+                      <ListItemText
+                        secondary={`${date.month}-${date.day}-20${date.year}`}
+                      >
+                        {ev.event.title}
+                      </ListItemText>
+                      <DropMenuList
+                        eventId={ev.event.id}
+                        eventLink={`events/${ev.event.id}/edit`}
+                        delete={props.deleteEvent}
+                      />
+
+                      <div>
+                        <ListItemText secondary={ev.attending}>
+                          <Link to={`events/${ev.event.id}`}>DETAILS</Link>
+                        </ListItemText>
+                      </div>
+                    </ListItem>
+                  </div>
+                )
+              })
+            ) : (
+              <p>You Have No Events</p>
+            )}
+          </List>
+          <br />
+          <Box>
+            <Typography color="primary">My Friend's Events</Typography>
+          </Box>
           <Divider />
           <List className="task-list">
             {props.events.length > 0 ? (
@@ -101,43 +142,14 @@ export const UserHome = props => {
                         {ev.event.title}
                       </ListItemText>
                       <div className="float-left">
-                        <Button>
-                          <Link to={`events/${ev.event.id}`}>Details</Link>
-                        </Button>
+                        <Link to={`events/${ev.event.id}`}>DETAILS</Link>
                       </div>
                     </ListItem>
                   </div>
                 )
               })
             ) : (
-              <p>You Have No Current Events</p>
-            )}
-          </List>
-        </Container>
-        <Container maxWidth="sm">
-          <Box pt={2} display="flex" className="space-between">
-            <Typography color="primary" size="small" style={{fontSize: '14px'}}>
-              TASKS{' '}
-            </Typography>
-          </Box>
-          <Divider />
-          <List className="task-list">
-            {tasks.length > 0 ? (
-              tasks.map(task => (
-                <div key={task.id}>
-                  <ListItem alignItems="flex-start">
-                    <ListItemText
-                      secondary={task.description}
-                      primary={task.title}
-                    />
-                    <div className="align-left">
-                      <Button>Details</Button>
-                    </div>
-                  </ListItem>
-                </div>
-              ))
-            ) : (
-              <p>You Have No Current Tasks</p>
+              <p>You Have No Events</p>
             )}
           </List>
         </Container>
@@ -153,6 +165,7 @@ const mapState = state => {
   return {
     user: state.user,
     events: state.events.events,
+    myEvents: state.events.myEvents,
     tasks: state.user.tasks,
     notifications: state.notifications
   }
@@ -162,7 +175,8 @@ const mapDispatch = dispatch => {
   return {
     getUser: () => dispatch(getMe()),
     getAllNotifications: eventId => dispatch(getAllNotifications(eventId)),
-    getUserEvents: pastOrUpcoming => dispatch(fetchUserEvents(pastOrUpcoming))
+    getUserEvents: pastOrUpcoming => dispatch(fetchUserEvents(pastOrUpcoming)),
+    deleteEvent: eventId => dispatch(deleteEvent(eventId))
   }
 }
 

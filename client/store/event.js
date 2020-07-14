@@ -4,7 +4,9 @@ import history from '../history'
 const GET_ONE_EVENT = 'GET_EVENT'
 const ADD_EVENT = 'ADD_EVENT'
 const ADD_INVITES = 'ADD_INVITES'
+const DELETE_EVENT = 'DELETE_EVENT'
 const GET_USER_EVENTS = 'GET_USER_EVENTS '
+const GET_USER_EVENTS_AS_HOST = 'GET_USER_EVENTS_AS_HOST'
 
 const getEvent = event => ({
   type: GET_ONE_EVENT,
@@ -13,6 +15,11 @@ const getEvent = event => ({
 
 const getUserEvents = events => ({
   type: GET_USER_EVENTS,
+  events
+})
+
+const getUserEventsAsHost = events => ({
+  type: GET_USER_EVENTS_AS_HOST,
   events
 })
 
@@ -59,11 +66,38 @@ export const fetchEvent = id => {
   }
 }
 
+export const deleteEvent = id => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.delete(`/api/events/${id}/delete`)
+      dispatch(getUserEvents(data))
+      dispatch(getUserEventsAsHost(data))
+      history.push(`/`)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export const updateEvent = (event, id) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/events/${id}/edit`, event)
+      dispatch(getEvent(data))
+      // alert("Your changes have been made")
+      history.push(`/events/${id}/details`)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 export const fetchUserEvents = upcomingOrPast => {
   return async dispatch => {
     try {
       const {data} = await axios(`/api/users/me/${upcomingOrPast}`)
       dispatch(getUserEvents(data))
+      dispatch(getUserEventsAsHost(data))
     } catch (err) {
       console.log(err)
     }
@@ -84,16 +118,37 @@ export const createEvent = event => {
 
 const initialState = {
   events: [],
+  myEvents: [],
   currEvent: {},
-  invitees: []
+  invitees: [],
+  organizer: false
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_USER_EVENTS: {
-      return {...state, events: action.events}
+      const eventGuest = []
+      action.events.map(ev => {
+        if (ev.isOrganizer !== true) {
+          eventGuest.push({...ev})
+        }
+      })
+      return {...state, events: eventGuest}
+    }
+    case GET_USER_EVENTS_AS_HOST: {
+      const eventHost = []
+      action.events.map(ev => {
+        if (ev.isOrganizer === true) {
+          eventHost.push({...ev})
+        }
+      })
+      return {...state, myEvents: eventHost}
     }
     case GET_ONE_EVENT: {
+      let isHost = false
+      // if(action.event.users_events[0].isOrganizer === true) {
+      //   isHost = true
+      // }
       return {...state, currEvent: action.event}
     }
     case ADD_EVENT: {

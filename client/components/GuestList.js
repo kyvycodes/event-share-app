@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchEvent, updateUserAttendance} from '../store/event'
-import DoneIcon from '@material-ui/icons/Done'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
 import {
   Container,
@@ -53,7 +52,7 @@ export const GuestList = props => {
                           {user.firstName} {user.lastName}
                         </ListItemText>
 
-                        {user.users_events.attending === 'pending' ? (
+                        {user.users_events.attending === 'Pending' ? (
                           <div>
                             <Button
                               label="YES"
@@ -63,7 +62,7 @@ export const GuestList = props => {
                                 backgroundColor: '#32CD32'
                               }}
                               onClick={() =>
-                                props.updateUserAttendance(eventId, 'attending')
+                                props.updateUserAttendance(eventId, 'Attending')
                               }
                             >
                               YES
@@ -78,7 +77,7 @@ export const GuestList = props => {
                                 backgroundColor: '#ff2400'
                               }}
                               onClick={() =>
-                                props.updateUserAttendance(eventId, 'declined')
+                                props.updateUserAttendance(eventId, 'Declined')
                               }
                             >
                               NO
@@ -86,7 +85,7 @@ export const GuestList = props => {
                           </div>
                         ) : (
                           <div>
-                            {user.users_events.attending === 'attending' ? (
+                            {user.users_events.attending === 'Attending' ? (
                               <div>
                                 <IconButton
                                   color="secondary"
@@ -94,7 +93,7 @@ export const GuestList = props => {
                                   onClick={() =>
                                     props.updateUserAttendance(
                                       eventId,
-                                      'declined'
+                                      'Declined'
                                     )
                                   }
                                 >
@@ -117,7 +116,7 @@ export const GuestList = props => {
                                   onClick={() =>
                                     props.updateUserAttendance(
                                       eventId,
-                                      'attending'
+                                      'Attending'
                                     )
                                   }
                                 >
