@@ -40,7 +40,7 @@ export default function DeleteEdithTasksMenu(props) {
         <Link
           to={`/events/${props.eventId}/tasks/EdithTaskForm/${props.taskId}`}
         >
-          <MenuItem onClick={handleClose}>Edith</MenuItem>
+          <MenuItem onClick={handleClose}>Edit</MenuItem>
         </Link>
       </Menu>
     </div>

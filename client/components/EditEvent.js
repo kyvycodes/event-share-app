@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {fetchEvent, updateEvent} from '../../store/event'
+import {fetchEvent, updateEvent} from '../store/event'
 import {
   TextField,
   FormControl,

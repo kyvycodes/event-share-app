@@ -8,7 +8,7 @@ import EventTabs from './EventTabs'
 import AddTask from './addTask'
 import taskList from './taskList'
 import GuestList from './GuestList'
-import EditEvent from './AdditionalForms/EditEvent'
+import EditEvent from './EditEvent'
 import EdithTaskForm from './EdithTaskForm'
 
 /**
