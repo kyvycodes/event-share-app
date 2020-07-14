@@ -1,13 +1,27 @@
 const router = require('express').Router()
-const {Poll, Options} = require('../db/models')
+const {Poll, Options, Answers} = require('../db/models')
 module.exports = router
 
-router.get('/', async (req, res, next) => {
+const dummyData = {
+  title: 'What to do for breakfast',
+  options: ['pancakes', 'french Toast', 'burgers'],
+  eventId: 1
+}
+
+const dummyData2 = {
+  userId: 2,
+  optionId: 1,
+  pollId: 9
+}
+
+router.get('/:eventId', async (req, res, next) => {
   try {
-    const answers = await Options.findAll({
-      where: {pollId: req.params.pollId}
+    const polls = await Poll.findAll({
+      where: {
+        eventId: req.params.eventId
+      }
     })
-    res.json(answers)
+    res.json(polls)
   } catch (err) {
     next(err)
   }
@@ -15,12 +29,35 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newPoll = await Poll.create(req.body)
-    // const optionOne = await Options.create(req.body.optionOne)
-    // const optionTwo = await Options.create(req.body.optionTwo)
-    // const optionThree = await Options.create(req.body.optionThree)
-    // console.log(optionOne.__proto__)
+    const poll = {
+      title: req.body.title,
+      // userId: req.user.id,
+      eventid: req.body.eventId
+    }
+
+    const newPoll = await Poll.create(poll)
+
+    for (let i = 0; i < req.body.options.length; i++) {
+      let title = req.body.options[i]
+      let option = await Options.create({title})
+      option.setPoll(newPoll.id)
+    }
+
     res.status(201).json(newPoll)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/:pollId', async (req, res, next) => {
+  try {
+    const answer = {
+      optionId: 1,
+      userId: 1
+    }
+    const newAnswer = await Answers.create(answer)
+    //to be finished
+    res.status(201).json(newAnswer)
   } catch (error) {
     next(error)
   }

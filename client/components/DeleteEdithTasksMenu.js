@@ -7,7 +7,6 @@ import EdithTaskForm from './EdithTaskForm'
 import {Link} from 'react-router-dom'
 
 export default function DeleteEdithTasksMenu(props) {
-  console.log('HERE', props)
   const [anchorEl, setAnchorEl] = React.useState(null)
 
   const handleClick = event => {

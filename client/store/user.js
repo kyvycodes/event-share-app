@@ -25,17 +25,6 @@ const removeUser = () => ({type: REMOVE_USER})
  * THUNK CREATORS
  */
 
-// export const updateUserEvents = (eventId, dec) => async dispatch => {
-//   try {
-//     const decision = {
-//       decision: dec
-//     }
-//     const {data} = await axios.put(`/api/users/me/${eventId}`, decision)
-//     dispatch(getUser(data))
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
 export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
@@ -47,16 +36,6 @@ export const me = () => async dispatch => {
 export const getMe = () => async dispatch => {
   try {
     const res = await axios.get('/api/users/me')
-    dispatch(getUser(res.data || defaultUser))
-    dispatch(getUserParties(res.data || defaultUser))
-  } catch (err) {
-    console.error(err)
-  }
-}
-
-export const getMePast = () => async dispatch => {
-  try {
-    const res = await axios.get('/api/users/me/past')
     dispatch(getUser(res.data || defaultUser))
     dispatch(getUserParties(res.data || defaultUser))
   } catch (err) {
@@ -102,6 +81,7 @@ export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')
     dispatch(removeUser())
+    localStorage.clear()
     history.push('/login')
   } catch (err) {
     console.error(err)

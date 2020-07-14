@@ -59,8 +59,6 @@ export const UserHome = props => {
   const {firstName, lastName, email, profile_pic} = props.user
   const events = props.user.events || []
   const tasks = props.user.tasks || []
-  const eventId = props.eventId
-  console.log('PROPS', props)
   return (
     <div>
       <div className="profile">

@@ -13,12 +13,10 @@ export const addOption = option => ({
 
 export const setOption = option => async dispatch => {
   const {data} = await axios.post(`/api/poll/`, option)
-  console.log('res****', data)
   dispatch(addOption(data))
 }
 
 export default function(state = initialState, action) {
-  console.log('actionnnnnn', action)
   //action is undefined ???
   switch (action.type) {
     case ADD_OPTION:

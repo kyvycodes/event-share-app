@@ -31,8 +31,6 @@ export class InviteForm extends React.Component {
       email: this.state.email,
       eventId: this.props.match.params.id
     }
-    // e.target.name.value = ''
-    // e.target.email.value = ''
     this.setState({
       invitees: [...this.state.invitees, invitee],
       email: '',
@@ -106,7 +104,6 @@ export class InviteForm extends React.Component {
             Send Invites
           </button>
         </div>
-        {/* } */}
       </div>
     )
   }

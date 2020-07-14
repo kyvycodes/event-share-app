@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {fetchEvent, deleteEvent} from '../store/event'
-import DropMenuList from './AdditionalForms/DropDownMenu'
 import {
   Paper,
   Grid,
@@ -13,7 +12,6 @@ import {
   Typography,
   Container
 } from '@material-ui/core'
-// import EventTabs from './EventTabs'
 import MapContainer from './MapContainer'
 
 export const formatDate = date => {
@@ -112,8 +110,6 @@ class EventDetails extends React.Component {
                   To be determined
                 </Typography>
 
-                {/* <Typography className="labelInfo">Host By{}</Typography> */}
-
                 <Typography paragraph display="inline">
                   <Link to={`/profile/${1}`}>
                     {/* Host By {event.user.name} */}
@@ -121,6 +117,7 @@ class EventDetails extends React.Component {
                 </Typography>
                 <Typography paragraph display="inline">
                   Your RSVP
+                  {/* move yes/no here */}
                 </Typography>
 
                 <Box display="flex" mb={2} mr={1} justifyContent="center">

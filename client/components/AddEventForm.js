@@ -66,6 +66,7 @@ export class EventForm extends React.Component {
               <option value="NJ">NJ</option>
               <option value="PA">PA</option>
               <option value="FL">FL</option>
+              {/* add all states */}
             </select>
             <label>
               Zipcode:

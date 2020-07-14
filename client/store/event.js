@@ -8,9 +8,10 @@ const DELETE_EVENT = 'DELETE_EVENT'
 const GET_USER_EVENTS = 'GET_USER_EVENTS '
 const GET_USER_EVENTS_AS_HOST = 'GET_USER_EVENTS_AS_HOST'
 
-const getEvent = event => ({
+const getEvent = data => ({
   type: GET_ONE_EVENT,
-  event
+  event: data.event,
+  count: data.count
 })
 
 const getUserEvents = events => ({
@@ -25,7 +26,8 @@ const getUserEventsAsHost = events => ({
 
 const addInvites = invitees => ({
   type: ADD_INVITES,
-  invitees
+  members: invitees.members,
+  nonMembers: invitees.nonMembers
 })
 
 export const updateUserAttendance = (eventId, dec) => async dispatch => {
@@ -47,7 +49,7 @@ export const createInvites = (invitees, eventId) => {
   return async dispatch => {
     try {
       const {data} = await axios.post(`/api/events/invite`, invitees)
-      dispatch(addInvites(data))
+      dispatch(getEvent(data))
       history.push(`/events/${eventId}/guests`)
     } catch (err) {
       console.log(err)
@@ -59,6 +61,7 @@ export const fetchEvent = id => {
   return async dispatch => {
     try {
       const {data} = await axios(`/api/events/${id}`)
+      console.log('DATA', data)
       dispatch(getEvent(data))
     } catch (err) {
       console.log(err)
@@ -84,7 +87,7 @@ export const updateEvent = (event, id) => {
     try {
       const {data} = await axios.put(`/api/events/${id}/edit`, event)
       dispatch(getEvent(data))
-      // alert("Your changes have been made")
+      alert('Your changes have been made') //to be changed for better alert
       history.push(`/events/${id}/details`)
     } catch (err) {
       console.log(err)
@@ -121,6 +124,7 @@ const initialState = {
   myEvents: [],
   currEvent: {},
   invitees: [],
+  attendingCount: 0,
   organizer: false
 }
 
@@ -145,17 +149,14 @@ export default function(state = initialState, action) {
       return {...state, myEvents: eventHost}
     }
     case GET_ONE_EVENT: {
-      let isHost = false
+      // let isHost = false
       // if(action.event.users_events[0].isOrganizer === true) {
       //   isHost = true
       // }
-      return {...state, currEvent: action.event}
+      return {...state, currEvent: action.event, attendingCount: action.count}
     }
     case ADD_EVENT: {
       return {...state, currEvent: action.event}
-    }
-    case ADD_INVITES: {
-      return {...state, invitees: action.invitees}
     }
     default:
       return state
