@@ -87,7 +87,7 @@ const mapState = state => {
   return {
     user: state.user,
     currEvent: state.events.currEvent,
-    isOrganizer: state.events.organizer
+    isOrganizer: state.events.organizer //not fetching all the time
   }
 }
 

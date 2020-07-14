@@ -7,42 +7,58 @@ import {
   FormGroup,
   Button
 } from '@material-ui/core'
-import options from '../store/options'
+// import setOption from '../store/options'
+import getPoll from '../store/poll'
+
+// there are a million ideas in here. Feel free to delete what you want. I have started from scratch multiple times
 
 export class PollForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       title: '',
-      optionOne: '',
-      optionTwo: '',
-      optionThree: ''
+      options: []
+      // optionOne: '',
+      // optionTwo: '',
+      // optionThree: ''
     }
-
-    this.handleChange = this.handleChange.bind(this)
+    // this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+  // Options should be mapped thru
+
+  // handleChange(event) {
+  //   this.setState({
+  //     [event.target.name]: event.target.value
+  //   })
+  // }
 
   handleSubmit(event) {
     event.preventDefault()
-    const poll = this.props.poll
 
-    let newPoll = {
-      title: this.state.title,
-      optionOne: this.state.optionOne,
-      optionTwo: this.state.optionTwo,
-      optionThree: this.state.optionThree,
-      eventId: event.id
+    //the first way I tried to handle the submit is below
+    //     console.log('props', this.props)
+    // this.props.addOption(this.state);
+    // this.setState({
+    //     title: ''
+    // })
+    const option = {
+      title: event.target.title.value,
+      eventId: this.props.match.params.id
     }
-    this.props.setOption(newPoll) //fix
+
+    event.target.title.value = ''
+
+    this.props.setOptions(this.state)
+    this.setState({
+      options: [...this.state.options, option]
+    })
+    // eventId: event.id
   }
+
   render() {
+    console.log('propssss', this.props)
     return (
       <Container maxWidth="sm">
         <form onSubmit={this.handleSubmit}>
@@ -57,31 +73,32 @@ export class PollForm extends React.Component {
               />
             </FormControl>
             <FormControl>
-              <TextField
+              {/* INSTEAD OF MAPPING OPTION BY OPTION IT SHOULD BE MAPPED FROM OPTIONS STORED IN THE DB */}
+              {/* <TextField
                 onChange={this.handleChange}
                 value={this.state.description}
                 name="optionOne"
                 label="option 1"
                 variant="outlined"
-              />
+              /> */}
             </FormControl>
             <FormControl>
-              <TextField
-                onChange={this.handleChange}
-                value={this.state.description}
-                name="optionTwo"
-                label="option 2"
-                variant="outlined"
-              />
+              {/* <TextField
+              //   onChange={this.handleChange}
+              //   value={this.state.description}
+              //   name="optionTwo"
+              //   label="option 2"
+              //   variant="outlined"
+              // /> */}
             </FormControl>
             <FormControl>
-              <TextField
+              {/* <TextField
                 onChange={this.handleChange}
                 value={this.state.description}
                 name="optionThree"
                 label="option 3"
                 variant="outlined"
-              />
+              /> */}
             </FormControl>
           </FormGroup>
           <Button type="submit">Create Poll</Button>
@@ -103,4 +120,12 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(PollForm)
+// const mapDispatch = dispatch => {
+//   return {
+//     fetchPoll: poll => dispatch(getPoll(poll))
+//   }
+// }
+
+export default connect(null, mapDispatch)(PollForm)
+
+// export default connect(mapState, mapDispatch)(PollForm)
