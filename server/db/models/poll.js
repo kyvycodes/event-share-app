@@ -6,19 +6,12 @@ const Poll = db.define('poll', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  // autoClose: {
-  //   type: Sequelize.INTEGER
-  // },
   closed: {
     type: Sequelize.BOOLEAN,
     defaultValue: 'false'
   },
-  // creator: {
-  //   type: Sequelize.BOOLEAN
-  // },
-  showTotal: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: 'false'
+  dateClosed: {
+    type: Sequelize.DATE
   }
 })
 

@@ -4,9 +4,9 @@ const Task = require('./task')
 const Event = require('./event')
 const Poll = require('./poll')
 const Options = require('./options')
-const pollOptions = require('./pollOptions')
 const Invitee = require('./invitees')
 const Notification = require('./notification')
+const Answers = require('./userAnswers')
 
 Task.belongsTo(User)
 User.hasMany(Task)
@@ -25,7 +25,9 @@ Poll.belongsTo(Event)
 Poll.belongsTo(User)
 
 Options.belongsTo(Poll)
-Poll.belongsToMany(Options, {through: 'poll_options'})
+
+Options.belongsToMany(User, {through: 'answers'})
+User.belongsToMany(Options, {through: 'answers'})
 
 Invitee.belongsTo(Event)
 Event.hasMany(Invitee)
@@ -50,7 +52,7 @@ module.exports = {
   userEventRel,
   Poll,
   Options,
-  pollOptions,
   Invitee,
-  Notification
+  Notification,
+  Answers
 }

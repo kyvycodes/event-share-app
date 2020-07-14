@@ -5,10 +5,33 @@ const {Event, Invitee, Task, User, userEventRel} = require('../db/models')
 const main = require('./nodemailer')
 module.exports = router
 
+router.post('/add', async (req, res, next) => {
+  try {
+    const event = {
+      title: req.body.title,
+      description: req.body.description,
+      date: req.body.date,
+      address: req.body.address,
+      city: req.body.city,
+      state: req.body.state,
+      zipcode: req.body.zipcode,
+      startTime: req.body.startTime
+    }
+    const newEvent = await Event.create(event)
+    newEvent.addUser(req.user.id, {
+      through: {isOrganizer: true, attending: 'Attending'}
+    })
+    res.json(newEvent)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.get('/:id', async (req, res, next) => {
   try {
     const event = await Event.findOne({
       where: {id: req.params.id},
+
       include: [
         {
           model: userEventRel,
@@ -22,7 +45,15 @@ router.get('/:id', async (req, res, next) => {
         userEventRel
       ]
     })
-    res.json(event)
+
+    let count = await event.countUsers_events({
+      where: {
+        attending: 'Attending'
+      }
+    })
+    let eventAndCount = {event, count}
+
+    res.json(eventAndCount)
   } catch (err) {
     next(err)
   }
@@ -71,33 +102,12 @@ router.put('/:id/edit', async (req, res, next) => {
   }
 })
 
-router.post('/add', async (req, res, next) => {
-  try {
-    const event = {
-      title: req.body.title,
-      description: req.body.description,
-      date: req.body.date,
-      address: req.body.address,
-      city: req.body.city,
-      state: req.body.state,
-      zipcode: req.body.zipcode,
-      startTime: req.body.startTime
-    }
-    const newEvent = await Event.create(event)
-    newEvent.addUser(req.user.id, {
-      through: {isOrganizer: true, attending: 'Attending'}
-    })
-    res.json(newEvent)
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.post('/invite', async (req, res, next) => {
   try {
-    const emails = []
+    let eventId
     await Promise.all(
       req.body.map(async member => {
+        eventId = member.eventId
         const isUser = await User.findOne({
           where: {
             email: member.email
@@ -119,11 +129,24 @@ router.post('/invite', async (req, res, next) => {
           req.user.firstName,
           member.eventId
         )
-
-        emails.push(member)
       })
     )
-    res.json(emails)
+    const event = await Event.findByPk(eventId, {
+      //still not refreshing automatically
+      include: [
+        {
+          model: userEventRel,
+          where: {
+            userId: req.user.id
+          }
+        },
+        Invitee,
+        User,
+        Task,
+        userEventRel
+      ]
+    })
+    res.json(event)
   } catch (err) {
     next(err)
   }
@@ -131,7 +154,6 @@ router.post('/invite', async (req, res, next) => {
 
 router.put('/:eventId/updateUser', async (req, res, next) => {
   try {
-    console.log('req', req.params.eventId)
     const userEvent = await userEventRel.findOne({
       where: {
         userId: req.user.id,

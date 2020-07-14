@@ -7,7 +7,8 @@ import {
   Container,
   FormGroup,
   Button,
-  Typography
+  Typography,
+  Select
 } from '@material-ui/core'
 
 export class EditEvent extends Component {
@@ -45,14 +46,9 @@ export class EditEvent extends Component {
               <TextField
                 size="small"
                 type="title"
-                // onChange={this.handleChange}
-                // value={this.state.title}
                 name="title"
                 label={event.title}
                 variant="outlined"
-
-                // error={!!errorsTask.title}
-                // helperText={errorsTask.title}
               />
             </FormControl>
             <FormControl>
@@ -60,8 +56,6 @@ export class EditEvent extends Component {
 
               <TextField
                 size="small"
-                // onChange={this.handleChange}
-                // value={this.state.description}
                 name="description"
                 label={event.description}
                 variant="outlined"
@@ -85,6 +79,17 @@ export class EditEvent extends Component {
                 size="small"
                 name="city"
                 label={event.city}
+                type="city"
+                variant="outlined"
+              />
+            </FormControl>
+            <FormControl>
+              <Typography>State:</Typography>
+              {/* change to select button with all states */}
+              <TextField
+                size="small"
+                name="state"
+                label={event.state}
                 type="city"
                 variant="outlined"
               />
@@ -127,7 +132,7 @@ export class EditEvent extends Component {
                   shrink: true
                 }}
                 inputProps={{
-                  step: 300 // 5 min
+                  step: 300
                 }}
               />
             </FormControl>

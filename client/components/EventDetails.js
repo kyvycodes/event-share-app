@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {fetchEvent, deleteEvent} from '../store/event'
-import DropMenuList from './AdditionalForms/DropDownMenu'
 import {
   Paper,
   Grid,
@@ -13,7 +12,6 @@ import {
   Typography,
   Container
 } from '@material-ui/core'
-// import EventTabs from './EventTabs'
 import MapContainer from './MapContainer'
 
 export const formatDate = date => {
@@ -35,6 +33,7 @@ class EventDetails extends React.Component {
 
     const date = formatDate(this.props.currEvent.date || [])
     const eventId = this.props.match.params.id
+
     return (
       <div>
         <Paper className="pad-1">
@@ -76,6 +75,9 @@ class EventDetails extends React.Component {
                   {this.props.currEvent.description}
                 </Typography>
 
+                <Typography paragraph className="labelInfo">
+                  Confirmed Guests: {this.props.attending}
+                </Typography>
                 <Chip
                   color="primary"
                   style={{backgroundColor: '#32CD32'}}
@@ -112,8 +114,6 @@ class EventDetails extends React.Component {
                   To be determined
                 </Typography>
 
-                {/* <Typography className="labelInfo">Host By{}</Typography> */}
-
                 <Typography paragraph display="inline">
                   <Link to={`/profile/${1}`}>
                     {/* Host By {event.user.name} */}
@@ -121,6 +121,7 @@ class EventDetails extends React.Component {
                 </Typography>
                 <Typography paragraph display="inline">
                   Your RSVP
+                  {/* move yes/no here */}
                 </Typography>
 
                 <Box display="flex" mb={2} mr={1} justifyContent="center">
@@ -155,7 +156,8 @@ const mapState = state => {
   return {
     user: state.user,
     currEvent: state.events.currEvent,
-    isOrganizer: state.events.organizer
+    isOrganizer: state.events.organizer,
+    attending: state.events.attendingCount
   }
 }
 
