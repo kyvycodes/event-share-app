@@ -7,25 +7,37 @@ import {Link} from 'react-router-dom'
 export class InviteForm extends React.Component {
   constructor(props) {
     super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.state = {
-      invitees: []
+      invitees: [],
+      email: '',
+      name: ''
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
   handleSubmit(e) {
     e.preventDefault()
-    if (e.target.name.value === '' || e.target.email.value === '') {
+    if (this.state.email === '' || this.state.name === '') {
       swal('Please fill out name and email')
     }
     const invitee = {
-      name: e.target.name.value,
-      email: e.target.email.value,
+      name: this.state.name,
+      email: this.state.email,
       eventId: this.props.match.params.id
     }
-    e.target.name.value = ''
-    e.target.email.value = ''
-    this.setState({invitees: [...this.state.invitees, invitee]})
+    // e.target.name.value = ''
+    // e.target.email.value = ''
+    this.setState({
+      invitees: [...this.state.invitees, invitee],
+      email: '',
+      name: ''
+    })
   }
 
   removeFromList(i) {
@@ -54,11 +66,21 @@ export class InviteForm extends React.Component {
           <form onSubmit={this.handleSubmit}>
             <label>
               Name:
-              <input type="text" name="name" />
+              <input
+                type="text"
+                name="name"
+                onChange={this.handleChange}
+                value={this.state.name}
+              />
             </label>
             <label>
               Email
-              <input type="email" name="email" />
+              <input
+                type="email"
+                name="email"
+                onChange={this.handleChange}
+                value={this.state.email}
+              />
             </label>
             <br />
 

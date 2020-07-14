@@ -40,14 +40,15 @@ class EventTabs extends React.Component {
         <Box align="center" className="dropDownMenu">
           <DropMenuList
             eventId={this.props.currEvent.id}
+            eventLink="/edit"
             delete={this.props.deleteEvent}
           />
         </Box>
         <TabContext value={this.state.value}>
-          <AppBar position="static" color="secondary" style={{zIndex: 9000}}>
+          <AppBar position="static" color="secondary" style={{zIndex: 3000}}>
             <TabList
               onChange={this.handleChange.bind(this)}
-              // aria-label="simple tabs example"
+              aria-label="simple tabs example"
             >
               <Tab
                 label="Details"
@@ -102,8 +103,8 @@ class EventTabs extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    currEvent: state.events.currEvent
-    // isOrganizer: state.events.currEvent.user.users_events.isOrganizer
+    currEvent: state.events.currEvent,
+    isOrganizer: state.events.organizer
   }
 }
 

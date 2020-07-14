@@ -144,6 +144,7 @@ const mapDispatch = dispatch => {
       const email = evt.target.email.value
       const password = evt.target.password.value
       const eventId = id
+      localStorage.clear()
       dispatch(auth(email, password, null, null, formName, eventId))
     }
   }

@@ -35,18 +35,10 @@ class EventDetails extends React.Component {
 
     const date = formatDate(this.props.currEvent.date || [])
     const eventId = this.props.match.params.id
-    console.log('PROPS', this.props)
     return (
       <div>
         <Paper className="pad-1">
           <Grid container>
-            {/* <img
-                className="marginB-1"
-                style={{width: '100%', marginBottom: '1rem'}}
-                src="/partyglass.jpg"
-                alt="Party"
-              /> */}
-
             <Grid item xs={12} md={6}>
               <Container>
                 <MapContainer mb={2} />
@@ -75,10 +67,6 @@ class EventDetails extends React.Component {
                 <Typography paragraph className="labelInfo">
                   {this.props.currEvent.title}
                 </Typography>
-                <DropMenuList
-                  eventId={eventId}
-                  delete={this.props.deleteEvent}
-                />
                 <Chip
                   color="primary"
                   style={{backgroundColor: '#32CD32'}}
@@ -166,7 +154,8 @@ class EventDetails extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    currEvent: state.events.currEvent
+    currEvent: state.events.currEvent,
+    isOrganizer: state.events.organizer
   }
 }
 

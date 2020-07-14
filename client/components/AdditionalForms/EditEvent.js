@@ -7,10 +7,6 @@ import {
   Container,
   FormGroup,
   Button,
-  Select,
-  InputLabel,
-  MenuItem,
-  FormHelperText,
   Typography
 } from '@material-ui/core'
 
@@ -29,7 +25,6 @@ export class EditEvent extends Component {
           e.target.elements[i].value
       }
     }
-    console.log('EVENT', event)
     this.props.editEvent(event, this.props.match.params.id)
   }
 

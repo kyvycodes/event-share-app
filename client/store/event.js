@@ -120,7 +120,8 @@ const initialState = {
   events: [],
   myEvents: [],
   currEvent: {},
-  invitees: []
+  invitees: [],
+  organizer: false
 }
 
 export default function(state = initialState, action) {
@@ -144,6 +145,10 @@ export default function(state = initialState, action) {
       return {...state, myEvents: eventHost}
     }
     case GET_ONE_EVENT: {
+      let isHost = false
+      // if(action.event.users_events[0].isOrganizer === true) {
+      //   isHost = true
+      // }
       return {...state, currEvent: action.event}
     }
     case ADD_EVENT: {

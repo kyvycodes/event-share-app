@@ -25,9 +25,9 @@ import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp'
  */
 
 export const GuestList = props => {
-  // useEffect(() => {
-  //   props.getEvent(props.match.params.id)
-  // }, [])
+  useEffect(() => {
+    props.getEvent(props.match.params.id)
+  }, [])
   const users = props.users || []
   const nonUsers = props.nonUsers || []
   const eventId = props.match.params.id

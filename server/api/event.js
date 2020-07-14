@@ -9,7 +9,18 @@ router.get('/:id', async (req, res, next) => {
   try {
     const event = await Event.findOne({
       where: {id: req.params.id},
-      include: [Invitee, User, Task]
+      include: [
+        {
+          model: userEventRel,
+          where: {
+            userId: req.user.id
+          }
+        },
+        Invitee,
+        User,
+        Task,
+        userEventRel
+      ]
     })
     res.json(event)
   } catch (err) {
@@ -19,7 +30,6 @@ router.get('/:id', async (req, res, next) => {
 
 router.delete('/:id/delete', async (req, res, next) => {
   try {
-    console.log('REQ', req.params)
     const event = await Event.findByPk(req.params.id)
     event.destroy()
     const events = await userEventRel.findAll({

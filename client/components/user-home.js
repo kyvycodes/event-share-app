@@ -22,16 +22,7 @@ import {
   ListItemText,
   Box,
   Avatar,
-  Typography,
-  IconButton,
-  Grid,
-  Grow,
-  Popper,
-  Paper,
-  ClickAwayListener,
-  MenuItem,
-  MenuList,
-  makeStyles
+  Typography
 } from '@material-ui/core'
 import {useState} from 'react'
 
@@ -68,6 +59,7 @@ export const UserHome = props => {
   const {firstName, lastName, email, profile_pic} = props.user
   const events = props.user.events || []
   const tasks = props.user.tasks || []
+  const eventId = props.eventId
   console.log('PROPS', props)
   return (
     <div>
@@ -115,6 +107,7 @@ export const UserHome = props => {
                       </ListItemText>
                       <DropMenuList
                         eventId={ev.event.id}
+                        eventLink={`events/${ev.event.id}/edit`}
                         delete={props.deleteEvent}
                       />
 
@@ -160,33 +153,6 @@ export const UserHome = props => {
             )}
           </List>
         </Container>
-        {/* <Container maxWidth="sm">
-          <Box pt={2} display="flex" className="space-between">
-            <Typography color="primary" size="small" style={{fontSize: '14px'}}>
-              TASKS{' '}
-            </Typography>
-          </Box>
-          <Divider />
-          <List className="task-list">
-            {tasks.length > 0 ? (
-              tasks.map(task => (
-                <div key={task.id}>
-                  <ListItem alignItems="flex-start">
-                    <ListItemText
-                      secondary={task.description}
-                      primary={task.title}
-                    />
-                    <div className="align-left">
-                      <Button>Details</Button>
-                    </div>
-                  </ListItem>
-                </div>
-              ))
-            ) : (
-              <p>You Have No Current Tasks</p>
-            )}
-          </List>
-        </Container> */}
       </div>
     </div>
   )
