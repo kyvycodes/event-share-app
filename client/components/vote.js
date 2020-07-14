@@ -1,19 +1,13 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {Button} from '@material-ui/core'
+import {Button, Typography} from '@material-ui/core'
+import {getPoll} from '../store/poll'
+import {connect} from 'react-redux'
 
 // this is a template for user vote component that is being refactored
 class Vote extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      options: [
-        {name: 'cake', votes: 0},
-        {name: 'pudding', votes: 0},
-        {name: 'chocolate', votes: 0},
-        {name: 'cotton candy', votes: 0}
-      ]
-    }
+  componentDidMount() {
+    this.props.getPoll(this.props.match.params.pollId)
   }
 
   vote(i) {
@@ -28,26 +22,38 @@ class Vote extends React.Component {
   }
 
   render() {
+    console.log('PROPS', this.props)
+    const options = this.props.options || []
     return (
-      <>
-        <Link to="/poll">
-          <Button color="primary" variant="contained" size="small">
-            Create a Poll
-          </Button>
-        </Link>
-        <h1 className="heading">Vote!</h1>
+      <div>
+        <div className="profile">
+          <Typography color="primary" variant="h3" size="large">
+            Event Poll: {this.props.currPoll.title}
+          </Typography>
+        </div>
+        <h3 className="heading">Vote Now!</h3>
         <div className="options">
-          {this.state.options.map((opt, i) => (
-            <div key={i} className="option">
+          {options.map((opt, i) => (
+            <div key={opt.id} className="option">
               <div className="voteCount">{opt.votes}</div>
-              <div className="optionName">{opt.name}</div>
-              <button onClick={this.vote.bind(this, i)}>Click Here</button>
+              <div className="optionName">{opt.title}</div>
+              <button type="button" onClick={this.vote.bind(this, i)}>
+                Click Here
+              </button>
             </div>
           ))}
         </div>
-      </>
+      </div>
     )
   }
 }
 
-export default Vote
+const mapStateToProps = state => ({
+  currPoll: state.poll.poll,
+  options: state.poll.poll.options
+})
+const mapDispatchToProps = dispatch => ({
+  getPoll: id => dispatch(getPoll(id))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Vote)

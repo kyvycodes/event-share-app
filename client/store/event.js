@@ -152,6 +152,7 @@ export default function(state = initialState, action) {
       // if(action.event.users_events[0].isOrganizer === true) {
       //   isHost = true
       // }
+
       return {...state, currEvent: action.event, attendingCount: action.count}
     }
     case ADD_EVENT: {

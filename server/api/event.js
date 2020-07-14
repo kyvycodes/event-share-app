@@ -162,10 +162,10 @@ router.put('/:eventId/updateUser', async (req, res, next) => {
     })
     userEvent.attending = req.body.decision
     await userEvent.save()
-    const currEvent = await Event.findByPk(req.params.eventId, {
+    const event = await Event.findByPk(req.params.eventId, {
       include: [User, Invitee]
     })
-    res.json(currEvent)
+    res.json({event})
   } catch (err) {
     next(err)
   }

@@ -22,11 +22,12 @@ import {
 import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp'
 
 export const GuestList = props => {
-  // useEffect(() => {
-  //   props.getEvent(props.match.params.id)
-  // }, [])
-  const users = props.users || []
-  const nonUsers = props.nonUsers || []
+  useEffect(() => {
+    props.getEvent(props.match.params.id)
+  }, [])
+  const currEvent = props.currEvent || []
+  const users = props.currEvent.users || []
+  const nonUsers = currEvent.nonUsers || []
   const eventId = props.match.params.id
   return (
     <div>
@@ -38,6 +39,8 @@ export const GuestList = props => {
           </Box>
           <Divider />
           <List className="task-list">
+            {/* { currEvent.length > 0 ? ( */}
+            {/* <div> */}
             {users.length !== 0 ? (
               users.map(user => {
                 if (user.id === props.user.id) {
@@ -181,6 +184,10 @@ export const GuestList = props => {
             ) : (
               <p>No pending invitations</p>
             )}
+            {/* </div>
+          ) :
+           ("")
+            } */}
           </List>
           <Divider />
         </Container>
@@ -195,9 +202,9 @@ export const GuestList = props => {
 const mapState = state => {
   return {
     user: state.user,
-    currEvent: state.events.currEvent,
-    nonUsers: state.events.currEvent.invitees,
-    users: state.events.currEvent.users
+    currEvent: state.events.currEvent
+    // // nonUsers: state.events.currEvent.invitees,
+    // users: state.events.currEvent.users
   }
 }
 

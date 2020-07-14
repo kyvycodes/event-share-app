@@ -31,6 +31,7 @@ export class InviteForm extends React.Component {
       email: this.state.email,
       eventId: this.props.match.params.id
     }
+
     this.setState({
       invitees: [...this.state.invitees, invitee],
       email: '',
