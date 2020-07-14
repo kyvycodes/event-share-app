@@ -33,6 +33,7 @@ class EventDetails extends React.Component {
 
     const date = formatDate(this.props.currEvent.date || [])
     const eventId = this.props.match.params.id
+
     return (
       <div>
         <Paper className="pad-1">
@@ -74,6 +75,9 @@ class EventDetails extends React.Component {
                   {this.props.currEvent.description}
                 </Typography>
 
+                <Typography paragraph className="labelInfo">
+                  Confirmed Guests: {this.props.attending}
+                </Typography>
                 <Chip
                   color="primary"
                   style={{backgroundColor: '#32CD32'}}
@@ -152,7 +156,8 @@ const mapState = state => {
   return {
     user: state.user,
     currEvent: state.events.currEvent,
-    isOrganizer: state.events.organizer
+    isOrganizer: state.events.organizer,
+    attending: state.events.attendingCount
   }
 }
 

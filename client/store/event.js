@@ -61,7 +61,6 @@ export const fetchEvent = id => {
   return async dispatch => {
     try {
       const {data} = await axios(`/api/events/${id}`)
-      console.log('DATA', data)
       dispatch(getEvent(data))
     } catch (err) {
       console.log(err)
