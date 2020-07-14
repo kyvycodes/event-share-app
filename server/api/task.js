@@ -71,3 +71,40 @@ router.put('/:id', async (req, res, next) => {
     next(error)
   }
 })
+//delete task
+router.delete('/:taskId', async (req, res, next) => {
+  try {
+    const taskId = req.params.taskId
+    const taskToDelete = await Task.findByPk(taskId)
+    const deleted = await taskToDelete.destroy()
+    if (deleted) {
+      res.sendStatus(204)
+    } else {
+      const error = new Error(
+        'Failed to delete task to DELETE /api/tasks/:taskId'
+      )
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+//update task
+router.put('/:taskId/edith', async (req, res, next) => {
+  console.log('UPDATED', req.body)
+  try {
+    const taskId = req.params.taskId
+    const edithtask = await Task.findByPk(taskId)
+    const updatedTask = await edithtask.update(req.body)
+    console.log('UPDATED', updatedTask)
+    if (updatedTask) {
+      res.status(200).json(updatedTask)
+    } else {
+      const error = new Error('Failed to PUT /api/key/:taskId')
+      error.status = 500
+      throw error
+    }
+  } catch (error) {
+    next(error)
+  }
+})

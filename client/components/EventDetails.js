@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
-import {fetchEvent} from '../store/event'
+import {fetchEvent, deleteEvent} from '../store/event'
+import DropMenuList from './AdditionalForms/DropDownMenu'
 import {
   Paper,
   Grid,
@@ -15,7 +16,7 @@ import {
 // import EventTabs from './EventTabs'
 import MapContainer from './MapContainer'
 
-const formatDate = date => {
+export const formatDate = date => {
   return {
     day: `${date[8]}${date[9]}`,
     month: `${date[5]}${date[6]}`,
@@ -24,7 +25,7 @@ const formatDate = date => {
 }
 class EventDetails extends React.Component {
   componentDidMount() {
-    this.props.getEvent(this.props.match.params.id)
+    // this.props.getEvent(this.props.match.params.id)
   }
 
   render() {
@@ -38,17 +39,26 @@ class EventDetails extends React.Component {
       <div>
         <Paper className="pad-1">
           <Grid container>
-            <Grid container item xs={12} md={6}>
-              <img
-                className="marginB-1"
-                style={{width: '100%', marginBottom: '1rem'}}
-                src="/partyglass.jpg"
-                alt="Party"
-              />
-            </Grid>
-
             <Grid item xs={12} md={6}>
               <Container>
+                <MapContainer mb={2} />
+                <Grid item xs={6}>
+                  <Typography
+                    component="span"
+                    variant="body2"
+                    className="inline"
+                    color="textPrimary"
+                  >
+                    <a
+                      href={getDirections}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                      className="direcions"
+                    >
+                      Get Directions
+                    </a>
+                  </Typography>
+                </Grid>
                 <Chip
                   color="primary"
                   style={{backgroundColor: '#32CD32'}}
@@ -57,7 +67,6 @@ class EventDetails extends React.Component {
                 <Typography paragraph className="labelInfo">
                   {this.props.currEvent.title}
                 </Typography>
-
                 <Chip
                   color="primary"
                   style={{backgroundColor: '#32CD32'}}
@@ -105,44 +114,13 @@ class EventDetails extends React.Component {
 
                 {/* <Typography className="labelInfo">Host By{}</Typography> */}
 
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className="inline"
-                      color="textPrimary"
-                    >
-                      Map
-                    </Typography>
-                  </Grid>
-
-                  <Grid item xs={6}>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className="inline"
-                      color="textPrimary"
-                    >
-                      <a
-                        href={getDirections}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        className="direcions"
-                      >
-                        Get Directions
-                      </a>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={6} />
-                </Grid>
-
-                <MapContainer mb={2} />
-
                 <Typography paragraph display="inline">
                   <Link to={`/profile/${1}`}>
                     {/* Host By {event.user.name} */}
                   </Link>
+                </Typography>
+                <Typography paragraph display="inline">
+                  Your RSVP
                 </Typography>
 
                 <Box display="flex" mb={2} mr={1} justifyContent="center">
@@ -176,13 +154,15 @@ class EventDetails extends React.Component {
 const mapState = state => {
   return {
     user: state.user,
-    currEvent: state.events.currEvent
+    currEvent: state.events.currEvent,
+    isOrganizer: state.events.organizer
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    getEvent: id => dispatch(fetchEvent(id))
+    getEvent: id => dispatch(fetchEvent(id)),
+    deleteEvent: eventId => dispatch(deleteEvent(eventId))
   }
 }
 

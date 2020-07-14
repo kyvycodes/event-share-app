@@ -16,9 +16,10 @@ const fetchAllNotifications = suggestions => ({
 const fetchDeleteSuggestion = id => ({type: DELETE_SUGGESTION, id})
 export const resetAllNotifications = () => ({type: RESET_NOTIFICATIONS})
 
-export const getAllNotifications = id => async dispatch => {
+export const getAllNotifications = userPartiesObj => async dispatch => {
+  console.log('userPartiesObj', userPartiesObj)
   try {
-    const res = await axios.get(`/api/notifications/${id}`)
+    const res = await axios.put(`/api/notifications/`, userPartiesObj)
     dispatch(fetchAllNotifications(res.data))
   } catch (err) {
     console.error(err)
