@@ -33,116 +33,134 @@ import {
   MenuList,
   makeStyles
 } from '@material-ui/core'
+import {useState} from 'react'
 
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 
-export class UserHome extends React.Component {
-  componentDidMount() {
-    this.props.getUser()
-    this.props.getUserEvents('upcoming')
-    this.props.getAllNotifications(1)
-  }
+export const UserHome = props => {
+  // effect functions can't be async, so declare the
+  // async function inside the effect, then call it
+  const [setValue, handleValue] = useState(true)
+  /*
+  useEffect every time a  value change inside the array the useEffect will excute again
+  */
+  useEffect(
+    () => {
+      async function fetchNotifications() {
+        await props.getUser()
+        await props.getUserEvents('upcoming')
+        if (props.user.userParties) {
+          const partiesOrganizedByUser = await props.user.userParties
+          const userPartiesObj = {
+            userPartiesArray: partiesOrganizedByUser
+          }
+          props.getAllNotifications(userPartiesObj)
+        }
+        if (!props.user.userParties) {
+          handleValue(false)
+        }
+      }
+      fetchNotifications()
+    },
+    [setValue]
+  )
 
-  render() {
-    const {firstName, lastName, email, profile_pic} = this.props.user
-    const events = this.props.user.events || []
-    const tasks = this.props.user.tasks || []
-    console.log('PROPS', this.props)
-    return (
+  const {firstName, lastName, email, profile_pic} = props.user
+  const events = props.user.events || []
+  const tasks = props.user.tasks || []
+  console.log('PROPS', props)
+  return (
+    <div>
+      <div className="profile">
+        <img className="img-profile " src={profile_pic} />
+        <h4>
+          {firstName} {lastName}
+        </h4>
+        <p>{email}</p>
+        <Link to="/events/add">
+          <Button variant="contained" color="primary" size="small">
+            Create Event
+          </Button>{' '}
+        </Link>
+        <br />
+        <br />
+
+        <ButtonGroup color="primary" aria-label="outlined primary button group">
+          <Button onClick={() => props.getUserEvents('upcoming')}>
+            Upcoming
+          </Button>
+          <Button onClick={() => props.getUserEvents('past')}>
+            Past Events
+          </Button>
+        </ButtonGroup>
+      </div>
       <div>
-        <div className="profile">
-          <img className="img-profile " src={profile_pic} />
-          <h4>
-            {firstName} {lastName}
-          </h4>
-          <p>{email}</p>
-          <Link to="/events/add">
-            <Button variant="contained" color="primary" size="small">
-              Create Event
-            </Button>{' '}
-          </Link>
+        <Container maxWidth="sm">
           <br />
-          <br />
+          <Box>
+            <Typography color="primary">My Events</Typography>
+          </Box>
+          <Divider />
+          <List className="task-list">
+            {props.myEvents.length > 0 ? (
+              props.myEvents.map(ev => {
+                const date = formatDate(ev.event.date)
+                return (
+                  <div key={ev.event.id}>
+                    <ListItem alignItems="flex-start">
+                      <ListItemText
+                        secondary={`${date.month}-${date.day}-20${date.year}`}
+                      >
+                        {ev.event.title}
+                      </ListItemText>
+                      <DropMenuList
+                        eventId={ev.event.id}
+                        delete={props.deleteEvent}
+                      />
 
-          <ButtonGroup
-            color="primary"
-            aria-label="outlined primary button group"
-          >
-            <Button onClick={() => this.props.getUserEvents('upcoming')}>
-              Upcoming
-            </Button>
-            <Button onClick={() => this.props.getUserEvents('past')}>
-              Past Events
-            </Button>
-          </ButtonGroup>
-        </div>
-        <div>
-          <Container maxWidth="sm">
-            <br />
-            <Box>
-              <Typography color="primary">My Events</Typography>
-            </Box>
-            <Divider />
-            <List className="task-list">
-              {this.props.myEvents.length > 0 ? (
-                this.props.myEvents.map(ev => {
-                  const date = formatDate(ev.event.date)
-                  return (
-                    <div key={ev.event.id}>
-                      <ListItem alignItems="flex-start">
-                        <ListItemText
-                          secondary={`${date.month}-${date.day}-20${date.year}`}
-                        >
-                          {ev.event.title}
-                        </ListItemText>
-                        <DropMenuList
-                          eventId={ev.event.id}
-                          delete={this.props.deleteEvent}
-                        />
-
-                        <div>
-                          <ListItemText secondary={ev.attending}>
-                            <Link to={`events/${ev.event.id}`}>DETAILS</Link>
-                          </ListItemText>
-                        </div>
-                      </ListItem>
-                    </div>
-                  )
-                })
-              ) : (
-                <p>You Have No Events</p>
-              )}
-            </List>
-            <br />
-            <Box>
-              <Typography color="primary">My Friend's Events</Typography>
-            </Box>
-            <Divider />
-            <List className="task-list">
-              {this.props.events.length > 0 ? (
-                this.props.events.map(ev => {
-                  const date = formatDate(ev.event.date)
-                  return (
-                    <div key={ev.event.id}>
-                      <ListItem alignItems="flex-start">
-                        <ListItemText
-                          secondary={`${date.month}-${date.day}-20${date.year}`}
-                        >
-                          {ev.event.title}
-                        </ListItemText>
-                        <div className="float-left">
+                      <div>
+                        <ListItemText secondary={ev.attending}>
                           <Link to={`events/${ev.event.id}`}>DETAILS</Link>
-                        </div>
-                      </ListItem>
-                    </div>
-                  )
-                })
-              ) : (
-                <p>You Have No Events</p>
-              )}
-            </List>
-          </Container>
-          {/* <Container maxWidth="sm">
+                        </ListItemText>
+                      </div>
+                    </ListItem>
+                  </div>
+                )
+              })
+            ) : (
+              <p>You Have No Events</p>
+            )}
+          </List>
+          <br />
+          <Box>
+            <Typography color="primary">My Friend's Events</Typography>
+          </Box>
+          <Divider />
+          <List className="task-list">
+            {props.events.length > 0 ? (
+              props.events.map(ev => {
+                const date = formatDate(ev.event.date)
+                return (
+                  <div key={ev.event.id}>
+                    <ListItem alignItems="flex-start">
+                      <ListItemText
+                        secondary={`${date.month}-${date.day}-20${date.year}`}
+                      >
+                        {ev.event.title}
+                      </ListItemText>
+                      <div className="float-left">
+                        <Link to={`events/${ev.event.id}`}>DETAILS</Link>
+                      </div>
+                    </ListItem>
+                  </div>
+                )
+              })
+            ) : (
+              <p>You Have No Events</p>
+            )}
+          </List>
+        </Container>
+        {/* <Container maxWidth="sm">
           <Box pt={2} display="flex" className="space-between">
             <Typography color="primary" size="small" style={{fontSize: '14px'}}>
               TASKS{' '}
@@ -169,10 +187,9 @@ export class UserHome extends React.Component {
             )}
           </List>
         </Container> */}
-        </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 /**

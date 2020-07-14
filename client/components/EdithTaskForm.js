@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {setTask} from '../store/task'
+import {setTask, editTaskThunk} from '../store/task'
 import {
   TextField,
   FormControl,
@@ -13,7 +13,7 @@ import {
   FormHelperText
 } from '@material-ui/core'
 
-export class AddTask extends React.Component {
+export class EdithTaskForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -40,21 +40,28 @@ export class AddTask extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    const eventId = this.props.match.params.id
-    let newTask = {
+    const taskId = this.props.match.params.taskId
+    //const eventId = this.props.match.params.eventId
+
+    let edithTask = {
       title: this.state.title,
       description: this.state.description,
       category: this.state.category,
-      eventId: eventId
+      eventId: this.props.match.params.id
     }
-    await this.props.setTask(newTask)
-    if (!this.state.errorsTask.title) {
-      this.props.history.push(`/events/${eventId}/tasks`)
-    }
+    //console.log('EVENTID', edithTask.eventId)
+    //console.log('PROPS', edithTask)
+    //console.log('ID', taskId)
+    await this.props.editTask(taskId, edithTask)
+    //console.log('****errorsTask', this.state.errorsTask.title)
+    // if (!this.state.errorsTask.title) {
+    //   this.props.history.push(`/events/${eventId}/tasks`)
+    // }
   }
 
   render() {
     const {errorsTask} = this.state
+    const {task} = this.state
     return (
       <Container maxWidth="sm">
         <form
@@ -63,7 +70,7 @@ export class AddTask extends React.Component {
           noValidate
           autoComplete="off"
         >
-          <h3 align="center">Create a Task</h3>
+          <h3 align="center">Edith Task</h3>
           <FormGroup>
             <FormControl>
               <TextField
@@ -71,7 +78,7 @@ export class AddTask extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.title}
                 name="title"
-                label="Title Name *"
+                label="Edith Name *"
                 variant="outlined"
                 error={!!errorsTask.title}
                 helperText={errorsTask.title}
@@ -82,7 +89,7 @@ export class AddTask extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.description}
                 name="description"
-                label="Description"
+                label="Edith Description"
                 variant="outlined"
               />
             </FormControl>
@@ -94,7 +101,7 @@ export class AddTask extends React.Component {
               <Select
                 labelId="demo-simple-select-filled-label"
                 id="demo-simple-select-filled"
-                label="Category"
+                label="Edith Category"
                 name="category"
                 value={this.state.category}
                 onChange={this.handleChange}
@@ -111,8 +118,9 @@ export class AddTask extends React.Component {
             type="submit"
             variant="contained"
             color="secondary"
+            onClick={this.handleSubmit}
           >
-            Add to tasks
+            Update task
           </Button>
         </form>
       </Container>
@@ -122,16 +130,14 @@ export class AddTask extends React.Component {
 
 const mapState = state => {
   return {
-    user: state.user,
-    email: state.user.email,
-    errorsTask: state.task.errorsTask
+    task: state.task
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    setTask: task => dispatch(setTask(task))
+    editTask: (taskId, task) => dispatch(editTaskThunk(taskId, task))
   }
 }
 
-export default connect(mapState, mapDispatch)(AddTask)
+export default connect(mapState, mapDispatch)(EdithTaskForm)
