@@ -3,6 +3,7 @@ const Op = Sequelize.Op
 const router = require('express').Router()
 const {Event, Invitee, Task, User, userEventRel} = require('../db/models')
 const main = require('./nodemailer')
+const inviteEmail = require('../../client/components/AdditionalForms/InviteEmail')
 module.exports = router
 
 router.post('/add', async (req, res, next) => {
@@ -177,12 +178,13 @@ router.post('/invite', async (req, res, next) => {
           }
         }
         if (isNew[1] || isMemberAlready) {
-          await main(
-            member.email,
+          const emailTemplate = inviteEmail(
             member.name,
             req.user.firstName,
             member.eventId
           )
+          console.log(emailTemplate)
+          await main(member.email, req.user.firstName, emailTemplate)
         }
       })
     )
