@@ -96,7 +96,15 @@ router.put('/:id/edit', async (req, res, next) => {
       }
     }
     await event.save()
-    res.json(event)
+
+    let count = await event.countUsers_events({
+      where: {
+        attending: 'Attending'
+      }
+    })
+    let eventAndCount = {event, count}
+
+    res.json(eventAndCount)
   } catch (err) {
     next(err)
   }
