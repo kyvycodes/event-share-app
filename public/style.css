@@ -231,3 +231,7 @@ section {
     max-width: '36ch';
   }
 }
+
+.poll-form-yourOption {
+  margin-left: 50px;
+}
