@@ -159,7 +159,7 @@ const mapState = state => {
     user: state.user,
     currEvent: state.events.currEvent,
     isOrganizer: state.events.organizer,
-    attending: state.events.attendingCount
+    attending: state.events.RSVPCount.areAttending
   }
 }
 

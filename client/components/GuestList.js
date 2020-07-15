@@ -34,13 +34,19 @@ export const GuestList = props => {
       <div>
         <Container maxWidth="sm">
           <Box pt={2} display="flex" className="space-between">
+            <Button color="primary">
+              Guests That Confirmed: {props.attending.areAttending}
+            </Button>
+            <Button color="primary">
+              Guests That Declined: {props.attending.notAttending}
+            </Button>
+          </Box>
+          <Box pt={2} display="flex" className="space-between">
             <Button color="primary">Invited To Event</Button>
             <Button color="primary">RSVP'd</Button>
           </Box>
           <Divider />
           <List className="task-list">
-            {/* { currEvent.length > 0 ? ( */}
-            {/* <div> */}
             {users.length !== 0 ? (
               users.map(user => {
                 if (user.id === props.user.id) {
@@ -184,10 +190,6 @@ export const GuestList = props => {
             ) : (
               <p>No pending invitations</p>
             )}
-            {/* </div>
-          ) :
-           ("")
-            } */}
           </List>
           <Divider />
         </Container>
@@ -202,7 +204,8 @@ export const GuestList = props => {
 const mapState = state => {
   return {
     user: state.user,
-    currEvent: state.events.currEvent
+    currEvent: state.events.currEvent,
+    attending: state.events.RSVPCount
     // // nonUsers: state.events.currEvent.invitees,
     // users: state.events.currEvent.users
   }
