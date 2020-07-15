@@ -46,29 +46,29 @@ router.get('/:id', async (req, res, next) => {
       ]
     })
 
-    let areAttending = await event.countUsers_events({
+    const areAttending = await event.countUsers_events({
       where: {
         attending: 'Attending'
       }
     })
-    let notAttending = await event.countUsers_events({
+    const notAttending = await event.countUsers_events({
       where: {
         attending: 'Declined'
       }
     })
 
-    let arePending = await event.countUsers_events({
+    const arePending = await event.countUsers_events({
       where: {
         attending: 'Pending'
       }
     })
 
-    let count = {
+    const count = {
       areAttending,
       notAttending,
       arePending
     }
-    let eventAndCount = {event, count}
+    const eventAndCount = {event, count}
 
     res.json(eventAndCount)
   } catch (err) {
@@ -114,12 +114,29 @@ router.put('/:id/edit', async (req, res, next) => {
     }
     await event.save()
 
-    let count = await event.countUsers_events({
+    const areAttending = await event.countUsers_events({
       where: {
         attending: 'Attending'
       }
     })
-    let eventAndCount = {event, count}
+    const notAttending = await event.countUsers_events({
+      where: {
+        attending: 'Declined'
+      }
+    })
+
+    const arePending = await event.countUsers_events({
+      where: {
+        attending: 'Pending'
+      }
+    })
+
+    const count = {
+      areAttending,
+      notAttending,
+      arePending
+    }
+    const eventAndCount = {event, count}
 
     res.json(eventAndCount)
   } catch (err) {
@@ -160,17 +177,16 @@ router.post('/invite', async (req, res, next) => {
           }
         }
         if (isNew[1] || isMemberAlready) {
-          // await main(
-          //   member.email,
-          //   member.name,
-          //   req.user.firstName,
-          //   member.eventId
-          // )
+          await main(
+            member.email,
+            member.name,
+            req.user.firstName,
+            member.eventId
+          )
         }
       })
     )
     const event = await Event.findByPk(eventId, {
-      //still not refreshing automatically
       include: [
         {
           model: userEventRel,
@@ -185,13 +201,30 @@ router.post('/invite', async (req, res, next) => {
       ]
     })
 
-    let count = await event.countUsers_events({
+    const areAttending = await event.countUsers_events({
       where: {
         attending: 'Attending'
       }
     })
+    const notAttending = await event.countUsers_events({
+      where: {
+        attending: 'Declined'
+      }
+    })
 
-    let eventAndCount = {event, count}
+    const arePending = await event.countUsers_events({
+      where: {
+        attending: 'Pending'
+      }
+    })
+
+    const count = {
+      areAttending,
+      notAttending,
+      arePending
+    }
+    const eventAndCount = {event, count}
+
     res.json(eventAndCount)
   } catch (err) {
     next(err)
