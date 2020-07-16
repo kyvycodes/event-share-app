@@ -235,3 +235,14 @@ section {
 .poll-form-yourOption {
   margin-left: 50px;
 }
+
+/*FOR EDIT/CREATE EVENT */
+.twoInputFields {
+  max-width: '36ch';
+  justify-content: 'center';
+}
+
+/*FOR EVENT NAV BAR */
+.eventNavBar {
+  display: flex;
+}

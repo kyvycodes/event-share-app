@@ -99,6 +99,7 @@ router.delete('/:id/delete', async (req, res, next) => {
         }
       ]
     })
+    console.log('EVENT', events)
     res.json(events)
   } catch (err) {
     next(err)
