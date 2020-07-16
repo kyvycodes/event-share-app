@@ -27,8 +27,8 @@ class EventTabs extends React.Component {
     const eventId = this.props.match.params.id
     const currEvent = this.props.currEvent || []
     return (
-      <div className="eventNavBar">
-        <div>
+      <div>
+        <div display="flex">
           <Box display="flex" justifyContent="center">
             <Typography
               align="center"
