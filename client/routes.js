@@ -16,6 +16,7 @@ import {
 } from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
+import {FeedbackForm} from './components'
 
 /**
  * COMPONENT
@@ -49,6 +50,7 @@ class Routes extends Component {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/events/:id/guests" component={Login} />
         <Route exact path="/events/:id/signup" component={Signup} />
+        <Route exact path="/FeedbackForm" component={FeedbackForm} />
 
         {/* Displays our Login component as a fallback */}
         <Route component={LandingPage} />
