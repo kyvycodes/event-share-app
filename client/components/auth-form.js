@@ -13,6 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Typography from '@material-ui/core/Typography'
 import {makeStyles} from '@material-ui/core/styles'
 import Container from '@material-ui/core/Container'
+import Confetti from 'react-confetti'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -32,9 +33,6 @@ const useStyles = makeStyles(theme => ({
   submit: {
     backgroundColor: 'black',
     margin: theme.spacing(3, 0, 2)
-  },
-  main: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'
   }
 }))
 
@@ -46,6 +44,7 @@ export default function SignUp(props) {
   const classes = useStyles()
   return (
     <Container component="main" maxWidth="xs" className={classes.main}>
+      <Confetti />
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

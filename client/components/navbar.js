@@ -14,7 +14,8 @@ import {
   ListItemText,
   Typography,
   Button,
-  Badge
+  Badge,
+  Box
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import NotificationsIcon from '@material-ui/icons/Notifications'
@@ -57,7 +58,11 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
 
   return (
     <div className={classes.root}>
-      <AppBar className="" position="static">
+      <AppBar
+        className=""
+        position="static"
+        style={{backgroundColor: '#74D2CA'}}
+      >
         <Toolbar>
           <Typography variant="h5" className={classes.logoText}>
             <Button component={RouterLink} to="/home" color="inherit">
@@ -65,7 +70,8 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
             </Button>
           </Typography>
 
-          <IconButton
+          {/* Notification was moved into logged in conditional KH */}
+          {/* <IconButton
             edge="start"
             component={RouterLink}
             to="/notifications"
@@ -79,12 +85,13 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
             >
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
 
           <IconButton
             edge="start"
             color="inherit"
             aria-label="menu"
+            style={{color: '#000000'}}
             onClick={() => setOpen(true)}
           >
             <MenuIcon />
@@ -103,7 +110,28 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
           {/* The navbar will show these links after you log in */}
           {isLoggedIn ? (
             <div>
+              <IconButton
+                edge="start"
+                component={RouterLink}
+                to="/notifications"
+                color="inherit"
+                aria-label="menu"
+              >
+                <Badge
+                  badgeContent={notifications.suggestions.length}
+                  color="secondary"
+                  className={classes.notificationIcon}
+                >
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
               <ListItem button component={RouterLink} to="/home">
+                <ListItemText primary="Profile" />
+              </ListItem>
+
+              <ListItem button component={RouterLink} to="/home">
+                {' '}
+                {/* this home button should take you back to HomePage KH */}
                 <ListItemText primary="Home" />
               </ListItem>
 
@@ -114,12 +142,46 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
           ) : (
             <div>
               {/* The navbar will show these links before you log in */}
-              <ListItem button component={RouterLink} to="/login">
+              {/* Create Component */}
+              <Box className="paddinggg">
+                <ListItem button component={RouterLink} to="/">
+                  {' '}
+                  {/* Create Component */}
+                  <ListItemText primary="WHY EVENTSHARE?" />
+                </ListItem>
+              </Box>
+
+              <Box className="paddinggg">
+                <ListItem button component={RouterLink} to="/">
+                  {' '}
+                  {/* Create Component */}
+                  <ListItemText primary="ABOUT US" />
+                </ListItem>
+              </Box>
+
+              <Box className="paddinggg">
+                <ListItem button component={RouterLink} to="/">
+                  {' '}
+                  {/* Create Component and/or seed with dummy data*/}
+                  <ListItemText primary="TESTIMONIALS" />
+                </ListItem>
+              </Box>
+
+              <Box className="paddinggg">
+                <ListItem button component={RouterLink} to="/">
+                  {' '}
+                  {/* Create Component / form contact us */}
+                  <ListItemText primary="FEEDBACK" />
+                </ListItem>
+              </Box>
+
+              {/* <ListItem button component={RouterLink} to="/login">
                 <ListItemText primary="Login" />
               </ListItem>
+
               <ListItem button component={RouterLink} to="/signup">
                 <ListItemText primary="Sign Up" />
-              </ListItem>
+              </ListItem> */}
             </div>
           )}
         </List>
