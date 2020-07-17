@@ -19,6 +19,7 @@ export class EditEvent extends Component {
     this.state = {
       state: 'NY'
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -75,41 +76,37 @@ export class EditEvent extends Component {
                 rowsMax={4}
               />
             </FormControl>
-            <Box pt={0} display="flex" className="form">
-              <FormControl>
-                <Typography>Date</Typography>
+            <FormControl>
+              <Typography>Date</Typography>
 
-                <TextField
-                  size="small"
-                  name="date"
-                  type="date"
-                  variant="outlined"
-                  label={date}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  style={{maxWidth: '19ch'}}
-                />
-              </FormControl>
-              <FormControl>
-                <Typography>Time</Typography>
+              <TextField
+                size="small"
+                name="date"
+                type="date"
+                variant="outlined"
+                label={date}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <Typography>Time</Typography>
 
-                <TextField
-                  style={{maxWidth: '16ch'}}
-                  size="small"
-                  name="time"
-                  type="time"
-                  variant="outlined"
-                  label={event.startTime}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  inputProps={{
-                    step: 300
-                  }}
-                />
-              </FormControl>
-            </Box>
+              <TextField
+                size="small"
+                name="time"
+                type="time"
+                variant="outlined"
+                label={event.startTime}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                inputProps={{
+                  step: 300
+                }}
+              />
+            </FormControl>
             <FormControl>
               <Typography>Address</Typography>
 

@@ -39,6 +39,7 @@ export class EventForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     const event = isEmpty(e)
+    console.log('EVENT', event)
     if (Object.keys(event).length < 9) {
       swal('', 'Please fill out all input fields', 'error') // to be changed
     } else {
@@ -74,37 +75,33 @@ export class EventForm extends React.Component {
                 rowsMax={4}
               />
             </FormControl>
-            <Box pt={0} display="flex" className="form">
-              <FormControl>
-                <TextField
-                  size="small"
-                  name="date"
-                  label="Date *"
-                  type="date"
-                  variant="outlined"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  style={{maxWidth: '18ch'}}
-                />
-              </FormControl>
-              <FormControl>
-                <TextField
-                  style={{maxWidth: '15ch'}}
-                  size="small"
-                  name="time"
-                  label="Time *"
-                  type="time"
-                  variant="outlined"
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  inputProps={{
-                    step: 300
-                  }}
-                />
-              </FormControl>
-            </Box>
+            <FormControl>
+              <TextField
+                size="small"
+                name="date"
+                label="Date *"
+                type="date"
+                variant="outlined"
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+            </FormControl>
+            <FormControl>
+              <TextField
+                size="small"
+                name="time"
+                label="Time *"
+                type="time"
+                variant="outlined"
+                InputLabelProps={{
+                  shrink: true
+                }}
+                inputProps={{
+                  step: 300
+                }}
+              />
+            </FormControl>
             <FormControl>
               <TextField
                 size="small"
