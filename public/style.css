@@ -242,7 +242,14 @@ section {
   justify-content: 'center';
 }
 
-/*FOR EVENT NAV BAR */
-.eventNavBar {
+/*FOR PHOTO FEED */
+.photos {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.MuiCardHeader-root {
+  max-height: '20ch';
 }
