@@ -72,16 +72,17 @@ const Home = () => {
       </Paper>
 
       <Container>
-        <Typography
+        {/* <img src="https://media.giphy.com/media/frLwjfFvMzopoghNqI/giphy.gif" width="800"/> */}
+        {/* <Typography
           className={classes.subTitle}
           variant="h4"
           component="h2"
           gutterBottom
         >
           Discover
-        </Typography>
+        </Typography> */}
 
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           <Grid item xs={6} md={3}>
             <img
               src="hero-background.jpg"
@@ -110,7 +111,7 @@ const Home = () => {
               style={{width: '100%', marginBottom: '1rem'}}
             />
           </Grid>
-        </Grid>
+        </Grid> */}
       </Container>
     </>
   )

@@ -28,15 +28,14 @@ export default function Footer() {
   const classes = useStyles()
 
   return (
-    <div className={classes.root} className="wrapper">
-      <CssBaseline />
+    <div className={classes.root} className="push">
       <Container
         component="main"
         className={classes.main}
-        className="push"
         maxWidth="sm"
         style={{backgroundColor: '#74D2CA'}}
       >
+        {/* I had the footer in the right position and then got tired and messed something up, check out: https://css-tricks.com/couple-takes-sticky-footer/ */}
         <footer className="footer">
           <Typography variant="h5" component="h5" gutterBottom>
             {/* Sticky footer */}

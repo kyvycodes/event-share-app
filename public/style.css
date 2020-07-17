@@ -253,7 +253,18 @@ section {
 .push {
   height: 50px;
 }
-.wrapper {
-  min-height: 100%;
-  margin-bottom: -50px;
+/* .wrapper {
+  /* min-height: 100%; */
+/* margin-bottom: -50px; */
+/* } */
+
+/* SIDE NAV BAR LINKS */
+.paddinggg {
+  padding-bottom: 5%;
+}
+
+.img {
+  object-fit: cover;
+  width: 50px;
+  height: 100px;
 }
