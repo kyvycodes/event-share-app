@@ -57,7 +57,11 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
 
   return (
     <div className={classes.root}>
-      <AppBar className="" position="static">
+      <AppBar
+        className=""
+        position="static"
+        style={{backgroundColor: '#74D2CA'}}
+      >
         <Toolbar>
           <Typography variant="h5" className={classes.logoText}>
             <Button component={RouterLink} to="/home" color="inherit">

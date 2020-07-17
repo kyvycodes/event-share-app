@@ -13,6 +13,7 @@ import {
   Container
 } from '@material-ui/core'
 import MapContainer from './MapContainer'
+import CalendarConnect from './calendar/calendarConnect'
 
 export const formatDate = date => {
   return {
@@ -139,11 +140,21 @@ class EventDetails extends React.Component {
                     </Link>
                   </Box>
 
-                  <Link to={`/events/${eventId}/add-task`}>
-                    <Button size="small" variant="contained" color="secondary">
-                      Create A Task
-                    </Button>
-                  </Link>
+                  <Box mb={2} mr={1}>
+                    <Link to={`/events/${eventId}/add-task`}>
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="secondary"
+                      >
+                        Create A Task
+                      </Button>
+                    </Link>
+                  </Box>
+
+                  <Box mb={2} mr={1}>
+                    <CalendarConnect />
+                  </Box>
                 </Box>
               </Container>
             </Grid>

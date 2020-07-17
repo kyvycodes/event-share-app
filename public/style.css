@@ -218,6 +218,7 @@ section {
   .ctaBtn {
     flex-direction: row;
     justify-content: center;
+    padding: 4rem;
   }
   .title {
     margin-top: 5rem !important;

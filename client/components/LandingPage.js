@@ -41,25 +41,30 @@ const Home = () => {
         >
           Everything your team needs to create an event in one platform.
         </Typography>
-        <Box className="ctaBtn" mt="7rem">
+
+        <Box className="ctaBtn" mt="7rem" mb={2} mr={1}>
           <Button
             className={classes.ctaBtn}
+            style={{backgroundColor: '#000000', spacing: 5}}
             color="secondary"
             component={Link}
             to="/signup"
             variant="contained"
             size="large"
+            mr={8}
           >
             Get Started
           </Button>
 
           <Button
             className={classes.ctaBtn}
+            style={{backgroundColor: '#000000', spacing: 8}}
             color="primary"
             component={Link}
             to="/Login"
             variant="contained"
             size="large"
+            mr={8}
           >
             Login
           </Button>
