@@ -1,7 +1,9 @@
 import React from 'react'
 import {Button} from '@material-ui/core'
 
-function CalendarConnect() {
+function CalendarConnect(props) {
+  console.log('props', props)
+
   var gapi = window.gapi
   /*
     Update with your own Client Id and Api key
@@ -31,23 +33,50 @@ function CalendarConnect() {
         .getAuthInstance()
         .signIn()
         .then(() => {
+          // var event = {
+          //   summary: `${props.event.title}`,
+          //   location: `${props.event.address}`,
+          //   description: `${props.event.description}`,
+          //   start: {
+          //     dateTime:  `${props.event.date.month}-${props.event.date.day}-20${props.event.date.year}`,
+          //     timeZone:`${props.event.startTime}`
+          //   },
+          //   end: {
+          //     dateTime: '2020-06-28T17:00:00-07:00',
+          //     // timeZone: 'America/Los_Angeles'
+          //   },
+          //   // recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
+          //   // attendees: [
+          //   //   {email: 'lpage@example.com'},
+          //   //   {email: 'sbrin@example.com'}
+          //   // ],
+          // let date = `${props.event.month}`+`${props.event.day}`+`20${props.event.year}`;
+
+          // console.log("date", date)
           var event = {
-            summary: 'Awesome Event!',
-            location: '800 Howard St., San Francisco, CA 94103',
-            description: 'Really great refreshments',
-            start: {
-              dateTime: '2020-06-28T09:00:00-07:00',
-              timeZone: 'America/Los_Angeles'
-            },
+            summary: `${props.event.title}`,
+            location: `${props.event.address}`,
+            description: `${props.event.description}`,
+            // start: {
+            //   date: date.toString(),
+            //   time: `${props.event.startTime}`
+            //   // timeZone: 'America/Los_Angeles'
+            // },
+
+            // start: {
+            //   dateTime: '2020-06-28T09:00:00-07:00',
+            //   timeZone: 'America/Los_Angeles'
+            // },
+
             end: {
               dateTime: '2020-06-28T17:00:00-07:00',
-              timeZone: 'America/Los_Angeles'
+              time: `${props.event.endTime}`
             },
             recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
-            attendees: [
-              {email: 'lpage@example.com'},
-              {email: 'sbrin@example.com'}
-            ],
+            // attendees: [
+            //   {email: 'lpage@example.com'},
+            //   {email: 'sbrin@example.com'}
+            // ],
             reminders: {
               useDefault: false,
               overrides: [
@@ -56,7 +85,7 @@ function CalendarConnect() {
               ]
             }
           }
-
+          console.log('event', event)
           var request = gapi.client.calendar.events.insert({
             calendarId: 'primary',
             resource: event

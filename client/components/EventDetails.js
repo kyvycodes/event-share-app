@@ -153,7 +153,7 @@ class EventDetails extends React.Component {
                   </Box>
 
                   <Box mb={2} mr={1}>
-                    <CalendarConnect />
+                    <CalendarConnect event={this.props.currEvent} />
                   </Box>
                 </Box>
               </Container>
