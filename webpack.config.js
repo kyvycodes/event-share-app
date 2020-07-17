@@ -20,10 +20,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.css$/,
         use: [
-          {loader: 'style-loader', options: {injectType: 'styleTag'}},
-          'css-loader'
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          }
         ]
       },
       {
