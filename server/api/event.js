@@ -4,6 +4,7 @@ const router = require('express').Router()
 const {Event, Invitee, Task, User, userEventRel} = require('../db/models')
 const main = require('./nodemailer')
 const inviteEmail = require('../../client/components/AdditionalForms/InviteEmail')
+
 module.exports = router
 
 router.post('/add', async (req, res, next) => {

@@ -9,8 +9,10 @@ const {
   Notification,
   Poll,
   Options,
-  Answers
+  Answers,
+  Post
 } = require('../server/db/models')
+
 const {
   events,
   eventUsers,

@@ -8,6 +8,7 @@ const ADD_INVITES = 'ADD_INVITES'
 const DELETE_EVENT = 'DELETE_EVENT'
 const GET_USER_EVENTS = 'GET_USER_EVENTS '
 const GET_USER_EVENTS_AS_HOST = 'GET_USER_EVENTS_AS_HOST'
+const GET_POSTS = 'GET_POSTS'
 
 const getEvent = data => ({
   type: GET_ONE_EVENT,
@@ -23,6 +24,11 @@ const getUserEvents = events => ({
 const getUserEventsAsHost = events => ({
   type: GET_USER_EVENTS_AS_HOST,
   events
+})
+
+const getPosts = posts => ({
+  type: GET_POSTS,
+  posts
 })
 
 export const updateUserAttendance = (eventId, dec) => async dispatch => {
@@ -112,13 +118,37 @@ export const createEvent = event => {
   }
 }
 
+export const createPost = post => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post(`/api/photos`, post)
+      dispatch(getPosts(data))
+      history.push(`/events/${data.eventId}/photos`)
+    } catch (err) {
+      console.log('ERROR', err)
+    }
+  }
+}
+
+export const fetchPosts = eventId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios(`/api/photos/`)
+      dispatch(getEvent(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
 const initialState = {
   events: [],
   myEvents: [],
   currEvent: {},
   invitees: [],
   RSVPCount: {},
-  organizer: false
+  organizer: false,
+  posts: []
 }
 
 export default function(state = initialState, action) {
@@ -151,6 +181,9 @@ export default function(state = initialState, action) {
     }
     case ADD_EVENT: {
       return {...state, currEvent: action.event}
+    }
+    case GET_POSTS: {
+      return {...state, posts: action.posts}
     }
     default:
       return state

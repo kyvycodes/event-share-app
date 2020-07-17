@@ -1,13 +1,9 @@
 import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
-import {getMe} from '../store/user'
 import {createPost} from '../store/event'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
-import CommentOutlinedIcon from '@material-ui/icons/CommentOutlined' /**
- * COMPONENT
- */
+
 import {
   Container,
   Button,
@@ -48,7 +44,10 @@ export class PhotoUpload extends React.Component {
     this.setState({caption: e.target.value})
   }
 
-  uploadPic() {}
+  uploadPic(e) {
+    console.log('EVENT', e)
+    console.log('STATE', this.state)
+  }
   render() {
     return (
       <Container maxWidth="sm">

@@ -73,6 +73,26 @@ const events = [
     state: 'NY',
     zipcode: 10004,
     startTime: '9:00'
+  },
+  {
+    title: 'BBQ Saturday!',
+    description: 'For everyone who wants to eat till they drop',
+    date: '2020-9-10',
+    address: '5 Hanover Square 11th floor',
+    city: 'NY',
+    state: 'NY',
+    zipcode: 10004,
+    startTime: '10:00'
+  },
+  {
+    title: 'Fullstack Game Night',
+    description: 'Orlando is treating with free alcohol and food',
+    date: '2020-9-10',
+    address: '5 Hanover Square 11th floor',
+    city: 'NY',
+    state: 'NY',
+    zipcode: 10004,
+    startTime: '5:00'
   }
 ]
 
