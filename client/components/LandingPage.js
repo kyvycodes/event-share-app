@@ -71,8 +71,14 @@ const Home = () => {
         </Box>
       </Paper>
 
-      <Container>
-        {/* <img src="https://media.giphy.com/media/frLwjfFvMzopoghNqI/giphy.gif" width="800"/> */}
+      {/* <Container> */}
+      <Container className="bt">
+        {/* NOT FINAL VIDEO, OPEN TO SUGGESTIONS */}
+        <img
+          src="https://media.giphy.com/media/JU4a4jIdlLaeJBWoFw/giphy.gif"
+          width="100%"
+          height="100%"
+        />
         {/* <Typography
           className={classes.subTitle}
           variant="h4"
