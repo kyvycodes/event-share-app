@@ -76,7 +76,7 @@ class EventTabs extends React.Component {
                 label="Polls"
                 value="4"
                 component={RouterLink}
-                to={`/events/${eventId}/polls/1`}
+                to={`/events/${eventId}/polls`}
               />
               <Tab
                 label="Photos"

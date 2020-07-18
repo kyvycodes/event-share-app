@@ -23,10 +23,10 @@ export const getPoll = id => async dispatch => {
   }
 }
 
-export const getEventPolls = id => async dispatch => {
+export const getEventPolls = eventId => async dispatch => {
   try {
-    const res = await axios.get(` /api/poll/${id}/polls`)
-    console.log('res', res)
+    const res = await axios.get(`/api/poll/${eventId}`)
+
     dispatch(fetchEventPolls(res.data))
   } catch (err) {
     console.error(err)
@@ -34,7 +34,6 @@ export const getEventPolls = id => async dispatch => {
 }
 
 export const createAnswer = answerObj => async dispatch => {
-  console.log('redux', answerObj)
   try {
     const res = await axios.post(`/api/poll/create/vote`, answerObj)
     dispatch(fetchEventPolls(res.data))
@@ -47,7 +46,7 @@ export const createPoll = poll => async dispatch => {
   try {
     const res = await axios.post(`/api/poll/create`, poll)
     dispatch(fetchPoll(res.data))
-    history.push(`/events/${poll.eventId}/polls/${res.data.id}`)
+    history.push(`/events/${poll.eventId}/polls`)
   } catch (err) {
     console.error(err)
   }
