@@ -253,3 +253,11 @@ section {
 .MuiCardHeader-root {
   max-height: '20ch';
 }
+
+.icons {
+  color: '#9370DB';
+}
+
+.iconsB {
+  background-color: '#9370DB';
+}

@@ -185,7 +185,7 @@ router.post('/invite', async (req, res, next) => {
             req.user.firstName,
             member.eventId
           )
-          // await main(member.email, req.user.firstName, emailTemplate)
+          await main(member.email, req.user.firstName, emailTemplate)
         }
       })
     )

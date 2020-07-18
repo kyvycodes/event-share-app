@@ -8,6 +8,7 @@ const Invitee = require('./invitees')
 const Notification = require('./notification')
 const Answers = require('./userAnswers')
 const Post = require('./post')
+const PhotoComment = require('./photoComment')
 
 Task.belongsTo(User)
 User.hasMany(Task)
@@ -39,6 +40,12 @@ Event.hasMany(Post)
 
 Post.belongsTo(User)
 User.hasMany(Post)
+
+PhotoComment.belongsTo(Post)
+Post.hasMany(PhotoComment)
+
+PhotoComment.belongsTo(User)
+User.hasMany(PhotoComment)
 /**
  * If we had any associations to make, this would be a great place to put them!
  * ex. if we had another model called BlogPost, we might say:
@@ -62,5 +69,6 @@ module.exports = {
   Invitee,
   Notification,
   Answers,
-  Post
+  Post,
+  PhotoComment
 }

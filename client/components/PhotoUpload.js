@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import {withRouter} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {createPost} from '../store/event'
@@ -11,15 +12,18 @@ import {
   Grid,
   Card,
   CardMedia,
-  CardContent,
-  CardHeader,
-  CardActions,
-  Divider,
-  Avatar,
   Typography,
   TextField,
   FormControl
 } from '@material-ui/core'
+
+const toBase64 = file =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
 
 export class PhotoUpload extends React.Component {
   constructor(props) {
@@ -31,13 +35,12 @@ export class PhotoUpload extends React.Component {
     }
     this.handlePhoto = this.handlePhoto.bind(this)
     this.handleCaption = this.handleCaption.bind(this)
+    this.uploadPic = this.uploadPic.bind(this)
   }
 
-  handlePhoto(e) {
-    this.setState({
-      fileUpload: URL.createObjectURL(e.target.files[0]),
-      file: e.target.files[0]
-    })
+  async handlePhoto(e) {
+    const base64Url = await toBase64(e.target.files[0])
+    this.setState({fileUpload: base64Url})
   }
 
   handleCaption(e) {
@@ -45,10 +48,10 @@ export class PhotoUpload extends React.Component {
   }
 
   uploadPic(e) {
-    console.log('EVENT', e)
-    console.log('STATE', this.state)
+    this.props.createPost(this.state, this.props.match.params.id)
   }
   render() {
+    console.log('PROPS', this.props)
     return (
       <Container maxWidth="sm">
         <div className="profile">
@@ -71,7 +74,7 @@ export class PhotoUpload extends React.Component {
                   <form>
                     <FormControl fullWidth={true} variant="outlined" style={{}}>
                       <TextField
-                        label="Add a short caption..."
+                        label="Add a short caption here"
                         InputLabelProps={{
                           shrink: true
                         }}
@@ -82,15 +85,15 @@ export class PhotoUpload extends React.Component {
                         onChange={this.handleCaption}
                       />
                     </FormControl>
-                    <Button>
+                    <Button onClick={this.uploadPic}>
                       Upload
-                      <AddCircleIcon fontSize="large" />
+                      <AddCircleIcon />
                     </Button>
                   </form>
                 </Card>
               </div>
             ) : (
-              <p>You haven't uploaded any photos yet</p>
+              <p>You haven't chosen any photos yet</p>
             )}
           </div>
         </div>
@@ -110,8 +113,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    createPost: post => dispatch(createPost(post))
+    createPost: (post, eventId) => dispatch(createPost(post, eventId))
   }
 }
 
-export default connect(mapState, mapDispatch)(PhotoUpload)
+export default withRouter(connect(mapState, mapDispatch)(PhotoUpload))

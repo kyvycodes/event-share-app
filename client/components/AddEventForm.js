@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {createEvent} from '../store/event'
-import SelectState from './AdditionalForms/stateSelectMenu'
 import swal from 'sweetalert'
 import {
   TextField,
