@@ -28,7 +28,7 @@ class EventTabs extends React.Component {
     const currEvent = this.props.currEvent || []
     return (
       <div>
-        <div display="flex">
+        <div>
           <Box display="flex" justifyContent="center">
             <Typography
               align="center"

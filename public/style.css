@@ -259,10 +259,27 @@ section {
   justify-content: 'center';
 }
 
+/*FOR PHOTO FEED */
+
 /*FOR EVENT NAV BAR */
 
 .eventNavBar {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.MuiCardHeader-root {
+  max-height: '20ch';
+}
+
+.icons {
+  color: '#9370DB';
+}
+
+.iconsB {
+  background-color: '#9370DB';
 }
 
 /* FOR FOOTER */

@@ -9,13 +9,16 @@ const {
   Notification,
   Poll,
   Options,
-  Answers
+  Answers,
+  Post
 } = require('../server/db/models')
+
 const {
   events,
   eventUsers,
   usersDummyData,
-  userAnswers
+  userAnswers,
+  posts
 } = require('../dummyData')
 
 async function seed() {
@@ -131,6 +134,8 @@ async function seed() {
   await Promise.all(eventUsers.map(rel => userEventRel.create(rel)))
 
   await Promise.all(userAnswers.map(answer => Answers.create(answer)))
+
+  await Promise.all(posts.map(post => Post.create(post)))
 
   const notificationSuggestions = await Promise.all([
     Notification.create({

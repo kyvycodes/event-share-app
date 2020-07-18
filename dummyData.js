@@ -73,6 +73,26 @@ const events = [
     state: 'NY',
     zipcode: 10004,
     startTime: '9:00'
+  },
+  {
+    title: 'BBQ Saturday!',
+    description: 'For everyone who wants to eat till they drop',
+    date: '2020-9-10',
+    address: '5 Hanover Square 11th floor',
+    city: 'NY',
+    state: 'NY',
+    zipcode: 10004,
+    startTime: '10:00'
+  },
+  {
+    title: 'Fullstack Game Night',
+    description: 'Orlando is treating with free alcohol and food',
+    date: '2020-9-10',
+    address: '5 Hanover Square 11th floor',
+    city: 'NY',
+    state: 'NY',
+    zipcode: 10004,
+    startTime: '5:00'
   }
 ]
 
@@ -153,9 +173,34 @@ const userAnswers = [
   }
 ]
 
+const posts = [
+  {
+    userId: 3,
+    eventId: 1,
+    fileUrl:
+      'https://fscomps.fotosearch.com/compc/CSP/CSP399/smiling-man-and-woman-cooking-barbecue-clipart__k53886204.jpg',
+    caption: 'So excited for this BBQ!'
+  },
+  {
+    userId: 2,
+    eventId: 1,
+    fileUrl:
+      'https://hips.hearstapps.com/ame-prod-goodhousekeeping-assets.s3.amazonaws.com/main/embedded/46609/gettyimages-475200404.jpg',
+    caption: "Who's ready for some BBQ?!"
+  },
+  {
+    userId: 1,
+    eventId: 1,
+    fileUrl:
+      'https://image.shutterstock.com/image-photo/family-having-barbecue-party-their-260nw-513989062.jpg',
+    caption: 'Idk if I can eat anymore #sleepy'
+  }
+]
+
 module.exports = {
   events,
   eventUsers,
   usersDummyData,
-  userAnswers
+  userAnswers,
+  posts
 }

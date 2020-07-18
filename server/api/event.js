@@ -4,6 +4,7 @@ const router = require('express').Router()
 const {Event, Invitee, Task, User, userEventRel} = require('../db/models')
 const main = require('./nodemailer')
 const inviteEmail = require('../../client/components/AdditionalForms/InviteEmail')
+
 module.exports = router
 
 router.post('/add', async (req, res, next) => {
@@ -184,7 +185,6 @@ router.post('/invite', async (req, res, next) => {
             req.user.firstName,
             member.eventId
           )
-          console.log(emailTemplate)
           await main(member.email, req.user.firstName, emailTemplate)
         }
       })
@@ -244,10 +244,36 @@ router.put('/:eventId/updateUser', async (req, res, next) => {
     })
     userEvent.attending = req.body.decision
     await userEvent.save()
+
     const event = await Event.findByPk(req.params.eventId, {
       include: [User, Invitee]
     })
-    res.json({event})
+
+    const areAttending = await event.countUsers_events({
+      where: {
+        attending: 'Attending'
+      }
+    })
+    const notAttending = await event.countUsers_events({
+      where: {
+        attending: 'Declined'
+      }
+    })
+
+    const arePending = await event.countUsers_events({
+      where: {
+        attending: 'Pending'
+      }
+    })
+
+    const count = {
+      areAttending,
+      notAttending,
+      arePending
+    }
+    const eventAndCount = {event, count}
+
+    res.json(eventAndCount)
   } catch (err) {
     next(err)
   }

@@ -8,6 +8,8 @@ const ADD_INVITES = 'ADD_INVITES'
 const DELETE_EVENT = 'DELETE_EVENT'
 const GET_USER_EVENTS = 'GET_USER_EVENTS '
 const GET_USER_EVENTS_AS_HOST = 'GET_USER_EVENTS_AS_HOST'
+const GET_POSTS = 'GET_POSTS'
+const POST_COMMENT = 'POST_COMMENT'
 
 const getEvent = data => ({
   type: GET_ONE_EVENT,
@@ -23,6 +25,16 @@ const getUserEvents = events => ({
 const getUserEventsAsHost = events => ({
   type: GET_USER_EVENTS_AS_HOST,
   events
+})
+
+const getPosts = posts => ({
+  type: GET_POSTS,
+  posts
+})
+
+const getComments = comments => ({
+  type: GET_USER_EVENTS,
+  comments
 })
 
 export const updateUserAttendance = (eventId, dec) => async dispatch => {
@@ -104,8 +116,46 @@ export const createEvent = event => {
   return async dispatch => {
     try {
       const {data} = await axios.post('/api/events/add', event)
-      // dispatch(getEvent(data))
+      dispatch(getEvent(data))
       history.push(`/events/${data.id}`)
+    } catch (err) {
+      console.log('ERROR', err)
+    }
+  }
+}
+
+export const createPost = (post, eventId) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post(`/api/photos/upload/${eventId}`, post)
+      dispatch(getPosts(data))
+      history.push(`/events/${eventId}/photos`)
+    } catch (err) {
+      console.log('ERROR', err)
+    }
+  }
+}
+
+export const fetchPosts = eventId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios(`/api/photos/${eventId}`)
+      dispatch(getPosts(data))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+}
+
+export const createComment = (comment, postId, eventId) => {
+  return async dispatch => {
+    try {
+      console.log('ID', comment, postId)
+      const {data} = await axios.post(`/api/photos/${postId}/comments`, {
+        comment,
+        eventId
+      })
+      dispatch(getPosts(data))
     } catch (err) {
       console.log('ERROR', err)
     }
@@ -118,7 +168,8 @@ const initialState = {
   currEvent: {},
   invitees: [],
   RSVPCount: {},
-  organizer: false
+  organizer: false,
+  posts: []
 }
 
 export default function(state = initialState, action) {
@@ -151,6 +202,9 @@ export default function(state = initialState, action) {
     }
     case ADD_EVENT: {
       return {...state, currEvent: action.event}
+    }
+    case GET_POSTS: {
+      return {...state, posts: action.posts}
     }
     default:
       return state

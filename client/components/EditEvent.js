@@ -19,6 +19,7 @@ export class EditEvent extends Component {
     this.state = {
       state: 'NY'
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
     this.handleSubmit = this.handleSubmit.bind(this)
