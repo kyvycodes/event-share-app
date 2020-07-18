@@ -14,7 +14,8 @@ import {
   CardMedia,
   Typography,
   TextField,
-  FormControl
+  FormControl,
+  Divider
 } from '@material-ui/core'
 
 const toBase64 = file =>
