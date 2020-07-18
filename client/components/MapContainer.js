@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import LocationPicker from 'react-location-picker'
-import geocoderAPIKey from '../config/keys_prod'
+// import geocoderAPIKey from '../config/keys_prod'
 
 class MapContainer extends Component {
   constructor(props) {
@@ -16,10 +16,11 @@ class MapContainer extends Component {
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps) {
+      const geocoder = 'AIzaSyBckGXwJ7hizZvLZkLWJ3LFGhoXmbaSG0s'
       fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${
           nextProps.address
-        }&key=${geocoderAPIKey} `
+        }&key=${geocoder} `
       )
         .then(response => response.json())
         .then(responseJson => {
