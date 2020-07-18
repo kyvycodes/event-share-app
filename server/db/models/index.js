@@ -28,9 +28,14 @@ Poll.belongsTo(User)
 
 Options.belongsTo(Poll)
 Poll.hasMany(Options)
-
 Options.belongsToMany(User, {through: 'answers'})
 User.belongsToMany(Options, {through: 'answers'})
+
+Answers.belongsTo(Options)
+Options.hasMany(Answers)
+Answers.hasMany(User)
+Poll.hasMany(Answers)
+User.belongsTo(Answers)
 
 Invitee.belongsTo(Event)
 Event.hasMany(Invitee)

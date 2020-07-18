@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import swal from 'sweetalert'
+//import swal from 'sweetalert'
 import {withRouter, Link as RouterLink} from 'react-router-dom'
 
 function MenuListComposition(props) {

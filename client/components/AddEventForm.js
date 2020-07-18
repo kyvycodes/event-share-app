@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {createEvent} from '../store/event'
+
 import swal from 'sweetalert'
 import {
   TextField,
@@ -9,9 +10,7 @@ import {
   FormGroup,
   Button,
   Select,
-  InputLabel,
   MenuItem,
-  Typography,
   Box
 } from '@material-ui/core'
 

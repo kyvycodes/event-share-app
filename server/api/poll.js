@@ -31,13 +31,41 @@ router.get('/:pollId', async (req, res, next) => {
 router.get('/:eventId/polls', async (req, res, next) => {
   try {
     const polls = await Poll.findAll({
-      where: {
-        eventId: req.params.eventId
+      where: {eventId: req.params.eventId},
+      include: {
+        model: Options,
+        include: {
+          model: Answers
+        }
       }
     })
     res.json(polls)
   } catch (err) {
     next(err)
+  }
+})
+
+router.post('/create/vote', async (req, res, next) => {
+  try {
+    const answerObj = {
+      optionId: req.body.optionId,
+      userId: req.body.userId,
+      pollId: req.body.pollId
+    }
+
+    await Answers.create(answerObj)
+    const polls = await Poll.findAll({
+      where: {eventId: req.body.eventId},
+      include: {
+        model: Options,
+        include: {
+          model: Answers
+        }
+      }
+    })
+    res.status(201).json(polls)
+  } catch (error) {
+    next(error)
   }
 })
 

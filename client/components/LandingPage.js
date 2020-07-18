@@ -41,42 +41,54 @@ const Home = () => {
         >
           Everything your team needs to create an event in one platform.
         </Typography>
-        <Box className="ctaBtn" mt="7rem">
+
+        <Box className="ctaBtn" mt="7rem" mb={2} mr={1}>
           <Button
             className={classes.ctaBtn}
+            style={{backgroundColor: '#000000', spacing: 5}}
             color="secondary"
             component={Link}
             to="/signup"
             variant="contained"
             size="large"
+            mr={8}
           >
             Get Started
           </Button>
 
           <Button
             className={classes.ctaBtn}
+            style={{backgroundColor: '#000000', spacing: 8}}
             color="primary"
             component={Link}
             to="/Login"
             variant="contained"
             size="large"
+            mr={8}
           >
             Login
           </Button>
         </Box>
       </Paper>
 
-      <Container>
-        <Typography
+      {/* <Container> */}
+      <Container className="bt">
+        {/* NOT FINAL VIDEO, OPEN TO SUGGESTIONS */}
+        <img
+          src="https://media.giphy.com/media/JU4a4jIdlLaeJBWoFw/giphy.gif"
+          width="100%"
+          height="100%"
+        />
+        {/* <Typography
           className={classes.subTitle}
           variant="h4"
           component="h2"
           gutterBottom
         >
           Discover
-        </Typography>
+        </Typography> */}
 
-        <Grid container spacing={3}>
+        {/* <Grid container spacing={3}>
           <Grid item xs={6} md={3}>
             <img
               src="hero-background.jpg"
@@ -105,7 +117,7 @@ const Home = () => {
               style={{width: '100%', marginBottom: '1rem'}}
             />
           </Grid>
-        </Grid>
+        </Grid> */}
       </Container>
     </>
   )

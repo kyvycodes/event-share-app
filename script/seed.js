@@ -17,7 +17,8 @@ const {
   events,
   eventUsers,
   usersDummyData,
-  userAnswers
+  userAnswers,
+  posts
 } = require('../dummyData')
 
 async function seed() {
@@ -50,47 +51,91 @@ async function seed() {
     User.create({
       firstName: 'Luis',
       lastName: 'Carbajal',
-      email: 'Luis@email.com',
+      email: 'luis@email.com',
       password: '123',
       profile_pic: 'https://avatars0.githubusercontent.com/u/10853211?s=120&v=4'
     })
   ])
 
+  await Promise.all(events.map(event => Event.create(event)))
+
   const polls = await Promise.all([
     Poll.create({
-      title: 'what should desert be?',
+      title: 'What is your favorite ice cream flavor? 🍦🍦',
       userId: 1,
-      optionId: 1
+      // optionId: 1,
+      eventId: 1
     }),
     Poll.create({
-      title: 'how hard is it to make a poll'
+      title: 'What is your favorite cocktail? 🍹🍹',
+      userId: 1,
+      // optionId: 1,
+      eventId: 1
+    }),
+    Poll.create({
+      title: 'What is your favorite food? 🍔🍕',
+      userId: 1,
+      eventId: 1
     })
   ])
 
   const options = await Promise.all([
     Options.create({
-      title: 'cake',
+      title: 'Mint chocolate',
       pollId: 1,
       userId: 1
     }),
     Options.create({
-      title: 'fruit tart',
+      title: 'Buttered pecan ',
       pollId: 1,
       userId: 2
     }),
     Options.create({
-      title: 'pie',
-      pollId: 1
+      title: 'Strawberry',
+      pollId: 1,
+      userId: 5
+    }),
+
+    Options.create({
+      title: 'Margaritas',
+      pollId: 2,
+      userId: 1
+    }),
+    Options.create({
+      title: 'Cosmopolitan',
+      pollId: 2,
+      userId: 2
+    }),
+    Options.create({
+      title: 'Mojito',
+      pollId: 2,
+      userId: 3
+    }),
+
+    Options.create({
+      title: 'Pizza',
+      pollId: 3,
+      userId: 1
+    }),
+    Options.create({
+      title: 'Steak',
+      pollId: 3,
+      userId: 2
+    }),
+    Options.create({
+      title: 'Chicken',
+      pollId: 3,
+      userId: 3
     })
   ])
 
   await Promise.all(usersDummyData.map(user => User.create(user)))
 
-  await Promise.all(events.map(event => Event.create(event)))
-
   await Promise.all(eventUsers.map(rel => userEventRel.create(rel)))
 
   await Promise.all(userAnswers.map(answer => Answers.create(answer)))
+
+  await Promise.all(posts.map(post => Post.create(post)))
 
   const notificationSuggestions = await Promise.all([
     Notification.create({
