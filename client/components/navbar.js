@@ -168,7 +168,7 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
               </Box>
 
               <Box className="paddinggg">
-                <ListItem button component={RouterLink} to="/">
+                <ListItem button component={RouterLink} to="/FeedbackForm">
                   {' '}
                   {/* Create Component / form contact us */}
                   <ListItemText primary="FEEDBACK" />

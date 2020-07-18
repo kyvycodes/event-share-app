@@ -290,3 +290,9 @@ section {
   width: 50px;
   height: 100px;
 }
+
+/* 'feed-back-form-submit-button'*/
+.feed-back-form-submit-button {
+  margin-left: 50px;
+  text-align: center;
+}

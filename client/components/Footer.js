@@ -37,8 +37,9 @@ export default function Footer() {
       >
         {/* I had the footer in the right position and then got tired and messed something up, check out: https://css-tricks.com/couple-takes-sticky-footer/ */}
         <footer className="footer">
-          <Typography variant="h5" component="h5" gutterBottom>
+          <Typography variant="h6" component="h5" gutterBottom color="inherit">
             {/* Sticky footer */}
+            &copy; 2020 Event-Share
           </Typography>
         </footer>
       </Container>
