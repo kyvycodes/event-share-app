@@ -24,7 +24,7 @@ export const formatDate = date => {
 }
 class EventDetails extends React.Component {
   componentDidMount() {
-    // this.props.getEvent(this.props.match.params.id)
+    this.props.getEvent(this.props.match.params.id)
   }
 
   render() {
@@ -36,14 +36,16 @@ class EventDetails extends React.Component {
     const getDirections = `http://maps.google.com/?q=${currEvent.address}, ${
       currEvent.city
     }`
-
+    const address = `${currEvent.address}, ${currEvent.city}, ${
+      currEvent.state
+    } ${currEvent.zipcode}`
     return (
       <div>
         <Paper className="pad-1">
           <Grid container>
             <Grid item xs={12} md={6}>
               <Container>
-                <MapContainer mb={2} />
+                <MapContainer mb={2} address={address} />
                 <Grid item xs={6}>
                   <Typography
                     component="span"
