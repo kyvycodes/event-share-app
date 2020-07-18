@@ -6,4 +6,5 @@ secrets.js
 npm-debug.log
 yarn-error.log
 apiKey.js
+client/config
 apiGoogleconfig.json

@@ -1,16 +1,10 @@
 import React, {Component} from 'react'
 import LocationPicker from 'react-location-picker'
-
-/* Default position */
-const defaultPosition = {
-  lat: 40.8322224,
-  lng: -73.9009961
-}
+import geocoderAPIKey from '../config/keys_prod'
 
 class MapContainer extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       address: ' ',
       position: {
@@ -18,21 +12,25 @@ class MapContainer extends Component {
         lng: 0
       }
     }
-
-    // latitude: 40.8322224
-    // longitude: -73.9009961
-
-    // Bind
     this.handleLocationChange = this.handleLocationChange.bind(this)
   }
-
-  handleLocationChange({position, address, places}) {
-    console.log('POSITION', position)
-
-    // Set new location
-    this.setState({position, address})
+  componentWillReceiveProps(nextProps) {
+    if (nextProps) {
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${
+          nextProps.address
+        }&key=${geocoderAPIKey} `
+      )
+        .then(response => response.json())
+        .then(responseJson => {
+          this.setState({position: responseJson.results[0].geometry.location})
+        })
+        .catch(err => {
+          console.log('err', err)
+        })
+    }
   }
-
+  handleLocationChange() {}
   render() {
     return (
       <div>
@@ -41,7 +39,7 @@ class MapContainer extends Component {
           <LocationPicker
             containerElement={<div style={{height: '100%'}} />}
             mapElement={<div style={{height: '400px'}} />}
-            defaultPosition={defaultPosition}
+            defaultPosition={this.state.position}
             onChange={this.handleLocationChange}
           />
         </div>
