@@ -15,22 +15,22 @@ import {
   CardContent,
   Divider,
   IconButton,
-  Tooltip
+  Tooltip,
+  LinearProgress,
+  Card
 } from '@material-ui/core'
 import MapContainer from './MapContainer'
 import CalendarConnect from './calendar/calendarConnect'
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined'
 import LocationOnIcon from '@material-ui/icons/LocationOn'
 import EventIcon from '@material-ui/icons/Event'
-import ScheduleIcon from '@material-ui/icons/Schedule'
 import PeopleIcon from '@material-ui/icons/People'
 import InfoIcon from '@material-ui/icons/Info'
 import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
-import DoneRoundedIcon from '@material-ui/icons/DoneRounded'
-import SentimentDissatisfiedRoundedIcon from '@material-ui/icons/SentimentDissatisfiedRounded'
 import history from '../history'
 
+const purpleColor = '#606060'
 export const formatDate = date => {
   return {
     day: `${date[8]}${date[9]}`,
@@ -89,110 +89,120 @@ class EventDetails extends React.Component {
               </Typography>
             </Grid>
           </Box>
-          <CardContent>
-            <Typography variant="button" display="block" color="textSecondary">
-              {date.month}-{date.day}-20{date.year} at {currEvent.startTime} PM
-            </Typography>
+          <Box pt={2} display="flex" className="space-between">
+            <CardContent>
+              <Typography
+                variant="button"
+                display="block"
+                color="textSecondary"
+              >
+                {date.month}-{date.day}-20{date.year} at {currEvent.startTime}{' '}
+                PM
+              </Typography>
 
-            <Typography variant="subtitle1">
-              <b>{currEvent.title}</b>
-            </Typography>
-            <Typography color="textSecondary" variant="subtitle2">
-              Hosted By {organizerName}
-            </Typography>
-          </CardContent>
-          <Divider />
-          <div align="center">
-            <Typography>
-              <b>Are You Going?</b>
-            </Typography>
-
-            {attendance[0].attending === 'Pending' ? (
-              <div>
-                <ButtonGroup
-                  variant="contained"
-                  aria-label="contained primary button group"
-                >
-                  <Button
-                    size="small"
-                    style={{backgroundColor: '#76B654', color: 'white'}}
-                    onClick={() =>
-                      this.props.updateUserAttendance(eventId, 'Attending')
-                    }
+              <Typography variant="subtitle1">
+                <b>{currEvent.title}</b>
+              </Typography>
+              <Typography color="textSecondary" variant="subtitle2">
+                Hosted By {organizerName}
+              </Typography>
+            </CardContent>
+            <Divider />
+            <div className="profile">
+              <Typography>
+                <b>RSVP?</b>
+              </Typography>
+              {attendance[0].attending === 'Pending' ? (
+                <div>
+                  <ButtonGroup
+                    variant="contained"
+                    aria-label="contained primary button group"
                   >
-                    YES
-                  </Button>
+                    <Button
+                      size="small"
+                      style={{backgroundColor: '#76B654', color: 'white'}}
+                      onClick={() =>
+                        this.props.updateUserAttendance(eventId, 'Attending')
+                      }
+                    >
+                      YES
+                    </Button>
 
-                  <Button
-                    size="small"
-                    style={{backgroundColor: '#FF5757', color: 'white'}}
-                    onClick={() =>
-                      this.props.updateUserAttendance(eventId, 'Declined')
-                    }
-                  >
-                    NO
-                  </Button>
-                </ButtonGroup>
-              </div>
-            ) : (
-              <div>
-                {attendance[0].attending === 'Attending' ? (
-                  <div>
-                    <Tooltip title="Change RSVP">
-                      <IconButton
-                        color="secondary"
-                        size="small"
-                        onClick={() =>
-                          this.props.updateUserAttendance(eventId, 'Declined')
-                        }
-                      >
-                        <HighlightOffSharpIcon
-                          style={{
-                            color: '#FF5757'
-                          }}
-                        />
-                      </IconButton>
-                    </Tooltip>
-                    <Chip
-                      label="Attending!"
-                      color="primary"
+                    <Button
                       size="small"
-                      style={{
-                        backgroundColor: '#76B654'
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div>
-                    <Tooltip title="Change RSVP">
-                      <IconButton
-                        color="secondary"
+                      style={{backgroundColor: '#FF5757', color: 'white'}}
+                      onClick={() =>
+                        this.props.updateUserAttendance(eventId, 'Declined')
+                      }
+                    >
+                      NO
+                    </Button>
+                  </ButtonGroup>
+                </div>
+              ) : (
+                <div>
+                  {attendance[0].attending === 'Attending' ? (
+                    <div>
+                      <Tooltip title="Change RSVP">
+                        <IconButton
+                          color="secondary"
+                          size="small"
+                          onClick={() =>
+                            this.props.updateUserAttendance(eventId, 'Declined')
+                          }
+                        >
+                          <HighlightOffSharpIcon
+                            style={{
+                              color: '#FF5757'
+                            }}
+                          />
+                        </IconButton>
+                      </Tooltip>
+                      <Chip
+                        label="Attending!"
+                        color="primary"
                         size="small"
-                        onClick={() =>
-                          this.props.updateUserAttendance(eventId, 'Attending')
-                        }
-                      >
-                        <CheckCircleOutlineIcon
-                          style={{
-                            color: '#76B654'
-                          }}
-                        />
-                      </IconButton>
-                    </Tooltip>
-                    <Chip
-                      label="Declined"
-                      color="primary"
-                      size="small"
-                      style={{
-                        backgroundColor: '#FF5757'
-                      }}
-                    />
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-          {this.props.isOrganizer && (
+                        style={{
+                          backgroundColor: '#76B654'
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div>
+                      <Tooltip title="Change RSVP">
+                        <IconButton
+                          color="secondary"
+                          size="small"
+                          onClick={() =>
+                            this.props.updateUserAttendance(
+                              eventId,
+                              'Attending'
+                            )
+                          }
+                        >
+                          <CheckCircleOutlineIcon
+                            style={{
+                              color: '#76B654'
+                            }}
+                          />
+                        </IconButton>
+                      </Tooltip>
+                      <Chip
+                        label="Declined"
+                        color="primary"
+                        size="small"
+                        style={{
+                          backgroundColor: '#FF5757'
+                        }}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </Box>
+
+          {this.props.isOrganizer ? (
             <div className="profile">
               <ButtonGroup
                 variant="contained"
@@ -228,18 +238,58 @@ class EventDetails extends React.Component {
                 </Button>
               </ButtonGroup>
             </div>
-          )}
+          ) : (
+            <div className="profile">
+              <ButtonGroup
+                variant="contained"
+                aria-label="contained primary button group"
+              >
+                <Button
+                  size="small"
+                  style={{backgroundColor: '#9370DB', color: 'white'}}
+                  onClick={() => history.push(`/events/${eventId}/polls/`)}
+                >
+                  Vote in Polls
+                </Button>
 
+                <Button
+                  size="small"
+                  style={{backgroundColor: '#9370DB', color: 'white'}}
+                  onClick={() => history.push(`/events/${eventId}/tasks/`)}
+                >
+                  Pick Tasks
+                </Button>
+                <Button
+                  size="small"
+                  style={{backgroundColor: '#9370DB', color: 'white'}}
+                  onClick={() => history.push(`/events/${eventId}/tasks/`)}
+                >
+                  Upload
+                </Button>
+              </ButtonGroup>
+            </div>
+          )}
+          <br />
+          <Divider />
+
+          <CardContent>
+            <Typography variant="subtitle1">TASK PROGRESS</Typography>
+            <LinearProgress variant="determinate" value={90} />
+            <Typography
+              variant="body2"
+              color="textSecondary"
+            >90%</Typography>
+          </CardContent>
           <Divider />
 
           <CardContent>
             <Typography variant="subtitle1">DETAILS</Typography>
 
             <Typography variant="subtitle1">
-              <InfoIcon /> {currEvent.description}
+              <InfoIcon style={{color: purpleColor}} /> {currEvent.description}
             </Typography>
             <Typography variant="body1">
-              <LocationOnIcon />
+              <LocationOnIcon style={{color: purpleColor}} />
               {currEvent.address}
               <br />
               <LocationOnIcon
@@ -248,15 +298,14 @@ class EventDetails extends React.Component {
               {currEvent.city}, {currEvent.zipcode}
             </Typography>
             <Typography variant="body1">
-              <EventIcon /> {date.month}-{date.day}-20{date.year} at{' '}
-              {currEvent.startTime} PM
+              <EventIcon style={{color: purpleColor}} /> {date.month}-{date.day}-20{
+                date.year
+              }{' '}
+              at {currEvent.startTime} PM
             </Typography>
             <Typography variant="body1">
-              <PeopleIcon /> {this.props.attending} confirmed
-            </Typography>
-            <Typography variant="body1">
-              <b>Pending:</b>
-              {this.props.pending} guests
+              <PeopleIcon style={{color: purpleColor}} /> {this.props.attending}{' '}
+              confirmed
             </Typography>
           </CardContent>
 

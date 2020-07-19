@@ -28,7 +28,7 @@ export class EventRoutes extends Component {
           <Route exact path="/events/:id/tasks" component={taskList} />
           <Route exact path="/events/:id/add-task" component={AddTask} />
           <Route exact path="/events/:id/polls/create" component={PollForm} />
-          <Route exact path="/events/:id/polls/vote" component={Vote} />
+          <Route exact path="/events/:id/polls" component={Vote} />
           <Route exact path="/events/:id/photos/" component={PhotoFeed} />
           <Route exact path="/events/:id/photos/add" component={PhotoUpload} />
 

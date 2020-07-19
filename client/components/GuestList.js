@@ -33,13 +33,14 @@ export const GuestList = props => {
     <div>
       <div>
         <Container maxWidth="sm">
-          <Box pt={2} display="flex" className="space-between">
+          <Box pt={2} display="flex">
             <Button color="primary">
-              Guests That Confirmed: {props.attending.areAttending}
+              Confirmed: {props.attending.areAttending}
             </Button>
             <Button color="primary">
-              Guests That Declined: {props.attending.notAttending}
+              Declined: {props.attending.notAttending}
             </Button>
+            <Button color="primary">Pending: {props.attending.pending}</Button>
           </Box>
           <Box pt={2} display="flex" className="space-between">
             <Button color="primary">Invited To Event</Button>
