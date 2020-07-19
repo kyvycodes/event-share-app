@@ -12,13 +12,11 @@ import {
   TaskList,
   PollForm,
   Login,
-  Notifications,
-  WhyEventShare
+  Notifications
 } from './components'
 import {me} from './store'
 import LandingPage from './components/LandingPage'
 import {FeedbackForm} from './components'
-import {test} from './components/loggedout-components/test'
 import {EventShare} from './components/loggedout-components/why-event-share'
 import {AboutUs} from './components/loggedout-components/about-us'
 import {Testimonials} from './components/loggedout-components/testimonials'
@@ -47,20 +45,19 @@ class Routes extends Component {
           </Switch>
         )}
         {/* Routes placed here are available to all visitors */}
+
         <Route exact path="/" component={LandingPage} />
-        <Route exact path="/about-eventshare" component={WhyEventShare} />
-
-        <Route exact path="/test" component={test} />
-        <Route exact path="/about-event-share" component={EventShare} />
-
-        <Route exact path="/about-us" component={AboutUs} />
-        <Route exact path="/testimonials" component={Testimonials} />
         <Route exact path="/home" component={LandingPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/events/:id/guests" component={Login} />
         <Route exact path="/events/:id/signup" component={Signup} />
+
+        {/* Logged out hamburger content  */}
         <Route exact path="/FeedbackForm" component={FeedbackForm} />
+        <Route exact path="/about-event-share" component={EventShare} />
+        <Route exact path="/about-us" component={AboutUs} />
+        <Route exact path="/testimonials" component={Testimonials} />
 
         {/* Displays our Login component as a fallback */}
         <Route component={LandingPage} />

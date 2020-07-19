@@ -313,3 +313,88 @@ section {
   margin-left: 50px;
   text-align: center;
 }
+
+/* TESTIMONIAL */
+.container {
+  border: 1px solid #74d2ca;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px 0;
+  padding: 25px;
+}
+
+.container::after {
+  content: '';
+  display: inline-block;
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.container span {
+  font-size: 20px;
+  color: #ff5757;
+  margin-top: 15px;
+}
+
+/* @media (max-width: 500px) {
+  .container {
+      text-align: center;
+  }
+  .container img {
+      margin: auto;
+      float: none;
+      display: block;
+  }
+} */
+
+.quote {
+  font-size: 7em;
+  color: #9370db;
+  text-shadow: black;
+}
+
+.parent-div {
+  text-align: center;
+}
+
+.text-div {
+  font-style: oblique;
+  color: #32323b;
+}
+
+/* WHY EVENT SHARE */
+.div-why {
+  /* border: 1px solid gray; */
+  text-align: center;
+  /* padding: 8px; */
+  margin: auto;
+  margin-top: 40px;
+  width: 60%;
+  padding: 20px;
+
+  padding-bottom: 90px;
+}
+
+.h1-why {
+  text-align: center;
+  text-transform: uppercase;
+  color: #4caf50;
+}
+
+.p-why {
+  text-indent: 50px;
+  text-align: justify;
+  letter-spacing: 3px;
+}
+
+.a-why {
+  text-decoration: none;
+  color: #008cba;
+}
