@@ -144,25 +144,22 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
               {/* The navbar will show these links before you log in */}
               {/* Create Component */}
               <Box className="paddinggg">
-                <ListItem button component={RouterLink} to="/">
+                <ListItem button component={RouterLink} to="/about-event-share">
                   {' '}
-                  {/* Create Component */}
                   <ListItemText primary="WHY EVENTSHARE?" />
                 </ListItem>
               </Box>
 
               <Box className="paddinggg">
-                <ListItem button component={RouterLink} to="/">
+                <ListItem button component={RouterLink} to="/about-us">
                   {' '}
-                  {/* Create Component */}
                   <ListItemText primary="ABOUT US" />
                 </ListItem>
               </Box>
 
               <Box className="paddinggg">
-                <ListItem button component={RouterLink} to="/">
+                <ListItem button component={RouterLink} to="/testimonials">
                   {' '}
-                  {/* Create Component and/or seed with dummy data*/}
                   <ListItemText primary="TESTIMONIALS" />
                 </ListItem>
               </Box>
@@ -170,7 +167,6 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
               <Box className="paddinggg">
                 <ListItem button component={RouterLink} to="/FeedbackForm">
                   {' '}
-                  {/* Create Component / form contact us */}
                   <ListItemText primary="FEEDBACK" />
                 </ListItem>
               </Box>
