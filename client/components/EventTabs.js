@@ -28,28 +28,8 @@ class EventTabs extends React.Component {
     const currEvent = this.props.currEvent || []
     return (
       <div>
-        <div>
-          <Box display="flex" justifyContent="center">
-            <Typography
-              align="center"
-              component="h1"
-              variant="h5"
-              color="secondary"
-              className="eventTitle"
-            >
-              {currEvent.title}🎉
-            </Typography>
-            <Box className="eventTitle">
-              <DropMenuList
-                eventId={currEvent.id}
-                eventLink={`/events/${eventId}/edit`}
-                delete={this.props.deleteEvent}
-              />
-            </Box>
-          </Box>
-        </div>
         <TabContext value={this.state.value}>
-          <AppBar position="static" color="secondary">
+          <AppBar position="static" style={{backgroundColor: '#74D2CA'}}>
             <TabList
               onChange={this.handleChange.bind(this)}
               aria-label="simple tabs example"
@@ -87,6 +67,21 @@ class EventTabs extends React.Component {
             </TabList>
           </AppBar>
         </TabContext>
+        <div>
+          <Box display="flex" justifyContent="center" className="space-between">
+            <Typography align="center" variant="h6" className="eventTitle">
+              <b>{currEvent.title}🎉</b>
+            </Typography>
+            <Box className="eventTitle">
+              <DropMenuList
+                className="icons"
+                eventId={currEvent.id}
+                eventLink={`/events/${eventId}/edit`}
+                delete={this.props.deleteEvent}
+              />
+            </Box>
+          </Box>
+        </div>
       </div>
     )
   }

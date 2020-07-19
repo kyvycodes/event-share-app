@@ -236,17 +236,32 @@ router.post('/invite', async (req, res, next) => {
 
 router.put('/:eventId/updateUser', async (req, res, next) => {
   try {
+    console.log('INFO', req.user.id, req.body, req.params)
     const userEvent = await userEventRel.findOne({
       where: {
         userId: req.user.id,
         eventId: req.params.eventId
       }
     })
+    console.log('USER', userEvent)
     userEvent.attending = req.body.decision
     await userEvent.save()
 
+    console.log('USER@', userEvent)
+
     const event = await Event.findByPk(req.params.eventId, {
-      include: [User, Invitee]
+      include: [
+        {
+          model: userEventRel,
+          where: {
+            userId: req.user.id
+          }
+        },
+        Invitee,
+        User,
+        Task,
+        userEventRel
+      ]
     })
 
     const areAttending = await event.countUsers_events({

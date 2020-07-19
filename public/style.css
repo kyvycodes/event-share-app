@@ -274,14 +274,6 @@ section {
   max-height: '20ch';
 }
 
-.icons {
-  color: '#9370DB';
-}
-
-.iconsB {
-  background-color: '#9370DB';
-}
-
 /* FOR FOOTER */
 
 .footer,
@@ -312,4 +304,9 @@ section {
 .feed-back-form-submit-button {
   margin-left: 50px;
   text-align: center;
+}
+
+.btn-create {
+  background-color: #9370db;
+  color: white;
 }

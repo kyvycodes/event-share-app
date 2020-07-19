@@ -1,15 +1,11 @@
 import axios from 'axios'
 import history from '../history'
-import swal from 'sweetalert'
 
 const GET_ONE_EVENT = 'GET_EVENT'
 const ADD_EVENT = 'ADD_EVENT'
-const ADD_INVITES = 'ADD_INVITES'
-const DELETE_EVENT = 'DELETE_EVENT'
 const GET_USER_EVENTS = 'GET_USER_EVENTS '
 const GET_USER_EVENTS_AS_HOST = 'GET_USER_EVENTS_AS_HOST'
 const GET_POSTS = 'GET_POSTS'
-const POST_COMMENT = 'POST_COMMENT'
 
 const getEvent = data => ({
   type: GET_ONE_EVENT,
@@ -30,11 +26,6 @@ const getUserEventsAsHost = events => ({
 const getPosts = posts => ({
   type: GET_POSTS,
   posts
-})
-
-const getComments = comments => ({
-  type: GET_USER_EVENTS,
-  comments
 })
 
 export const updateUserAttendance = (eventId, dec) => async dispatch => {
@@ -92,7 +83,7 @@ export const updateEvent = (event, id) => {
   return async dispatch => {
     try {
       const {data} = await axios.put(`/api/events/${id}/edit`, event)
-      dispatch(getEvent(data))
+      // dispatch(getEvent(data))
       history.push(`/events/${id}/details`)
     } catch (err) {
       console.log(err)
@@ -116,7 +107,7 @@ export const createEvent = event => {
   return async dispatch => {
     try {
       const {data} = await axios.post('/api/events/add', event)
-      dispatch(getEvent(data))
+      // dispatch(getEvent(data))
       history.push(`/events/${data.id}`)
     } catch (err) {
       console.log('ERROR', err)
@@ -193,12 +184,18 @@ export default function(state = initialState, action) {
       return {...state, myEvents: eventHost}
     }
     case GET_ONE_EVENT: {
-      // let isHost = false
-      // if(action.event.users_events[0].isOrganizer === true) {
-      //   isHost = true
-      // }
+      let isHost = false
 
-      return {...state, currEvent: action.event, RSVPCount: action.count}
+      if (action.event.users_events[0].isOrganizer === true) {
+        isHost = true
+      }
+
+      return {
+        ...state,
+        currEvent: action.event,
+        RSVPCount: action.count,
+        organizer: isHost
+      }
     }
     case ADD_EVENT: {
       return {...state, currEvent: action.event}
