@@ -9,13 +9,13 @@ import {
   Container,
   Button,
   ButtonGroup,
-  Grid,
   Card,
   CardMedia,
   Typography,
   TextField,
   FormControl,
-  Divider
+  Divider,
+  Box
 } from '@material-ui/core'
 
 const toBase64 = file =>
@@ -56,12 +56,13 @@ export class PhotoUpload extends React.Component {
     return (
       <Container maxWidth="sm">
         <div className="profile">
-          <div>
-            <Typography>Photo Feed!</Typography>
-            <input type="file" onChange={this.handlePhoto} />
-          </div>
-          <br />
+          <Box pt={2} display="flex" className="space-between">
+            <Typography variant="button">Photo Feed</Typography>
+            <br />
+          </Box>
           <Divider />
+          <input type="file" onChange={this.handlePhoto} />
+          <br />
 
           <div className="addTask-form">
             {this.state.fileUpload ? (

@@ -41,8 +41,11 @@ router.get('/:id', async (req, res, next) => {
             userId: req.user.id
           }
         },
+        {
+          model: User,
+          order: [['firstName', 'DESC']]
+        },
         Invitee,
-        User,
         Task,
         userEventRel
       ]
@@ -100,7 +103,6 @@ router.delete('/:id/delete', async (req, res, next) => {
         }
       ]
     })
-    console.log('EVENT', events)
     res.json(events)
   } catch (err) {
     next(err)
@@ -246,7 +248,18 @@ router.put('/:eventId/updateUser', async (req, res, next) => {
     await userEvent.save()
 
     const event = await Event.findByPk(req.params.eventId, {
-      include: [User, Invitee]
+      include: [
+        {
+          model: userEventRel,
+          where: {
+            userId: req.user.id
+          }
+        },
+        Invitee,
+        User,
+        Task,
+        userEventRel
+      ]
     })
 
     const areAttending = await event.countUsers_events({

@@ -67,7 +67,7 @@ export const auth = (
   try {
     let historyUrl = '/home'
     if (eventId) {
-      historyUrl = `/events/${eventId}/guests`
+      historyUrl = `/events/${eventId}/details`
     }
     dispatch(getUser(res.data))
     localStorage.clear()
