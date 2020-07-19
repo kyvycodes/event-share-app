@@ -63,7 +63,11 @@ class Vote extends React.Component {
 
           <Link to={`/events/${this.props.events.currEvent.id}/polls/create`}>
             <Box display="flex" justifyContent="flex-end">
-              <Button color="primary" variant="contained" size="small">
+              <Button
+                className="btn-create"
+                color="primary"
+                variant="contained"
+              >
                 Create a Poll
               </Button>
             </Box>
@@ -85,7 +89,7 @@ class Vote extends React.Component {
                       <Card
                         className={
                           option.id === this.state.selectedOption
-                            ? 'green'
+                            ? 'btn-accept'
                             : 'white'
                         }
                         key={option.id}
@@ -98,9 +102,9 @@ class Vote extends React.Component {
                             <Grid item xs={6} style={{textAlign: 'right'}}>
                               {!poll.usersAlreadyVoted.includes(user.id) ? (
                                 <Button
+                                  className="btn-taken"
                                   color="secondary"
                                   variant="contained"
-                                  className=""
                                   onClick={this.vote.bind(
                                     this,
                                     option.id,
@@ -142,6 +146,7 @@ class Vote extends React.Component {
                 <Card style={{height: '3.4rem'}}>
                   <Box justifyContent="center" display="flex" mt={1}>
                     <Button
+                      className="btn-submit"
                       color="secondary"
                       variant="contained"
                       size="medium"

@@ -47,7 +47,6 @@ export class AddTask extends React.Component {
   async handleSubmit(event) {
     event.preventDefault()
     const eventId = this.props.match.params.id
-    console.log('this.props 88', this.props.events.myEvents)
     const usersEvents = this.props.events.myEvents
 
     // if the user is the host then add a task to db
