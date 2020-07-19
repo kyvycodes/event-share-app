@@ -48,7 +48,7 @@ class Routes extends Component {
         <Route exact path="/home" component={LandingPage} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <Route exact path="/events/:id/guests" component={Login} />
+        <Route exact path="/events/:id/details" component={Login} />
         <Route exact path="/events/:id/signup" component={Signup} />
         <Route exact path="/FeedbackForm" component={FeedbackForm} />
 

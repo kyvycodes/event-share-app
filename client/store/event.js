@@ -47,7 +47,7 @@ export const createInvites = (invitees, eventId) => {
   return async dispatch => {
     try {
       const {data} = await axios.post(`/api/events/invite`, invitees)
-      // dispatch(getEvent(data)) if we are pushing to another component and that component re-renders in componentDidMount, do we need to dispatch here?
+      dispatch(getEvent(data))
       history.push(`/events/${eventId}/guests`)
     } catch (err) {
       console.log(err)
@@ -160,7 +160,8 @@ const initialState = {
   invitees: [],
   RSVPCount: {},
   organizer: false,
-  posts: []
+  posts: [],
+  tasksDone: 0
 }
 
 export default function(state = initialState, action) {
@@ -185,16 +186,26 @@ export default function(state = initialState, action) {
     }
     case GET_ONE_EVENT: {
       let isHost = false
-
+      let tasksDone = 0
+      let percentageDone = 0
       if (action.event.users_events[0].isOrganizer === true) {
         isHost = true
       }
+      if (action.event.tasks.length) {
+        action.event.tasks.forEach(task => {
+          if (task.userId) {
+            tasksDone++
+          }
+        })
 
+        percentageDone = Math.round(tasksDone / action.event.tasks.length * 100)
+      }
       return {
         ...state,
         currEvent: action.event,
         RSVPCount: action.count,
-        organizer: isHost
+        organizer: isHost,
+        tasksDone: percentageDone
       }
     }
     case ADD_EVENT: {
