@@ -1,6 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {setTask} from '../store/task'
+import {postNotification} from '../store/notifications'
+import {fetchUserEvents} from '../store/event'
 import {
   TextField,
   FormControl,
@@ -12,6 +14,7 @@ import {
   MenuItem,
   FormHelperText
 } from '@material-ui/core'
+import swal from 'sweetalert'
 
 export class AddTask extends React.Component {
   constructor(props) {
@@ -26,6 +29,9 @@ export class AddTask extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount() {
+    this.props.getUserEvents('upcoming')
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errorsTask) {
       this.setState({errorsTask: nextProps.errorsTask})
@@ -41,15 +47,52 @@ export class AddTask extends React.Component {
   async handleSubmit(event) {
     event.preventDefault()
     const eventId = this.props.match.params.id
-    let newTask = {
-      title: this.state.title,
-      description: this.state.description,
-      category: this.state.category,
-      eventId: eventId
-    }
-    await this.props.setTask(newTask)
-    if (!this.state.errorsTask.title) {
-      this.props.history.push(`/events/${eventId}/tasks`)
+    console.log('this.props 88', this.props.events.myEvents)
+    const usersEvents = this.props.events.myEvents
+
+    // if the user is the host then add a task to db
+    if (usersEvents.length > 0) {
+      for (let i = 0; i < usersEvents.length; i++) {
+        if (usersEvents[i].eventId == eventId) {
+          if (usersEvents[i].isOrganizer) {
+            let newTask = {
+              title: this.state.title,
+              description: this.state.description,
+              category: this.state.category,
+              eventId: eventId
+            }
+            await this.props.setTask(newTask)
+            if (!this.state.errorsTask.title) {
+              this.props.history.push(`/events/${eventId}/tasks`)
+            }
+          }
+        }
+      }
+    } else {
+      const fullName = `${this.props.user.firstName} ${
+        this.props.user.lastName
+      }`
+
+      const notificationObj = {
+        authorId: this.props.user.id,
+        authorName: fullName,
+        eventId: eventId,
+        title: this.state.title,
+        description: this.state.description,
+        category: this.state.category
+      }
+
+      await this.props.postNotification(notificationObj)
+
+      swal({
+        title: 'Good job!',
+        text:
+          'The organizer of the party will approve your recommendation soon!',
+        icon: 'success',
+        button: 'Go back'
+      }).then(function() {
+        window.location.href = `http://localhost:8080/events/${eventId}/tasks`
+      })
     }
   }
 
@@ -124,13 +167,17 @@ const mapState = state => {
   return {
     user: state.user,
     email: state.user.email,
-    errorsTask: state.task.errorsTask
+    errorsTask: state.task.errorsTask,
+    events: state.events
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    setTask: task => dispatch(setTask(task))
+    setTask: task => dispatch(setTask(task)),
+    postNotification: notificationObj =>
+      dispatch(postNotification(notificationObj)),
+    getUserEvents: pastOrUpcoming => dispatch(fetchUserEvents(pastOrUpcoming))
   }
 }
 
