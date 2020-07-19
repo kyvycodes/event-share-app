@@ -20,8 +20,7 @@ class Vote extends React.Component {
     }
   }
   componentDidMount() {
-    this.props.getPoll(this.props.match.params.pollId)
-    this.props.getEventPolls(this.props.match.params.pollId)
+    this.props.getEventPolls(this.props.match.params.id)
   }
 
   vote(optionId, pollId, userId) {
@@ -52,13 +51,15 @@ class Vote extends React.Component {
     const {user, polls, events} = this.props
     return (
       <>
-        <Link to="/poll">
-          <Button color="primary" variant="contained" size="small">
-            Create a Poll
-          </Button>
+        <Link to={`/events/${this.props.events.currEvent.id}/polls/create`}>
+          <Box display="flex" justifyContent="flex-end">
+            <Button color="primary" variant="contained" size="small">
+              Create a Poll
+            </Button>
+          </Box>
         </Link>
         <ToastContainer />
-        <h1 className="heading">Vote!</h1>
+        <h1 className="heading">Vote Now!</h1>
 
         {polls.map(poll => {
           return (
