@@ -398,3 +398,31 @@ section {
   text-decoration: none;
   color: #008cba;
 }
+
+/* ABOUT US PAGE */
+
+.about-header {
+  text-align: center;
+}
+
+.h1-header {
+  color: #34262b;
+  font-family: 'Amatic SC', sans-serif;
+  font-size: 100px;
+}
+
+.h4-header {
+  font-family: 'Coming Soon', sans-serif;
+  font-size: 20px;
+  padding: 0;
+  font-weight: bold;
+  color: #74d2ca;
+}
+
+.team {
+  color: #9370db;
+}
+
+.h4-about {
+  color: #ff5757;
+}
