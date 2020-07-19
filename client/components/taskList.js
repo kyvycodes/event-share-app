@@ -53,11 +53,16 @@ export class TaskList extends React.Component {
     const eventId = this.props.match.params.id
     const userId = this.props.user.id
     return (
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" style={{padding: 0}}>
         <Box pt={2} display="flex" className="space-between">
           <Button color="primary">What to bring:</Button>
           <Link to={`/events/${eventId}/add-task`}>
-            <Button color="primary" variant="contained" size="small">
+            <Button
+              color="primary"
+              variant="contained"
+              size="small"
+              className="btn-create"
+            >
               Create a task
             </Button>
           </Link>
@@ -135,15 +140,18 @@ export class TaskList extends React.Component {
                                 'addUserTask'
                               )}
                               className="float-left"
+                              className="btn-accept"
                             />
                           )}
                         </Grid>
                       </Grid>
-                      <DeleteEditTasksMenu
-                        eventId={this.props.match.params.id}
-                        taskId={task.id}
-                        deleteTask={this.props.deleteTask}
-                      />
+                      <div className="delete-edit-task-menu">
+                        <DeleteEditTasksMenu
+                          eventId={this.props.match.params.id}
+                          taskId={task.id}
+                          deleteTask={this.props.deleteTask}
+                        />
+                      </div>
                     </ListItem>
 
                     <Divider />
@@ -234,6 +242,7 @@ export class TaskList extends React.Component {
                                 'addUserTask'
                               )}
                               className="float-left"
+                              className="btn-accept"
                             />
                           )}
                         </Grid>

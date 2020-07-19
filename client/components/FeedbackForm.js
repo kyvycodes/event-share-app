@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       //margin: theme.spacing(),
-      width: '34ch',
+      width: '28ch',
       display: 'flex',
       flexDirection: 'column',
       margin: 'auto'
@@ -29,12 +29,11 @@ export default function FeedbackForm() {
 
   return (
     <Container maxWidth="" className={classes.Container}>
+      {/* <Typography variant="h4" component="h2" className='feedback-title' > */}
+      <h4 className="feedback-title">How are we doing ?</h4>
+      {/* </Typography> */}
       <form className={classes.root} noValidate autoComplete="off">
-        <Typography variant="h3" component="h2">
-          How are we doing ?
-        </Typography>
-
-        <p>
+        <p className="feedback-paragraph">
           We are always working to improve the Event-Share experience, so we'd
           love to hear what's working and how can we do better.
         </p>
@@ -62,7 +61,7 @@ export default function FeedbackForm() {
           style={{backgroundColor: 'black'}}
           className={classes.button}
           endIcon={<SendIcon />}
-          className
+          className="btn-submit"
         >
           Submit
         </Button>

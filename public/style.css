@@ -59,7 +59,7 @@ button {
 
 .task-list {
   width: '100%';
-  max-width: '36ch';
+  max-width: '45ch';
 }
 
 .inline {
@@ -72,6 +72,10 @@ button {
 
 .float-left {
   float: right !important;
+}
+.delete-edit-task-menu {
+  /* margin-left: 70px; */
+  padding: 0px;
 }
 
 /* EVENT DETAILS */
@@ -308,6 +312,17 @@ section {
   text-align: center;
 }
 
+/* feedback-form*/
+.feedback-paragraph {
+  font-size: 20px;
+  font-style: italic;
+}
+.feedback-title {
+  margin-top: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
 /*BUTTONS */
 .btn-create {
   background-color: #9370db !important;
@@ -429,5 +444,6 @@ section {
 
 .h4-about {
   color: #ff5757;
+
 
 
