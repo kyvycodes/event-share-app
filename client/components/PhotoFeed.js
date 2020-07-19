@@ -73,7 +73,6 @@ export class PhotoFeed extends React.Component {
                 variant="contained"
                 size="small"
                 className="btn-create"
-                style={{backgroundColor: '#9370DB', color: 'white'}}
               >
                 Add
                 <AddAPhotoOutlinedIcon size="small" />
@@ -81,12 +80,17 @@ export class PhotoFeed extends React.Component {
             </Link>
           </Box>
         </div>
+
         <Box className="">
           {posts.length === 0 ? (
-            <Typography>No one has posted any pictures yet</Typography>
+            <div align="center">
+              <br />
+              <Divider />
+              <br />
+              <Typography>No one has posted any pictures yet</Typography>
+            </div>
           ) : (
             posts.map(pic => {
-              console.log(this.props.user.id, pic.userId)
               if (this.isUser(this.props.user.id, pic.userId)) {
                 icon = <ClearOutlinedIcon />
               } else {

@@ -30,7 +30,6 @@ import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
 import history from '../history'
 
-const purpleColor = '#606060'
 export const formatDate = date => {
   return {
     day: `${date[8]}${date[9]}`,
@@ -47,7 +46,7 @@ class EventDetails extends React.Component {
   render() {
     const currEvent = this.props.currEvent || []
     const attendance = currEvent.users_events || ['']
-    const users = this.props.currEvent.users || []
+    const users = currEvent.users || []
     const date = formatDate(currEvent.date || [])
     const eventId = this.props.match.params.id
     let organizerName = ''
@@ -64,9 +63,6 @@ class EventDetails extends React.Component {
 
     return (
       <div>
-        {/* <Paper className="pad-1" justifycontent="center"> */}
-        {/* <Grid container>
-            <Grid item xs={12} md={6}> */}
         <Container maxWidth="sm">
           <MapContainer mb={2} address={address} />
           <Box pt={2} display="flex" className="space-between">
@@ -107,36 +103,30 @@ class EventDetails extends React.Component {
               </Typography>
             </CardContent>
             <Divider />
-            <div className="profile">
+            {/* {!this.props.isOrganizer ? ( */}
+            <div className="rsvp">
               <Typography>
-                <b>RSVP?</b>
+                <b>Attending?</b>
               </Typography>
               {attendance[0].attending === 'Pending' ? (
                 <div>
-                  <ButtonGroup
-                    variant="contained"
-                    aria-label="contained primary button group"
-                  >
-                    <Button
-                      size="small"
-                      style={{backgroundColor: '#76B654', color: 'white'}}
-                      onClick={() =>
-                        this.props.updateUserAttendance(eventId, 'Attending')
-                      }
-                    >
-                      YES
-                    </Button>
+                  <Chip
+                    label="Yes"
+                    className="btn-accept"
+                    size="small"
+                    onClick={() =>
+                      this.props.updateUserAttendance(eventId, 'Attending')
+                    }
+                  />
 
-                    <Button
-                      size="small"
-                      style={{backgroundColor: '#FF5757', color: 'white'}}
-                      onClick={() =>
-                        this.props.updateUserAttendance(eventId, 'Declined')
-                      }
-                    >
-                      NO
-                    </Button>
-                  </ButtonGroup>
+                  <Chip
+                    label="No"
+                    size="small"
+                    className="btn-taken"
+                    onClick={() =>
+                      this.props.updateUserAttendance(eventId, 'Declined')
+                    }
+                  />
                 </div>
               ) : (
                 <div>
@@ -158,12 +148,10 @@ class EventDetails extends React.Component {
                         </IconButton>
                       </Tooltip>
                       <Chip
-                        label="Attending!"
+                        label="Yes!"
                         color="primary"
                         size="small"
-                        style={{
-                          backgroundColor: '#76B654'
-                        }}
+                        className="btn-accept"
                       />
                     </div>
                   ) : (
@@ -187,18 +175,19 @@ class EventDetails extends React.Component {
                         </IconButton>
                       </Tooltip>
                       <Chip
-                        label="Declined"
+                        label="No"
                         color="primary"
                         size="small"
-                        style={{
-                          backgroundColor: '#FF5757'
-                        }}
+                        className="btn-taken"
                       />
                     </div>
                   )}
                 </div>
               )}
             </div>
+            {/* ):
+            <p></p>
+            } */}
           </Box>
 
           {this.props.isOrganizer ? (
@@ -209,7 +198,7 @@ class EventDetails extends React.Component {
               >
                 <Button
                   size="small"
-                  style={{backgroundColor: '#9370DB', color: 'white'}}
+                  className="btn-create"
                   onClick={() => history.push(`/events/${eventId}/invite`)}
                 >
                   Invite
@@ -218,7 +207,7 @@ class EventDetails extends React.Component {
 
                 <Button
                   size="small"
-                  style={{backgroundColor: '#9370DB', color: 'white'}}
+                  className="btn-create"
                   onClick={() =>
                     history.push(`/events/${eventId}/polls/create`)
                   }
@@ -228,7 +217,7 @@ class EventDetails extends React.Component {
 
                 <Button
                   size="small"
-                  style={{backgroundColor: '#9370DB', color: 'white'}}
+                  className="btn-create"
                   onClick={() =>
                     history.push(`/events/${eventId}/tasks/add-task`)
                   }
@@ -245,7 +234,7 @@ class EventDetails extends React.Component {
               >
                 <Button
                   size="small"
-                  style={{backgroundColor: '#9370DB', color: 'white'}}
+                  className="btn-create"
                   onClick={() => history.push(`/events/${eventId}/polls/`)}
                 >
                   Vote in Polls
@@ -253,14 +242,14 @@ class EventDetails extends React.Component {
 
                 <Button
                   size="small"
-                  style={{backgroundColor: '#9370DB', color: 'white'}}
+                  className="btn-create"
                   onClick={() => history.push(`/events/${eventId}/tasks/`)}
                 >
                   Pick Tasks
                 </Button>
                 <Button
                   size="small"
-                  style={{backgroundColor: '#9370DB', color: 'white'}}
+                  className="btn-create"
                   onClick={() => history.push(`/events/${eventId}/tasks/`)}
                 >
                   Upload
@@ -273,9 +262,12 @@ class EventDetails extends React.Component {
 
           <CardContent>
             <Typography variant="subtitle1">TASK PROGRESS</Typography>
-            <LinearProgress variant="determinate" value={90} />
+            <LinearProgress
+              variant="determinate"
+              value={this.props.taskPercentage}
+            />
             <Typography variant="body2" color="textSecondary">
-              90%
+              {this.props.taskPercentage}%
             </Typography>
           </CardContent>
           <Divider />
@@ -284,10 +276,10 @@ class EventDetails extends React.Component {
             <Typography variant="subtitle1">DETAILS</Typography>
 
             <Typography variant="subtitle1">
-              <InfoIcon style={{color: purpleColor}} /> {currEvent.description}
+              <InfoIcon /> {currEvent.description}
             </Typography>
             <Typography variant="body1">
-              <LocationOnIcon style={{color: purpleColor}} />
+              <LocationOnIcon />
               {currEvent.address}
               <br />
               <LocationOnIcon
@@ -296,14 +288,11 @@ class EventDetails extends React.Component {
               {currEvent.city}, {currEvent.zipcode}
             </Typography>
             <Typography variant="body1">
-              <EventIcon style={{color: purpleColor}} /> {date.month}-{date.day}-20{
-                date.year
-              }{' '}
-              at {currEvent.startTime} PM
+              <EventIcon /> {date.month}-{date.day}-20{date.year} at{' '}
+              {currEvent.startTime} PM
             </Typography>
             <Typography variant="body1">
-              <PeopleIcon style={{color: purpleColor}} /> {this.props.attending}{' '}
-              confirmed
+              <PeopleIcon /> {this.props.attending} confirmed
             </Typography>
           </CardContent>
 
@@ -311,8 +300,6 @@ class EventDetails extends React.Component {
                   <CalendarConnect event={this.props.currEvent} />
                 </Box> */}
         </Container>
-        {/* </Grid>
-          </Grid> */}
       </div>
     )
   }
@@ -323,7 +310,8 @@ const mapState = state => {
     user: state.user,
     currEvent: state.events.currEvent,
     isOrganizer: state.events.organizer,
-    attending: state.events.RSVPCount.areAttending
+    attending: state.events.RSVPCount.areAttending,
+    taskPercentage: state.events.tasksDone
   }
 }
 

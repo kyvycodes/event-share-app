@@ -29,7 +29,7 @@ class EventTabs extends React.Component {
     return (
       <div>
         <TabContext value={this.state.value}>
-          <AppBar position="static" style={{backgroundColor: '#74D2CA'}}>
+          <AppBar position="static" className="eventNavBar">
             <TabList
               onChange={this.handleChange.bind(this)}
               aria-label="simple tabs example"
