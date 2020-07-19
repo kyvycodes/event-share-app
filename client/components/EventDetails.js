@@ -261,7 +261,7 @@ class EventDetails extends React.Component {
           <Divider />
 
           <CardContent>
-            <Typography variant="subtitle1">TASK PROGRESS</Typography>
+            <Typography variant="subtitle1">EVENT PROGRESS</Typography>
             <LinearProgress
               variant="determinate"
               value={this.props.taskPercentage}

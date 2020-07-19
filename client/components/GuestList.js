@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchEvent, updateUserAttendance} from '../store/event'
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
 import {
   Container,
   Button,
@@ -18,8 +17,6 @@ import {
   IconButton,
   Grid
 } from '@material-ui/core'
-
-import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp'
 
 export const GuestList = props => {
   useEffect(() => {
@@ -167,7 +164,7 @@ export const GuestList = props => {
             <br />
 
             <Box pt={2} display="flex" className="space-between">
-              <Button color="primary">Others Who Are Pending</Button>
+              <Button color="primary">Others who aren't users</Button>
             </Box>
             <Divider />
 
