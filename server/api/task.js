@@ -91,7 +91,6 @@ router.delete('/:taskId', async (req, res, next) => {
 
 //update task
 router.put('/:taskId/edith', async (req, res, next) => {
-  console.log('UPDATED', req.body)
   try {
     const taskId = req.params.taskId
     const edithtask = await Task.findByPk(taskId)

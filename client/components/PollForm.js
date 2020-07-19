@@ -16,7 +16,7 @@ import {
 
 export class PollForm extends React.Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
       options: [],
       title: '',
@@ -39,8 +39,8 @@ export class PollForm extends React.Component {
     const option = this.state.currentOption
 
     this.setState({
-      options: [...this.state.options, option],
-      currentOption: ''
+      currentOption: ' ',
+      options: [...this.state.options, option]
     })
   }
 
@@ -56,47 +56,6 @@ export class PollForm extends React.Component {
 
   render() {
     return (
-      // <div>
-      //    <h1>Create A Poll For Your Event</h1>
-
-      //   <label>
-      //     <p>Poll Question</p>
-      //     <input
-      //       type="text"
-      //       name="title"
-      //       placeholder="question"
-      //       value={this.state.value}
-      //       onChange={this.handleChange}
-      //     />
-      //     <p>Write Your Options</p>
-
-      //     <input
-      //       type="text"
-      //       name="currentOption"
-      //       placeholder="option"
-      //       value={this.state.value}
-      //       onChange={this.handleChange}
-      //     />
-      //   </label>
-      //   <div>
-      //     <button type="button" onClick={this.handleAddOption}>
-      //       Add Option
-      //     </button>
-      //   </div>
-      //   <h4>Your Options</h4>
-      //   <div>
-      //     {this.state.options.map(option => {
-      //       return <p>{option}</p>
-      //     })}
-
-      //     <form onSubmit={this.handleSubmit}>
-      //       <button type="submit">Create Poll</button>
-      //     </form>
-      //   </div>
-      //   </div>
-      //    )
-      //   }
-      // }
       <Container maxWidth="sm">
         <form
           onSubmit={this.handleSubmit}
@@ -128,11 +87,12 @@ export class PollForm extends React.Component {
                 name="currentOption"
                 label="option"
                 variant="outlined"
-                value={this.state.value}
+                value={this.state.currentOption}
                 onChange={this.handleChange}
               />
             </FormControl>
           </FormGroup>
+
           <Button
             className="btn-theme"
             type="button"
