@@ -81,8 +81,9 @@ button {
   font-size: 1rem;
 }
 
-.chip-color {
-  background-color: '#32CD32' !important;
+.rsvp {
+  padding: 20px 0;
+  text-align: center;
 }
 
 /* EVENTTABS */
@@ -94,9 +95,9 @@ button {
 
 /* NOTIFICATIONS */
 
-.btn-accept {
+/* .btn-accept {
   background-color: '#32CD32' !important;
-}
+} */
 
 /*  LANDING PAGE  */
 
@@ -268,18 +269,11 @@ section {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  background-color: #74d2ca !important;
 }
 
 .MuiCardHeader-root {
   max-height: '20ch';
-}
-
-.icons {
-  color: '#9370DB';
-}
-
-.iconsB {
-  background-color: '#9370DB';
 }
 
 /* FOR FOOTER */
@@ -313,6 +307,29 @@ section {
   margin-left: 50px;
   text-align: center;
 }
+
+/*BUTTONS */
+.btn-create {
+  background-color: #9370db !important;
+  color: white !important;
+  size: 'small';
+}
+
+.btn-submit {
+  background-color: #9370db !important;
+  color: white !important;
+}
+
+.btn-accept {
+  background-color: #76b654 !important;
+  color: white !important;
+}
+
+.btn-taken {
+  background-color: #ff5757 !important;
+  color: white !important;
+}
+
 
 /* TESTIMONIAL */
 .container {
@@ -412,4 +429,5 @@ section {
 
 .h4-about {
   color: #ff5757;
-}
+
+
