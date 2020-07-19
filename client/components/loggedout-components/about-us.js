@@ -19,10 +19,6 @@ export const AboutUs = () => {
       </header>
       <div>
         <div align="center">
-          <h2 align="center" className="team">
-            Our Team:
-          </h2>
-
           <img
             height="300px"
             width="300px"

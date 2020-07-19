@@ -18,6 +18,7 @@ import {
   Box
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import {
   getAllNotifications,
@@ -70,7 +71,7 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
             </Button>
           </Typography>
 
-          {/* Notification was moved into logged in conditional KH */}
+          {/* Notification was moved into logged in conditional But I can not figure out how to get it out the Hamburger KH */}
           {/* <IconButton
             edge="start"
             component={RouterLink}
@@ -125,6 +126,15 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
+
+              <Box className="paddinggg">
+                <ListItem button component={RouterLink} to="/">
+                  {' '}
+                  {/* needs to go "back", too many things go home KH */}{' '}
+                  <ArrowBackIosIcon />
+                </ListItem>
+              </Box>
+
               <ListItem button component={RouterLink} to="/home">
                 <ListItemText primary="Profile" />
               </ListItem>
@@ -143,6 +153,13 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
             <div>
               {/* The navbar will show these links before you log in */}
               {/* Create Component */}
+              <Box className="paddinggg">
+                <ListItem button component={RouterLink} to="/">
+                  {' '}
+                  <ArrowBackIosIcon />
+                </ListItem>
+              </Box>
+
               <Box className="paddinggg">
                 <ListItem button component={RouterLink} to="/about-event-share">
                   {' '}
