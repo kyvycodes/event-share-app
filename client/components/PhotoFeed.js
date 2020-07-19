@@ -29,29 +29,6 @@ import {
   InputAdornment
 } from '@material-ui/core'
 
-const useStyles = theme => ({
-  root: {
-    maxWidth: 345
-  },
-  media: {
-    height: 0,
-    paddingTop: '56.25%' // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)'
-  },
-  avatar: {
-    // backgroundColor: red[500],
-  }
-})
-
 export class PhotoFeed extends React.Component {
   constructor(props) {
     super(props)
@@ -89,7 +66,7 @@ export class PhotoFeed extends React.Component {
       <Container maxWidth="sm">
         <div className="profile">
           <Box pt={2} display="flex" className="space-between">
-            <Button>Photo Feed</Button>
+            <Typography variant="button">Photo Feed</Typography>
             <Link to={`/events/${eventId}/photos/add`}>
               <Button
                 pt={2}

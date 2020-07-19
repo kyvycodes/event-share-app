@@ -62,7 +62,6 @@ class EventDetails extends React.Component {
       currEvent.state
     } ${currEvent.zipcode}`
 
-    console.log('ATTENDANCE', attendance)
     return (
       <div>
         {/* <Paper className="pad-1" justifycontent="center"> */}
@@ -275,10 +274,9 @@ class EventDetails extends React.Component {
           <CardContent>
             <Typography variant="subtitle1">TASK PROGRESS</Typography>
             <LinearProgress variant="determinate" value={90} />
-            <Typography
-              variant="body2"
-              color="textSecondary"
-            >90%</Typography>
+            <Typography variant="body2" color="textSecondary">
+              90%
+            </Typography>
           </CardContent>
           <Divider />
 

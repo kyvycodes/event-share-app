@@ -40,7 +40,6 @@ export const GuestList = props => {
             <Button color="primary">
               Declined: {props.attending.notAttending}
             </Button>
-            <Button color="primary">Pending: {props.attending.pending}</Button>
           </Box>
           <Box pt={2} display="flex" className="space-between">
             <Button color="primary">Invited To Event</Button>

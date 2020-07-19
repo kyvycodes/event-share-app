@@ -1,13 +1,11 @@
 import axios from 'axios'
 import history from '../history'
-import swal from 'sweetalert'
 
 const GET_ONE_EVENT = 'GET_EVENT'
 const ADD_EVENT = 'ADD_EVENT'
 const GET_USER_EVENTS = 'GET_USER_EVENTS '
 const GET_USER_EVENTS_AS_HOST = 'GET_USER_EVENTS_AS_HOST'
 const GET_POSTS = 'GET_POSTS'
-const GET_COMMENTS = 'GET_COMMENTS'
 
 const getEvent = data => ({
   type: GET_ONE_EVENT,
@@ -30,19 +28,8 @@ const getPosts = posts => ({
   posts
 })
 
-const getComments = comments => ({
-  type: GET_COMMENTS,
-  comments
-})
-
-const updateComment = comment => ({
-  type: GET_COMMENTS,
-  comment
-})
-
 export const updateUserAttendance = (eventId, dec) => async dispatch => {
   try {
-    console.log('EVENT', eventId, dec)
     const decision = {
       decision: dec
     }
