@@ -94,14 +94,13 @@ export class Notifications extends React.Component {
                     size="small"
                     variant="contained"
                     color="secondary"
-                    style={{
-                      backgroundColor: '#32CD32'
-                    }}
+                    className="btn-accept"
                   >
                     Approve
                   </Button>
 
                   <Button
+                    className="btn-taken"
                     size="small"
                     variant="contained"
                     color="secondary"
