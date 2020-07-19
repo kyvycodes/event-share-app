@@ -1,6 +1,8 @@
 import axios from 'axios'
+import history from '../history'
 
 const GET_SUGGESTIONS = 'GET_SUGGESTIONS'
+const POST_SUGGESTION = 'POST_SUGGESTION'
 const DELETE_SUGGESTION = 'DELETE_SUGGESTION'
 const RESET_NOTIFICATIONS = 'RESET_NOTIFICATIONS'
 
@@ -14,7 +16,18 @@ const fetchAllNotifications = suggestions => ({
   suggestions
 })
 const fetchDeleteSuggestion = id => ({type: DELETE_SUGGESTION, id})
+
 export const resetAllNotifications = () => ({type: RESET_NOTIFICATIONS})
+
+export const postNotification = notificationObj => async dispatch => {
+  console.log('Redux notificationObj', notificationObj)
+  try {
+    await axios.post(`/api/notifications/add`, notificationObj)
+    return this
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const getAllNotifications = userPartiesObj => async dispatch => {
   try {
