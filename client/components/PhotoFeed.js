@@ -4,8 +4,8 @@ import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
 import {fetchPosts, createComment} from '../store/event'
 import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined'
-import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
+import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined'
 
 import {
   Container,
@@ -83,17 +83,23 @@ export class PhotoFeed extends React.Component {
 
   render() {
     const posts = this.props.posts || []
-    const user = this.props.user
+    const eventId = this.props.match.params.id
     let icon = <p />
     return (
       <Container maxWidth="sm">
         <div className="profile">
           <Box pt={2} display="flex" className="space-between">
-            <Typography>PHOTO FEED</Typography>
-            <Link to={`events/${this.props.match.params.id}/photos/add`}>
-              <Button>
-                Add Picture
-                <AddAPhotoOutlinedIcon className="icons" />
+            <Button>Photo Feed</Button>
+            <Link to={`/events/${eventId}/photos/add`}>
+              <Button
+                pt={2}
+                variant="contained"
+                size="small"
+                className="btn-create"
+                style={{backgroundColor: '#9370DB', color: 'white'}}
+              >
+                Add
+                <AddAPhotoOutlinedIcon size="small" />
               </Button>
             </Link>
           </Box>

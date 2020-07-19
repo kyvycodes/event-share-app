@@ -21,9 +21,11 @@ router.get('/:eventId', async (req, res, next) => {
         eventId: req.params.eventId
       },
       order: [['createdAt', 'DESC']],
-      include: [{model: PhotoComment, include: [User]}, User]
+      include: [
+        {model: PhotoComment, include: [User], order: [['createdAt', 'DESC']]},
+        User
+      ]
     })
-    console.log(allPosts)
 
     res.json(allPosts)
   } catch (err) {
@@ -37,7 +39,6 @@ router.post('/upload/:eventId', async (req, res, next) => {
     const result = await cloudinary.uploader.upload(req.body.fileUpload, {
       upload_presets: `event-share`
     })
-    console.log('result', result)
 
     const postToCreate = {
       fileUrl: result.url,
@@ -53,7 +54,10 @@ router.post('/upload/:eventId', async (req, res, next) => {
         eventId: req.params.eventId
       },
       order: [['createdAt', 'DESC']],
-      include: [{model: PhotoComment, include: [User]}, User]
+      include: [
+        {model: PhotoComment, include: [User], order: [['createdAt', 'DESC']]},
+        User
+      ]
     })
 
     res.json(allPosts)
@@ -64,8 +68,6 @@ router.post('/upload/:eventId', async (req, res, next) => {
 
 router.post('/:postId/comments', async (req, res, next) => {
   try {
-    console.log('REQ', req.body)
-
     const comment = await PhotoComment.create({
       comment: req.body.comment,
       userId: req.user.id,
@@ -77,7 +79,10 @@ router.post('/:postId/comments', async (req, res, next) => {
         eventId: req.body.eventId
       },
       order: [['createdAt', 'DESC']],
-      include: [{model: PhotoComment, include: [User]}, User]
+      include: [
+        {model: PhotoComment, include: [User], order: [['createdAt', 'DESC']]},
+        User
+      ]
     })
 
     res.json(allPosts)
