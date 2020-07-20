@@ -368,39 +368,11 @@ section {
 }
 
 /* WHY EVENT SHARE */
-.div-why {
-  /* border: 1px solid gray; */
-  text-align: center;
-  /* padding: 8px; */
-  margin: auto;
-  margin-top: 40px;
-  width: 60%;
-  padding: 20px;
+/* Now uses most of about us CSS */
 
-  padding-bottom: 90px;
-}
-
-.h1-why {
-  text-align: center;
-  text-transform: uppercase;
-  color: #74d2ca;
-}
-
-.p-why {
-  text-indent: 50px;
-  text-align: justify;
-  font-weight: bold;
-  /* font-size: 20px; */
-  font-family: 'Coming Soon', sans-serif;
-}
-
-.a-why {
+.connect-why {
   text-decoration: none;
   color: #9370db;
-}
-
-.typed-why {
-  font-family: 'Amatic SC', sans-serif;
 }
 
 /* ABOUT US PAGE */
@@ -433,7 +405,6 @@ section {
 /* FOOTER */
 .footer {
   position: fixed;
-  left: 0;
   bottom: 0;
   width: 100%;
   background-color: #74d2ca;
@@ -449,5 +420,11 @@ section {
 .alignright {
   float: right;
   font-size: small;
-  padding: 7px;
+  padding: 15px;
+}
+
+/* USER PROFILE UPDATE */
+
+.user-links {
+  color: #9370db;
 }
