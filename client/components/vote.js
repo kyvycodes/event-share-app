@@ -68,6 +68,7 @@ class Vote extends React.Component {
                 className="btn-create"
                 color="primary"
                 variant="contained"
+                size="small"
               >
                 Create a Poll
               </Button>
@@ -106,6 +107,7 @@ class Vote extends React.Component {
                                   className="btn-taken"
                                   color="secondary"
                                   variant="contained"
+                                  size="small"
                                   onClick={this.vote.bind(
                                     this,
                                     option.id,

@@ -196,7 +196,10 @@ export class EventForm extends React.Component {
             className="btn-theme"
             type="submit"
             variant="contained"
-            color="secondary"
+            style={{
+              backgroundColor: '#9370db',
+              color: 'white'
+            }}
           >
             Create Event
           </Button>

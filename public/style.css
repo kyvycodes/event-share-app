@@ -1,5 +1,6 @@
 body {
   font-family: sans-serif;
+  margin: 0;
 }
 
 a {
@@ -282,6 +283,7 @@ section {
 .push {
   height: 50px;
 }
+
 /* .wrapper {
   /* min-height: 100%; */
 /* margin-bottom: -50px; */
@@ -447,6 +449,11 @@ section {
 
 .root {
   padding: 0px 0 !important;
+}
+.event-nav-tabs {
+  /* padding-left: 0px !important;
+  padding-right: 0px !important;
+  max-width: 20px !important */
 }
 
 /*COMMENT PAGE */
