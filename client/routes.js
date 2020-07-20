@@ -40,8 +40,11 @@ class Routes extends Component {
             <Route exact path="/home" component={UserHome} />
             <Route exact path="/events/add" component={EventForm} />
             <Route path="/events/:id" component={EventApp} />
-
             <Route path="/notifications" component={Notifications} />
+            <Route exact path="/FeedbackForm" component={FeedbackForm} />
+            <Route exact path="/about-event-share" component={EventShare} />
+            <Route exact path="/about-us" component={AboutUs} />
+            <Route exact path="/testimonials" component={Testimonials} />
           </Switch>
         )}
         {/* Routes placed here are available to all visitors */}
