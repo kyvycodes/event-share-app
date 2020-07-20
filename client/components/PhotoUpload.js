@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {createPost} from '../store/event'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
-
+import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined'
 import {
   Container,
   Button,
@@ -61,8 +61,24 @@ export class PhotoUpload extends React.Component {
             <br />
           </Box>
           <Divider />
-          <input type="file" onChange={this.handlePhoto} />
           <br />
+          <div>
+            <input
+              style={{display: 'none'}}
+              accept="image/*"
+              className=""
+              id="contained-button-file"
+              multiple
+              type="file"
+              onChange={this.handlePhoto}
+            />
+            <label htmlFor="contained-button-file">
+              <Typography variant="button">Choose...</Typography>
+              {/* <Button variant="contained" className="icons" component="span"> */}
+              <AddAPhotoOutlinedIcon fontSize="large" className="icons" />
+              {/* </Button> */}
+            </label>
+          </div>
 
           <div className="addTask-form">
             {this.state.fileUpload ? (
@@ -88,7 +104,7 @@ export class PhotoUpload extends React.Component {
                       />
                     </FormControl>
                     <Button onClick={this.uploadPic}>
-                      Upload
+                      Post
                       <AddCircleIcon />
                     </Button>
                   </form>

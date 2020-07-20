@@ -28,6 +28,7 @@ import PeopleIcon from '@material-ui/icons/People'
 import InfoIcon from '@material-ui/icons/Info'
 import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
+import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined'
 import history from '../history'
 
 export const formatDate = date => {
@@ -250,9 +251,10 @@ class EventDetails extends React.Component {
                 <Button
                   size="small"
                   className="btn-create"
-                  onClick={() => history.push(`/events/${eventId}/tasks/`)}
+                  onClick={() => history.push(`/events/${eventId}/photos/`)}
                 >
                   Upload
+                  <CameraAltOutlinedIcon />
                 </Button>
               </ButtonGroup>
             </div>
