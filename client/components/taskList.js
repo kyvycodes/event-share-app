@@ -4,8 +4,11 @@ import {Link} from 'react-router-dom'
 import {
   getAllTasksForAnEvent,
   addTaskToUser,
-  deleteTaskThunk
+  deleteTaskThunk,
+  setTask
 } from '../store/task'
+
+import {fetchEvent} from '../store/event'
 import {
   Container,
   Button,
@@ -34,6 +37,7 @@ export class TaskList extends React.Component {
   async componentDidMount() {
     const eventId = await this.props.match.params.id
     await this.props.getAllTasksForAnEvent(eventId)
+    await this.props.fetchEvent(eventId)
   }
 
   async handleChooseTask(taskId, type) {
@@ -49,22 +53,35 @@ export class TaskList extends React.Component {
   }
 
   render() {
-    const {tasks} = this.props
+    const {tasks, events} = this.props
     const eventId = this.props.match.params.id
     const userId = this.props.user.id
+    const isOrganizer = events.organizer
+
     return (
-      <Container maxWidth="sm" style={{padding: 0}}>
+      <Container maxWidth="sm">
         <Box pt={2} display="flex" className="space-between">
           <Button color="primary">What to bring:</Button>
           <Link to={`/events/${eventId}/add-task`}>
-            <Button
-              color="primary"
-              variant="contained"
-              size="small"
-              className="btn-create"
-            >
-              Create a task
-            </Button>
+            {isOrganizer ? (
+              <Button
+                className="btn-create"
+                color="primary"
+                variant="contained"
+                size="small"
+              >
+                Create a task
+              </Button>
+            ) : (
+              <Button
+                className="btn-create"
+                color="primary"
+                variant="contained"
+                size="small"
+              >
+                Suggest a task
+              </Button>
+            )}
           </Link>
         </Box>
         <Divider />
@@ -76,7 +93,7 @@ export class TaskList extends React.Component {
                   <div key={task.id}>
                     <ListItem alignItems="flex-start">
                       <Grid container>
-                        <Grid item xs={7}>
+                        <Grid item xs={6}>
                           <ListItemText
                             primary={task.title}
                             secondary={
@@ -92,7 +109,8 @@ export class TaskList extends React.Component {
                             }
                           />
                         </Grid>
-                        <Grid item xs={5}>
+
+                        <Grid item xs={6}>
                           {task.user ? (
                             <div className="float-left">
                               {userId === task.user.id ? (
@@ -140,18 +158,27 @@ export class TaskList extends React.Component {
                                 'addUserTask'
                               )}
                               className="float-left"
-                              className="btn-accept"
                             />
                           )}
                         </Grid>
                       </Grid>
-                      <div className="delete-edit-task-menu">
+                      <Box
+                        display="flex"
+                        style={{
+                          width: '19px'
+                        }}
+                      >
                         <DeleteEditTasksMenu
+                          style={{
+                            paddingLeft: '0px',
+                            maxWidth: '5px',
+                            width: '30px'
+                          }}
                           eventId={this.props.match.params.id}
                           taskId={task.id}
                           deleteTask={this.props.deleteTask}
                         />
-                      </div>
+                      </Box>
                     </ListItem>
 
                     <Divider />
@@ -178,7 +205,7 @@ export class TaskList extends React.Component {
                   <div key={task.id}>
                     <ListItem alignItems="flex-start">
                       <Grid container>
-                        <Grid item xs={7}>
+                        <Grid item xs={6}>
                           <ListItemText
                             primary={task.title}
                             secondary={
@@ -194,7 +221,7 @@ export class TaskList extends React.Component {
                             }
                           />
                         </Grid>
-                        <Grid item xs={5}>
+                        <Grid item xs={6}>
                           {task.user ? (
                             <div className="float-left">
                               {userId === task.user.id ? (
@@ -242,16 +269,18 @@ export class TaskList extends React.Component {
                                 'addUserTask'
                               )}
                               className="float-left"
-                              className="btn-accept"
                             />
                           )}
                         </Grid>
                       </Grid>
-                      <DeleteEditTasksMenu
-                        eventId={this.props.match.params.id}
-                        taskId={task.id}
-                        deleteTask={this.props.deleteTask}
-                      />
+                      <Box display="flex" style={{width: '19px'}}>
+                        <DeleteEditTasksMenu
+                          style={{paddingLeft: '0px'}}
+                          eventId={this.props.match.params.id}
+                          taskId={task.id}
+                          deleteTask={this.props.deleteTask}
+                        />
+                      </Box>
                     </ListItem>
                     <Divider />
                   </div>
@@ -273,13 +302,15 @@ const mapState = state => {
     user: state.user,
     email: state.user.email,
     errorsTask: state.task.errorsTask,
-    tasks: state.task.tasks
+    tasks: state.task.tasks,
+    events: state.events
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     setTask: task => dispatch(setTask(task)),
+    fetchEvent: id => dispatch(fetchEvent(id)),
     getAllTasksForAnEvent: eventId => dispatch(getAllTasksForAnEvent(eventId)),
     addTaskToUser: (updateTask, taskId) =>
       dispatch(addTaskToUser(updateTask, taskId)),
