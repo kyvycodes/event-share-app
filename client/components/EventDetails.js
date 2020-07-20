@@ -296,9 +296,9 @@ class EventDetails extends React.Component {
             </Typography>
           </CardContent>
 
-          {/* <Box mb={2} mr={1}>
-                  <CalendarConnect event={this.props.currEvent} />
-                </Box> */}
+          <Box mb={2} mr={1}>
+            <CalendarConnect event={this.props.currEvent} />
+          </Box>
         </Container>
       </div>
     )

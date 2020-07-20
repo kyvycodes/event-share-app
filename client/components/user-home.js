@@ -69,14 +69,14 @@ export const UserHome = props => {
         </h4>
         <p>{email}</p>
         <Link to="/events/add">
-          <Button variant="contained" color="primary" size="small">
+          <Button variant="contained" size="small" className="btn-create">
             Create Event
           </Button>{' '}
         </Link>
         <br />
         <br />
 
-        <ButtonGroup color="primary" aria-label="outlined primary button group">
+        <ButtonGroup aria-label="outlined primary button group">
           <Button onClick={() => props.getUserEvents('upcoming')}>
             Upcoming
           </Button>
@@ -107,7 +107,12 @@ export const UserHome = props => {
 
                       <div>
                         <ListItemText secondary={ev.attending}>
-                          <Link to={`events/${ev.event.id}`}>DETAILS</Link>
+                          <Link
+                            to={`events/${ev.event.id}`}
+                            className="user-links"
+                          >
+                            DETAILS
+                          </Link>
                         </ListItemText>
                       </div>
                       <DropMenuList
@@ -142,7 +147,12 @@ export const UserHome = props => {
                       </ListItemText>
                       <div className="friendsEvent-details">
                         <ListItemText secondary={ev.attending}>
-                          <Link to={`events/${ev.event.id}`}>DETAILS</Link>
+                          <Link
+                            to={`events/${ev.event.id}`}
+                            className="user-links"
+                          >
+                            DETAILS
+                          </Link>
                         </ListItemText>
                       </div>
                     </ListItem>
