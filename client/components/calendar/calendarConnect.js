@@ -57,11 +57,11 @@ function CalendarConnect(props) {
             summary: `${props.event.title}`,
             location: `${props.event.address}`,
             description: `${props.event.description}`,
-            // start: {
-            //   date: date.toString(),
-            //   time: `${props.event.startTime}`
-            //   // timeZone: 'America/Los_Angeles'
-            // },
+            start: {
+              //   date: date.toString(),
+              time: `${props.event.startTime}`
+              //   // timeZone: 'America/Los_Angeles'
+            },
 
             // start: {
             //   dateTime: '2020-06-28T09:00:00-07:00',
@@ -69,8 +69,8 @@ function CalendarConnect(props) {
             // },
 
             end: {
-              dateTime: '2020-06-28T17:00:00-07:00',
-              time: `${props.event.endTime}`
+              dateTime: '2020-06-28T17:00:00-07:00'
+              // time: `${props.event.endTime}`
             },
             recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
             // attendees: [

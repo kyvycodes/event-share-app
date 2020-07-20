@@ -330,7 +330,6 @@ section {
   color: white !important;
 }
 
-
 /* TESTIMONIAL */
 .container {
   border: 1px solid #74d2ca;
@@ -429,5 +428,26 @@ section {
 
 .h4-about {
   color: #ff5757;
+}
 
+/* FOOTER */
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #74d2ca;
+  font-size: small;
+  color: white;
+}
 
+.alignleft {
+  float: left;
+  font-size: small;
+  padding: 7px;
+}
+.alignright {
+  float: right;
+  font-size: small;
+  padding: 7px;
+}
