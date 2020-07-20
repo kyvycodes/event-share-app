@@ -78,7 +78,7 @@ export class PhotoUpload extends React.Component {
             <label htmlFor="contained-button-file">
               <Chip
                 label="CHOOSE PHOTO"
-                className="btn-accept"
+                className="btn-taken"
                 component="span"
                 onDelete={() => {}}
                 deleteIcon={<AddOutlinedIcon style={{color: 'white'}} />}
