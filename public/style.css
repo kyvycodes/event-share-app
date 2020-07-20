@@ -90,6 +90,10 @@ button {
   text-align: center;
 }
 
+.friendsEvent-details {
+  margin-right: 58px;
+}
+
 /* EVENTTABS */
 
 .eventTitle {
@@ -345,7 +349,6 @@ section {
   color: white !important;
 }
 
-
 /* TESTIMONIAL */
 .container {
   border: 1px solid #74d2ca;
@@ -444,6 +447,4 @@ section {
 
 .h4-about {
   color: #ff5757;
-
-
-
+}
