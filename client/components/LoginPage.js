@@ -17,6 +17,12 @@ import Container from '@material-ui/core/Container'
 //  '#22bfa0' color used for logo
 
 const useStyles = makeStyles(theme => ({
+  main: {
+    width: '45ch',
+    display: 'flex',
+    flexDirection: 'column',
+    margin: 'auto'
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -33,7 +39,9 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     backgroundColor: 'black',
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+    width: '30ch',
+    marginLeft: 50
   }
 }))
 
