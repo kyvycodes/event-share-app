@@ -90,7 +90,7 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
             edge="start"
             color="inherit"
             aria-label="menu"
-            style={{color: '#000000'}}
+            style={{color: 'white'}}
             onClick={() => setOpen(true)}
           >
             <MenuIcon />

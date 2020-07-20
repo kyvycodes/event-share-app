@@ -140,6 +140,7 @@ class EventDetails extends React.Component {
                           <IconButton
                             color="secondary"
                             size="small"
+                            border={2}
                             onClick={() =>
                               this.props.updateUserAttendance(
                                 eventId,

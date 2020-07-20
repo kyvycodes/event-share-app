@@ -34,36 +34,60 @@ class EventTabs extends React.Component {
           <AppBar position="static" className="eventNavBar">
             <TabList
               TabIndicatorProps={{style: {background: '#74d2ca'}}}
+              style={{
+                paddingLeft: '0px',
+                paddingRight: '0px'
+              }}
               onChange={this.handleChange.bind(this)}
               aria-label="simple tabs example"
             >
               <Tab
+                style={{
+                  paddingLeft: '0px',
+                  paddingRight: '0px'
+                }}
                 label="Details"
                 value="1"
                 component={RouterLink}
                 to={`/events/${eventId}/details`}
               />
               <Tab
+                style={{
+                  paddingLeft: '0px',
+                  paddingRight: '0px'
+                }}
                 label="Guests"
                 value="2"
                 component={RouterLink}
                 to={`/events/${eventId}/guests`}
               />
               <Tab
+                style={{
+                  paddingLeft: '0px',
+                  paddingRight: '0px'
+                }}
                 label="Tasks"
                 value="3"
                 component={RouterLink}
                 to={`/events/${eventId}/tasks`}
               />
               <Tab
+                style={{
+                  paddingLeft: '0px',
+                  paddingRight: '0px'
+                }}
                 label="Polls"
                 value="4"
                 component={RouterLink}
                 to={`/events/${eventId}/polls`}
               />
               <Tab
+                style={{
+                  paddingLeft: '0px',
+                  paddingRight: '0px'
+                }}
                 className="navBarFields"
-                label="Pics"
+                label="Photos"
                 value="5"
                 component={RouterLink}
                 to={`/events/${eventId}/photos`}

@@ -110,7 +110,7 @@ export class InviteForm extends React.Component {
               className="btn-theme"
               type="submit"
               variant="contained"
-              color="secondary"
+              style={{backgroundColor: '#9370db', color: 'white'}}
             >
               Add To list
             </Button>
@@ -119,7 +119,7 @@ export class InviteForm extends React.Component {
               className="btn-theme"
               type="button"
               variant="contained"
-              color="secondary"
+              style={{backgroundColor: '#9370db', color: 'white'}}
               onClick={() => this.sendEmails(this.state.invitees)}
             >
               Send Invites
