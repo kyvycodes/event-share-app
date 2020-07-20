@@ -105,11 +105,6 @@ export const UserHome = props => {
                         {ev.event.title}
                       </ListItemText>
 
-                      <DropMenuList
-                        eventId={ev.event.id}
-                        eventLink={`events/${ev.event.id}/edit`}
-                        delete={props.deleteEvent}
-                      />
                       <div>
                         <ListItemText secondary={ev.attending}>
                           <Link
@@ -120,6 +115,11 @@ export const UserHome = props => {
                           </Link>
                         </ListItemText>
                       </div>
+                      <DropMenuList
+                        eventId={ev.event.id}
+                        eventLink={`events/${ev.event.id}/edit`}
+                        delete={props.deleteEvent}
+                      />
                     </ListItem>
                   </div>
                 )
@@ -145,7 +145,7 @@ export const UserHome = props => {
                       >
                         {ev.event.title}
                       </ListItemText>
-                      <div>
+                      <div className="friendsEvent-details">
                         <ListItemText secondary={ev.attending}>
                           <Link
                             to={`events/${ev.event.id}`}
