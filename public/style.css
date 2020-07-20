@@ -40,7 +40,6 @@ button {
 .form {
   justify-content: center;
 }
-
 /* ADD TASK FORM */
 
 .MuiInputLabel-formControl {
@@ -48,13 +47,11 @@ button {
   position: absolute;
   transform: translate(0, 24px) scale(1);
 }
-
 /* NOTIFICATIONS */
 
 .card-notifications {
   margin-bottom: 1.5rem;
 }
-
 /*  TASK LIST  */
 
 .task-list {
@@ -78,6 +75,10 @@ button {
   padding: 0px;
 }
 
+.delete-edit-task-menu {
+  /* margin-left: 70px; */
+  padding: 0px;
+}
 /* EVENT DETAILS */
 
 .labelInfo {
@@ -90,19 +91,20 @@ button {
   text-align: center;
 }
 
+.friendsEvent-details {
+  margin-right: 58px;
+}
+
 /* EVENTTABS */
 
 .eventTitle {
   margin-top: 1.8rem !important;
   margin-bottom: 0.8rem !important;
 }
-
 /* NOTIFICATIONS */
-
 /* .btn-accept {
   background-color: '#32CD32' !important;
 } */
-
 /*  LANDING PAGE  */
 
 .btn-theme {
@@ -167,7 +169,6 @@ section {
   background-color: rgb(52, 216, 20);
   margin-left: 130px;
 }
-
 /* Voting */
 
 .green {
@@ -216,7 +217,6 @@ section {
   outline: none;
   cursor: pointer;
 }
-
 /* LANDIGN PAGE */
 
 .title {
@@ -231,7 +231,6 @@ section {
   flex-direction: column;
   justify-content: center;
 }
-
 /* MEDIA QUERIES */
 
 @media only screen and (min-width: 768px) {
@@ -256,16 +255,13 @@ section {
 .poll-form-yourOption {
   margin-left: 50px;
 }
-
 /*FOR EDIT/CREATE EVENT */
 
 .twoInputFields {
   max-width: '36ch';
   justify-content: 'center';
 }
-
 /*FOR PHOTO FEED */
-
 /*FOR EVENT NAV BAR */
 
 .eventNavBar {
@@ -280,21 +276,16 @@ section {
 .MuiCardHeader-root {
   max-height: '20ch';
 }
-
 /* FOR FOOTER */
 
 .footer,
 .push {
   height: 50px;
 }
-
 /* .wrapper {
   /* min-height: 100%; */
-
 /* margin-bottom: -50px; */
-
 /* } */
-
 /* SIDE NAV BAR LINKS */
 
 .paddinggg {
@@ -306,13 +297,12 @@ section {
   width: 50px;
   height: 100px;
 }
-
 /* 'feed-back-form-submit-button'*/
+
 .feed-back-form-submit-button {
   margin-left: 50px;
   text-align: center;
 }
-
 /* feedback-form*/
 .feedback-paragraph {
   font-size: 20px;
@@ -325,6 +315,7 @@ section {
 }
 
 /*BUTTONS */
+
 .btn-create {
   background-color: #9370db !important;
   color: white !important;
@@ -350,6 +341,7 @@ section {
 }
 
 /* TESTIMONIAL */
+
 .container {
   border: 1px solid #74d2ca;
   background-color: #ffffff;
@@ -385,8 +377,8 @@ section {
   font-style: oblique;
   color: #32323b;
 }
-
 /* WHY EVENT SHARE */
+
 .div-why {
   /* border: 1px solid gray; */
   text-align: center;
@@ -395,7 +387,6 @@ section {
   margin-top: 40px;
   width: 60%;
   padding: 20px;
-
   padding-bottom: 90px;
 }
 
@@ -421,8 +412,8 @@ section {
 .typed-why {
   font-family: 'Amatic SC', sans-serif;
 }
-
 /* ABOUT US PAGE */
+
 .about-header {
   text-align: center;
 }
@@ -464,6 +455,7 @@ section {
   padding: 0px 0 !important;
 }
 
+/*COMMENT PAGE */
 .commentsSection {
   display: flex;
   flex-direction: row;
@@ -474,12 +466,12 @@ section {
   flex-grow: 4;
 }
 
+/* GUEST PAGE*/
+
 .guest-list {
   justify-content: center;
   align-items: center;
   padding: 1px 0;
-
-  /* text-align: center; */
 }
 .float-rigth {
   float: left !important;

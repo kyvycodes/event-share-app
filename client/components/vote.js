@@ -56,6 +56,7 @@ class Vote extends React.Component {
   }
   render() {
     const {user, polls, events} = this.props
+
     return (
       <Container maxWidth="sm">
         <Box pt={2} display="flex" className="space-between">

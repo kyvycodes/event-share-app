@@ -86,7 +86,7 @@ export class AddTask extends React.Component {
       swal({
         title: 'Good job!',
         text:
-          'The organizer of the party will approve your recommendation soon!',
+          'The organizer of the party will review your recommendation soon!',
         icon: 'success',
         button: 'Go back'
       }).then(function() {
