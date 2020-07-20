@@ -378,6 +378,7 @@ section {
   color: #32323b;
 }
 /* WHY EVENT SHARE */
+/* Now uses most of about us CSS */
 
 .div-why {
   /* border: 1px solid gray; */
@@ -396,15 +397,7 @@ section {
   color: #74d2ca;
 }
 
-.p-why {
-  text-indent: 50px;
-  text-align: justify;
-  font-weight: bold;
-  /* font-size: 20px; */
-  font-family: 'Coming Soon', sans-serif;
-}
-
-.a-why {
+.connect-why {
   text-decoration: none;
   color: #9370db;
 }
@@ -412,6 +405,7 @@ section {
 .typed-why {
   font-family: 'Amatic SC', sans-serif;
 }
+
 /* ABOUT US PAGE */
 
 .about-header {
@@ -479,4 +473,31 @@ section {
 
 .float.middle {
   padding: 10px 0;
+}
+
+/* FOOTER */
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #74d2ca;
+  font-size: small;
+  color: white;
+}
+
+.alignleft {
+  float: left;
+  font-size: small;
+  padding: 7px;
+}
+.alignright {
+  float: right;
+  font-size: small;
+  padding: 15px;
+}
+
+/* USER PROFILE UPDATE */
+
+.user-links {
+  color: #9370db;
 }

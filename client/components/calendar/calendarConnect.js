@@ -10,11 +10,6 @@ export const formatDate = date => {
 }
 
 function CalendarConnect(props) {
-  // console.log('props', props)
-  // console.log("TIME", props.event.startTime)
-  // const endTime = (props.event.startTime + '4:00')
-  // const GMTOFF = '-5:00'
-  // const startTime = props.event.startTime % GMTOFF
   var gapi = window.gapi
   /*
     Update with your own Client Id and Api key
@@ -61,11 +56,7 @@ function CalendarConnect(props) {
               time: `${props.event.startTime}`,
               timeZone: 'America/New_York'
             },
-            // recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
-            // attendees: [
-            //   {email: 'lpage@example.com'},
-            //   {email: 'sbrin@example.com'}
-            // ],
+
             reminders: {
               useDefault: false,
               overrides: [
