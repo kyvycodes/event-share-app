@@ -1,13 +1,20 @@
 import React from 'react'
 import {Button} from '@material-ui/core'
 
-function CalendarConnect(props) {
-  console.log('props', props)
+export const formatDate = date => {
+  return {
+    day: `${date[8]}${date[9]}`,
+    month: `${date[5]}${date[6]}`,
+    year: `${date[2]}${date[3]}`
+  }
+}
 
+function CalendarConnect(props) {
   var gapi = window.gapi
   /*
     Update with your own Client Id and Api key
   */
+
   var CLIENT_ID =
     '808314770859-1c9t6unkt408pf6cak4u4g14jih20csi.apps.googleusercontent.com'
   var API_KEY = 'AIzaSyBHJ7fXAqcoHK3tGW4nrQfc7fP_o7_EOsE'
@@ -33,50 +40,23 @@ function CalendarConnect(props) {
         .getAuthInstance()
         .signIn()
         .then(() => {
-          // var event = {
-          //   summary: `${props.event.title}`,
-          //   location: `${props.event.address}`,
-          //   description: `${props.event.description}`,
-          //   start: {
-          //     dateTime:  `${props.event.date.month}-${props.event.date.day}-20${props.event.date.year}`,
-          //     timeZone:`${props.event.startTime}`
-          //   },
-          //   end: {
-          //     dateTime: '2020-06-28T17:00:00-07:00',
-          //     // timeZone: 'America/Los_Angeles'
-          //   },
-          //   // recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
-          //   // attendees: [
-          //   //   {email: 'lpage@example.com'},
-          //   //   {email: 'sbrin@example.com'}
-          //   // ],
-          // let date = `${props.event.month}`+`${props.event.day}`+`20${props.event.year}`;
-
-          // console.log("date", date)
           var event = {
             summary: `${props.event.title}`,
             location: `${props.event.address}`,
             description: `${props.event.description}`,
-            start: {
-              //   date: date.toString(),
-              time: `${props.event.startTime}`
-              //   // timeZone: 'America/Los_Angeles'
-            },
 
-            // start: {
-            //   dateTime: '2020-06-28T09:00:00-07:00',
-            //   timeZone: 'America/Los_Angeles'
-            // },
+            start: {
+              dateTime: `${props.event.date}`,
+              time: `${props.event.startTime}`,
+              timeZone: 'America/New_York'
+            },
 
             end: {
-              dateTime: '2020-06-28T17:00:00-07:00'
-              // time: `${props.event.endTime}`
+              dateTime: `${props.event.date}`,
+              time: `${props.event.startTime}`,
+              timeZone: 'America/New_York'
             },
-            recurrence: ['RRULE:FREQ=DAILY;COUNT=2'],
-            // attendees: [
-            //   {email: 'lpage@example.com'},
-            //   {email: 'sbrin@example.com'}
-            // ],
+
             reminders: {
               useDefault: false,
               overrides: [
@@ -85,7 +65,6 @@ function CalendarConnect(props) {
               ]
             }
           }
-          console.log('event', event)
           var request = gapi.client.calendar.events.insert({
             calendarId: 'primary',
             resource: event
@@ -117,14 +96,14 @@ function CalendarConnect(props) {
   }
 
   return (
-    <div className="CalendarConnect">
+    <div>
       <Button
+        className="calendar-btn"
+        color="primary"
         size="small"
-        variant="contained"
-        color="secondary"
         onClick={handleClick}
       >
-        Add Event To Your Calendar
+        Add to Calendar
       </Button>
     </div>
   )

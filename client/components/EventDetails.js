@@ -28,6 +28,7 @@ import PeopleIcon from '@material-ui/icons/People'
 import InfoIcon from '@material-ui/icons/Info'
 import HighlightOffSharpIcon from '@material-ui/icons/HighlightOffSharp'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline'
+import CameraAltOutlinedIcon from '@material-ui/icons/CameraAltOutlined'
 import history from '../history'
 
 export const formatDate = date => {
@@ -43,6 +44,7 @@ class EventDetails extends React.Component {
     await this.props.getEvent(this.props.match.params.id)
   }
 
+  // eslint-disable-next-line complexity
   render() {
     const currEvent = this.props.currEvent || []
     const attendance = currEvent.users_events || ['']
@@ -65,29 +67,33 @@ class EventDetails extends React.Component {
       <div>
         <Container maxWidth="sm">
           <MapContainer mb={2} address={address} />
-          <Box pt={2} display="flex" className="space-between">
-            <Grid item xs={6}>
-              <Typography
-                component="span"
-                variant="body2"
-                className="inline"
-                color="textPrimary"
+          <Box
+            pt={2}
+            display="flex"
+            className="space-between"
+            style={{align: 'center'}}
+          >
+            <Typography
+              component="span"
+              variant="button"
+              className="calendar-btn"
+              color="primary"
+            >
+              <a
+                href={getDirections}
+                rel="noopener noreferrer"
+                target="_blank"
+                color="primary"
               >
-                <a
-                  href={getDirections}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className="direcions"
-                >
-                  Get Directions
-                </a>
-              </Typography>
-            </Grid>
+                Get Directions
+              </a>
+            </Typography>
+            <CalendarConnect event={this.props.currEvent} />
           </Box>
           <Box pt={2} display="flex" className="space-between">
             <CardContent>
               <Typography
-                variant="button"
+                variant="subtitle2"
                 display="block"
                 color="textSecondary"
               >
@@ -103,91 +109,92 @@ class EventDetails extends React.Component {
               </Typography>
             </CardContent>
             <Divider />
-            {/* {!this.props.isOrganizer ? ( */}
-            <div className="rsvp">
-              <Typography>
-                <b>Attending?</b>
-              </Typography>
-              {attendance[0].attending === 'Pending' ? (
-                <div>
-                  <Chip
-                    label="Yes"
-                    className="btn-accept"
-                    size="small"
-                    onClick={() =>
-                      this.props.updateUserAttendance(eventId, 'Attending')
-                    }
-                  />
+            {!this.props.isOrganizer ? (
+              <div className="rsvp">
+                <Typography variant="button">Attending?</Typography>
+                {attendance[0].attending === 'Pending' ? (
+                  <div>
+                    <Chip
+                      label="Yes"
+                      className="btn-accept"
+                      size="small"
+                      onClick={() =>
+                        this.props.updateUserAttendance(eventId, 'Attending')
+                      }
+                    />
 
-                  <Chip
-                    label="No"
-                    size="small"
-                    className="btn-taken"
-                    onClick={() =>
-                      this.props.updateUserAttendance(eventId, 'Declined')
-                    }
-                  />
-                </div>
-              ) : (
-                <div>
-                  {attendance[0].attending === 'Attending' ? (
-                    <div>
-                      <Tooltip title="Change RSVP">
-                        <IconButton
-                          color="secondary"
+                    <Chip
+                      label="No"
+                      size="small"
+                      className="btn-taken"
+                      onClick={() =>
+                        this.props.updateUserAttendance(eventId, 'Declined')
+                      }
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    {attendance[0].attending === 'Attending' ? (
+                      <div>
+                        <Tooltip title="Change RSVP">
+                          <IconButton
+                            color="secondary"
+                            size="small"
+                            onClick={() =>
+                              this.props.updateUserAttendance(
+                                eventId,
+                                'Declined'
+                              )
+                            }
+                          >
+                            <HighlightOffSharpIcon
+                              style={{
+                                color: '#FF5757'
+                              }}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                        <Chip
+                          label="Yes!"
+                          color="primary"
                           size="small"
-                          onClick={() =>
-                            this.props.updateUserAttendance(eventId, 'Declined')
-                          }
-                        >
-                          <HighlightOffSharpIcon
-                            style={{
-                              color: '#FF5757'
-                            }}
-                          />
-                        </IconButton>
-                      </Tooltip>
-                      <Chip
-                        label="Yes!"
-                        color="primary"
-                        size="small"
-                        className="btn-accept"
-                      />
-                    </div>
-                  ) : (
-                    <div>
-                      <Tooltip title="Change RSVP">
-                        <IconButton
-                          color="secondary"
+                          className="btn-accept"
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        <Tooltip title="Change RSVP">
+                          <IconButton
+                            color="secondary"
+                            size="small"
+                            onClick={() =>
+                              this.props.updateUserAttendance(
+                                eventId,
+                                'Attending'
+                              )
+                            }
+                          >
+                            <CheckCircleOutlineIcon
+                              style={{
+                                color: '#76B654'
+                              }}
+                            />
+                          </IconButton>
+                        </Tooltip>
+                        <Chip
+                          label="No"
+                          color="primary"
                           size="small"
-                          onClick={() =>
-                            this.props.updateUserAttendance(
-                              eventId,
-                              'Attending'
-                            )
-                          }
-                        >
-                          <CheckCircleOutlineIcon
-                            style={{
-                              color: '#76B654'
-                            }}
-                          />
-                        </IconButton>
-                      </Tooltip>
-                      <Chip
-                        label="No"
-                        color="primary"
-                        size="small"
-                        className="btn-taken"
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-            {/* ):
-            <p></p>
-            } */}
+                          className="btn-taken"
+                        />
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <p />
+            )}
           </Box>
 
           {this.props.isOrganizer ? (
@@ -250,9 +257,10 @@ class EventDetails extends React.Component {
                 <Button
                   size="small"
                   className="btn-create"
-                  onClick={() => history.push(`/events/${eventId}/tasks/`)}
+                  onClick={() => history.push(`/events/${eventId}/photos/`)}
                 >
                   Upload
+                  <CameraAltOutlinedIcon />
                 </Button>
               </ButtonGroup>
             </div>
@@ -261,7 +269,7 @@ class EventDetails extends React.Component {
           <Divider />
 
           <CardContent>
-            <Typography variant="subtitle1">EVENT PROGRESS</Typography>
+            <Typography variant="button">Event Progress</Typography>
             <LinearProgress
               variant="determinate"
               value={this.props.taskPercentage}
@@ -273,13 +281,13 @@ class EventDetails extends React.Component {
           <Divider />
 
           <CardContent>
-            <Typography variant="subtitle1">DETAILS</Typography>
+            <Typography variant="button">Details</Typography>
 
             <Typography variant="subtitle1">
-              <InfoIcon /> {currEvent.description}
+              <InfoIcon className="icons" /> {currEvent.description}
             </Typography>
             <Typography variant="body1">
-              <LocationOnIcon />
+              <LocationOnIcon className="icons" />
               {currEvent.address}
               <br />
               <LocationOnIcon
@@ -288,17 +296,15 @@ class EventDetails extends React.Component {
               {currEvent.city}, {currEvent.zipcode}
             </Typography>
             <Typography variant="body1">
-              <EventIcon /> {date.month}-{date.day}-20{date.year} at{' '}
-              {currEvent.startTime} PM
+              <EventIcon className="icons" /> {date.month}-{date.day}-20{
+                date.year
+              }{' '}
+              at {currEvent.startTime} PM
             </Typography>
             <Typography variant="body1">
-              <PeopleIcon /> {this.props.attending} confirmed
+              <PeopleIcon className="icons" /> {this.props.attending} confirmed
             </Typography>
           </CardContent>
-
-          <Box mb={2} mr={1}>
-            <CalendarConnect event={this.props.currEvent} />
-          </Box>
         </Container>
       </div>
     )

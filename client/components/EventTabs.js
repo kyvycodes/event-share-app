@@ -5,6 +5,8 @@ import {fetchEvent, deleteEvent} from '../store/event'
 import DropMenuList from './AdditionalForms/DropDownMenu'
 import AppBar from '@material-ui/core/AppBar'
 import Tab from '@material-ui/core/Tab'
+import Tabs from '@material-ui/core/Tabs'
+
 import Typography from '@material-ui/core/Typography'
 import TabContext from '@material-ui/lab/TabContext'
 import TabList from '@material-ui/lab/TabList'
@@ -28,9 +30,10 @@ class EventTabs extends React.Component {
     const currEvent = this.props.currEvent || []
     return (
       <div>
-        <TabContext value={this.state.value}>
+        <TabContext value={this.state.value} c>
           <AppBar position="static" className="eventNavBar">
             <TabList
+              TabIndicatorProps={{style: {background: '#74d2ca'}}}
               onChange={this.handleChange.bind(this)}
               aria-label="simple tabs example"
             >
@@ -59,7 +62,8 @@ class EventTabs extends React.Component {
                 to={`/events/${eventId}/polls`}
               />
               <Tab
-                label="Photos"
+                className="navBarFields"
+                label="Pics"
                 value="5"
                 component={RouterLink}
                 to={`/events/${eventId}/photos`}

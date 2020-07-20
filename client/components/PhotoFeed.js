@@ -23,10 +23,7 @@ import {
   Box,
   TextField,
   FormControl,
-  IconButton,
-  InputBase,
-  Paper,
-  InputAdornment
+  IconButton
 } from '@material-ui/core'
 
 export class PhotoFeed extends React.Component {
@@ -45,11 +42,9 @@ export class PhotoFeed extends React.Component {
   }
 
   handleSubmit(postId) {
-    this.props.postComment(
-      this.state.comment,
-      postId,
-      this.props.match.params.id
-    )
+    const comment = this.state.comment
+    this.setState({comment: ''})
+    this.props.postComment(comment, postId, this.props.match.params.id)
   }
   handleComment(e) {
     this.setState({comment: e.target.value})
@@ -66,7 +61,9 @@ export class PhotoFeed extends React.Component {
       <Container maxWidth="sm">
         <div className="profile">
           <Box pt={2} display="flex" className="space-between">
-            <Typography variant="button">Photo Feed</Typography>
+            <Typography variant="button" color="primary">
+              Photo Feed
+            </Typography>
             <Link to={`/events/${eventId}/photos/add`}>
               <Button
                 pt={2}
@@ -122,13 +119,14 @@ export class PhotoFeed extends React.Component {
                         <b>{pic.user.firstName} says:</b> {pic.caption}
                       </Typography>
                       <br />
-
-                      <FormControl
-                        fullWidth={true}
+                      <form className="commentsSection">
+                        {/* <FormControl
                         variant="outlined"
                         style={{}}
-                      >
+
+                      > */}
                         <TextField
+                          className="comments"
                           size="small"
                           type="title"
                           name="comment"
@@ -139,10 +137,15 @@ export class PhotoFeed extends React.Component {
                           }}
                           onChange={this.handleComment}
                         />
-                      </FormControl>
-                      <IconButton onClick={() => this.handleSubmit(pic.id)}>
-                        <AddCircleIcon className="icons" />
-                      </IconButton>
+                        {/* </FormControl> */}
+
+                        <IconButton
+                          className="root"
+                          onClick={() => this.handleSubmit(pic.id)}
+                        >
+                          <AddCircleIcon className="icons" />
+                        </IconButton>
+                      </form>
                       {pic.photoComments.length > 0 &&
                         pic.photoComments.map(comm => (
                           <Typography

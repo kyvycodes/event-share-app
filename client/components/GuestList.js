@@ -40,112 +40,20 @@ export const GuestList = props => {
           <List className="task-list">
             {users.length !== 0 ? (
               users.map(user => {
-                // if (user.id === props.user.id) {
-                //   return (
-                //     <div key={user.id}>
-                //       <ListItem alignItems="flex-start">
-                //         <ListItemText>
-                //           {' '}
-                //           {user.firstName} {user.lastName}
-                //         </ListItemText>
-
-                //         {user.users_events.attending === 'Pending' ? (
-                //           <div>
-                //             <Button
-                //               label="YES"
-                //               size="small"
-                //               variant="text"
-                //               style={{
-                //                 backgroundColor: '#32CD32'
-                //               }}
-                //               onClick={() =>
-                //                 props.updateUserAttendance(eventId, 'Attending')
-                //               }
-                //             >
-                //               YES
-                //             </Button>
-
-                //             <Button
-                //               label="NO"
-                //               color="primary"
-                //               size="small"
-                //               variant="text"
-                //               style={{
-                //                 backgroundColor: '#ff2400'
-                //               }}
-                //               onClick={() =>
-                //                 props.updateUserAttendance(eventId, 'Declined')
-                //               }
-                //             >
-                //               NO
-                //             </Button>
-                //           </div>
-                //         ) : (
-                //           <div>
-                //             {user.users_events.attending === 'Attending' ? (
-                //               <div>
-                //                 <IconButton
-                //                   color="secondary"
-                //                   size="small"
-                //                   onClick={() =>
-                //                     props.updateUserAttendance(
-                //                       eventId,
-                //                       'Declined'
-                //                     )
-                //                   }
-                //                 >
-                //                   <HighlightOffSharpIcon />
-                //                 </IconButton>
-                //                 <Chip
-                //                   label="Attending"
-                //                   color="primary"
-                //                   size="small"
-                //                   style={{
-                //                     backgroundColor: '#32CD32'
-                //                   }}
-                //                 />
-                //               </div>
-                //             ) : (
-                //               <div>
-                //                 <IconButton
-                //                   color="secondary"
-                //                   size="small"
-                //                   onClick={() =>
-                //                     props.updateUserAttendance(
-                //                       eventId,
-                //                       'Attending'
-                //                     )
-                //                   }
-                //                 >
-                //                   <CheckCircleOutlineIcon
-                //                     style={{
-                //                       color: '#32CD32'
-                //                     }}
-                //                   />
-                //                 </IconButton>
-                //                 <Chip
-                //                   label="Declined"
-                //                   color="primary"
-                //                   size="small"
-                //                   style={{
-                //                     backgroundColor: '#ff2400'
-                //                   }}
-                //                 />
-                //               </div>
-                //             )}
-                //           </div>
-                //         )}
-                //       </ListItem>
-                //       <Divider />
-                //     </div>
-                //   )
-                // } else {
                 return (
                   <div key={user.id}>
                     <ListItem alignItems="flex-start">
-                      <ListItemText>
-                        {' '}
-                        {user.firstName} {user.lastName}
+                      <ListItemText display="flex" className="guest-list">
+                        <Avatar
+                          className="float-rigth"
+                          size="small"
+                          alt={user.firstName}
+                          src={user.profile_pic}
+                        />
+                        <Typography className="float.middle">
+                          {' '}
+                          {user.firstName} {user.lastName}
+                        </Typography>
                       </ListItemText>
                       <div className="float-left">
                         <ListItemText>
