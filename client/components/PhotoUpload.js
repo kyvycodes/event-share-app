@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {createPost} from '../store/event'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
-import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined'
+import CloudUploadOutlinedIcon from '@material-ui/icons/CloudUploadOutlined'
+import AddOutlinedIcon from '@material-ui/icons/AddOutlined'
 import {
   Container,
   Button,
@@ -15,7 +16,8 @@ import {
   TextField,
   FormControl,
   Divider,
-  Box
+  Box,
+  Chip
 } from '@material-ui/core'
 
 const toBase64 = file =>
@@ -52,12 +54,13 @@ export class PhotoUpload extends React.Component {
     this.props.createPost(this.state, this.props.match.params.id)
   }
   render() {
-    console.log('PROPS', this.props)
     return (
       <Container maxWidth="sm">
         <div className="profile">
           <Box pt={2} display="flex" className="space-between">
-            <Typography variant="button">Photo Feed</Typography>
+            <Typography variant="button" color="primary">
+              Photo Feed
+            </Typography>
             <br />
           </Box>
           <Divider />
@@ -73,10 +76,13 @@ export class PhotoUpload extends React.Component {
               onChange={this.handlePhoto}
             />
             <label htmlFor="contained-button-file">
-              <Typography variant="button">Choose...</Typography>
-              {/* <Button variant="contained" className="icons" component="span"> */}
-              <AddAPhotoOutlinedIcon fontSize="large" className="icons" />
-              {/* </Button> */}
+              <Chip
+                label="CHOOSE PHOTO"
+                className="btn-accept"
+                component="span"
+                onDelete={() => {}}
+                deleteIcon={<AddOutlinedIcon style={{color: 'white'}} />}
+              />
             </label>
           </div>
 
@@ -103,12 +109,11 @@ export class PhotoUpload extends React.Component {
                         onChange={this.handleCaption}
                       />
                     </FormControl>
-                    <Button onClick={this.uploadPic}>
-                      Post
-                      <AddCircleIcon />
-                    </Button>
                   </form>
                 </Card>
+                <Button className="btn-create" onClick={this.uploadPic}>
+                  Post To Feed
+                </Button>
               </div>
             ) : (
               <p>You haven't chosen any photos yet</p>

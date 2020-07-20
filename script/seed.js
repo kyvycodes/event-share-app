@@ -25,39 +25,11 @@ async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({
-      firstName: 'cody',
-      lastName: 'michaels',
-      email: 'cody@email.com',
-      password: '123',
-      profile_pic:
-        'https://avatars0.githubusercontent.com/u/1868782?s=460&u=2c72e54e297dc00128739a1207ce9c572bc34d4e&v=4'
-    }),
-    User.create({
-      firstName: 'murphy',
-      lastName: 'jones',
-      email: 'murphy@email.com',
-      password: '123',
-      profile_pic: 'https://avatars3.githubusercontent.com/u/45020?s=460&v=4'
-    }),
-    User.create({
-      firstName: 'Fila',
-      lastName: 'Braz',
-      email: 'fila@email.com',
-      password: '123',
-      profile_pic: 'https://avatars0.githubusercontent.com/u/38737958?s=40&v=4'
-    }),
-    User.create({
-      firstName: 'Luis',
-      lastName: 'Carbajal',
-      email: 'luis@email.com',
-      password: '123',
-      profile_pic: 'https://avatars0.githubusercontent.com/u/10853211?s=120&v=4'
-    })
-  ])
+  await Promise.all(usersDummyData.map(user => User.create(user)))
 
   await Promise.all(events.map(event => Event.create(event)))
+
+  await Promise.all(eventUsers.map(rel => userEventRel.create(rel)))
 
   const polls = await Promise.all([
     Poll.create({
@@ -129,17 +101,13 @@ async function seed() {
     })
   ])
 
-  await Promise.all(usersDummyData.map(user => User.create(user)))
-
-  await Promise.all(eventUsers.map(rel => userEventRel.create(rel)))
-
   await Promise.all(userAnswers.map(answer => Answers.create(answer)))
 
   await Promise.all(posts.map(post => Post.create(post)))
 
   const notificationSuggestions = await Promise.all([
     Notification.create({
-      authorId: 3,
+      authorId: 13,
       authorName: 'Fila Fb',
       title: 'Music',
       description: 'Bring some music to play',
@@ -147,7 +115,7 @@ async function seed() {
       eventId: 1
     }),
     Notification.create({
-      authorId: 4,
+      authorId: 14,
       authorName: 'Luis Carbajal',
       title: '3 Milk Cake',
       description: 'Bring some 3 Milk Cake',
@@ -155,7 +123,7 @@ async function seed() {
       eventId: 1
     }),
     Notification.create({
-      authorId: 4,
+      authorId: 14,
       authorName: 'Luis Carbajal',
       title: 'Margaritas',
       description: 'Some margaritas sounds great',
@@ -204,7 +172,6 @@ async function seed() {
     })
   ])
 
-  console.log(`seeded ${users.length} users`)
   console.log(`seeded ${tasks.length} tasks`)
   console.log(`seeded ${notificationSuggestions.length} suggestions`)
   console.log(`seeded ${polls.length} tasks`)
