@@ -467,14 +467,22 @@ section {
 
 /* FOOTER */
 .footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
+  height: 2.5rem;
   width: 100%;
   background-color: #74d2ca;
   font-size: small;
-  color: black;
 }
 
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  padding-bottom: 2.5rem; /* Footer height */
+}
 .alignleft {
   float: left;
   font-size: small;
@@ -483,11 +491,18 @@ section {
 .alignright {
   float: right;
   font-size: small;
-  padding: 15px;
+  padding-right: 15px;
+  color: white;
 }
 
 /* USER PROFILE UPDATE */
 
 .user-links {
   color: #9370db;
+}
+
+.content {
+  min-height: 400px;
+  margin-bottom: 100px;
+  clear: both;
 }
