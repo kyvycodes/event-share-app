@@ -18,6 +18,7 @@ import {
   Box
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import {
   getAllNotifications,
@@ -70,7 +71,7 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
             </Button>
           </Typography>
 
-          {/* Notification was moved into logged in conditional KH */}
+          {/* Notification was moved into logged in conditional But I can not figure out how to get it out the Hamburger KH */}
           {/* <IconButton
             edge="start"
             component={RouterLink}
@@ -125,6 +126,15 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
+
+              <Box className="paddinggg">
+                <ListItem button component={RouterLink} to="/">
+                  {' '}
+                  {/* needs to go "back", too many things go home KH */}{' '}
+                  <ArrowBackIosIcon />
+                </ListItem>
+              </Box>
+
               <ListItem button component={RouterLink} to="/home">
                 <ListItemText primary="Profile" />
               </ListItem>
@@ -146,23 +156,27 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
               <Box className="paddinggg">
                 <ListItem button component={RouterLink} to="/">
                   {' '}
-                  {/* Create Component */}
+                  <ArrowBackIosIcon />
+                </ListItem>
+              </Box>
+
+              <Box className="paddinggg">
+                <ListItem button component={RouterLink} to="/about-event-share">
+                  {' '}
                   <ListItemText primary="WHY EVENTSHARE?" />
                 </ListItem>
               </Box>
 
               <Box className="paddinggg">
-                <ListItem button component={RouterLink} to="/">
+                <ListItem button component={RouterLink} to="/about-us">
                   {' '}
-                  {/* Create Component */}
                   <ListItemText primary="ABOUT US" />
                 </ListItem>
               </Box>
 
               <Box className="paddinggg">
-                <ListItem button component={RouterLink} to="/">
+                <ListItem button component={RouterLink} to="/testimonials">
                   {' '}
-                  {/* Create Component and/or seed with dummy data*/}
                   <ListItemText primary="TESTIMONIALS" />
                 </ListItem>
               </Box>
@@ -170,7 +184,6 @@ const Navbar = ({handleClick, isLoggedIn, notifications}) => {
               <Box className="paddinggg">
                 <ListItem button component={RouterLink} to="/FeedbackForm">
                   {' '}
-                  {/* Create Component / form contact us */}
                   <ListItemText primary="FEEDBACK" />
                 </ListItem>
               </Box>

@@ -66,24 +66,28 @@ class EventDetails extends React.Component {
       <div>
         <Container maxWidth="sm">
           <MapContainer mb={2} address={address} />
-          <Box pt={2} display="flex" className="space-between">
-            <Grid item xs={6}>
-              <Typography
-                component="span"
-                variant="body2"
-                className="inline"
-                color="textPrimary"
+          <Box
+            pt={2}
+            display="flex"
+            className="space-between"
+            style={{align: 'center'}}
+          >
+            <Typography
+              component="span"
+              variant="button"
+              className="calendar-btn"
+              color="primary"
+            >
+              <a
+                href={getDirections}
+                rel="noopener noreferrer"
+                target="_blank"
+                color="primary"
               >
-                <a
-                  href={getDirections}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                  className="direcions"
-                >
-                  Get Directions
-                </a>
-              </Typography>
-            </Grid>
+                Get Directions
+              </a>
+            </Typography>
+            <CalendarConnect event={this.props.currEvent} />
           </Box>
           <Box pt={2} display="flex" className="space-between">
             <CardContent>
@@ -298,9 +302,9 @@ class EventDetails extends React.Component {
             </Typography>
           </CardContent>
 
-          {/* <Box mb={2} mr={1}>
-                  <CalendarConnect event={this.props.currEvent} />
-                </Box> */}
+          <Box mb={2} mr={1}>
+            <CalendarConnect event={this.props.currEvent} />
+          </Box>
         </Container>
       </div>
     )

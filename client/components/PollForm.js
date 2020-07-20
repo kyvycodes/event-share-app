@@ -63,7 +63,7 @@ export class PollForm extends React.Component {
           noValidate
           autoComplete="off"
         >
-          <h1 align="center">Create A Poll For Your Event</h1>
+          <h2 align="center">Create A Poll For Your Event</h2>
           <FormGroup>
             <InputLabel id="demo-simple-select-filled-label">
               Poll Questions
@@ -103,13 +103,13 @@ export class PollForm extends React.Component {
             Add Options
           </Button>
           <div className="poll-form-yourOption">
-            <h4>Your Options</h4>
+            <h4>Your Options: </h4>
             {this.state.options.map((option, i) => {
               return <p key={i}>{option}</p>
             })}
           </div>
           <Button
-            className="btn-theme"
+            className="btn-theme btn-create"
             type="submit"
             variant="contained"
             color="secondary"

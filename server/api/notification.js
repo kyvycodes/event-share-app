@@ -10,6 +10,7 @@ router.put('/', async (req, res, next) => {
     let currentResult
     for (let i = 0; i < partiesArray.length; i++) {
       currentResult = await Notification.findAll({
+        order: [['updatedAt', 'DESC']],
         where: {eventId: partiesArray[i]}
       })
       result = [...result, ...currentResult]
@@ -20,6 +21,7 @@ router.put('/', async (req, res, next) => {
   }
 })
 
+// TO APPROVE TASK SUGGESTED  this is to create a task when the host approves
 router.post('/', async (req, res, next) => {
   try {
     const taskObj = {
@@ -35,6 +37,24 @@ router.post('/', async (req, res, next) => {
     } else {
       res.status(404)
     }
+  } catch (error) {
+    next(error)
+  }
+})
+
+//  TO CREATE A NOTIFICATION
+router.post('/add', async (req, res, next) => {
+  try {
+    const notificationObj = {
+      authorId: req.body.authorId,
+      authorName: req.body.authorName,
+      eventId: req.body.eventId,
+      title: req.body.title,
+      description: req.body.description,
+      category: req.body.category
+    }
+    const newNotification = await Notification.create(notificationObj)
+    res.status(201).json(newNotification)
   } catch (error) {
     next(error)
   }

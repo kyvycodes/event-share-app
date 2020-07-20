@@ -2,7 +2,14 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import LinearProgress from '@material-ui/core/LinearProgress'
 import Box from '@material-ui/core/Box'
-import {Button, Typography, Grid, Card, CardContent} from '@material-ui/core'
+import {
+  Button,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  Container
+} from '@material-ui/core'
 import {getPoll, getEventPolls, createAnswer} from '../store/poll'
 import {connect} from 'react-redux'
 import CheckCircleOutlinedIcon from '@material-ui/icons/CheckCircleOutlined'
@@ -50,16 +57,24 @@ class Vote extends React.Component {
   render() {
     const {user, polls, events} = this.props
     return (
-      <>
-        <Link to={`/events/${this.props.events.currEvent.id}/polls/create`}>
-          <Box display="flex" justifyContent="flex-end">
-            <Button color="primary" variant="contained" size="small">
-              Create a Poll
-            </Button>
-          </Box>
-        </Link>
+      <Container maxWidth="sm">
+        <Box pt={2} display="flex" className="space-between">
+          <Button color="primary">Vote Now!</Button>
+
+          <Link to={`/events/${this.props.events.currEvent.id}/polls/create`}>
+            <Box display="flex" justifyContent="flex-end">
+              <Button
+                className="btn-create"
+                color="primary"
+                variant="contained"
+              >
+                Create a Poll
+              </Button>
+            </Box>
+          </Link>
+        </Box>
         <ToastContainer />
-        <h1 className="heading">Vote Now!</h1>
+        <h1 className="heading" />
 
         {polls.map(poll => {
           return (
@@ -74,7 +89,7 @@ class Vote extends React.Component {
                       <Card
                         className={
                           option.id === this.state.selectedOption
-                            ? 'green'
+                            ? 'btn-accept'
                             : 'white'
                         }
                         key={option.id}
@@ -87,9 +102,9 @@ class Vote extends React.Component {
                             <Grid item xs={6} style={{textAlign: 'right'}}>
                               {!poll.usersAlreadyVoted.includes(user.id) ? (
                                 <Button
+                                  className="btn-taken"
                                   color="secondary"
                                   variant="contained"
-                                  className=""
                                   onClick={this.vote.bind(
                                     this,
                                     option.id,
@@ -131,6 +146,7 @@ class Vote extends React.Component {
                 <Card style={{height: '3.4rem'}}>
                   <Box justifyContent="center" display="flex" mt={1}>
                     <Button
+                      className="btn-submit"
                       color="secondary"
                       variant="contained"
                       size="medium"
@@ -149,7 +165,7 @@ class Vote extends React.Component {
             </div>
           )
         })}
-      </>
+      </Container>
     )
   }
 }
