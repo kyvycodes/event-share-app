@@ -115,6 +115,14 @@ const usersDummyData = [
     email: 'luis@email.com',
     password: '123',
     profile_pic: 'https://avatars0.githubusercontent.com/u/10853211?s=120&v=4'
+  },
+  {
+    firstName: 'Serge Aristide',
+    lastName: 'Hardeman',
+    email: 'Sergethiti@gmail.com',
+    password: '123',
+    profile_pic:
+      'https://ca.slack-edge.com/T024FPYBQ-UV0NUJTJN-0aed69397b94-512'
   }
 ]
 
@@ -122,7 +130,7 @@ const events = [
   {
     title: 'WDF Graduation Party',
     description:
-      "Let's celebrate the end of our capstone, Champgane on Fullstack!",
+      "Let's celebrate the end of our capstone, Champagne on Fullstack!",
     date: '2020-8-1',
     address: '5 Hanover Square 11th floor',
     city: 'NY',
@@ -213,7 +221,7 @@ const eventUsers = [
     eventId: 1,
     userId: 7,
     isOrganizer: false,
-    attending: 'Declined'
+    attending: 'Attending'
   },
   {
     eventId: 1,
