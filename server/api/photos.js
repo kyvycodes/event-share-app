@@ -90,3 +90,30 @@ router.post('/:postId/comments', async (req, res, next) => {
     next(err)
   }
 })
+
+router.delete('/:postId/delete', async (req, res, next) => {
+  try {
+    const post = await Post.findByPk(req.params.postId)
+    const eventId = post.eventId
+    const comments = await PhotoComment.destroy({
+      where: {
+        postId: req.params.postId
+      }
+    })
+    post.destroy()
+    const allPosts = await Post.findAll({
+      where: {
+        eventId: eventId
+      },
+      order: [['createdAt', 'DESC']],
+      include: [
+        {model: PhotoComment, include: [User], order: [['createdAt', 'DESC']]},
+        User
+      ]
+    })
+
+    res.json(allPosts)
+  } catch (err) {
+    next(err)
+  }
+})

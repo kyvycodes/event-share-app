@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link, withRouter} from 'react-router-dom'
-import {fetchPosts, createComment} from '../store/event'
+import {fetchPosts, createComment, deletePost} from '../store/event'
 import AddAPhotoOutlinedIcon from '@material-ui/icons/AddAPhotoOutlined'
 import AddCircleIcon from '@material-ui/icons/AddCircle'
 import ClearOutlinedIcon from '@material-ui/icons/ClearOutlined'
@@ -42,7 +42,7 @@ export class PhotoFeed extends React.Component {
   }
 
   handleSubmit(postId) {
-    const comment = this.state.comment
+    const comment = this.state.comment.slice()
     this.setState({comment: ''})
     this.props.postComment(comment, postId, this.props.match.params.id)
   }
@@ -106,7 +106,13 @@ export class PhotoFeed extends React.Component {
                       }
                       title={pic.user.firstName}
                       action={
-                        <IconButton onClick={() => {}}>{icon}</IconButton>
+                        <IconButton
+                          onClick={() => {
+                            this.props.delete(pic.id)
+                          }}
+                        >
+                          {icon}
+                        </IconButton>
                       }
                     />
                     <CardMedia
@@ -182,7 +188,8 @@ const mapDispatch = dispatch => {
   return {
     getPosts: id => dispatch(fetchPosts(id)),
     postComment: (comment, postId, eventId) =>
-      dispatch(createComment(comment, postId, eventId))
+      dispatch(createComment(comment, postId, eventId)),
+    delete: postId => dispatch(deletePost(postId))
   }
 }
 
