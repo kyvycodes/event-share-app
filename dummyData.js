@@ -16,6 +16,13 @@ const usersDummyData = [
       'https://ca.slack-edge.com/T024FPYBQ-UV3E9BL5P-5f85573b81cb-512'
   },
   {
+    firstName: 'Luis',
+    lastName: 'Carbajal',
+    email: 'luis@email.com',
+    password: '123',
+    profile_pic: 'https://avatars0.githubusercontent.com/u/10853211?s=120&v=4'
+  },
+  {
     firstName: 'David',
     lastName: 'Patlut',
     email: 'david@email.com',
@@ -109,13 +116,7 @@ const usersDummyData = [
     password: '123',
     profile_pic: 'https://avatars0.githubusercontent.com/u/38737958?s=40&v=4'
   },
-  {
-    firstName: 'Luis',
-    lastName: 'Carbajal',
-    email: 'luis@email.com',
-    password: '123',
-    profile_pic: 'https://avatars0.githubusercontent.com/u/10853211?s=120&v=4'
-  },
+
   {
     firstName: 'Serge Aristide',
     lastName: 'Hardeman',
@@ -194,7 +195,7 @@ const eventUsers = [
     attending: 'Attending'
   },
   {
-    eventId: 2,
+    eventId: 1,
     userId: 3,
     isOrganizer: false,
     attending: 'Pending'
