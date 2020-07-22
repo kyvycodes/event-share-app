@@ -33,19 +33,19 @@ async function seed() {
 
   const polls = await Promise.all([
     Poll.create({
-      title: 'What is your favorite ice cream flavor? 🍦🍦',
+      title: 'What ice cream flavor should we get? 🍦🍦',
       userId: 1,
       // optionId: 1,
       eventId: 1
     }),
     Poll.create({
-      title: 'What is your favorite cocktail? 🍹🍹',
+      title: 'What type of cocktails do you want? 🍹🍹',
       userId: 1,
       // optionId: 1,
       eventId: 1
     }),
     Poll.create({
-      title: 'What is your favorite food? 🍔🍕',
+      title: 'What color-theme clothes should we all wear?',
       userId: 1,
       eventId: 1
     })
@@ -85,17 +85,17 @@ async function seed() {
     }),
 
     Options.create({
-      title: 'Pizza',
+      title: 'White',
       pollId: 3,
       userId: 1
     }),
     Options.create({
-      title: 'Steak',
+      title: 'Pastel colors',
       pollId: 3,
       userId: 2
     }),
     Options.create({
-      title: 'Chicken',
+      title: 'Pink',
       pollId: 3,
       userId: 3
     })
@@ -110,15 +110,15 @@ async function seed() {
       authorId: 13,
       authorName: 'Fila Fb',
       title: 'Music',
-      description: 'Bring some music to play',
-      category: 'to bring',
+      description: 'A cool playlist for the party',
+      category: 'to do',
       eventId: 1
     }),
     Notification.create({
       authorId: 14,
       authorName: 'Luis Carbajal',
-      title: '3 Milk Cake',
-      description: 'Bring some 3 Milk Cake',
+      title: 'Tres Leches Cake',
+      description: 'Bring some Tres Leches Cake',
       category: 'to bring',
       eventId: 1
     }),

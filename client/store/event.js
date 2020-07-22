@@ -153,6 +153,17 @@ export const createComment = (comment, postId, eventId) => {
   }
 }
 
+export const deletePost = postId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.delete(`/api/photos/${postId}/delete`)
+      dispatch(getPosts(data))
+    } catch (err) {
+      console.log('ERROR', err)
+    }
+  }
+}
+
 const initialState = {
   events: [],
   myEvents: [],
