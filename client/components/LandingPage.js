@@ -75,49 +75,10 @@ const Home = () => {
       <Container className="bt">
         {/* NOT FINAL VIDEO, OPEN TO SUGGESTIONS */}
         <img
-          src="https://media.giphy.com/media/JU4a4jIdlLaeJBWoFw/giphy.gif"
+          src="https://media.giphy.com/media/J1j9YNrbnDM2Ctzv3D/giphy.gif"
           width="100%"
           height="100%"
         />
-        {/* <Typography
-          className={classes.subTitle}
-          variant="h4"
-          component="h2"
-          gutterBottom
-        >
-          Discover
-        </Typography> */}
-
-        {/* <Grid container spacing={3}>
-          <Grid item xs={6} md={3}>
-            <img
-              src="hero-background.jpg"
-              alt="Lake"
-              style={{width: '100%', marginBottom: '1rem'}}
-            />
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <img
-              src="6.jpg"
-              alt="Lake"
-              style={{width: '100%', marginBottom: '1rem'}}
-            />
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <img
-              src="1.jpg"
-              alt="Lake"
-              style={{width: '100%', marginBottom: '1rem'}}
-            />
-          </Grid>
-          <Grid item xs={6} md={3}>
-            <img
-              src="2.jpg"
-              alt="Lake"
-              style={{width: '100%', marginBottom: '1rem'}}
-            />
-          </Grid>
-        </Grid> */}
       </Container>
     </>
   )
