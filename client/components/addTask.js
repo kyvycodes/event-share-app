@@ -90,7 +90,7 @@ export class AddTask extends React.Component {
         icon: 'success',
         button: 'Go back'
       }).then(function() {
-        window.location.href = `http://localhost:8080/events/${eventId}/tasks`
+        window.location.href = `https://event-share.herokuapp.com/events/${eventId}/tasks`
       })
     }
   }
