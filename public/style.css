@@ -474,7 +474,9 @@ section {
   font-size: small;
   color: black;
 }
-
+.about-us-room {
+  margin-bottom: '20px';
+}
 .alignleft {
   float: left;
   font-size: small;

@@ -70,11 +70,13 @@ export const AboutUs = () => {
             alt="Luis"
           />
           <h4 className="h4-about">Luis Carbajal</h4>
-          <p style={{margin: '10px'}}>
+          <p style={{margin: '10px'}} className="about-us-room">
             {' '}
             My ultimate goal is to build great products that help people to
             interact with information and the world in a new way.
           </p>
+          <br />
+          <br />
         </div>
       </div>
     </div>
