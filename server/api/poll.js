@@ -43,19 +43,6 @@ router.post('/create', async (req, res, next) => {
     const guests = await currEvent.getUsers({
       attributes: ['firstName', 'email']
     })
-
-    // for (let i = 0; i < guests.length; i++) {
-    //   let member = guests[i]
-    //   const emailTemplate = PollEmail(
-    //     member.firstName,
-    //     req.user.firstName,
-    //     req.body.eventId,
-    //     poll.title
-    //   )
-
-    //   await main(member.email, req.user.firstName, emailTemplate)
-    // }
-
     res.status(201).json(newPoll)
   } catch (error) {
     next(error)
