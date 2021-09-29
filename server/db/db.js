@@ -6,13 +6,9 @@ const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
 const db = new Sequelize(
   process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
   {
-    options: {
-      dialect: 'postgres',
-      native: true,
-      ssl: true,
-      dialectOptions: {
-        ssl: true
-      }
+    logging: false,
+    dialectOptions: {
+      ssl: true
     }
   }
 )
