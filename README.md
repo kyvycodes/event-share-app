@@ -28,6 +28,8 @@ We deploy automatically, via continuous deployment with Travis 🚀
 
 Check it out: https://event-share.herokuapp.com/
 
+*(the original project repo lives [here](https://github.com/EventShare-WDF-2004/EventShare))*
+
 ---
 
 ## Start
